@@ -4,6 +4,7 @@ from mighty.models.base import Base
 from mighty.applications.address.models import Address
 from company import translates as _, choices, managers
 from company.apps import CompanyConfig as conf
+from django.utils.module_loading import import_string
 
 CHOICES_APE = sorted(list(choices.APE), key=lambda x: x[1])
 CHOICES_LEGALFORM = sorted(list(choices.LEGALFORM), key=lambda x: x[1])
@@ -35,6 +36,9 @@ class Company(Base):
     def legalform_code(self): return self.legalform if self.legalform else _.legalform_null
     @property
     def legalform_label(self): return dict(choices.LEGALFORM).get(self.legalform)
+
+    def get_dataset_by_country(self, alpha2):
+        return import_string('%s.models.Company%s' % (self.app_label, alpha2.upper()))
 
 class CompanyAddress(Address):
     company = models.ForeignKey(conf.ForeignKey.Company, on_delete=models.CASCADE, related_name='company_address')

@@ -13,7 +13,7 @@ from company import backends_loop
 import datetime
 
 @method_decorator(login_required, name='dispatch')
-class Search(FormView):
+class SearchByCountry(FormView):
     template_name = "company/list.html"
     form_class = CompanySearchForm
     success_url = '/company/search/'
@@ -30,9 +30,10 @@ class Search(FormView):
         context = super().get_context_data(**kwargs)
         if self.request.GET.get('search'):
             search = self.request.GET.get('search')
-            companies, total, pages = backends_loop(search)
+            message, companies, total, pages = backends_loop(self.kwargs.get('country', 'fr'), search)
             context.update({
                 'object_list': companies,
+                'message': message,
                 'total': total,
                 'pages': pages,
                 'error': False,#cf.message,
@@ -42,7 +43,7 @@ class Search(FormView):
             })
         return context
 
-class Detail(DetailView):
+class DetailByCountry(DetailView):
     template_name = 'company/detail.html'
     model = Company
     slug_field = 'siren'
@@ -54,7 +55,7 @@ class Detail(DetailView):
         try:
             return Company.objects.get(siren=self.kwargs['siren'])
         except Company.DoesNotExist:
-            companies, total, pages = backends_loop(search)
+            message, companies, total, pages = backends_loop(self.kwargs.get('country', 'fr'), search)
             self.message = cf.message
             self.filler = True
             return companies[0]

@@ -1,7 +1,7 @@
 from django.conf import settings
 from company.backends.search import SearchBackend
 from io import BytesIO
-import base64, pycurl, json
+import base64, pycurl, json, re
 from mighty.functions import get_logger
 logger = get_logger()
 
@@ -37,37 +37,40 @@ class SearchBackend(SearchBackend):
             return False
 
     def get_companies(self, qreq, number=50, offset=0):
-        companies, total, pages = ([], 0, 0)
+        message, companies, total, pages = (False, [], 0, 0)
         access_token = self.get_token()
         headers = ['Accept: application/json', 'Authorization: Bearer %s' % access_token]
         url = "%s?q=%s&nombre=%s&debut=%s&masquerValeursNulles=true" % (self.siret_url, qreq, number, offset)
         buffer, response_code = self.call_webservice(url, headers)
-        for company in self.companies(buffer.get('etablissements', [buffer['header']]), response_code):
-            companies.append({
-                'siren': company.get('siren'),
-                'denomination': company['uniteLegale'].get('denominationUniteLegale', company['uniteLegale'].get('nomUniteLegale')),
-                'legalform': company['uniteLegale']['categorieJuridiqueUniteLegale'],
-                'ape': company['uniteLegale']['activitePrincipaleUniteLegale'].replace('.', ''),
-                'since': self.since(company['uniteLegale']['dateCreationUniteLegale']),
-                'address': {
-                    'nic': company['nic'],
-                    'street_number': company['adresseEtablissement'].get('numeroVoieEtablissement'),
-                    'way': company['adresseEtablissement'].get('typeVoieEtablissement'),
-                    'route': company['adresseEtablissement'].get('libelleVoieEtablissement'),
-                    'locality': company['adresseEtablissement'].get('libelleCommuneEtablissement',
-                        company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement')),
-                    'postal_code': company['adresseEtablissement'].get('codeCommuneEtablissement', 
-                        company['adresseEtablissement'].get('codePostalEtablissement')),
-                    'country': company['adresseEtablissement'].get('libellePaysEtrangerEtablissement', 'france').lower(),
-                    'country_code': company['adresseEtablissement'].get('codePaysEtrangerEtablissement', 'fr').lower(),
-                    'cedex': company['adresseEtablissement'].get('libelleCedexEtablissement'),
-                    'cedex_code': company['adresseEtablissement'].get('codeCedexEtablissement'),
-                    'special': company['adresseEtablissement'].get('distributionSpecialeEtablissement'),
-                    'complement': company['adresseEtablissement'].get('complementAdresseEtablissement'),
-                    'index': company['adresseEtablissement'].get('indiceRepetitionEtablissement'),
-                }
-            })
-        return companies, total, pages
+        message = buffer['header']['message']
+        if str(response_code)[0] in ["2", "3"]:
+            for company in buffer.get('etablissements', [buffer['header']]):
+                companies.append({
+                    'siren': company.get('siren'),
+                    'siret': company.get('siret'),
+                    'denomination': company['uniteLegale'].get('denominationUniteLegale', company['uniteLegale'].get('nomUniteLegale')),
+                    'legalform': company['uniteLegale']['categorieJuridiqueUniteLegale'],
+                    'ape': company['uniteLegale']['activitePrincipaleUniteLegale'].replace('.', ''),
+                    'since': self.since(company['uniteLegale']['dateCreationUniteLegale']),
+                    'address': {
+                        'nic': company['nic'],
+                        'street_number': company['adresseEtablissement'].get('numeroVoieEtablissement'),
+                        'way': company['adresseEtablissement'].get('typeVoieEtablissement'),
+                        'route': company['adresseEtablissement'].get('libelleVoieEtablissement'),
+                        'locality': company['adresseEtablissement'].get('libelleCommuneEtablissement',
+                            company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement')),
+                        'postal_code': company['adresseEtablissement'].get('codeCommuneEtablissement', 
+                            company['adresseEtablissement'].get('codePostalEtablissement')),
+                        'country': company['adresseEtablissement'].get('libellePaysEtrangerEtablissement', 'france').lower(),
+                        'country_code': company['adresseEtablissement'].get('codePaysEtrangerEtablissement', 'fr').lower(),
+                        'cedex': company['adresseEtablissement'].get('libelleCedexEtablissement'),
+                        'cedex_code': company['adresseEtablissement'].get('codeCedexEtablissement'),
+                        'special': company['adresseEtablissement'].get('distributionSpecialeEtablissement'),
+                        'complement': company['adresseEtablissement'].get('complementAdresseEtablissement'),
+                        'index': company['adresseEtablissement'].get('indiceRepetitionEtablissement'),
+                    }
+                })
+        return message, companies, total, pages
 
     def get_company_by_siren(self, siren):
         return self.get_companies('siren:%s' % siren)
@@ -96,4 +99,5 @@ class SearchBackend(SearchBackend):
         return self.get_companies('etatAdministratifUniteLegale:A', number, offset)
 
     def get_company_by_fulltext(self, fulltext):
-        return self.get_companies('denominationUniteLegale:%s' % fulltext, )
+        fulltext = re.sub(r"\s+", '-', fulltext)
+        return self.get_companies('denominationUniteLegale:%s+AND+etatAdministratifUniteLegale:A' % fulltext)

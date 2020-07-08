@@ -27,17 +27,9 @@ def merge_company(backends):
 def merge_backends(results):
     return [merge_company([datas for backend, datas in backends.items()]) for company, backends in results.items()]
 
-def backends_loop(search):
+def backends_loop(country, search):
     results = {}
     ftotal, fpages = (0, 0)
-    for backend in settings.COMPANYFILLER_BACKEND:
-        return get_backend(backend, search)
-        companies, total, pages = get_backend('%s.SearchBackend' % backend, search)
-        ftotal = total if total > ftotal else ftotal
-        pages = pages if pages > fpages else fpages
-        for company in companies:
-            if company['denomination'] in results:
-                results[company['denomination']][backend] = company
-            else:
-                results[company['denomination']] = { backend: company }
+    for backend in settings.COMPANY_BACKENDS[country]:
+        return get_backend('%s.SearchBackend' % backend, search)
     return merge_backends(results), ftotal, fpages

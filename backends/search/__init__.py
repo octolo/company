@@ -29,6 +29,9 @@ class SearchBackend:
     def since(self, date):
         return datetime.datetime.strptime(date, self.since_format).date()
 
+    def get_companies(self, companies, response_code):
+        raise NotImplementedError("Subclasses should implement get_companies()")
+
     def get_company_by_siren(self, siren):
         raise NotImplementedError("Subclasses should implement get_company_by_siren()")
 
