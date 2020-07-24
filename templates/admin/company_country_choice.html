@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+{% load mighty static admin_urls %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+.country { display: inline-block; line-height: 30px; height: 30px; }
+.country > * { display: inline-block; vertical-align: middle; }
+.country > span{ width: 30px; }
+input { padding: 2px 10px!important; margin: 0; }
+</style>
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} logs{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{{ mighty.home }}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+{% if object %}&rsaquo; <a href="{% url opts|admin_urlname:'change' object.pk|admin_urlquote %}">{{ object|truncatewords:"18" }}</a>{% endif %}
+&rsaquo; {{ title|title }}
+</div>
+{% endblock %}
+
+{% block content %}
+{% for country in object_list %}
+{% if object %}
+<a class="country" href="{% url opts|admin_urlname:'country_search_extend' object.pk|admin_urlquote country.alpha2|lower %}">
+{% else %}
+<a class="country" href="{% url opts|admin_urlname:'country_search' country.alpha2|lower %}">
+{% endif %}
+<span>{{ country.alpha2 }}&nbsp;</span>{% if country.image %}<img src="/media/{{ country.image }}">{% endif %}
+</a>
+<br>
+{% endfor %}
+{% endblock %}

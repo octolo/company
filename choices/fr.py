@@ -1,5 +1,34 @@
 from django.utils.translation import gettext_lazy as _
 
+SLICE_EFFECTIVE = (
+("00", _("0 salarié (n'ayant pas d'effectif au 31/12 mais ayant employé des salariés au cours de l'année de référence)")),
+("01", _("1 ou 2 salariés")),
+("02", _("3 à 5 salariés")),
+("03", _("6 à 9 salariés")),
+("11", _("10 à 19 salariés")),
+("12", _("20 à 49 salariés")),
+("21", _("50 à 99 salariés")),
+("22", _("100 à 199 salariés")),
+("31", _("200 à 249 salariés")),
+("32", _("250 à 499 salariés")),
+("41", _("500 à 999 salariés")),
+("42", _("1 000 à 1 999 salariés")),
+("51", _("2 000 à 4 999 salariés")),
+("52", _("5 000 à 9 999 salariés")),
+("53", _("10 000 salariés et plus")),
+)
+
+CODEREF = (
+("AFEPMEDEF", _("Afep MEDEF")),
+("MIDDLENEXT", _("MiddleNext")),
+)
+
+INDEX = (
+("CAC40", _("CAC40")),
+("NEXT80", _("NEXT80")),
+("NEXTPP", _("NEXT++")),
+)
+
 LEGALFORM = (
 (1000, _("Entrepreneur individue")),
 (2110, _("Indivision entre personnes physiques")),

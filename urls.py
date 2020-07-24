@@ -7,5 +7,5 @@ from company import views
 #    path('<str:siren>/', views.CompanyDetailView.as_view(), name='company-detail'),
 #]
 
-app_name='company'
+app_name=views.get_company_model()().app_label
 urlpatterns = [path('', include(views.CompanyViewSet().urls)),]

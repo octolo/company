@@ -3,8 +3,13 @@ from django.conf import settings
 from mighty import over_config
 
 class Config:
-    class ForeignKey:
+    app_label = 'company'
+
+    class Model:
         Company = 'Company'
+        CompanyFR = 'CompanyFR'
+        CompanyAddressFR = 'CompanyAddressFR'
+        Balo = 'Balo'
 
     class Announce:
         Balo = False

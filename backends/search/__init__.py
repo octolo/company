@@ -1,4 +1,4 @@
-from company import choices
+from company.choices import fr as choices
 import datetime
 
 CHOICES_APE = dict(choices.APE)
@@ -24,10 +24,10 @@ class SearchBackend:
         return int(code)#CHOICES_LEGALFORM[int(code)]
 
     def lastupdate(self, date):
-        return datetime.datetime.strptime(date, self.iso_format).date()
+        return datetime.datetime.strptime(date, self.iso_format).strftime("%Y-%m-%d")
 
     def since(self, date):
-        return datetime.datetime.strptime(date, self.since_format).date()
+        return datetime.datetime.strptime(date, self.since_format).strftime("%Y-%m-%d")
 
     def get_companies(self, companies, response_code):
         raise NotImplementedError("Subclasses should implement get_companies()")

@@ -2,7 +2,7 @@
 {% load admin_urls mighty %}
 
 {% block object-tools-items %}
-{% url opts|admin_urlname:'choices' as search_url %}
+{% url opts|admin_urlname:'country_choice' as search_url %}
 <li><a href="{{ search_url }}">Search</a></li>
 {{ block.super }}
 {% endblock %}

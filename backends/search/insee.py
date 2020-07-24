@@ -42,18 +42,23 @@ class SearchBackend(SearchBackend):
         headers = ['Accept: application/json', 'Authorization: Bearer %s' % access_token]
         url = "%s?q=%s&nombre=%s&debut=%s&masquerValeursNulles=true" % (self.siret_url, qreq, number, offset)
         buffer, response_code = self.call_webservice(url, headers)
-        message = buffer['header']['message']
+        message = False if buffer['header']['message'] == "OK" else buffer['header']['message'] 
+        total = buffer['header'].get('total', 0)
+        pages = round(total/number) if total else 0
         if str(response_code)[0] in ["2", "3"]:
             for company in buffer.get('etablissements', [buffer['header']]):
                 companies.append({
-                    'siren': company.get('siren'),
                     'siret': company.get('siret'),
                     'denomination': company['uniteLegale'].get('denominationUniteLegale', company['uniteLegale'].get('nomUniteLegale')),
                     'legalform': company['uniteLegale']['categorieJuridiqueUniteLegale'],
                     'ape': company['uniteLegale']['activitePrincipaleUniteLegale'].replace('.', ''),
-                    'since': self.since(company['uniteLegale']['dateCreationUniteLegale']),
+                    'ape_noun': company['uniteLegale']['nomenclatureActivitePrincipaleUniteLegale'],
+                    'since': self.since(company['uniteLegale'].get('dateCreationUniteLegale')),
+                    'category': company['uniteLegale'].get('categorieEntreprise', ''),
+                    'slice_effective': company['uniteLegale'].get('trancheEffectifsUniteLegale', ''),
+                    'effective': "",
+                    'share_capital': "",
                     'address': {
-                        'nic': company['nic'],
                         'street_number': company['adresseEtablissement'].get('numeroVoieEtablissement'),
                         'way': company['adresseEtablissement'].get('typeVoieEtablissement'),
                         'route': company['adresseEtablissement'].get('libelleVoieEtablissement'),

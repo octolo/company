@@ -2,9 +2,11 @@
     {% include "company/countries/fr/td.html" %}
     <td>
         <form method="POST" action="{{ add_url }}">
+            {{ add_url }}
             {% csrf_token %}
             {% include "company/countries/fr/form_search_based.html" %}
-            <input type="number" value="{{ forloop.counter0 }}">
+            <input type="hidden" name="position" value="{{ forloop.counter0 }}">
+            <input type="hidden" name="search" value="{{ search }}">
             <input type="submit">
         </form>
     </td>

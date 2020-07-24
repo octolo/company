@@ -1,0 +1,7 @@
+{% load mighty %}
+<th scope="row">{{ company.denomination }}</th>
+<td>{{ since }}{{ company.since }}</td>
+<td>{% number_hread company.siret " " %}</td>
+<td>{% if company.category %}{{ company.category }}{% endif %}</td>
+<td>{% if company.ape %}{{ company.ape }}{% if company.ape_label %}, {{company.ape_label }}{% endif %}{% endif %}</td>
+<td>{% if company.legalform %}{{ company.legalform }}{% if company.legalform_label %}, {{company.legalform_label }}{% endif %}{% endif %}</td>
