@@ -6,7 +6,6 @@ from django.core.exceptions import ValidationError
 from django.utils.decorators import method_decorator
 
 from mighty.views import TemplateView, FormView, DetailView, AddView, ListView
-from mighty.views.viewsets import ModelViewSet
 from mighty.functions import get_form_model
 
 from company.apps import CompanyConfig as conf
@@ -127,18 +126,18 @@ class AddByCountry(CanContainParentObject, FormView):
         self.success_url = form.cmodel.company.admin_change_url if self.admin else form.cmodel.company.detail_url
         return super().form_valid(form)
 
-class CompanyViewSet(ModelViewSet):
-    model = company_model
-    slug = '<uuid:uid>'
-    slug_field = 'uid'
-    slug_url_kwarg = 'uid'
-    filter_model = filters.CompanyFilter
-
-    def __init__(self):
-        super().__init__()
-        self.add_view('country-choice', ChoiceCountry, 'choice/')
-        self.add_view('country-search', SearchByCountry, 'choice/<str:country>/search/')
-        self.add_view('country-add', AddByCountry, 'choices/<str:country>/search/<int:position>/add/')
-        self.add_view('country-choice-extend', ChoiceCountry, '%s/choice/'% self.slug)
-        self.add_view('country-search-extend', SearchByCountry, '%s/choice/<str:country>/search/' % self.slug)
-        self.add_view('country-add-extend', SearchByCountry, '%s/choice/<str:country>/search/<int:position>/add/' % self.slug)
+#class CompanyViewSet(ModelViewSet):
+#    model = company_model
+#    slug = '<uuid:uid>'
+#    slug_field = 'uid'
+#    slug_url_kwarg = 'uid'
+#    filter_model = filters.CompanyFilter
+#
+#    def __init__(self):
+#        super().__init__()
+#        self.add_view('country-choice', ChoiceCountry, 'choice/')
+#        self.add_view('country-search', SearchByCountry, 'choice/<str:country>/search/')
+#        self.add_view('country-add', AddByCountry, 'choices/<str:country>/search/<int:position>/add/')
+#        self.add_view('country-choice-extend', ChoiceCountry, '%s/choice/'% self.slug)
+#        self.add_view('country-search-extend', SearchByCountry, '%s/choice/<str:country>/search/' % self.slug)
+#        self.add_view('country-add-extend', SearchByCountry, '%s/choice/<str:country>/search/<int:position>/add/' % self.slug)
