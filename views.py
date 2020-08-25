@@ -101,8 +101,6 @@ class SearchByCountry(CanContainParentObject, FormView):
             })
         return context
 
-
-
 @method_decorator(login_required, name='dispatch')
 class AddByCountry(CanContainParentObject, FormView):
     template_name = 'company/countries/add.html'
