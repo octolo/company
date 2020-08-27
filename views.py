@@ -124,6 +124,19 @@ class AddByCountry(CanContainParentObject, FormView):
         self.success_url = form.cmodel.company.admin_change_url if self.admin else form.cmodel.company.detail_url
         return super().form_valid(form)
 
+
+if 'rest_framework' in settings.INSTALLED_APPS:
+    from rest_framework.generics import ListAPIView
+    from mighty.filters import RequestInterpreter
+    from company import filters
+
+    class APICompanyList(ListAPIView):
+        def get_queryset(self, queryset=None):
+            queryset = super().get_queryset()
+            flts = [filters.ByDate(), filters.ByStartDate(), filters.ByEndDate(), filters.InDenomination()]
+            return RequestInterpreter(queryset, self.request, flts=flts).ready()
+
+
 #class CompanyViewSet(ModelViewSet):
 #    model = company_model
 #    slug = '<uuid:uid>'

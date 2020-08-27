@@ -13,6 +13,7 @@ class Company(Base):
     search_fields = ['denomination']
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)
+    end = models.DateField(null=True)
     icb = models.CharField(_.icb, max_length=40, choices=ICB, blank=True, null=True, db_index=True)
     market = models.CharField(_.market, max_length=40, choices=MARKET, blank=True, null=True, db_index=True)
 
@@ -47,6 +48,7 @@ class CompanyAlpha2(Base):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE)
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)
+    end = models.DateField(null=True)
 
     class Meta(Base.Meta):
         abstract = True
