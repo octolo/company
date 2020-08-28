@@ -9,11 +9,17 @@ from company import translates as _, managers, get_company_model
 from company.apps import CompanyConfig as conf
 from company.choices import ICB, MARKET
 
-class Company(Base):
+
+class CompanyBase(Base):
     search_fields = ['denomination']
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)
-    end = models.DateField(null=True)
+    closed = models.DateField(_.closed, null=True)
+
+    class Meta(Base.Meta):
+        abstract = True
+
+class Company(CompanyBase):
     icb = models.CharField(_.icb, max_length=40, choices=ICB, blank=True, null=True, db_index=True)
     market = models.CharField(_.market, max_length=40, choices=MARKET, blank=True, null=True, db_index=True)
 
@@ -44,11 +50,8 @@ class Company(Base):
     def get_dataset_by_country(self, alpha2):
         return import_string('%s.models.Company%s' % (self.app_label, alpha2.upper()))
 
-class CompanyAlpha2(Base):
+class CompanyAlpha2(CompanyBase):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE)
-    denomination = models.CharField(max_length=255)
-    since = models.DateField(_.since, null=True)
-    end = models.DateField(null=True)
 
     class Meta(Base.Meta):
         abstract = True

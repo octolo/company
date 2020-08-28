@@ -1,5 +1,5 @@
-company = ('denomination', 'since', 'end')
-country = ('denomination', 'since', 'end')
+company = ('denomination', 'since', 'closed')
+country = ('denomination', 'since')
 
 # FR
 fr = ('siret', 'ape', 'ape_noun', 'category', 'legalform', 'slice_effective', 'effective', 'share_capital')
