@@ -1,4 +1,4 @@
-company = ('denomination', 'since', 'closed')
+company = ('denomination', 'since', 'closed', 'folder')
 country = ('denomination', 'since')
 
 # FR
