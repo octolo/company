@@ -18,7 +18,7 @@ from company.apps import CompanyConfig as conf
 class CompanyAdmin(BaseAdmin):
     fieldsets = ((None, {"classes": ("wide",), "fields": fields.company}),)
     list_display = fields.company
-    search_fields = ("denomination",)
+    search_fields = ("denomination", "company_fr__siret")
     change_list_template = "admin/company_change_list.html"
     change_form_template = "admin/company_change_form.html"
     change_form_logs_template = "admin/company_change_form_logs.html"

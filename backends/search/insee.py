@@ -1,9 +1,9 @@
 from django.conf import settings
 from company.backends.search import SearchBackend
 from io import BytesIO
-import base64, pycurl, json, re
-from mighty.functions import get_logger
-logger = get_logger()
+import base64, pycurl, json, re, logging
+from mighty.functions import make_searchable
+logger = logging.getLogger(__name__)
 
 class SearchBackend(SearchBackend):
     token_url = 'https://api.insee.fr/token'
@@ -79,30 +79,30 @@ class SearchBackend(SearchBackend):
 
     def get_company_by_siren(self, siren):
         return self.get_companies('siren:%s' % siren)
-        companies, total, pages = ([], 0, 0)
-        if not siren.isdigit() or not len(siren) == 9:  return companies, total, pages
-        access_token = self.get_token()
-        headers = ['Accept: application/json', 'Authorization: Bearer %s' % access_token]
-        buffer, response_code = self.call_webservice(self.siren_url, headers,  "q=siren:%s&masquerValeursNulles=true" % siren)
-        for company in self.companies(buffer.get('unitesLegales', [buffer['header']]), response_code):
-            companies.append({
-                'siren': company.get('siren'),
-                'denomination': company['periodesUniteLegale'][0]['denominationUniteLegale'],
-                'category': company.get('categorieEntreprise'),
-                'legalform_code': company['periodesUniteLegale'][0]['categorieJuridiqueUniteLegale'],
-                'legalform_label': self.legalform(company['periodesUniteLegale'][0]['categorieJuridiqueUniteLegale']),
-                'ape_code': company['periodesUniteLegale'][0]['activitePrincipaleUniteLegale'],
-                'ape_label': self.ape(company['periodesUniteLegale'][0]['activitePrincipaleUniteLegale'].replace('.', '')),
-                'street': '',
-                'city': '',
-                'since': self.createdate(company['dateCreationUniteLegale']),
-                'lastupdate': self.lastupdate(company['dateDernierTraitementUniteLegale']),
-            })
-        return companies, total, pages
+        #companies, total, pages = ([], 0, 0)
+        #if not siren.isdigit() or not len(siren) == 9:  return companies, total, pages
+        #access_token = self.get_token()
+        #headers = ['Accept: application/json', 'Authorization: Bearer %s' % access_token]
+        #buffer, response_code = self.call_webservice(self.siren_url, headers,  "q=siren:%s&masquerValeursNulles=true" % siren)
+        #for company in self.companies(buffer.get('unitesLegales', [buffer['header']]), response_code):
+        #    companies.append({
+        #        'siren': company.get('siren'),
+        #        'denomination': company['periodesUniteLegale'][0]['denominationUniteLegale'],
+        #        'category': company.get('categorieEntreprise'),
+        #        'legalform_code': company['periodesUniteLegale'][0]['categorieJuridiqueUniteLegale'],
+        #        'legalform_label': self.legalform(company['periodesUniteLegale'][0]['categorieJuridiqueUniteLegale']),
+        #        'ape_code': company['periodesUniteLegale'][0]['activitePrincipaleUniteLegale'],
+        #        'ape_label': self.ape(company['periodesUniteLegale'][0]['activitePrincipaleUniteLegale'].replace('.', '')),
+        #        'street': '',
+        #        'city': '',
+        #        'since': self.createdate(company['dateCreationUniteLegale']),
+        #        'lastupdate': self.lastupdate(company['dateDernierTraitementUniteLegale']),
+        #    })
+        #return companies, total, pages
 
     def get_active_companies(self, number, offset):
         return self.get_companies('etatAdministratifUniteLegale:A', number, offset)
 
     def get_company_by_fulltext(self, fulltext):
         fulltext = re.sub(r"\s+", '-', fulltext)
-        return self.get_companies('denominationUniteLegale:%s+AND+etatAdministratifUniteLegale:A' % fulltext)
+        return self.get_companies('denominationUniteLegale:%s+AND+etatAdministratifUniteLegale:A' % make_searchable(fulltext))

@@ -29,6 +29,29 @@ INDEX = (
 ("NEXTPP", _("NEXT++")),
 )
 
+GOVERNANCE = (
+("CAWPDG", _("CA avec PDG")),
+("CAGOVDISLO", _("CA à gouvernance dissociée")),
+("CSDIRECTOR", _("Conseil de Surveillance/Directoire")),
+("COMMANDITE", _("Commandite")),
+)
+
+EVALUATION = (
+("AUTOYEAR", _("Auto-évaluation chaque année")),
+("AUTO2YEAR", _("Auto-évaluation (1 fois tous les 2 ans)")),
+("AUTO3YEAR", _("Auto-évaluation (1 fois tous les 3 ans)")),
+("EXTYEAR", _("Consultant externe chaque année")),
+("EXT2YEAR", _("Consultant externe tous les 2 ans")),
+("EXT3YEAR", _("Consultant externe tous les 3 ans")),
+("AUTO2YEAREXT", _("Auto-évaluation annuelle et consultant externe tous les 2 ans")),
+("AUTO3YEAREXT", _("Auto-évaluation annuelle et consultant externe tous les 3 ans")),
+("PRESNOTNECESSARY", _("Le Président estime qu’il n’est pas nécessaire de procéder à l’évaluation du fonctionnement du Conseil d’administration.")),
+("0PROCESSENABLE", _("A ce jour, aucune procédure d’auto-évaluation du fonctionnement n’est mise en place par le Conseil.")),
+("0FORMDO", _("Aucune évaluation formalisée du Conseil n’a été réalisée jusqu’à aujourd’hui")),
+)
+
+
+
 LEGALFORM = (
 (1000, _("Entrepreneur individue")),
 (2110, _("Indivision entre personnes physiques")),

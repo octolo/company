@@ -7,21 +7,20 @@ from mighty.applications.address.models import Address
 
 from company import translates as _, managers, get_company_model
 from company.apps import CompanyConfig as conf
-from company.choices import ICB, MARKET
+from company.choices import ICB, MARKET, YESNO
 
-
-class CompanyBase(Base):
+class Company(Base):
     search_fields = ['denomination']
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)
-    closed = models.DateField(_.closed, null=True)
-
-    class Meta(Base.Meta):
-        abstract = True
-
-class Company(CompanyBase):
     icb = models.CharField(_.icb, max_length=40, choices=ICB, blank=True, null=True, db_index=True)
     market = models.CharField(_.market, max_length=40, choices=MARKET, blank=True, null=True, db_index=True)
+    capital_division = models.JSONField(blank=True, null=True)
+    share_capital = models.FloatField(_.fr_share_capital, blank=True, null=True)
+    floating = models.FloatField(blank=True, null=True)
+    site = models.URLField(blank=True, null=True)
+    current = models.FloatField(blank=True, null=True)
+    effective = models.BigIntegerField(blank=True, null=True)
 
     objects = models.Manager()
     objectsB = managers.CompanyManager()
@@ -50,20 +49,21 @@ class Company(CompanyBase):
     def get_dataset_by_country(self, alpha2):
         return import_string('%s.models.Company%s' % (self.app_label, alpha2.upper()))
 
-class CompanyAlpha2(CompanyBase):
+class CompanyAlpha2(Base):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE)
+    denomination = models.CharField(max_length=255)
+    since = models.DateField(_.since, null=True)
 
     class Meta(Base.Meta):
         abstract = True
+
+    def far_since(self):
+        return 
 
     def save(self, *args, **kwargs):
         if self.company_id is None:
             company = get_company_model()(denomination=self.denomination, since=self.since)
             company.save()
-            self.company = company
-        elif self.company.since > self.since:
-            self.company.since = self.since
-            self.company.save()
         super().save()
 
 #####################
@@ -72,7 +72,10 @@ class CompanyAlpha2(CompanyBase):
 from company.choices import fr as choices_fr
 CHOICES_APE = sorted(list(choices_fr.APE), key=lambda x: x[1])
 CHOICES_LEGALFORM = sorted(list(choices_fr.LEGALFORM), key=lambda x: x[1])
+CHOICES_GOVERNANCE = sorted(list(choices_fr.GOVERNANCE), key=lambda x: x[1])
+CHOICES_EVALUATION = sorted(list(choices_fr.EVALUATION), key=lambda x: x[1])
 class CompanyFR(CompanyAlpha2):
+    search_fields = ['denomination', 'siret', 'isin', 'ticker']
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='company_fr')
     siret = models.CharField(_.fr_siret, max_length=14, unique=True)
     ape = models.CharField(_.fr_ape, max_length=5)
@@ -81,13 +84,19 @@ class CompanyFR(CompanyAlpha2):
     legalform = models.CharField(_.fr_legalform, max_length=4)
     slice_effective = models.CharField(_.fr_slice_effective, choices=choices_fr.SLICE_EFFECTIVE, blank=True, null=True, max_length=2)
     effective = models.BigIntegerField(_.fr_effective, blank=True, null=True)
-    share_capital = models.FloatField(_.fr_share_capital, blank=True, null=True)
 
     isin = models.CharField(_.fr_isin, max_length=25, blank=True, null=True)
     ticker = models.CharField(_.fr_ticker, max_length=25, blank=True, null=True, db_index=True)
     coderef = models.CharField(_.fr_coderef, max_length=30, choices=choices_fr.CODEREF, blank=True, null=True, db_index=True)
     index = models.CharField(_.fr_index, choices=choices_fr.INDEX, max_length=255, blank=True, null=True, db_index=True)
 
+    governance = models.CharField(_.fr_governance, max_length=255, choices=CHOICES_GOVERNANCE, blank=True, null=True, db_index=True)
+    evaluation = models.CharField(_.fr_evaluation, max_length=255, choices=CHOICES_EVALUATION, blank=True, null=True)
+    quality_independent = models.CharField(_.fr_quality_independent, max_length=3, choices=YESNO, blank=True, null=True)
+    secretary = models.CharField(_.fr_secretary, max_length=255, blank=True, null=True)
+
+    resume = models.TextField(blank=True, null=True)
+    site = models.URLField(blank=True, null=True)
 
     class Meta(Base.Meta):
         abstract = True

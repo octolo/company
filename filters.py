@@ -1,33 +1,74 @@
+from django.db.models import Q
+from mighty import filters
+from functools import reduce
+from company import choices
+from company.choices import fr as choices_fr
 
-from mighty.filters import ParamFilter
-from company.models import Company
+class SearchByCompany(filters.SearchFilter):
+    def __init__(self, id='company', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'company')
+        self.field = {
+            'search': 'search',
+            'fr': 'company_fr__search',
+        }
 
-class ByDate(ParamFilter):
-    def __init__(self, id='date', *args, **kwargs):
-        super().__init__(id, *args, **kwargs)
-        self.param = kwargs.get('param', 'date')
-        self.mask = kwargs.get('mask', '')
-        self.field = kwargs.get('field', 'since')
+    def get_Q(self):
+        search = reduce(self.operator, [Q(**{self.field['search']+self.mask: value }) for value in self.get_value(self.field['search'])])
+        fr = reduce(self.operator, [Q(**{self.field['fr']+self.mask: value }) for value in self.get_value(self.field['fr'])])
+        return search|fr
 
-class ByStartDate(ParamFilter):
-    def __init__(self, id='date_start', *args, **kwargs):
-        super().__init__(id, *args, **kwargs)
-        self.param = kwargs.get('param', 'date_start')
-        self.mask = kwargs.get('mask', '__gte')
-        self.field = kwargs.get('field', 'since')
+class SearchByICB(filters.ParamChoicesFilter):
+    def __init__(self, id='icb', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)  
+        self.param = kwargs.get('param', 'icb')
+        self.field = kwargs.get('field', 'icb')
+        self.choices = kwargs.get('choices', [i[0] for i in choices.ICB])
 
-class ByEndDate(ParamFilter):
-    def __init__(self, id='date_end', *args, **kwargs):
-        super().__init__(id, *args, **kwargs)
-        self.param = kwargs.get('param', 'date_end')
-        self.mask = kwargs.get('mask', '__lte')
-        self.field = kwargs.get('field', 'end')
+class SearchByMarket(filters.ParamChoicesFilter):
+    def __init__(self, id='market', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'market')
+        self.field = kwargs.get('field', 'market')
+        self.choices = kwargs.get('choices', [m[0] for m in choices.MARKET])
 
-class InDenomination(ParamFilter):
-    def __init__(self, id='in_denomination', *args, **kwargs):
-        super().__init__(id, *args, **kwargs)
-        self.id = id if id else str(uuid.uuid4())
-        self.param = kwargs.get('param', 'in_denomination')
-        self.mask = kwargs.get('mask', '__icontains')
-        self.field = kwargs.get('field', 'denomination')
-        self.dependencies+=[ByDate(), ByStartDate(), ByEndDate()]
+# FR
+class SearchFRByISIN(filters.SearchFilter):
+    def __init__(self, id='isin', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'isin')
+        self.field = kwargs.get('field', 'company_fr__isin')
+
+class SearchFRBySiret(filters.SearchFilter):
+    def __init__(self, id='siret', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'siret')
+        self.field = kwargs.get('siret', 'company_fr__siret')
+
+class SearchFRByAPE(filters.ParamChoicesFilter):
+    def __init__(self, id='ape', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'ape')
+        self.field = kwargs.get('field', 'company_fr__ape')
+        self.choices = kwargs.get('choices', [a[0] for a in choices_fr.APE])
+
+class SearchFRByLegalform(filters.ParamChoicesFilter):
+    def __init__(self, id='legalform', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'legalform')
+        self.field = kwargs.get('field', 'legalform')
+        self.choices = kwargs.get('choices', [l[0] for l in choices_fr.LEGALFORM])
+
+class SearchFRByGovernance(filters.ParamChoicesFilter):
+    def __init__(self, id='governance', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'governance')
+        self.field = kwargs.get('field', 'governance')
+        self.choices = kwargs.get('choices', [g[0] for g in choices_fr.GOVERNANCE])
+
+class SearchFRByEvaluation(filters.ParamChoicesFilter):
+    def __init__(self, id='evaluation', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'evaluation')
+        self.field = kwargs.get('field', 'evaluation')
+        self.choices = kwargs.get('choices', [e[0] for e in choices_fr.EVALUATION])

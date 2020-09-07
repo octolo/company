@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 
 from mighty.views import TemplateView, FormView, DetailView, AddView, ListView
 from mighty.functions import get_form_model
+from mighty.filters import FiltersManager, Foxid
 
 from company.apps import CompanyConfig as conf
 from company.models import Company
@@ -124,18 +125,28 @@ class AddByCountry(CanContainParentObject, FormView):
         self.success_url = form.cmodel.company.admin_change_url if self.admin else form.cmodel.company.detail_url
         return super().form_valid(form)
 
-
 if 'rest_framework' in settings.INSTALLED_APPS:
     from rest_framework.generics import ListAPIView
-    from mighty.filters import RequestInterpreter
-    from company import filters
+    from boarddata.models import Person
+    from company import serializers, filters
 
     class APICompanyList(ListAPIView):
-        def get_queryset(self, queryset=None):
-            queryset = super().get_queryset()
-            flts = [filters.ByDate(), filters.ByStartDate(), filters.ByEndDate(), filters.InDenomination()]
-            return RequestInterpreter(queryset, self.request, flts=flts).ready()
+        queryset = company_model.objects.all()
+        serializer_class = serializers.CompanySerializer
 
+        def get_queryset(self, queryset=None):
+            fm = FiltersManager(flts=[
+                filters.SearchByCompany(),
+                filters.SearchByICB(),
+                filters.SearchByMarket(),
+                filters.SearchFRByAPE(),
+                filters.SearchFRByGovernance(),
+                filters.SearchFRByEvaluation(),
+                filters.SearchFRByISIN(),
+                filters.SearchFRByLegalform(),
+                filters.SearchFRBySiret(),
+            ])
+            return Foxid(self.queryset, self.request, f=fm.flts).ready().filter(*fm.params(self.request))
 
 #class CompanyViewSet(ModelViewSet):
 #    model = company_model

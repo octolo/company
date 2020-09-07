@@ -1,12 +1,15 @@
-from django.conf import settings
 from rest_framework.serializers import ModelSerializer
-from company import fields
+from company import get_company_model, fields
 
-
-class CompanySerializer(ModelSerializer):
-    class Meta:
-        fields = ('uid',) + fields.company
+company_model = get_company_model()
+companyfr_model = get_company_model('CompanyFR')
 
 class CompanyFRSerializer(ModelSerializer):
     class Meta:
-        fields = ('uid',) + fields.company + fields.fr
+        model = companyfr_model
+        fields = fields.fr
+
+class CompanySerializer(ModelSerializer):
+    class Meta:
+        model = company_model
+        fields = fields.company
