@@ -113,11 +113,11 @@ class CompanyFR(CompanyAlpha2):
     @property
     def ape_code(self): return self.ape if self.ape else _.ape_null
     @property
-    def ape_label(self): return dict(choices.APE).get(self.ape)
+    def ape_label(self): return dict(choices_fr.APE).get(self.ape)
     @property
     def legalform_code(self): return self.legalform if self.legalform else _.legalform_null
     @property
-    def legalform_label(self): return dict(choices.LEGALFORM).get(self.legalform)
+    def legalform_label(self): return dict(choices_fr.LEGALFORM).get(self.legalform)
 
     def save(self, *args, **kwargs):
         try:

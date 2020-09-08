@@ -4,6 +4,12 @@ from functools import reduce
 from company import choices
 from company.choices import fr as choices_fr
 
+class SearchByUid(filters.ParamFilter):
+    def __init__(self, id='uid', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'uid')
+        self.field = kwargs.get('field', 'uid')
+
 class SearchByCompany(filters.SearchFilter):
     def __init__(self, id='company', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)

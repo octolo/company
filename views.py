@@ -126,7 +126,7 @@ class AddByCountry(CanContainParentObject, FormView):
         return super().form_valid(form)
 
 if 'rest_framework' in settings.INSTALLED_APPS:
-    from rest_framework.generics import ListAPIView
+    from rest_framework.generics import ListAPIView, RetrieveAPIView
     from boarddata.models import Person
     from company import serializers, filters
 
@@ -134,8 +134,9 @@ if 'rest_framework' in settings.INSTALLED_APPS:
         queryset = company_model.objects.all()
         serializer_class = serializers.CompanySerializer
 
-        def get_queryset(self, queryset=None):
-            fm = FiltersManager(flts=[
+        def get_filters(self):
+            return [
+                filters.SearchByUid(),
                 filters.SearchByCompany(),
                 filters.SearchByICB(),
                 filters.SearchByMarket(),
@@ -145,21 +146,16 @@ if 'rest_framework' in settings.INSTALLED_APPS:
                 filters.SearchFRByISIN(),
                 filters.SearchFRByLegalform(),
                 filters.SearchFRBySiret(),
-            ])
-            return Foxid(self.queryset, self.request, f=fm.flts).ready().filter(*fm.params(self.request))
+            ]
 
-#class CompanyViewSet(ModelViewSet):
-#    model = company_model
-#    slug = '<uuid:uid>'
-#    slug_field = 'uid'
-#    slug_url_kwarg = 'uid'
-#    filter_model = filters.CompanyFilter
-#
-#    def __init__(self):
-#        super().__init__()
-#        self.add_view('country-choice', ChoiceCountry, 'choice/')
-#        self.add_view('country-search', SearchByCountry, 'choice/<str:country>/search/')
-#        self.add_view('country-add', AddByCountry, 'choices/<str:country>/search/<int:position>/add/')
-#        self.add_view('country-choice-extend', ChoiceCountry, '%s/choice/'% self.slug)
-#        self.add_view('country-search-extend', SearchByCountry, '%s/choice/<str:country>/search/' % self.slug)
-#        self.add_view('country-add-extend', SearchByCountry, '%s/choice/<str:country>/search/<int:position>/add/' % self.slug)
+        def get_filters_manager(self):
+            return FiltersManager(flts=self.get_filters())
+
+        def get_queryset(self, queryset=None):
+            return Foxid(self.queryset, self.request, f=self.get_filters_manager().flts, distinct=True).ready()\
+                .filter(*self.get_filters_manager().params(self.request))
+
+    class APICompanyDetail(RetrieveAPIView):
+        queryset = company_model.objects.all()
+        serializer_class = serializers.CompanyWithCountriesSerializer
+        lookup_field = 'uid'
