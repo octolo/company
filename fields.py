@@ -9,6 +9,17 @@ company = (
     'site',
     'current',
     'effective',
+    'purpose',
+    'secretary',
+    'settle_internal',
+    'duration_mandate',
+    'matrix_skills',
+    'instance_comex',
+    'age_limit_pdg',
+    'age_limit_dg',
+    'stock_min_rule',
+    'stock_min_status',
+    'resume'
 )
 
 country = ('denomination', 'since')

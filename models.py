@@ -9,6 +9,9 @@ from company import translates as _, managers, get_company_model
 from company.apps import CompanyConfig as conf
 from company.choices import ICB, MARKET, YESNO
 
+from ckeditor.fields import RichTextField
+
+
 class Company(Base):
     search_fields = ['denomination']
     denomination = models.CharField(max_length=255)
@@ -16,11 +19,27 @@ class Company(Base):
     icb = models.CharField(_.icb, max_length=40, choices=ICB, blank=True, null=True, db_index=True)
     market = models.CharField(_.market, max_length=40, choices=MARKET, blank=True, null=True, db_index=True)
     capital_division = models.JSONField(blank=True, null=True)
-    share_capital = models.FloatField(_.fr_share_capital, blank=True, null=True)
+    share_capital = models.FloatField(_.share_capital, blank=True, null=True)
     floating = models.FloatField(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
     current = models.FloatField(blank=True, null=True)
     effective = models.BigIntegerField(blank=True, null=True)
+    purpose = models.CharField(_.purpose, max_length=3, choices=YESNO, blank=True, null=True)
+    secretary = models.CharField(_.secretary, max_length=255, blank=True, null=True)
+    settle_internal = models.BooleanField(_.settle_internal, default=False)
+    duration_mandate = models.PositiveSmallIntegerField(_.duration_mandate, blank=True, null=True)
+    matrix_skills = models.BooleanField(_.matrix_skills, default=False)
+    instance_comex = models.BooleanField(_.instance_comex, default=False)
+    age_limit_pdg = models.BooleanField(_.age_limit_pdg, default=False)
+    age_limit_dg = models.BooleanField(_.age_limit_dg, default=False)    
+    stock_min_rule = models.PositiveIntegerField(_.stock_min_rule, default=0)
+    stock_min_status = models.PositiveIntegerField(_.stock_min_status, default=0)
+    resume = RichTextField(blank=True, null=True)
+
+    dowjones = ""
+    gaia = ""
+    nasdaq = ""
+
 
     objects = models.Manager()
     objectsB = managers.CompanyManager()
@@ -35,16 +54,20 @@ class Company(Base):
         return self.denomination
 
     @property
-    def country_choice_url(self): return self.get_url('country-choice')
-    @property
-    def country_choice_extend_url(self): return self.get_url('country-choice-extend', arguments=self.arguments())
+    def country_choice_url(self):
+        return self.get_url('country-choice')
 
-    def country_search_url(self, country): return self.get_url('country-search', arguments={'country': country})
+    @property
+    def country_choice_extend_url(self):
+        return self.get_url('country-choice-extend', arguments=self.arguments())
+
+    def country_search_url(self, country):
+        return self.get_url('country-search', arguments={'country': country})
+
     def country_search_extend_url(self, country):
         args = self.arguments()
         args['country'] = country
         return self.get_url('country-search-extend', arguments=args)
-
 
     def get_dataset_by_country(self, alpha2):
         return import_string('%s.models.Company%s' % (self.app_label, alpha2.upper()))
@@ -95,7 +118,7 @@ class CompanyFR(CompanyAlpha2):
     quality_independent = models.CharField(_.fr_quality_independent, max_length=3, choices=YESNO, blank=True, null=True)
     secretary = models.CharField(_.fr_secretary, max_length=255, blank=True, null=True)
 
-    resume = models.TextField(blank=True, null=True)
+    resume = RichTextField(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
 
     class Meta(Base.Meta):
