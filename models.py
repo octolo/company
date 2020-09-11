@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 from mighty.models.base import Base
+from mighty.models.image import Image
 from mighty.applications.address.models import Address
 
 from company import translates as _, managers, get_company_model
@@ -12,7 +13,7 @@ from company.choices import ICB, MARKET, YESNO
 from ckeditor.fields import RichTextField
 
 
-class Company(Base):
+class Company(Base, Image):
     search_fields = ['denomination']
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)

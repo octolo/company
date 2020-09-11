@@ -7,7 +7,7 @@ companyfr_model = get_company_model('CompanyFR')
 class CompanyMinSerializer(ModelSerializer):
     class Meta:
         model = company_model
-        fields = ('uid', 'denomination')
+        fields = ('uid', 'denomination', 'image_url')
 
 class CompanyFRSerializer(ModelSerializer):
     class Meta:
