@@ -131,7 +131,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
     from company import serializers, filters
 
     class APICompanyList(ListAPIView):
-        queryset = company_model.objects.all()
+        queryset = company_model.objectsB.all()
         serializer_class = serializers.CompanyWithCountriesSerializer
 
         def get_filters(self):

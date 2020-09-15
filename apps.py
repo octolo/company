@@ -4,6 +4,7 @@ from mighty import over_config
 
 class Config:
     app_label = 'company'
+    countries = {}
 
     class Model:
         Company = 'Company'

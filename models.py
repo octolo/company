@@ -108,12 +108,10 @@ class CompanyFR(CompanyAlpha2):
     legalform = models.CharField(_.fr_legalform, max_length=4)
     slice_effective = models.CharField(_.fr_slice_effective, choices=choices_fr.SLICE_EFFECTIVE, blank=True, null=True, max_length=2)
     effective = models.BigIntegerField(_.fr_effective, blank=True, null=True)
-
     isin = models.CharField(_.fr_isin, max_length=25, blank=True, null=True)
     ticker = models.CharField(_.fr_ticker, max_length=25, blank=True, null=True, db_index=True)
     coderef = models.CharField(_.fr_coderef, max_length=30, choices=choices_fr.CODEREF, blank=True, null=True, db_index=True)
     index = models.CharField(_.fr_index, choices=choices_fr.INDEX, max_length=255, blank=True, null=True, db_index=True)
-
     governance = models.CharField(_.fr_governance, max_length=255, choices=CHOICES_GOVERNANCE, blank=True, null=True, db_index=True)
     evaluation = models.CharField(_.fr_evaluation, max_length=255, choices=CHOICES_EVALUATION, blank=True, null=True)
     quality_independent = models.CharField(_.fr_quality_independent, max_length=3, choices=YESNO, blank=True, null=True)
