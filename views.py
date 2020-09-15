@@ -127,7 +127,6 @@ class AddByCountry(CanContainParentObject, FormView):
 
 if 'rest_framework' in settings.INSTALLED_APPS:
     from rest_framework.generics import ListAPIView, RetrieveAPIView
-    from boarddata.models import Person
     from company import serializers, filters
 
     class APICompanyList(ListAPIView):

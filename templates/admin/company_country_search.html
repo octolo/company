@@ -64,7 +64,7 @@ thead th { padding: 5px 10px!important; }
                 <form method="POST" action="{{ add_url }}">
                     {% csrf_token %}
                     {% for field in country_fields %}
-                    {% with value=company|index:field %}
+                    {% with value=company|indexkey:field %}
                     <input type="hidden" name="{{ field }}"{% if value %} value="{{ value }}"{% endif %}>
                     {% endwith %}
                     {% endfor %}
@@ -73,7 +73,7 @@ thead th { padding: 5px 10px!important; }
                     <input type="submit">
                 </form>
             </td>
-        {% for field in country_fields %}<td>{{ company|index:field }}</td>{% endfor %}
+        {% for field in country_fields %}<td>{{ company|indexkey:field }}</td>{% endfor %}
         </tr>
         {% endfor %}
     </tbody>
