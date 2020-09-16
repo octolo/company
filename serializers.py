@@ -1,14 +1,22 @@
 from rest_framework.serializers import ModelSerializer
 from company import get_company_model, fields
+from mighty.decorators import maskedSerializer
+
+except_mask = ('uid', 'denomination', 'capital_division', 'image_url')
 
 company_model = get_company_model()
 companyfr_model = get_company_model('CompanyFR')
 
+@maskedSerializer(except_mask=except_mask)
 class CompanyMinSerializer(ModelSerializer):
     class Meta:
         model = company_model
         fields = ('uid', 'denomination', 'image_url')
 
+    def to_internal_value(self, data):
+        return 'test'
+
+@maskedSerializer(except_mask=('uid', 'denomination'))
 class CompanyFRSerializer(ModelSerializer):
     class Meta:
         model = companyfr_model
@@ -20,13 +28,29 @@ class CompanyFRSerializer(ModelSerializer):
             'get_evaluation_display',
         )
 
+@maskedSerializer(except_mask=except_mask)
 class CompanySerializer(ModelSerializer):
     class Meta:
         model = company_model
         fields = ('uid',) + fields.company
 
+    def to_internal_value(self, data):
+        return 'test'
+
+@maskedSerializer(except_mask=except_mask)
 class CompanyWithCountriesSerializer(ModelSerializer):
     company_fr = CompanyFRSerializer(many=True)
+
+    #def to_internal_value(self, data):
+    #    print(data)
+    #    return super().to_internal_value(data)
+
+    #def to_representation(self, instance):
+    #    ret = super().to_representation(instance)
+    #    for field in ret:
+    #        print('%s: %s' % (field, ret[field]))
+    #    return ret
+    #    #return 'test'
 
     class Meta:
         model = company_model
