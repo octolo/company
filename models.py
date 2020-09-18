@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.module_loading import import_string
 
+from mighty.models import News
 from mighty.models.base import Base
 from mighty.models.image import Image
 from mighty.applications.address.models import Address
@@ -89,6 +90,12 @@ class CompanyAlpha2(Base):
             company = get_company_model()(denomination=self.denomination, since=self.since)
             company.save()
         super().save()
+
+class CompanyNews(News):
+    company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='company_news')
+
+    class Meta(News.Meta):
+        abstract = True
 
 #####################
 # FR
