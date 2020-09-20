@@ -31,6 +31,7 @@ fr = (
     'ape_noun',
     'category',
     'legalform',
+    'governance',
     'isin',
     'ticker',
     'coderef',

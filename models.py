@@ -20,6 +20,8 @@ class Company(Base, Image):
     since = models.DateField(_.since, null=True)
     icb = models.CharField(_.icb, max_length=40, choices=ICB, blank=True, null=True, db_index=True)
     market = models.CharField(_.market, max_length=40, choices=MARKET, blank=True, null=True, db_index=True)
+    dowjones = models.BooleanField(default=False)
+    nasdaq = models.BooleanField(default=False)
     capital_division = models.JSONField(blank=True, null=True)
     share_capital = models.FloatField(_.share_capital, blank=True, null=True)
     floating = models.FloatField(blank=True, null=True)
