@@ -78,3 +78,10 @@ class SearchFRByEvaluation(filters.ParamChoicesFilter):
         self.param = kwargs.get('param', 'evaluation')
         self.field = kwargs.get('field', 'evaluation')
         self.choices = kwargs.get('choices', [e[0] for e in choices_fr.EVALUATION])
+
+class SearchFRByIndex(filters.ParamChoicesFilter):
+    def __init__(self, id='index', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.param = kwargs.get('param', 'index')
+        self.field = kwargs.get('field', 'company_fr__index')
+        self.choices = kwargs.get('choices', [e[0] for e in choices_fr.INDEX])

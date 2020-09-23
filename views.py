@@ -145,6 +145,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
                 filters.SearchFRByISIN(),
                 filters.SearchFRByLegalform(),
                 filters.SearchFRBySiret(),
+                filters.SearchFRByIndex(),
             ]
 
         def get_filters_manager(self):
