@@ -1,7 +1,7 @@
 from django.conf import settings
 from company.backends.search import SearchBackend
 from io import BytesIO
-import base64, pycurl, json, re, logging
+import base64, pycurl, json, re, logging, time, datetime
 from mighty.functions import make_searchable
 logger = logging.getLogger(__name__)
 
@@ -42,63 +42,55 @@ class SearchBackend(SearchBackend):
         headers = ['Accept: application/json', 'Authorization: Bearer %s' % access_token]
         url = "%s?q=%s&nombre=%s&debut=%s&masquerValeursNulles=true" % (self.siret_url, qreq, number, offset)
         buffer, response_code = self.call_webservice(url, headers)
-        message = False if buffer['header']['message'] == "OK" else buffer['header']['message'] 
-        total = buffer['header'].get('total', 0)
-        pages = round(total/number) if total else 0
-        if str(response_code)[0] in ["2", "3"]:
-            for company in buffer.get('etablissements', [buffer['header']]):
-                companies.append({
-                    'siret': company.get('siret'),
-                    'denomination': company['uniteLegale'].get('denominationUniteLegale', company['uniteLegale'].get('nomUniteLegale')),
-                    'legalform': company['uniteLegale']['categorieJuridiqueUniteLegale'],
-                    'ape': company['uniteLegale']['activitePrincipaleUniteLegale'].replace('.', ''),
-                    'ape_noun': company['uniteLegale']['nomenclatureActivitePrincipaleUniteLegale'],
-                    'since': self.since(company['uniteLegale'].get('dateCreationUniteLegale')),
-                    'category': company['uniteLegale'].get('categorieEntreprise', ''),
-                    'slice_effective': company['uniteLegale'].get('trancheEffectifsUniteLegale', ''),
-                    'effective': "",
-                    'share_capital': "",
-                    'address': {
-                        'street_number': company['adresseEtablissement'].get('numeroVoieEtablissement'),
-                        'way': company['adresseEtablissement'].get('typeVoieEtablissement'),
-                        'route': company['adresseEtablissement'].get('libelleVoieEtablissement'),
-                        'locality': company['adresseEtablissement'].get('libelleCommuneEtablissement',
-                            company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement')),
-                        'postal_code': company['adresseEtablissement'].get('codeCommuneEtablissement', 
-                            company['adresseEtablissement'].get('codePostalEtablissement')),
-                        'country': company['adresseEtablissement'].get('libellePaysEtrangerEtablissement', 'france').lower(),
-                        'country_code': company['adresseEtablissement'].get('codePaysEtrangerEtablissement', 'fr').lower(),
-                        'cedex': company['adresseEtablissement'].get('libelleCedexEtablissement'),
-                        'cedex_code': company['adresseEtablissement'].get('codeCedexEtablissement'),
-                        'special': company['adresseEtablissement'].get('distributionSpecialeEtablissement'),
-                        'complement': company['adresseEtablissement'].get('complementAdresseEtablissement'),
-                        'index': company['adresseEtablissement'].get('indiceRepetitionEtablissement'),
-                    }
-                })
-        return message, companies, total, pages
+        if'header' in buffer:
+            message = False if buffer['header']['message'] == "OK" else buffer['header']['message']
+            total = buffer['header'].get('total', 0)
+            pages = round(total/number) if total else 0
+            if str(response_code)[0] in ["2", "3"]:
+                for company in buffer.get('etablissements', [buffer['header']]):
+                    companies.append({
+                        'siret': company.get('siret'),
+                        'denomination': company['uniteLegale'].get('denominationUniteLegale', company['uniteLegale'].get('nomUniteLegale')),
+                        'legalform': company['uniteLegale']['categorieJuridiqueUniteLegale'],
+                        'ape': company['uniteLegale']['activitePrincipaleUniteLegale'].replace('.', ''),
+                        'ape_noun': company['uniteLegale']['nomenclatureActivitePrincipaleUniteLegale'],
+                        'since': self.since(company['uniteLegale'].get('dateCreationUniteLegale')),
+                        'category': company['uniteLegale'].get('categorieEntreprise', ''),
+                        'slice_effective': company['uniteLegale'].get('trancheEffectifsUniteLegale', ''),
+                        'effective': "",
+                        'share_capital': "",
+                        'address': {
+                            'street_number': company['adresseEtablissement'].get('numeroVoieEtablissement'),
+                            'way': company['adresseEtablissement'].get('typeVoieEtablissement'),
+                            'route': company['adresseEtablissement'].get('libelleVoieEtablissement'),
+                            'locality': company['adresseEtablissement'].get('libelleCommuneEtablissement',
+                                company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement')),
+                            'postal_code': company['adresseEtablissement'].get('codeCommuneEtablissement', 
+                                company['adresseEtablissement'].get('codePostalEtablissement')),
+                            'country': company['adresseEtablissement'].get('libellePaysEtrangerEtablissement', 'france').lower(),
+                            'country_code': company['adresseEtablissement'].get('codePaysEtrangerEtablissement', 'fr').lower(),
+                            'cedex': company['adresseEtablissement'].get('libelleCedexEtablissement'),
+                            'cedex_code': company['adresseEtablissement'].get('codeCedexEtablissement'),
+                            'special': company['adresseEtablissement'].get('distributionSpecialeEtablissement'),
+                            'complement': company['adresseEtablissement'].get('complementAdresseEtablissement'),
+                            'index': company['adresseEtablissement'].get('indiceRepetitionEtablissement'),
+                        }
+                    })
+            return message, companies, total, pages
+        else:
+            if 'fault' in buffer:
+                if buffer['fault']['code'] == 900804:
+                    sleepfor = 61-datetime.datetime.now().second
+                    logger.info("desc: %s ,wait: %s seconds" % (buffer['fault']['description'], sleepfor))
+                    time.sleep(sleepfor)
+                    return self.get_companies(qreq, number, offset)
+                else:
+                    logger.info(buffer)
+            else:
+                logger.info("Error encountered but we dont know what")
 
     def get_company_by_siren(self, siren):
         return self.get_companies('siren:%s' % siren)
-        #companies, total, pages = ([], 0, 0)
-        #if not siren.isdigit() or not len(siren) == 9:  return companies, total, pages
-        #access_token = self.get_token()
-        #headers = ['Accept: application/json', 'Authorization: Bearer %s' % access_token]
-        #buffer, response_code = self.call_webservice(self.siren_url, headers,  "q=siren:%s&masquerValeursNulles=true" % siren)
-        #for company in self.companies(buffer.get('unitesLegales', [buffer['header']]), response_code):
-        #    companies.append({
-        #        'siren': company.get('siren'),
-        #        'denomination': company['periodesUniteLegale'][0]['denominationUniteLegale'],
-        #        'category': company.get('categorieEntreprise'),
-        #        'legalform_code': company['periodesUniteLegale'][0]['categorieJuridiqueUniteLegale'],
-        #        'legalform_label': self.legalform(company['periodesUniteLegale'][0]['categorieJuridiqueUniteLegale']),
-        #        'ape_code': company['periodesUniteLegale'][0]['activitePrincipaleUniteLegale'],
-        #        'ape_label': self.ape(company['periodesUniteLegale'][0]['activitePrincipaleUniteLegale'].replace('.', '')),
-        #        'street': '',
-        #        'city': '',
-        #        'since': self.createdate(company['dateCreationUniteLegale']),
-        #        'lastupdate': self.lastupdate(company['dateDernierTraitementUniteLegale']),
-        #    })
-        #return companies, total, pages
 
     def get_active_companies(self, number, offset):
         return self.get_companies('etatAdministratifUniteLegale:A', number, offset)
