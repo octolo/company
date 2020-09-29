@@ -24,6 +24,7 @@ class SearchBackend(SearchBackend):
         c.perform() # execute le navigateur
         response_code = c.getinfo(c.RESPONSE_CODE) # récupération du code de réponse http
         c.close() # fermeture du navigateur
+        print(buffer.getvalue())
         return json.loads(buffer.getvalue()), response_code
 
     def get_token(self):
