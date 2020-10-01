@@ -11,18 +11,15 @@ class SearchByUid(filters.ParamFilter):
         self.field = kwargs.get('field', 'uid')
 
 class SearchByCompany(filters.SearchFilter):
-    def __init__(self, id='company', request=None, *args, **kwargs):
+    def __init__(self, id='search', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
-        self.param = kwargs.get('param', 'company')
-        self.field = {
-            'search': 'search',
-            'fr': 'company_fr__search',
-        }
+        self.param = kwargs.get('param', 'search')
+        self.field = {'company': 'search', 'company_fr': 'company_fr__search'}
 
     def get_Q(self):
-        search = reduce(self.operator, [Q(**{self.field['search']+self.mask: value }) for value in self.get_value(self.field['search'])])
-        fr = reduce(self.operator, [Q(**{self.field['fr']+self.mask: value }) for value in self.get_value(self.field['fr'])])
-        return search|fr
+        company = reduce(self.operator, [Q(**{self.field['company']+self.mask: value }) for value in self.get_value(self.field['company'])])
+        company_fr = reduce(self.operator, [Q(**{self.field['company_fr']+self.mask: value }) for value in self.get_value(self.field['company_fr'])])
+        return company|company_fr
 
 class SearchByICB(filters.ParamChoicesFilter):
     def __init__(self, id='icb', request=None, *args, **kwargs):
@@ -79,7 +76,7 @@ class SearchFRByEvaluation(filters.ParamChoicesFilter):
         self.field = kwargs.get('field', 'evaluation')
         self.choices = kwargs.get('choices', [e[0] for e in choices_fr.EVALUATION])
 
-class SearchFRByIndex(filters.ParamChoicesFilter):
+class SearchFRByIndex(filters.ParamMultiChoicesFilter):
     def __init__(self, id='index', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
         self.param = kwargs.get('param', 'index')

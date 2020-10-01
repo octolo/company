@@ -13,37 +13,37 @@ from company.choices import ICB, MARKET, YESNO
 
 from ckeditor.fields import RichTextField
 
-
 class Company(Base, Image):
     search_fields = ['denomination']
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)
+    site = models.URLField(blank=True, null=True)
+    effective = models.BigIntegerField(blank=True, null=True)
+    secretary = models.CharField(_.secretary, max_length=255, blank=True, null=True)
+    resume = RichTextField(blank=True, null=True)
+    
+    purpose = models.CharField(_.purpose, max_length=3, choices=YESNO, blank=True, null=True)
+    instance_comex = models.BooleanField(_.instance_comex, default=False)
+    matrix_skills = models.BooleanField(_.matrix_skills, default=False)
+    
+    capital_division = models.JSONField(blank=True, null=True)
+    current = models.FloatField(blank=True, null=True)
+    share_capital = models.FloatField(_.share_capital, blank=True, null=True)
+    floating = models.FloatField(blank=True, null=True)
     icb = models.CharField(_.icb, max_length=40, choices=ICB, blank=True, null=True, db_index=True)
     market = models.CharField(_.market, max_length=40, choices=MARKET, blank=True, null=True, db_index=True)
     dowjones = models.BooleanField(default=False)
     nasdaq = models.BooleanField(default=False)
-    capital_division = models.JSONField(blank=True, null=True)
-    share_capital = models.FloatField(_.share_capital, blank=True, null=True)
-    floating = models.FloatField(blank=True, null=True)
-    site = models.URLField(blank=True, null=True)
-    current = models.FloatField(blank=True, null=True)
-    effective = models.BigIntegerField(blank=True, null=True)
-    purpose = models.CharField(_.purpose, max_length=3, choices=YESNO, blank=True, null=True)
-    secretary = models.CharField(_.secretary, max_length=255, blank=True, null=True)
+    gaia = models.BooleanField(default=False)
+    
     settle_internal = models.BooleanField(_.settle_internal, default=False)
     duration_mandate = models.PositiveSmallIntegerField(_.duration_mandate, blank=True, null=True)
-    matrix_skills = models.BooleanField(_.matrix_skills, default=False)
-    instance_comex = models.BooleanField(_.instance_comex, default=False)
     age_limit_pdg = models.BooleanField(_.age_limit_pdg, default=False)
     age_limit_dg = models.BooleanField(_.age_limit_dg, default=False)    
-    stock_min_rule = models.PositiveIntegerField(_.stock_min_rule, default=0)
-    stock_min_status = models.PositiveIntegerField(_.stock_min_status, default=0)
-    resume = RichTextField(blank=True, null=True)
+    stock_min_rule = models.PositiveIntegerField(_.stock_min_rule, blank=True, null=True)
+    stock_min_status = models.PositiveIntegerField(_.stock_min_status, blank=True, null=True)
 
-    dowjones = ""
-    gaia = ""
-    nasdaq = ""
-
+    siege_fr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE, related_name='siege_fr', blank=True, null=True)
 
     objects = models.Manager()
     objectsB = managers.CompanyManager()
@@ -54,8 +54,48 @@ class Company(Base, Image):
         verbose_name_plural = _.vp_company
         ordering = ['denomination']
 
+    def save(self, *args, **kwargs):
+        try:
+            self.siege_fr = self.company_fr.get(siege=True)
+        except Exception:
+            pass
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return self.denomination
+
+    @property
+    def infos(self):
+        return {
+            "purpose": self.purpose,
+            "instance_comex": self.instance_comex,
+            "matrix_skills": self.matrix_skills,
+        }
+
+    @property
+    def marketplace(self):
+        return {
+            "capital_division": self.capital_division,
+            "current": self.current,
+            "share_capital": self.share_capital,
+            "floating": self.floating,
+            "icb": self.icb,
+            "market": self.market,
+            "dowjones": self.dowjones,
+            "nasdaq": self.nasdaq,
+            "gaia": self.gaia,
+        }
+
+    @property
+    def rules(self):
+        return {
+            "settle_internal": self.settle_internal,
+            "duration_mandate": self.duration_mandate,
+            "age_limit_pdg": self.age_limit_pdg,
+            "age_limit_dg": self.age_limit_dg,
+            "stock_min_rule": self.stock_min_rule,
+            "stock_min_status": self.stock_min_status,
+        }
 
     @property
     def country_choice_url(self):
@@ -125,7 +165,7 @@ class CompanyFR(CompanyAlpha2):
     evaluation = models.CharField(_.fr_evaluation, max_length=255, choices=CHOICES_EVALUATION, blank=True, null=True)
     quality_independent = models.CharField(_.fr_quality_independent, max_length=3, choices=YESNO, blank=True, null=True)
     secretary = models.CharField(_.fr_secretary, max_length=255, blank=True, null=True)
-
+    siege = models.BooleanField(default=False)
     resume = RichTextField(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
 
@@ -155,6 +195,7 @@ class CompanyFR(CompanyAlpha2):
             int(self.slice_effective)
         except Exception:
             self.slice_effective = None
+        self.company.save()
         super().save()
       
 class CompanyAddressFR(Address):

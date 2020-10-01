@@ -3,18 +3,16 @@ from company import get_company_model, fields
 from mighty.decorators import maskedSerializer
 
 except_mask = ('uid', 'denomination', 'capital_division', 'image_url')
-
 company_model = get_company_model()
 companyfr_model = get_company_model('CompanyFR')
+
+base_fields = ('uid', 'denomination', 'image_url', 'since','site','effective','secretary','resume', 'infos', 'marketplace', 'rules')
 
 @maskedSerializer(except_mask=except_mask)
 class CompanyMinSerializer(ModelSerializer):
     class Meta:
         model = company_model
         fields = ('uid', 'denomination', 'image_url')
-
-    def to_internal_value(self, data):
-        return 'test'
 
 @maskedSerializer(except_mask=('uid', 'denomination'))
 class CompanyFRSerializer(ModelSerializer):
@@ -32,14 +30,11 @@ class CompanyFRSerializer(ModelSerializer):
 class CompanySerializer(ModelSerializer):
     class Meta:
         model = company_model
-        fields = ('uid',) + fields.company
-
-    def to_internal_value(self, data):
-        return 'test'
+        fields = base_fields
 
 @maskedSerializer(except_mask=except_mask)
 class CompanyWithCountriesSerializer(ModelSerializer):
-    company_fr = CompanyFRSerializer(many=True)
+    siege_fr = CompanyFRSerializer(many=False)
 
     #def to_internal_value(self, data):
     #    print(data)
@@ -54,4 +49,4 @@ class CompanyWithCountriesSerializer(ModelSerializer):
 
     class Meta:
         model = company_model
-        fields = ('uid', 'image_url') + fields.company + ('company_fr',)
+        fields = base_fields + ('siege_fr',)

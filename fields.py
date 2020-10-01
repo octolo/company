@@ -36,5 +36,7 @@ fr = (
     'ticker',
     'coderef',
     'index',
+    'siege',
 )
+
 balo =  ('announce', 'company', 'case', 'link', 'file_link', 'date')

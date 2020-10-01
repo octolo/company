@@ -25,7 +25,7 @@ class CanContainParentObject:
         return self.kwargs.get('country', self.country)
 
     def get_country_fields(self):
-        return fields.country + getattr(fields, self.get_country())
+        return fields.country + getattr(fields, self.get_country())[0:5]
 
     def get_country_model(self):
         return get_company_model(getattr(conf.Model, 'Company%s' % self.get_country().upper()))

@@ -50,8 +50,6 @@ EVALUATION = (
 ("0FORMDO", _("Aucune évaluation formalisée du Conseil n’a été réalisée jusqu’à aujourd’hui")),
 )
 
-
-
 LEGALFORM = (
 (1000, _("Entrepreneur individue")),
 (2110, _("Indivision entre personnes physiques")),

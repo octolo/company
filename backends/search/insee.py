@@ -11,9 +11,9 @@ class SearchBackend(SearchBackend):
     siret_url = 'https://api.insee.fr/entreprises/sirene/V3/siret'
     since_format = '%Y-%m-%d'
     iso_format = '%Y-%m-%dT%H:%M:%S'
+    error = 5
 
     def call_webservice(self, url, headers, postfields=None):
-        logger.info(url)
         buffer = BytesIO() # buffer
         c = pycurl.Curl() # ouverture du navigateur
         c.setopt(c.URL, url) # définition de l'URL
@@ -24,8 +24,23 @@ class SearchBackend(SearchBackend):
         c.perform() # execute le navigateur
         response_code = c.getinfo(c.RESPONSE_CODE) # récupération du code de réponse http
         c.close() # fermeture du navigateur
-        print(buffer.getvalue())
-        return json.loads(buffer.getvalue()), response_code
+        try:
+            datas = json.loads(buffer.getvalue())
+            print()
+            print()
+            print()
+            print()
+            print()
+            print(datas)
+        except Exception as e:
+            logger.error(buffer.getvalue())
+            logger.error(e)
+            self.error-=1
+            if self.error:
+                return self.call_webservice(url, headers, postfields)
+            else:
+                raise e
+        return datas, response_code
 
     def get_token(self):
         basic = '%s:%s' % (settings.INSEE_KEY, settings.INSEE_SECRET)
@@ -58,6 +73,7 @@ class SearchBackend(SearchBackend):
                         'since': self.since(company['uniteLegale'].get('dateCreationUniteLegale')),
                         'category': company['uniteLegale'].get('categorieEntreprise', ''),
                         'slice_effective': company['uniteLegale'].get('trancheEffectifsUniteLegale', ''),
+                        'siege':company.get('etablissementSiege', False),
                         'effective': "",
                         'share_capital': "",
                         'address': {
@@ -75,6 +91,7 @@ class SearchBackend(SearchBackend):
                             'special': company['adresseEtablissement'].get('distributionSpecialeEtablissement'),
                             'complement': company['adresseEtablissement'].get('complementAdresseEtablissement'),
                             'index': company['adresseEtablissement'].get('indiceRepetitionEtablissement'),
+                            
                         }
                     })
             return message, companies, total, pages
@@ -91,7 +108,7 @@ class SearchBackend(SearchBackend):
                 logger.info("Error encountered but we dont know what")
 
     def get_company_by_siren(self, siren):
-        return self.get_companies('siren:%s' % siren)
+        return self.get_companies('siren:%s+AND+etablissementSiege:true' % siren)
 
     def get_active_companies(self, number, offset):
         return self.get_companies('etatAdministratifUniteLegale:A', number, offset)
