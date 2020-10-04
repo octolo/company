@@ -131,7 +131,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
 
     class APICompanyList(ListAPIView):
         queryset = company_model.objectsB.all()
-        serializer_class = serializers.CompanyWithCountriesSerializer
+        serializer_class = serializers.CompanySerializer
 
         def get_filters(self):
             return [
@@ -157,5 +157,5 @@ if 'rest_framework' in settings.INSTALLED_APPS:
 
     class APICompanyDetail(RetrieveAPIView):
         queryset = company_model.objects.all()
-        serializer_class = serializers.CompanyWithCountriesSerializer
+        serializer_class = serializers.CompanySerializer
         lookup_field = 'uid'
