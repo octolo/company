@@ -6,5 +6,5 @@ Select_related = ('siege_fr',)
 class CompanyManager(models.Manager.from_queryset(models.QuerySet)):
     def get_queryset(self):
         return super().get_queryset()\
-            .select_related(*Select_related)
+            .select_related(*Select_related).annotate(count=models.Count('id'))
 
