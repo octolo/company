@@ -21,17 +21,11 @@ class SearchBackend(SearchBackend):
         c.setopt(c.HTTPHEADER, headers) # Ajoute l'entete d'autorisation avec la concatenation
         if postfields:
             c.setopt(c.POSTFIELDS, postfields) # ajoute les champs envoyer avec la method POST
-        c.perform() # execute le navigateur
-        response_code = c.getinfo(c.RESPONSE_CODE) # récupération du code de réponse http
-        c.close() # fermeture du navigateur
         try:
+            c.perform() # execute le navigateur
+            response_code = c.getinfo(c.RESPONSE_CODE) # récupération du code de réponse http
+            c.close() # fermeture du navigateur
             datas = json.loads(buffer.getvalue())
-            print()
-            print()
-            print()
-            print()
-            print()
-            print(datas)
         except Exception as e:
             logger.error(buffer.getvalue())
             logger.error(e)
