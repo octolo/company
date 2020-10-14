@@ -1,4 +1,6 @@
 from django import forms
+from company import get_company_model
+CompanyModel = get_company_model()
 
 class CompanySearchByCountryForm(forms.Form):
     search = forms.CharField(required=True)
@@ -16,6 +18,9 @@ class CompanyAddByCountry(forms.ModelForm):
 
     def save(self, commit=True, user=None, author=None):
         model_datas = {field: self.cleaned_data.get(field) for field in self.country_fields}
-        if self.parent_object: model_datas.update({"company": self.parent_object})
+        if  not self.parent_object:
+            self.parent_object = CompanyModel(denomination=model_datas['denomination'], since=model_datas['since'])
+            self.parent_object.save()
+        model_datas.update({"company": self.parent_object})
         self.cmodel, status = self.country_model.objects.get_or_create(**model_datas)
         self.cmodel.save()

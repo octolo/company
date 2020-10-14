@@ -2,11 +2,9 @@ from django.db import models
 from company.apps import CompanyConfig
 from company import queries
 
-
-Prefetch_related = ('company_%s' % country.lower() for country,table in CompanyConfig.countries.items())
+Select_related = ('siege_fr',)
 class CompanyManager(models.Manager.from_queryset(models.QuerySet)):
     def get_queryset(self):
         return super().get_queryset()\
-            .prefetch_related(*Prefetch_related)\
-            .annotate()
+            .select_related(*Select_related).annotate(count=models.Count('id'))
 

@@ -55,6 +55,7 @@ thead th { padding: 5px 10px!important; }
         {% for field in country_fields %}
         <th scope="col">{% field_name fake_country field %}</th>
         {% endfor %}
+        <th scope="col">address</th>
     </tr>
     </thead>
     <tbody>
@@ -73,7 +74,8 @@ thead th { padding: 5px 10px!important; }
                     <input type="submit">
                 </form>
             </td>
-        {% for field in country_fields %}<td>{{ company|indexkey:field }}</td>{% endfor %}
+            {% for field in country_fields %}<td>{{ company|indexkey:field }}</td>{% endfor %}
+            <td>{% join_or_concat ' ' company.address.items 1 %}</td>
         </tr>
         {% endfor %}
     </tbody>

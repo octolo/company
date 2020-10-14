@@ -31,9 +31,12 @@ fr = (
     'ape_noun',
     'category',
     'legalform',
+    'governance',
     'isin',
     'ticker',
     'coderef',
     'index',
+    'siege',
 )
+
 balo =  ('announce', 'company', 'case', 'link', 'file_link', 'date')

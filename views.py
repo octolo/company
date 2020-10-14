@@ -25,7 +25,7 @@ class CanContainParentObject:
         return self.kwargs.get('country', self.country)
 
     def get_country_fields(self):
-        return fields.country + getattr(fields, self.get_country())
+        return fields.country + getattr(fields, self.get_country())[0:5]
 
     def get_country_model(self):
         return get_company_model(getattr(conf.Model, 'Company%s' % self.get_country().upper()))
@@ -131,7 +131,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
 
     class APICompanyList(ListAPIView):
         queryset = company_model.objectsB.all()
-        serializer_class = serializers.CompanyWithCountriesSerializer
+        serializer_class = serializers.CompanySerializer
 
         def get_filters(self):
             return [
@@ -145,6 +145,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
                 filters.SearchFRByISIN(),
                 filters.SearchFRByLegalform(),
                 filters.SearchFRBySiret(),
+                filters.SearchFRByIndex(),
             ]
 
         def get_filters_manager(self):
@@ -156,5 +157,5 @@ if 'rest_framework' in settings.INSTALLED_APPS:
 
     class APICompanyDetail(RetrieveAPIView):
         queryset = company_model.objects.all()
-        serializer_class = serializers.CompanyWithCountriesSerializer
+        serializer_class = serializers.CompanySerializer
         lookup_field = 'uid'

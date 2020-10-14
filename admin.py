@@ -14,14 +14,39 @@ from mighty.applications.address.admin import AddressAdminInline
 from company import models, fields, translates as _
 from company.apps import CompanyConfig as conf
 
-
 class CompanyAdmin(BaseAdmin):
-    fieldsets = ((None, {"classes": ("wide",), "fields": fields.company}),)
+    fieldsets = (
+        (None, {"classes": ("wide",), "fields": ('denomination', 'since', 'site', 'effective', 'secretary', 'resume')}),
+        ('informations', {"classes": ("wide",), "fields": ('purpose', 'instance_comex', 'matrix_skills')}),
+        ('market', {"classes": ("wide",), "fields": (
+            'capital_division',
+            'current',
+            'share_capital',
+            'floating',
+            'icb',
+            'market',
+            'dowjones',
+            'nasdaq',
+            'gaia'
+        )}),
+        ('rules', {"classes": ("wide",), "fields": (
+            'duration_mandate',
+            'settle_internal',
+            'age_limit_pdg',
+            'age_limit_dg',
+            'stock_min_rule',
+            'stock_min_status'
+        )}),
+        ('sieges', {"classes": ("wide",), "fields": (
+            'siege_fr',
+        )}))
+
     list_display = fields.company
     search_fields = ("denomination", "company_fr__siret")
     change_list_template = "admin/company_change_list.html"
     change_form_template = "admin/company_change_form.html"
     change_form_logs_template = "admin/company_change_form_logs.html"
+    readonly_fields = ('siege_fr',)
     search_template = None
 
     def render_change_form(self, request, context, add=False, change=False, form_url="", obj=None):
