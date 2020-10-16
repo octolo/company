@@ -152,8 +152,10 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             return FiltersManager(flts=self.get_filters())
 
         def get_queryset(self, queryset=None):
-            return Foxid(self.queryset, self.request, f=self.get_filters_manager().flts, distinct=True).ready()\
-                .filter(*self.get_filters_manager().params(self.request))
+            fm = self.get_filters_manager()
+            return Foxid(self.queryset, self.request, f=fm.flts, distinct=True).ready()\
+                .filter(*fm.get_filters(self.request, False))\
+                .exclude(*fm.get_filters(self.request, True))
 
     class APICompanyDetail(RetrieveAPIView):
         queryset = company_model.objects.all()

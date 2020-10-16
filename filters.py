@@ -13,9 +13,9 @@ class SearchByCompany(filters.SearchFilter):
         super().__init__(id, request, *args, **kwargs)
         self.field = {'company': self.prefix + 'search', 'company_fr': self.prefix + 'company_fr__search'}
 
-    def get_Q(self):
-        company = reduce(self.operator, [Q(**{self.field['company']+self.mask: value }) for value in self.get_value(self.field['company'])])
-        company_fr = reduce(self.operator, [Q(**{self.field['company_fr']+self.mask: value }) for value in self.get_value(self.field['company_fr'])])
+    def get_Q(self, exclude=False):
+        company = reduce(self.operator, [Q(**{self.field['company']+self.mask: value }) for value in self.get_value(exclude)])
+        company_fr = reduce(self.operator, [Q(**{self.field['company_fr']+self.mask: value }) for value in self.get_value(exclude)])
         return company|company_fr
 
 class SearchByICB(filters.ParamChoicesFilter):
