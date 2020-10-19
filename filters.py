@@ -18,12 +18,13 @@ class SearchByCompany(filters.SearchFilter):
         company_fr = reduce(self.operator, [Q(**{self.field['company_fr']+self.mask: value }) for value in self.get_value(exclude)])
         return company|company_fr
 
-class SearchByICB(filters.ParamChoicesFilter):
+class SearchByICB(filters.ParamMultiChoicesFilter):
     def __init__(self, id='icb', request=None, *args, **kwargs):
-        super().__init__(id, request, *args, **kwargs)  
+        super().__init__(id, request, *args, **kwargs)
+        self.choices_required = True
         self.choices = kwargs.get('choices', [i[0] for i in choices.ICB])
 
-class SearchByMarket(filters.ParamChoicesFilter):
+class SearchByMarket(filters.ParamMultiChoicesFilter):
     def __init__(self, id='market', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
         self.choices = kwargs.get('choices', [m[0] for m in choices.MARKET])
@@ -40,6 +41,9 @@ class IsGaia(filters.BooleanParamFilter):
     def __init__(self, id='gaia', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
 
+#class SearchByFloat(filters.FilterByGTEorLTE):
+#    def __init__(self, id='floating', request=None, *args, **kwargs):
+#        super().__init__(id, request, *args, **kwargs)
 
 # FR
 class SearchFRByISIN(filters.SearchFilter):
@@ -52,32 +56,37 @@ class SearchFRBySiret(filters.SearchFilter):
         super().__init__(id, request, *args, **kwargs)
         self.field = self.prefix + kwargs.get('siret', 'company_fr__siret')
 
-class SearchFRByAPE(filters.ParamChoicesFilter):
+class SearchFRByAPE(filters.ParamMultiChoicesFilter):
     def __init__(self, id='ape', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
+        self.choices_required = True
         self.field = self.prefix + kwargs.get('field', 'company_fr__ape')
         self.choices = kwargs.get('choices', [a[0] for a in choices_fr.APE])
 
-class SearchFRByLegalform(filters.ParamChoicesFilter):
+class SearchFRByLegalform(filters.ParamMultiChoicesFilter):
     def __init__(self, id='legalform', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
+        self.choices_required = True
         self.field = self.prefix + kwargs.get('field', 'company_fr__legalform')
         self.choices = kwargs.get('choices', [l[0] for l in choices_fr.LEGALFORM])
 
-class SearchFRByGovernance(filters.ParamChoicesFilter):
+class SearchFRByGovernance(filters.ParamMultiChoicesFilter):
     def __init__(self, id='governance', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
+        self.choices_required = True
         self.field = self.prefix + kwargs.get('field', 'company_fr__governance')
         self.choices = kwargs.get('choices', [g[0] for g in choices_fr.GOVERNANCE])
 
-class SearchFRByEvaluation(filters.ParamChoicesFilter):
+class SearchFRByEvaluation(filters.ParamMultiChoicesFilter):
     def __init__(self, id='evaluation', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
+        self.choices_required = True
         self.field = self.prefix + kwargs.get('field', 'company_fr__evaluation')
         self.choices = kwargs.get('choices', [e[0] for e in choices_fr.EVALUATION])
 
 class SearchFRByIndex(filters.ParamMultiChoicesFilter):
     def __init__(self, id='index', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
+        self.choices_required = True
         self.field = self.prefix + kwargs.get('field', 'company_fr__index')
         self.choices = kwargs.get('choices', [e[0] for e in choices_fr.INDEX])

@@ -139,6 +139,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
                 filters.SearchByCompany(),
                 filters.SearchByICB(),
                 filters.SearchByMarket(),
+                #filters.SearchByFloat(),
                 filters.SearchFRByAPE(),
                 filters.SearchFRByGovernance(),
                 filters.SearchFRByEvaluation(),
