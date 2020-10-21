@@ -26,6 +26,15 @@ class Company(Base, Image):
     instance_comex = models.BooleanField(_.instance_comex, default=False)
     matrix_skills = models.BooleanField(_.matrix_skills, default=False)
     
+    capital_socnomtotal = models.BigIntegerField(_.capital_socnomtotal, blank=True, null=True)
+    capitalisation = models.FloatField(_.capitalisation, default=0)
+    turnover = models.BigIntegerField(_.turnover, blank=True, null=True)
+    net_profit = models.BigIntegerField(_.net_profit, blank=True, null=True, help_text=_.net_profit_help)
+    dividend = models.FloatField(_.total_dividend, blank=True, null=True)
+    securities = models.BigIntegerField(_.securities, blank=True, null=True)
+    current = models.FloatField(_.current, default=0.0)
+    total_dividend = models.IntegerField(_.total_dividend, blank=True, null=True, help_text=_.total_dividend_help)
+
     capital_division = models.JSONField(blank=True, null=True)
     current = models.FloatField(blank=True, null=True)
     share_capital = models.FloatField(_.share_capital, blank=True, null=True)
@@ -57,6 +66,10 @@ class Company(Base, Image):
     def save(self, *args, **kwargs):
         try:
             self.siege_fr = self.company_fr.get(siege=True)
+        except Exception:
+            pass
+        try:
+            self.floating = float(self.capital_division['Flottant'])
         except Exception:
             pass
         super().save(*args, **kwargs)
@@ -138,6 +151,23 @@ class CompanyNews(News):
 
     class Meta(News.Meta):
         abstract = True
+
+#class CompanyYearData(Base):
+#    company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='company_yeardata')
+#    date_data = models.DateField()
+#
+
+#    effective = models.PositiveIntegerField(_.effective, blank=True, null=True)
+#    capital_division = JSONField(_.capital_division, blank=True, null=True)
+#    floating = models.FloatField(_.floating, blank=True, null=True)
+#
+#    
+#    
+#    
+#    
+#
+#    class Meta(Base.Meta):
+#        abstract = True
 
 #####################
 # FR

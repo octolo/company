@@ -41,9 +41,42 @@ class IsGaia(filters.BooleanParamFilter):
     def __init__(self, id='gaia', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
 
-#class SearchByFloat(filters.FilterByGTEorLTE):
-#    def __init__(self, id='floating', request=None, *args, **kwargs):
-#        super().__init__(id, request, *args, **kwargs)
+class SearchByFloating(filters.FilterByGTEorLTE):
+    def __init__(self, id='floating', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+
+class SearchByTurnover(filters.FilterByGTEorLTE):
+    def __init__(self, id='turnover', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+
+class HasSettleTnternal(filters.BooleanParamFilter):
+    def __init__(self, id='settle_internal', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+
+class duration_mandate(filters.FilterByGTEorLTE):
+    def __init__(self, id='duration_mandate', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+
+class HasAgeLimitPDG(filters.BooleanParamFilter):
+    def __init__(self, id='age_limit_pdg', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+
+class HasAgeLimitDG(filters.BooleanParamFilter):
+    def __init__(self, id='age_limit_dg', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+
+class HasStockMinRule(filters.BooleanParamFilter):
+    def __init__(self, id='stock_min_rule', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.mask = kwargs.get('mask', '__isnull')
+
+class HasStockMinStatus(filters.BooleanParamFilter):
+    def __init__(self, id='stock_min_status', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.mask = kwargs.get('mask', '__isnull')
+
+
+
 
 # FR
 class SearchFRByISIN(filters.SearchFilter):
