@@ -53,9 +53,10 @@ class HasSettleTnternal(filters.BooleanParamFilter):
     def __init__(self, id='settle_internal', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
 
-class duration_mandate(filters.FilterByGTEorLTE):
-    def __init__(self, id='duration_mandate', request=None, *args, **kwargs):
+class DurationMandate(filters.FilterByGTEorLTE):
+    def __init__(self, id='duration_status', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
+        self.field = self.prefix+kwargs.get('field', 'duration_mandate')
 
 class HasAgeLimitPDG(filters.BooleanParamFilter):
     def __init__(self, id='age_limit_pdg', request=None, *args, **kwargs):
@@ -74,9 +75,6 @@ class HasStockMinStatus(filters.BooleanParamFilter):
     def __init__(self, id='stock_min_status', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
         self.mask = kwargs.get('mask', '__isnull')
-
-
-
 
 # FR
 class SearchFRByISIN(filters.SearchFilter):
