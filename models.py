@@ -91,7 +91,7 @@ class Company(Base, Image):
             "capital_division": self.capital_division,
             "current": self.current,
             "share_capital": self.share_capital,
-            "floating": self.floating,
+            "floating": round(self.floating, 2) if self.floating else None,
             "icb": self.icb,
             "market": self.market,
             "dowjones": self.dowjones,
@@ -151,23 +151,6 @@ class CompanyNews(News):
 
     class Meta(News.Meta):
         abstract = True
-
-#class CompanyYearData(Base):
-#    company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='company_yeardata')
-#    date_data = models.DateField()
-#
-
-#    effective = models.PositiveIntegerField(_.effective, blank=True, null=True)
-#    capital_division = JSONField(_.capital_division, blank=True, null=True)
-#    floating = models.FloatField(_.floating, blank=True, null=True)
-#
-#    
-#    
-#    
-#    
-#
-#    class Meta(Base.Meta):
-#        abstract = True
 
 #####################
 # FR
@@ -229,7 +212,7 @@ class CompanyFR(CompanyAlpha2):
         super().save()
       
 class CompanyAddressFR(Address):
-    companyfr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE, related_name='companyfr_address')
+    company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='companyfr_address')
 
     class Meta(Base.Meta):
         abstract = True

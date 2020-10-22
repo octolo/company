@@ -41,6 +41,10 @@ class IsGaia(filters.BooleanParamFilter):
     def __init__(self, id='gaia', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
 
+class SearchByEffective(filters.FilterByGTEorLTE):
+    def __init__(self, id='effective', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+
 class SearchByFloating(filters.FilterByGTEorLTE):
     def __init__(self, id='floating', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
@@ -71,10 +75,20 @@ class HasStockMinRule(filters.BooleanParamFilter):
         super().__init__(id, request, *args, **kwargs)
         self.mask = kwargs.get('mask', '__isnull')
 
+    def format_value(self, value):
+        return False if value else True
+
 class HasStockMinStatus(filters.BooleanParamFilter):
     def __init__(self, id='stock_min_status', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
         self.mask = kwargs.get('mask', '__isnull')
+
+    def format_value(self, value):
+        return False if value else True
+
+class HasMatrixSkills(filters.BooleanParamFilter):
+    def __init__(self, id='matrix_skills', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
 
 # FR
 class SearchFRByISIN(filters.SearchFilter):
@@ -121,3 +135,15 @@ class SearchFRByIndex(filters.ParamMultiChoicesFilter):
         self.choices_required = True
         self.field = self.prefix + kwargs.get('field', 'company_fr__index')
         self.choices = kwargs.get('choices', [e[0] for e in choices_fr.INDEX])
+
+class SearchFRBySliceEffective(filters.ParamMultiChoicesFilter):
+    def __init__(self, id='slice', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.choices_required = True
+        self.field = self.prefix + kwargs.get('field', 'company_fr__slice_effective')
+        self.choices = kwargs.get('choices', [e[0] for e in choices_fr.SLICE_EFFECTIVE])
+
+class SearchByNews(filters.SearchFilter):
+    def __init__(self, id='news', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.field = self.prefix + kwargs.get('field', 'company_news__keywords')

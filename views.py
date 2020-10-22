@@ -139,7 +139,17 @@ if 'rest_framework' in settings.INSTALLED_APPS:
                 filters.SearchByCompany(),
                 filters.SearchByICB(),
                 filters.SearchByMarket(),
-                #filters.SearchByFloat(),
+                filters.SearchByEffective(),
+                filters.SearchByFloating(),
+                filters.SearchByTurnover(),
+                filters.DurationMandate(),
+                filters.HasAgeLimitPDG(),
+                filters.HasAgeLimitDG(),
+                filters.HasSettleTnternal(),
+                filters.HasStockMinRule(),
+                filters.HasStockMinStatus(),
+                filters.HasMatrixSkills(),
+                filters.SearchByNews(),
                 filters.SearchFRByAPE(),
                 filters.SearchFRByGovernance(),
                 filters.SearchFRByEvaluation(),
@@ -147,6 +157,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
                 filters.SearchFRByLegalform(),
                 filters.SearchFRBySiret(),
                 filters.SearchFRByIndex(),
+                filters.SearchFRBySliceEffective(),
             ]
 
         def get_filters_manager(self):

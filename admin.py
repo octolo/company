@@ -154,7 +154,7 @@ class CompanyAdmin(BaseAdmin):
                 ]))
             ]))
         ]
-        return my_urls + urls 
+        return my_urls + urls
 
 #####################
 # FR

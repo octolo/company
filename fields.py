@@ -32,6 +32,7 @@ fr = (
     'category',
     'legalform',
     'governance',
+    'slice_effective',
     'isin',
     'ticker',
     'coderef',
