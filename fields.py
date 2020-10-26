@@ -25,6 +25,25 @@ company = (
 country = ('denomination', 'since')
 country_params = ('denomination', 'since')
 
+serializer = (
+    'uid',
+    'denomination',
+    'image_url',
+    'since',
+    'site',
+    'effective',
+    'secretary',
+    'resume',
+    'infos',
+    'marketplace',
+    'rules',
+    'siege_fr'
+)
+
+
+###
+# FR
+###
 fr = (
     'siret',
     'ape',
@@ -39,5 +58,4 @@ fr = (
     'index',
     'siege',
 )
-
 balo =  ('announce', 'company', 'case', 'link', 'file_link', 'date')

@@ -232,7 +232,3 @@ class Balo(Base):
     def save(self, *args, **kwargs):
         self.date = datetime.datetime.strptime(self.date, conf.Announce.Balo_dateformat).date()
         super().save()
-
-#####################
-# US
-#####################
