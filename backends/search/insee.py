@@ -93,8 +93,11 @@ class SearchBackend(SearchBackend):
             if 'fault' in buffer:
                 if buffer['fault']['code'] == 900804:
                     sleepfor = 61-datetime.datetime.now().second
-                    logger.info("desc: %s ,wait: %s seconds" % (buffer['fault']['description'], sleepfor))
-                    time.sleep(sleepfor)
+                    i = 0
+                    while i < sleepfor:
+                        logger.info("desc: %s, wait: %s seconds" % (buffer['fault']['description'], sleepfor))
+                        time.sleep(1)
+                        sleepfor-=1
                     return self.get_companies(qreq, number, offset)
                 else:
                     logger.info(buffer)
