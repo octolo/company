@@ -21,6 +21,7 @@ class CompanyAddByCountry(forms.ModelForm):
         if  not self.parent_object:
             self.parent_object = CompanyModel(denomination=model_datas['denomination'], since=model_datas['since'])
             self.parent_object.save()
+        print(model_datas)
         model_datas.update({"company": self.parent_object})
         self.cmodel, status = self.country_model.objects.get_or_create(**model_datas)
         self.cmodel.save()

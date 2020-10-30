@@ -68,8 +68,6 @@ class SearchBackend(SearchBackend):
                         'category': company['uniteLegale'].get('categorieEntreprise', ''),
                         'slice_effective': company['uniteLegale'].get('trancheEffectifsUniteLegale', ''),
                         'siege':company.get('etablissementSiege', False),
-                        'effective': "",
-                        'share_capital': "",
                         'address': {
                             'street_number': company['adresseEtablissement'].get('numeroVoieEtablissement'),
                             'way': company['adresseEtablissement'].get('typeVoieEtablissement'),

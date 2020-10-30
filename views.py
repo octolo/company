@@ -88,6 +88,7 @@ class SearchByCountry(CanContainParentObject, FormView):
             context.update({'nationality': nationality})
         if self.request.GET.get('search'):
             search = self.request.GET.get('search')
+            #print(backends_loop(self.kwargs.get('country', 'fr'), search))
             message, companies, total, pages = backends_loop(self.kwargs.get('country', 'fr'), search)
             context.update({
                 'search': search,

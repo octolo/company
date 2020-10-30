@@ -1,6 +1,6 @@
 from company.backends.search import SearchBackend
 from io import BytesIO
-import base64, pycurl, json
+import base64, pycurl, json, re
 
 class SearchBackend(SearchBackend):
     siren_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/siren/%s'
@@ -17,45 +17,50 @@ class SearchBackend(SearchBackend):
         c.close()
         return json.loads(buffer.getvalue()), response_code
 
-    def get_company_by_siren(self, siren):
-        companies, total, pages = ([], 0, 0)
-        buffer, response_code = self.call_webservice(self.siren_url %siren)
+    def get_companies(self, url, qreq):
+        message, companies, total, pages = (False, [], 0, 0)
+        buffer, response_code = self.call_webservice(url % qreq)
         company = self.companies(buffer.get('siege_social', [buffer]), response_code)
         if not self.message:
-            companies.append({
-                'siren': company.get('siren'),
-                'denomination': company.get('l1_declaree'),
-                'category': company.get('categorie_entreprise'),
-                'legalform_code': company.get('nature_juridique_entreprise'),
-                'legalform_label': self.legalform(company.get('nature_juridique_entreprise')),
-                'ape_code': company.get('activite_principale'),
-                'ape_label': self.ape(company.get('activite_principale')),
-                'street': company.get('l4_declaree'),
-                'city': company.get('l6_declaree'),
-                'since': self.since(company.get('date_creation')),
-                'lastupdate': self.lastupdate(company.get('updated_at')),
-            })
-            total, pages = (0, 0)
-        return companies, total, pages
-
-    def get_company_by_fulltext(self, fulltext):
-        companies, total, pages = ([], 0, 0)
-        buffer, response_code = self.call_webservice(self.fulltext_url %fulltext)
-        if not self.message:
+            if url == self.siren_url:
+                company = [company]
             for company in self.companies(buffer.get('etablissement', [buffer]), response_code):
                 companies.append({
-                    'siren': company.get('siren'),
-                    'denomination': company.get('l1_declaree'),
-                    'category': company.get('categorie_entreprise'),
-                    'legalform_code': company.get('nature_juridique_entreprise'),
-                    'legalform_label': self.legalform(company.get('nature_juridique_entreprise')),
-                    'ape_code': company.get('activite_principale'),
-                    'ape_label': self.ape(company.get('activite_principale')),
-                    'street': company.get('l4_declaree'),
-                    'city': company.get('l6_declaree'),
-                    'since': self.since(company.get('date_creation')),
-                    'lastupdate': self.lastupdate(company.get('updated_at')),
+                    'siret': company.get('siret', None),
+                    'denomination':company.get('l1_normalisee', None),
+                    'legalform': company.get('nature_juridique_entreprise', None),
+                    'ape': company.get('activite_principale', None),
+                    'ape_noun': None,
+                    'since': self.since(company.get('date_creation', None)),
+                    'category': company.get('categorie_entreprise', None),
+                    'slice_effective':  company.get('tranche_effectif_salarie_entreprise', None),
+                    'siege': company.get('etablissementSiege', None),
+                    'address': {
+                        'street_number': company.get("numero_voie", None),
+                        'way': company.get("type_voie", None),
+                        'route': company.get("libelle_voie", None),
+                        'locality': company.get("libelle_commune", None),
+                        'postal_code': company.get("code_postal", None),
+                        'country': 'france',
+                        'country_code': 'fr',
+                        'cedex': company.get("cedex", None),
+                        'cedex_code': None,
+                        'special': None,
+                        'complement': None,
+                        'index': None,
+                        
+                    }
                 })
             total = buffer.get('total_results', 0)
             pages = buffer.get('total_pages', 0)
-        return companies, total, pages
+        return message, companies, total, pages
+
+    def get_company_by_siren(self, siren):
+        return self.get_companies(self.siren_url, siren)
+
+    def get_active_companies(self, number, offset):
+        return self.get_companies('etatAdministratifUniteLegale:A', number, offset)
+
+    def get_company_by_fulltext(self, fulltext):
+        fulltext = re.sub(r"\s+", '-', fulltext)
+        return self.get_companies(self.fulltext_url, fulltext)

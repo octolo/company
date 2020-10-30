@@ -34,6 +34,11 @@ def backends_loop(country, search):
     ftotal, fpages = (0, 0)
     for backend in settings.COMPANY_BACKENDS[country]:
         return get_backend('%s.SearchBackend' % backend, search)
+        #try:
+        #    return get_backend('%s.SearchBackend' % backend, search)
+        #except Exception as e:
+        #    print(e)
+    return False
     return merge_backends(results), ftotal, fpages
 
 def get_company_model(address_or_country='Company'):
