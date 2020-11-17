@@ -11,7 +11,7 @@ from company import translates as _, managers, get_company_model
 from company.apps import CompanyConfig as conf
 from company.choices import ICB, MARKET, YESNO
 
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 class Company(Base, Image):
     search_fields = ['denomination']
@@ -20,7 +20,7 @@ class Company(Base, Image):
     site = models.URLField(blank=True, null=True)
     effective = models.BigIntegerField(blank=True, null=True)
     secretary = models.CharField(_.secretary, max_length=255, blank=True, null=True)
-    resume = RichTextField(blank=True, null=True)
+    resume = CKEditor5Field(blank=True, null=True)
     
     purpose = models.CharField(_.purpose, max_length=3, choices=YESNO, blank=True, null=True)
     instance_comex = models.BooleanField(_.instance_comex, default=False)
@@ -179,7 +179,7 @@ class CompanyFR(CompanyAlpha2):
     quality_independent = models.CharField(_.fr_quality_independent, max_length=3, choices=YESNO, blank=True, null=True)
     secretary = models.CharField(_.fr_secretary, max_length=255, blank=True, null=True)
     siege = models.BooleanField(default=False)
-    resume = RichTextField(blank=True, null=True)
+    resume = CKEditor5Field(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
 
     class Meta(Base.Meta):
