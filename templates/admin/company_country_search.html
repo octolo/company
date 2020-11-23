@@ -74,11 +74,13 @@ thead th { padding: 5px 10px!important; }
                     {% endfor %}
                     <input type="hidden" name="position" value="{{ forloop.counter0 }}">
                     <input type="hidden" name="search" value="{{ search }}">
+                    {% for key,data in company.address.items %}<input type="hidden" name="{{ key }}" value="{{ data }}"/>{% endfor %}
                     <input type="submit">
                 </form>
             </td>
             {% for field in country_fields %}<td>{{ company|indexkey:field }}</td>{% endfor %}
             <td>{% join_or_concat ' ' company.address.items 1 %}</td>
+            <td></td>
         </tr>
         {% endfor %}
     </tbody>

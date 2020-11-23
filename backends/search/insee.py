@@ -69,21 +69,22 @@ class SearchBackend(SearchBackend):
                         'slice_effective': company['uniteLegale'].get('trancheEffectifsUniteLegale', ''),
                         'siege':company.get('etablissementSiege', False),
                         'address': {
-                            'street_number': company['adresseEtablissement'].get('numeroVoieEtablissement'),
-                            'way': company['adresseEtablissement'].get('typeVoieEtablissement'),
-                            'route': company['adresseEtablissement'].get('libelleVoieEtablissement'),
+                            'address': ' '.join(filter(None, [
+                                company['adresseEtablissement'].get('numeroVoieEtablissement'),
+                                company['adresseEtablissement'].get('typeVoieEtablissement'),
+                                company['adresseEtablissement'].get('libelleVoieEtablissement')
+                            ])),
+                            'complement': company['adresseEtablissement'].get('complementAdresseEtablissement', ''),
                             'locality': company['adresseEtablissement'].get('libelleCommuneEtablissement',
-                                company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement')),
+                                company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement', '')),
                             'postal_code': company['adresseEtablissement'].get('codeCommuneEtablissement', 
-                                company['adresseEtablissement'].get('codePostalEtablissement')),
+                                company['adresseEtablissement'].get('codePostalEtablissement', '')),
                             'country': company['adresseEtablissement'].get('libellePaysEtrangerEtablissement', 'france').lower(),
                             'country_code': company['adresseEtablissement'].get('codePaysEtrangerEtablissement', 'fr').lower(),
-                            'cedex': company['adresseEtablissement'].get('libelleCedexEtablissement'),
-                            'cedex_code': company['adresseEtablissement'].get('codeCedexEtablissement'),
-                            'special': company['adresseEtablissement'].get('distributionSpecialeEtablissement'),
-                            'complement': company['adresseEtablissement'].get('complementAdresseEtablissement'),
-                            'index': company['adresseEtablissement'].get('indiceRepetitionEtablissement'),
-                            
+                            'cedex': company['adresseEtablissement'].get('libelleCedexEtablissement', ''),
+                            'cedex_code': company['adresseEtablissement'].get('codeCedexEtablissement', ''),
+                            'special': company['adresseEtablissement'].get('distributionSpecialeEtablissement', ''),
+                            'index': company['adresseEtablissement'].get('indiceRepetitionEtablissement', ''),
                         }
                     })
             return message, companies, total, pages

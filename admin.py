@@ -41,7 +41,7 @@ class CompanyAdmin(BaseAdmin):
             'siege_fr',
         )}))
 
-    list_display = fields.company
+    list_display = ('denomination', 'since', 'siege_fr')
     search_fields = ("denomination", "company_fr__siret")
     change_list_template = "admin/company_change_list.html"
     change_form_template = "admin/company_change_form.html"
@@ -131,7 +131,7 @@ class CompanyAdmin(BaseAdmin):
             "parent_object": parent_object if parent_object else None,
             "template_name": self.search_template or "admin/company_country_add.html",
         }
-        from company.views import AddByCountry, SearchByCountry
+        from company.views import AddByCountry
         return AddByCountry.as_view(**defaults)(request)
 
     def get_urls(self):
