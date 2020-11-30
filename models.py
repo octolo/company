@@ -213,6 +213,8 @@ class CompanyFR(CompanyAlpha2):
       
 class CompanyAddressFR(Address):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='companyfr_address')
+    is_siege = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     class Meta(Base.Meta):
         abstract = True
