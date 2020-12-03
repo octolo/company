@@ -193,7 +193,7 @@ class CompanyFR(CompanyAlpha2):
     @property
     def siren(self): return self.siret[:9]
     @property
-    def nic(self): return self.siret[10:]
+    def nic(self): return self.siret[9:]
     @property
     def ape_code(self): return self.ape if self.ape else _.ape_null
     @property
@@ -213,6 +213,7 @@ class CompanyFR(CompanyAlpha2):
       
 class CompanyAddressFR(Address):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='companyfr_address')
+    nic = models.CharField(max_length=5, blank=True, null=True)
     is_siege = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 

@@ -1,3 +1,5 @@
+default_app_config = 'company.apps.CompanyConfig'
+
 from django.apps import apps as django_apps
 from django.conf import settings
 from django.utils.module_loading import import_string

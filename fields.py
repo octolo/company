@@ -37,7 +37,8 @@ serializer = (
     'infos',
     'marketplace',
     'rules',
-    'siege_fr'
+    'siege_fr',
+    'companyfr_address'
 )
 
 

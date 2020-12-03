@@ -28,6 +28,7 @@
 {% block content %}
 <form method="POST">
     {% csrf_token %}
+    {{ parent_object }}
     {% include "company/countries/add.html" %}
     <input type="submit">
 </form>

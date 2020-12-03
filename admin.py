@@ -149,7 +149,7 @@ class CompanyAdmin(BaseAdmin):
             path("<path:object_id>/choices/", include([
                 path("", self.country_choice_view, name="%s_%s_country_choice_extend" % info),
                 path("<str:country>/search/", include([
-                   path("", self.country_search_view, name="%s_%s_country_search_extend" % info),
+                    path("", self.country_search_view, name="%s_%s_country_search_extend" % info),
                     path("add/", self.country_add_view, name="%s_%s_country_add_extend" % info),
                 ]))
             ]))

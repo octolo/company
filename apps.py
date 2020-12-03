@@ -19,3 +19,6 @@ class Config:
 if hasattr(settings, 'COMPANY'): over_config(Config, settings.COMPANY)
 class CompanyConfig(AppConfig, Config):
     name = 'company'
+
+    def ready(self):
+        from . import signals

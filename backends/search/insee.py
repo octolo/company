@@ -85,6 +85,7 @@ class SearchBackend(SearchBackend):
                             'cedex_code': company['adresseEtablissement'].get('codeCedexEtablissement', ''),
                             'special': company['adresseEtablissement'].get('distributionSpecialeEtablissement', ''),
                             'index': company['adresseEtablissement'].get('indiceRepetitionEtablissement', ''),
+                            'nic': company.get('nic')
                         }
                     })
             return message, companies, total, pages

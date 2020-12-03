@@ -132,6 +132,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
     class APICompanyList(ListAPIView):
         queryset = company_model.objectsB.all()
         serializer_class = serializers.CompanySerializer
+        lookup_field = 'uid'
 
         def get_filters(self):
             return [
@@ -166,8 +167,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
         def get_queryset(self, queryset=None):
             fm = self.get_filters_manager()
             return Foxid(self.queryset, self.request, f=fm.flts, distinct=True).ready()\
-                .filter(*fm.get_filters(self.request, False))\
-                .exclude(*fm.get_filters(self.request, True))
+                .filter(*fm.get_filters(self.request))
 
     class APICompanyDetail(RetrieveAPIView):
         queryset = company_model.objects.all()
