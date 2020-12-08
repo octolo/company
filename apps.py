@@ -5,6 +5,7 @@ from mighty import over_config
 class Config:
     app_label = 'company'
     countries = {}
+    sz_fields = ()
 
     class Model:
         Company = 'Company'

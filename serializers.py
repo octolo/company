@@ -3,6 +3,7 @@ from rest_framework.serializers import ModelSerializer
 from mighty.decorators import maskedSerializer
 from mighty.applications.address import fields as address_fields
 from company import get_company_model, fields
+from company.apps import CompanyConfig
 
 company_model = get_company_model()
 fr_model = get_company_model('CompanyFR')
@@ -35,4 +36,4 @@ class CompanySerializer(ModelSerializer):
 
     class Meta:
         model = company_model
-        fields = fields.serializer
+        fields = fields.serializer + CompanyConfig.sz_fields
