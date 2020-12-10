@@ -58,6 +58,7 @@ class SearchBackend(SearchBackend):
             pages = round(total/number) if total else 0
             if str(response_code)[0] in ["2", "3"]:
                 for company in buffer.get('etablissements', [buffer['header']]):
+                    print(company['adresseEtablissement'])
                     companies.append({
                         'siret': company.get('siret'),
                         'denomination': company['uniteLegale'].get('denominationUniteLegale', company['uniteLegale'].get('nomUniteLegale')),
@@ -77,8 +78,8 @@ class SearchBackend(SearchBackend):
                             'complement': company['adresseEtablissement'].get('complementAdresseEtablissement', ''),
                             'locality': company['adresseEtablissement'].get('libelleCommuneEtablissement',
                                 company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement', '')),
-                            'postal_code': company['adresseEtablissement'].get('codeCommuneEtablissement', 
-                                company['adresseEtablissement'].get('codePostalEtablissement', '')),
+                            'postal_code': company['adresseEtablissement'].get('codePostalEtablissement', 
+                                company['adresseEtablissement'].get('codeCommuneEtablissement', '')),
                             'country': company['adresseEtablissement'].get('libellePaysEtrangerEtablissement', 'france').lower(),
                             'country_code': company['adresseEtablissement'].get('codePaysEtrangerEtablissement', 'fr').lower(),
                             'cedex': company['adresseEtablissement'].get('libelleCedexEtablissement', ''),
