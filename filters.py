@@ -13,9 +13,10 @@ class SearchByCompany(filters.SearchFilter):
         super().__init__(id, request, *args, **kwargs)
         self.field = {'company': self.prefix + 'search', 'company_fr': self.prefix + 'company_fr__search'}
 
-    def get_Q(self, exclude=False):
-        company = reduce(self.operator, [Q(**{self.field['company']+self.mask: value }) for value in self.get_value(exclude)])
-        company_fr = reduce(self.operator, [Q(**{self.field['company_fr']+self.mask: value }) for value in self.get_value(exclude)])
+    def get_Q(self):
+        print('tata')
+        company = reduce(self.operator, [Q(**{self.field['company']+self.mask: value }) for value in self.get_value()])
+        company_fr = reduce(self.operator, [Q(**{self.field['company_fr']+self.mask: value }) for value in self.get_value()])
         return company|company_fr
 
 class SearchByICB(filters.ParamMultiChoicesFilter):
@@ -147,3 +148,29 @@ class SearchByNews(filters.SearchFilter):
     def __init__(self, id='news', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
         self.field = self.prefix + kwargs.get('field', 'company_news__keywords')
+
+filters_list = [
+    SearchByUid(),
+    SearchByCompany(),
+    SearchByICB(),
+    SearchByMarket(),
+    SearchByEffective(),
+    SearchByFloating(),
+    SearchByTurnover(),
+    DurationMandate(),
+    HasAgeLimitPDG(),
+    HasAgeLimitDG(),
+    HasSettleTnternal(),
+    HasStockMinRule(),
+    HasStockMinStatus(),
+    HasMatrixSkills(),
+    SearchByNews(),
+    SearchFRByAPE(),
+    SearchFRByGovernance(),
+    SearchFRByEvaluation(),
+    SearchFRByISIN(),
+    SearchFRByLegalform(),
+    SearchFRBySiret(),
+    SearchFRByIndex(),
+    SearchFRBySliceEffective(),
+]

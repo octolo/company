@@ -32,6 +32,14 @@ class CompanyMinSerializer(ModelSerializer):
 @maskedSerializer(except_mask=except_mask)
 class CompanySerializer(ModelSerializer):
     siege_fr = CompanyFRSerializer(many=False)
+
+    class Meta:
+        model = company_model
+        fields = fields.serializer + CompanyConfig.sz_fields
+
+@maskedSerializer(except_mask=except_mask)
+class CompanyWithAddrFRSerializer(ModelSerializer):
+    siege_fr = CompanyFRSerializer(many=False)
     companyfr_address = CompanyAddressFRSerializer(many=True)
 
     class Meta:

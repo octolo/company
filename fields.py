@@ -38,7 +38,6 @@ serializer = (
     'marketplace',
     'rules',
     'siege_fr',
-    'companyfr_address'
 )
 
 
@@ -58,5 +57,6 @@ fr = (
     'coderef',
     'index',
     'siege',
+    'evaluation',
 )
 balo =  ('announce', 'company', 'case', 'link', 'file_link', 'date')

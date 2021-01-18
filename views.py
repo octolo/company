@@ -128,46 +128,27 @@ class AddByCountry(CanContainParentObject, FormView):
 if 'rest_framework' in settings.INSTALLED_APPS:
     from rest_framework.generics import ListAPIView, RetrieveAPIView
     from company import serializers, filters
+    from mighty.filters import FiltersManager, Foxid
 
     class APICompanyList(ListAPIView):
         queryset = company_model.objectsB.all()
         serializer_class = serializers.CompanySerializer
         lookup_field = 'uid'
+        filters = filters.filters_list
+        cache_manager = None
 
-        def get_filters(self):
-            return [
-                filters.SearchByUid(),
-                filters.SearchByCompany(),
-                filters.SearchByICB(),
-                filters.SearchByMarket(),
-                filters.SearchByEffective(),
-                filters.SearchByFloating(),
-                filters.SearchByTurnover(),
-                filters.DurationMandate(),
-                filters.HasAgeLimitPDG(),
-                filters.HasAgeLimitDG(),
-                filters.HasSettleTnternal(),
-                filters.HasStockMinRule(),
-                filters.HasStockMinStatus(),
-                filters.HasMatrixSkills(),
-                filters.SearchByNews(),
-                filters.SearchFRByAPE(),
-                filters.SearchFRByGovernance(),
-                filters.SearchFRByEvaluation(),
-                filters.SearchFRByISIN(),
-                filters.SearchFRByLegalform(),
-                filters.SearchFRBySiret(),
-                filters.SearchFRByIndex(),
-                filters.SearchFRBySliceEffective(),
-            ]
+        @property
+        def foxid(self):
+            return Foxid(self.queryset, self.request, f=self.manager.flts).ready()
 
-        def get_filters_manager(self):
-            return FiltersManager(flts=self.get_filters())
+        @property
+        def manager(self):
+            if not self.cache_manager:
+                self.cache_manager = FiltersManager(flts=self.filters)
+            return self.cache_manager
 
         def get_queryset(self, queryset=None):
-            fm = self.get_filters_manager()
-            return Foxid(self.queryset, self.request, f=fm.flts, distinct=True).ready()\
-                .filter(*fm.get_filters(self.request))
+            return self.foxid.filter(*self.manager.params(self.request))
 
     class APICompanyDetail(RetrieveAPIView):
         queryset = company_model.objects.all()
