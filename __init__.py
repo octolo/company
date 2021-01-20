@@ -45,3 +45,16 @@ def backends_loop(country, search):
 
 def get_company_model(address_or_country='Company'):
     return django_apps.get_model(conf.app_label, getattr(conf.Model, address_or_country).lower())
+
+def create_company(country, input_obj):
+    CompanyModel = get_company_model()
+    CompanyCountry = get_company_model("Company%s" % country.upper())
+    CompanyAddress = get_company_model("CompanyAddress%s" % country.upper())
+    company, created = CompanyModel.objects.get_or_create(denomination=input_obj['denomination'])
+    if 'address' in input_obj:
+        del input_obj['address']
+    data = {key: value for key,value in input_obj.items()}
+    data['company'] = company
+    companyC, created = CompanyCountry.objects.get_or_create(**data)
+    company.since = input_obj['since']
+    company.save()

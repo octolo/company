@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.utils.decorators import method_decorator
+from django.http import JsonResponse
 
 from mighty.views import TemplateView, FormView, DetailView, AddView, ListView
 from mighty.functions import get_form_model
@@ -113,7 +114,6 @@ class SearchByCountry(SearchByCountryBase, FormView):
     over_no_permission = True
     over_add_to_context = {'search': _.search, 'search_placeholder': _.search_placeholder, 'since': _.since}
 
-from django.http import JsonResponse
 @method_decorator(login_required, name='dispatch')
 class APISearchByCountry(SearchByCountryBase, TemplateView):
     def get_context_data(self, **kwargs):
@@ -147,6 +147,28 @@ class AddByCountry(CanContainParentObject, FormView):
         form.save()
         self.success_url = form.cmodel.company.admin_change_url if self.admin else form.cmodel.company.detail_url
         return super().form_valid(form)
+
+
+from company import create_company
+@method_decorator(login_required, name='dispatch')
+class AddBySiren(APISearchByCountry):
+    def get_context_data(self, **kwargs):
+        if self.request.GET.get('siren'):
+            results = self.get_results(self.request.GET.get('siren'))
+            if len(results['object_list']) == 1:
+                create_company('FR', results['object_list'][0])
+                return results['object_list'][0]
+        return {}
+
+    def render_to_response(self, context, **response_kwargs):
+        return JsonResponse(context, safe=True, **response_kwargs)
+
+#@method_decorator(login_required, name='dispatch')
+#class DetailBySiren(DetailView):
+#    model = company_model
+#
+#    def get_object(self):
+#        self.model.objects.get(company_fr__siren=self.request)
 
 if 'rest_framework' in settings.INSTALLED_APPS:
     from rest_framework.views import APIView
