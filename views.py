@@ -18,7 +18,7 @@ import datetime
 company_model = get_company_model()
 
 class CanContainParentObject:
-    country = None
+    country = 'fr'
     parent_object = None
 
     def get_country(self):
@@ -66,41 +66,63 @@ class ChoiceCountry(CanContainParentObject, TemplateView):
         context.update({'object_list': self.get_countries()})
         return context
 
+class SearchByCountryBase(CanContainParentObject):
+    def get_results(self, search):
+        message, companies, total, pages = backends_loop(self.kwargs.get('country', 'fr'), search)
+        return {
+            'search': search,
+            'object_list': companies,
+            'message': message,
+            'total': total,
+            'pages': pages,
+            'error': False,#cf.message,
+            'results': _.results % total if int(total) > 1 else _.result % total,
+            'strpages': _.pages % pages if int(pages) > 1 else _.page % pages,
+            'toomuch': _.toomuch % total,
+        }
+
+    def country_definition(self):
+        country = self.get_country()
+        return {
+            'fake_country': self.get_country_model()(),
+            'country': country,
+            'nationality': self.get_nationality(country),
+            'country_fields': self.get_country_fields(),
+        }
+
+    def get_nationality(self, country):
+        if 'mighty.applications.nationality' in settings.INSTALLED_APPS:
+            from mighty.models import Nationality
+            nationality = Nationality.objects.get(alpha2__iexact=country)
+            return nationality
+        return country
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        country = self.get_country()
+        context.update(self.country_definition())
+        if self.request.GET.get('search'):
+            context.update(self.get_results(self.request.GET.get('search')))
+        return context
+
 @method_decorator(login_required, name='dispatch')
-class SearchByCountry(CanContainParentObject, FormView):
+class SearchByCountry(SearchByCountryBase, FormView):
     template_name = "company/country_search.html"
     form_class = CompanySearchByCountryForm
     success_url = '/company/search/'
     over_no_permission = True
     over_add_to_context = {'search': _.search, 'search_placeholder': _.search_placeholder, 'since': _.since}
 
+from django.http import JsonResponse
+@method_decorator(login_required, name='dispatch')
+class APISearchByCountry(SearchByCountryBase, TemplateView):
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        country = self.get_country()
-        context.update({
-            'fake_country': self.get_country_model()(),
-            'country': country,
-            'country_fields': self.get_country_fields(),
-        })
-        if 'mighty.applications.nationality' in settings.INSTALLED_APPS:
-            from mighty.models import Nationality
-            nationality = Nationality.objects.get(alpha2__iexact=country)
-            context.update({'nationality': nationality})
         if self.request.GET.get('search'):
-            search = self.request.GET.get('search')
-            message, companies, total, pages = backends_loop(self.kwargs.get('country', 'fr'), search)
-            context.update({
-                'search': search,
-                'object_list': companies,
-                'message': message,
-                'total': total,
-                'pages': pages,
-                'error': False,#cf.message,
-                'results': _.results % total if int(total) > 1 else _.result % total,
-                'strpages': _.pages % pages if int(pages) > 1 else _.page % pages,
-                'toomuch': _.toomuch % total,
-            })
-        return context
+            return self.get_results(self.request.GET.get('search'))
+        return {}
+
+    def render_to_response(self, context, **response_kwargs):
+        return JsonResponse(context, safe=True, **response_kwargs)
 
 @method_decorator(login_required, name='dispatch')
 class AddByCountry(CanContainParentObject, FormView):
@@ -108,7 +130,8 @@ class AddByCountry(CanContainParentObject, FormView):
     admin = False
 
     def get_form_class(self):
-        return self.get_country_form()
+        if self.request.GET.get('search'):
+            return self.get_country_form()
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -126,6 +149,8 @@ class AddByCountry(CanContainParentObject, FormView):
         return super().form_valid(form)
 
 if 'rest_framework' in settings.INSTALLED_APPS:
+    from rest_framework.views import APIView
+    from rest_framework.response import Response
     from rest_framework.generics import ListAPIView, RetrieveAPIView
     from company import serializers, filters
     from mighty.filters import FiltersManager, Foxid
@@ -154,3 +179,12 @@ if 'rest_framework' in settings.INSTALLED_APPS:
         queryset = company_model.objects.all()
         serializer_class = serializers.CompanySerializer
         lookup_field = 'uid'
+
+    class APISearchByCountry(SearchByCountryBase, APIView):
+        def get_context_data(self, **kwargs):
+            if self.request.GET.get('search'):
+                return self.get_results(self.request.GET.get('search'))
+            return {}
+
+        def get(self, request, format=None):
+            return Response(self.get_context_data())
