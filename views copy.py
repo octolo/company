@@ -130,7 +130,8 @@ class AddByCountry(CanContainParentObject, FormView):
     admin = False
 
     def get_form_class(self):
-        return self.get_country_form()
+        if self.request.GET.get('search'):
+            return self.get_country_form()
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
