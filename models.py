@@ -163,6 +163,7 @@ CHOICES_EVALUATION = sorted(list(choices_fr.EVALUATION), key=lambda x: x[1])
 class CompanyFR(CompanyAlpha2):
     search_fields = ['denomination', 'siret', 'isin', 'ticker']
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='company_fr')
+    siren = models.CharField(max_length=9, blank=True, null=True)
     siret = models.CharField(_.fr_siret, max_length=14, unique=True)
     ape = models.CharField(_.fr_ape, max_length=5)
     ape_noun = models.CharField(_.fr_ape_noun, max_length=10, blank=True, null=True)
@@ -191,7 +192,7 @@ class CompanyFR(CompanyAlpha2):
     @property
     def date_rcs(self): return self.since
     @property
-    def siren(self): return self.siret[:9]
+    def siren_from_siret(self): return self.siret[:9]
     @property
     def nic(self): return self.siret[9:]
     @property
@@ -208,6 +209,8 @@ class CompanyFR(CompanyAlpha2):
             int(self.slice_effective)
         except Exception:
             self.slice_effective = None
+        if not self.siren:
+            self.siren = self.siren_from_siret
         self.company.save()
         super().save()
       

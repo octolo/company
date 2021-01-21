@@ -14,7 +14,6 @@ class SearchByCompany(filters.SearchFilter):
         self.field = {'company': self.prefix + 'search', 'company_fr': self.prefix + 'company_fr__search'}
 
     def get_Q(self):
-        print('tata')
         company = reduce(self.operator, [Q(**{self.field['company']+self.mask: value }) for value in self.get_value()])
         company_fr = reduce(self.operator, [Q(**{self.field['company_fr']+self.mask: value }) for value in self.get_value()])
         return company|company_fr
