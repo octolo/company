@@ -211,6 +211,8 @@ class CompanyFR(CompanyAlpha2):
             self.slice_effective = None
         if not self.siren:
             self.siren = self.siren_from_siret
+        if not self.company.since:
+            self.company.since = self.since
         self.company.save()
         super().save()
       

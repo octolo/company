@@ -194,6 +194,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             return self.cache_manager
 
         def get_queryset(self, queryset=None):
+            print(self.manager.params(self.request))
             return self.foxid.filter(*self.manager.params(self.request))
 
     class APICompanyDetail(RetrieveAPIView):
