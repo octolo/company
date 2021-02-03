@@ -4,7 +4,6 @@ from mighty.decorators import maskedSerializer
 from mighty.applications.address import fields as address_fields
 from company import get_company_model, fields
 from company.apps import CompanyConfig
-from easyshares.models import Role
 
 company_model = get_company_model()
 fr_model = get_company_model('CompanyFR')
@@ -30,21 +29,12 @@ class CompanyMinSerializer(ModelSerializer):
         model = company_model
         fields = ('uid', 'denomination', 'image_url')
 
-@maskedSerializer(except_mask=except_mask)
-
-class RoleSerializer(ModelSerializer):
-    class Meta:
-        model = Role
-        fields = ('uid', 'name')
-
-" Je l'ai mis la, ca fonctionnais pas dans quand c'est directement dans le serializer de easyshares "
 class CompanySerializer(ModelSerializer):
     siege_fr = CompanyFRSerializer(many=False)
-    roles = RoleSerializer(many=True, source="group_role")
 
     class Meta:
         model = company_model
-        fields = fields.serializer + CompanyConfig.sz_fields + ('roles', )
+        fields = fields.serializer + CompanyConfig.sz_fields
 
 @maskedSerializer(except_mask=except_mask)
 class CompanyWithAddrFRSerializer(ModelSerializer):
