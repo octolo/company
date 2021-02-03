@@ -21,6 +21,18 @@ class SearchFilter(filters.SearchFilter):
         company_fr = reduce(self.operator, [Q(**{self.get_field()['company_fr']: value }) for value in self.get_value()])
         return company|company_fr
 
+class SinceFilter(filters.ParamFilter):
+    def __init__(self, id='since', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.field = kwargs.get('field', 'since')
+        self.mask = kwargs.get('mask', '__gte')
+
+class UntilFilter(filters.ParamFilter):
+    def __init__(self, id='until', request=None, *args, **kwargs):
+        super().__init__(id, request, *args, **kwargs)
+        self.field = kwargs.get('field', 'since')
+        self.mask = kwargs.get('mask', '__lte')
+
 class SearchByICB(filters.ParamMultiChoicesFilter):
     def __init__(self, id='icb', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
@@ -162,6 +174,8 @@ class SearchByNews(filters.SearchFilter):
 filters_list = [
     SearchFilter(),
     SearchByUid(),
+    SinceFilter(),
+    UntilFilter(),
 
     # Actualités
     SearchByNews(),
