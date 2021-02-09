@@ -216,7 +216,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
         def get(self, request, format=None):
             return Response(self.get_context_data())
 
-    class AddBySiren(APIView):
+    class AddBySiren(SearchByCountryBase, APIView):
         def get_context_data(self, **kwargs):
             if self.request.GET.get('siren'):
                 results = self.get_results(self.request.GET.get('siren'))
