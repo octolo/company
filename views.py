@@ -215,3 +215,8 @@ if 'rest_framework' in settings.INSTALLED_APPS:
 
         def get(self, request, format=None):
             return Response(self.get_context_data())
+
+    class AddBySiren(AddBySiren, APIView):
+        def get(self, request, format=None):
+            return Response(self.get_context_data())
+            
