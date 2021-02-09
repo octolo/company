@@ -216,7 +216,15 @@ if 'rest_framework' in settings.INSTALLED_APPS:
         def get(self, request, format=None):
             return Response(self.get_context_data())
 
-    class AddBySiren(AddBySiren, APIView):
+    class AddBySiren(APIView):
+        def get_context_data(self, **kwargs):
+            if self.request.GET.get('siren'):
+                results = self.get_results(self.request.GET.get('siren'))
+                if len(results['object_list']) == 1:
+                    create_company('FR', results['object_list'][0])
+                    return results['object_list'][0]
+            return {}
+
         def get(self, request, format=None):
             return Response(self.get_context_data())
             
