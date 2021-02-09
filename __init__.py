@@ -53,6 +53,10 @@ def create_company(country, input_obj):
     company, created = CompanyModel.objects.get_or_create(denomination=input_obj['denomination'])
     if 'address' in input_obj:
         del input_obj['address']
+        del input_obj['ape_str']
+        del input_obj['legalform_str']
+        del input_obj['slice_str']
+        del input_obj['raw_address']
     data = {key: value for key,value in input_obj.items()}
     data['company'] = company
     companyC, created = CompanyCountry.objects.get_or_create(**data)

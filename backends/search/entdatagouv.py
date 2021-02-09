@@ -6,6 +6,7 @@ class SearchBackend(SearchBackend):
     siren_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/siren/%s'
     fulltext_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/full_text/%s'
     since_format = '%Y%m%d'
+    raw_address = "%(street_number)s %(way)s %(route)s %(locality)s %(postal_code)s"
 
     def call_webservice(self, url):
         buffer = BytesIO() 
@@ -51,6 +52,7 @@ class SearchBackend(SearchBackend):
                         
                     }
                 })
+                companies['raw_address'] = self.raw_address % companies['address']
             total = buffer.get('total_results', 0)
             pages = buffer.get('total_pages', 0)
         return message, companies, total, pages

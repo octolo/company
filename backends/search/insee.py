@@ -1,8 +1,12 @@
 from django.conf import settings
+from mighty.functions import make_searchable
+
 from company.backends.search import SearchBackend
+from company.choices.fr import LEGALFORM, APE
+
 from io import BytesIO
 import base64, pycurl, json, re, logging, time, datetime
-from mighty.functions import make_searchable
+
 logger = logging.getLogger(__name__)
 
 class SearchBackend(SearchBackend):
@@ -12,6 +16,8 @@ class SearchBackend(SearchBackend):
     since_format = '%Y-%m-%d'
     iso_format = '%Y-%m-%dT%H:%M:%S'
     error = 5
+    raw_address = "%(address)s, %(locality)s %(postal_code)s"
+
 
     def call_webservice(self, url, headers, postfields=None):
         buffer = BytesIO() # buffer
@@ -58,7 +64,7 @@ class SearchBackend(SearchBackend):
             pages = round(total/number) if total else 0
             if str(response_code)[0] in ["2", "3"]:
                 for company in buffer.get('etablissements', [buffer['header']]):
-                    companies.append({
+                    new_company = {
                         'siret': company.get('siret'),
                         'denomination': company['uniteLegale'].get('denominationUniteLegale', company['uniteLegale'].get('nomUniteLegale')),
                         'legalform': company['uniteLegale']['categorieJuridiqueUniteLegale'],
@@ -87,7 +93,12 @@ class SearchBackend(SearchBackend):
                             'index': company['adresseEtablissement'].get('indiceRepetitionEtablissement', ''),
                             'nic': company.get('nic')
                         }
-                    })
+                    }
+                    new_company['raw_address'] = self.raw_address % (new_company['address'])
+                    new_company['ape_str'] = self.get_ape_str(new_company['ape'])
+                    new_company['legalform_str'] = self.get_legalform_str(new_company['legalform'])
+                    new_company['slice_str'] = self.get_slice_str(new_company['slice_effective'])
+                    companies.append(new_company)
             return message, companies, total, pages
         else:
             if 'fault' in buffer:

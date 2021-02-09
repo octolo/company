@@ -169,9 +169,7 @@ class SearchFRBySliceEffective(filters.ParamMultiChoicesFilter):
 class SearchByNews(filters.SearchFilter):
     def __init__(self, id='news', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
-        print(self.prefix)
         self.field = kwargs.get('field', 'company_news__keywords')
-        print(self.get_field())
 
 filters_list = [
     SearchFilter(),

@@ -3,6 +3,7 @@ import datetime
 
 CHOICES_APE = dict(choices.APE)
 CHOICES_LEGALFORM = dict(choices.LEGALFORM)
+CHOICES_SLICE = dict(choices.SLICE_EFFECTIVE)
 
 class SearchBackend:
     message = None
@@ -17,11 +18,27 @@ class SearchBackend:
         elif str(response_code)[0] == '5': self.in_error('error server')
         return companies
 
-    def ape(self, code):
-        return code#CHOICES_APE[code]
+    def get_ape_str(self, code):
+        try:
+            return CHOICES_APE[code]
+        except Exception:
+            pass
+        return code
 
-    def legalform(self, code):
-        return int(code)#CHOICES_LEGALFORM[int(code)]
+    def get_legalform_str(self, code):
+        try:
+            code = int(code)
+            return CHOICES_LEGALFORM[code]
+        except Exception:
+            pass
+        return code
+
+    def get_slice_str(self, code):
+        try:
+            return CHOICES_SLICE[code]
+        except Exception:
+            pass
+        return code
 
     def lastupdate(self, date):
         return datetime.datetime.strptime(date, self.iso_format).strftime("%Y-%m-%d")

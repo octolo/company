@@ -17,7 +17,6 @@ class CompanyAddByCountry(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True, user=None, author=None):
-        print(self.cleaned_data)
         model_datas = {field: self.cleaned_data.get(field) for field in self.country_fields}
         if  not self.parent_object:
             self.parent_object = CompanyModel(denomination=model_datas['denomination'], since=model_datas['since'])

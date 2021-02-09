@@ -162,6 +162,12 @@ class AddBySiren(APISearchByCountry):
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context, safe=True, **response_kwargs)
 
+from mighty.views import CheckData
+class CompanyCheck(CheckData):
+    model = company_model
+    test_field = 'company_fr__siren'
+    
+
 #@method_decorator(login_required, name='dispatch')
 #class DetailBySiren(DetailView):
 #    model = company_model
@@ -194,7 +200,6 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             return self.cache_manager
 
         def get_queryset(self, queryset=None):
-            print(self.manager.params(self.request))
             return self.foxid.filter(*self.manager.params(self.request))
 
     class APICompanyDetail(RetrieveAPIView):
