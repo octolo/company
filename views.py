@@ -13,7 +13,7 @@ from mighty.filters import FiltersManager, Foxid
 from company.apps import CompanyConfig as conf
 from company.models import Company
 from company.forms import CompanySearchByCountryForm, CompanyAddByCountry
-from company import backends_loop, get_company_model, translates as _, filters, fields
+from company import backends_loop, get_company_model, translates as _, filters, fields, create_company
 import datetime
 
 company_model = get_company_model()
@@ -148,7 +148,7 @@ class AddByCountry(CanContainParentObject, FormView):
         return super().form_valid(form)
 
 
-from company import create_company
+
 @method_decorator(login_required, name='dispatch')
 class AddBySiren(APISearchByCountry):
     def get_context_data(self, **kwargs):
