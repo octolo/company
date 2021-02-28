@@ -185,6 +185,7 @@ class CompanyFR(CompanyAlpha2):
 
     class Meta(Base.Meta):
         abstract = True
+        ordering = ['denomination',]
 
     def __str__(self):
         return self.denomination if hasattr(self, 'denomination') else super().__str__()

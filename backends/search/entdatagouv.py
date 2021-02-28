@@ -6,7 +6,7 @@ class SearchBackend(SearchBackend):
     siren_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/siren/%s'
     fulltext_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/full_text/%s'
     since_format = '%Y%m%d'
-    raw_address = "%(street_number)s %(way)s %(route)s %(locality)s %(postal_code)s"
+    raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
     def call_webservice(self, url):
         buffer = BytesIO() 
@@ -21,12 +21,13 @@ class SearchBackend(SearchBackend):
     def get_companies(self, url, qreq):
         message, companies, total, pages = (False, [], 0, 0)
         buffer, response_code = self.call_webservice(url % qreq)
-        company = self.companies(buffer.get('siege_social', [buffer]), response_code)
+        if url == self.siren_url:
+            list_company = [self.companies(buffer.get('siege_social', [buffer]), response_code)]
+        else:
+            list_company = self.companies(buffer.get('etablissement', [buffer]), response_code)
         if not self.message:
-            if url == self.siren_url:
-                company = [company]
-            for company in self.companies(buffer.get('etablissement', [buffer]), response_code):
-                companies.append({
+            for company in list_company:
+                new_company = {
                     'siret': company.get('siret', None),
                     'denomination':company.get('l1_normalisee', None),
                     'legalform': company.get('nature_juridique_entreprise', None),
@@ -35,11 +36,14 @@ class SearchBackend(SearchBackend):
                     'since': self.since(company.get('date_creation', None)),
                     'category': company.get('categorie_entreprise', None),
                     'slice_effective':  company.get('tranche_effectif_salarie_entreprise', None),
-                    'siege': company.get('etablissementSiege', None),
+                    'siege': company.get('is_siege', False),
                     'address': {
-                        'street_number': company.get("numero_voie", None),
-                        'way': company.get("type_voie", None),
-                        'route': company.get("libelle_voie", None),
+                        'address': ' '.join(filter(None, [
+                            company.get("numero_voie", None),
+                            company.get("type_voie", None),
+                            company.get("libelle_voie", None),
+                        ])),
+                        'complement': None,
                         'locality': company.get("libelle_commune", None),
                         'postal_code': company.get("code_postal", None),
                         'country': 'france',
@@ -47,12 +51,15 @@ class SearchBackend(SearchBackend):
                         'cedex': company.get("cedex", None),
                         'cedex_code': None,
                         'special': None,
-                        'complement': None,
                         'index': None,
-                        
+                        'nic': company.get('nic_siege')
                     }
-                })
-                companies['raw_address'] = self.raw_address % companies['address']
+                }
+                new_company['raw_address'] = self.raw_address % (new_company['address'])
+                new_company['ape_str'] = self.get_ape_str(new_company['ape'])
+                new_company['legalform_str'] = self.get_legalform_str(new_company['legalform'])
+                new_company['slice_str'] = self.get_slice_str(new_company['slice_effective'])
+                companies.append(new_company)
             total = buffer.get('total_results', 0)
             pages = buffer.get('total_pages', 0)
         return message, companies, total, pages

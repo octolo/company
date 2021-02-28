@@ -33,15 +33,12 @@ def merge_backends(results):
 
 def backends_loop(country, search):
     results = {}
-    ftotal, fpages = (0, 0)
+    message, results, total, pages = ('Nothing', [], 0, 0)
     for backend in settings.COMPANY_BACKENDS[country]:
-        return get_backend('%s.SearchBackend' % backend, search)
-        #try:
-        #    return get_backend('%s.SearchBackend' % backend, search)
-        #except Exception as e:
-        #    print(e)
-    return False
-    return merge_backends(results), ftotal, fpages
+        message, results, total, pages = get_backend('%s.SearchBackend' % backend, search)
+        if total:
+            break
+    return message, results, total, pages
 
 def get_company_model(address_or_country='Company'):
     return django_apps.get_model(conf.app_label, getattr(conf.Model, address_or_country).lower())

@@ -24,4 +24,11 @@ def AddressFrInit(sender, instance, **kwargs):
                 nic=company_bl['address']['nic']
             )
             addressfr.save()
-post_save.connect(AddressFrInit, CompanyFR)
+#post_save.connect(AddressFrInit, CompanyFR)
+
+def DefaultSiege(sender, instance, **kwargs):
+    companyfr = instance.company_fr.all()
+    if not instance.siege_fr and companyfr:
+        instance.siege_fr = companyfr[0]
+        instance.save()
+post_save.connect(DefaultSiege, CompanyModel)
