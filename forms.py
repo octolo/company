@@ -1,5 +1,5 @@
 from django import forms
-from company import get_company_model
+from company import get_company_model, backends_loop, create_company
 CompanyModel = get_company_model()
 
 class CompanySearchByCountryForm(forms.Form):
@@ -16,11 +16,26 @@ class CompanyAddByCountry(forms.ModelForm):
         self.parent_object = parent_object
         super().__init__(*args, **kwargs)
 
+    def get_results(self, country, search):
+        message, companies, total, pages = backends_loop(country, search)
+        return {
+            'search': search,
+            'object_list': companies,
+            'message': message,
+            'total': total,
+            'pages': pages,
+            'error': False,#cf.message,
+        }
+
     def save(self, commit=True, user=None, author=None):
-        model_datas = {field: self.cleaned_data.get(field) for field in self.country_fields}
-        if  not self.parent_object:
-            self.parent_object = CompanyModel(denomination=model_datas['denomination'], since=model_datas['since'])
-            self.parent_object.save()
-        model_datas.update({"company": self.parent_object})
-        self.cmodel, status = self.country_model.objects.get_or_create(**model_datas)
-        self.cmodel.save()
+        print(self.cleaned_data)
+        results = self.get_results('fr', self.cleaned_data.get('search'))
+        data = results['object_list'][self.cleaned_data.get('position')]
+        create_company('fr', data)
+        #model_datas = {field: self.cleaned_data.get(field) for field in self.country_fields}
+        #if  not self.parent_object:
+        #    self.parent_object = CompanyModel(denomination=model_datas['denomination'], since=model_datas['since'])
+        #    self.parent_object.save()
+        #model_datas.update({"company": self.parent_object})
+        #self.cmodel, status = self.country_model.objects.get_or_create(**model_datas)
+        #self.cmodel.save()

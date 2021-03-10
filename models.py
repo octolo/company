@@ -130,7 +130,7 @@ class Company(Base, Image):
         return import_string('%s.models.Company%s' % (self.app_label, alpha2.upper()))
 
 class CompanyAlpha2(Base):
-    company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, blank=True, null=True)
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)
 
@@ -141,9 +141,10 @@ class CompanyAlpha2(Base):
         return 
 
     def save(self, *args, **kwargs):
-        if self.company_id is None:
-            company = get_company_model()(denomination=self.denomination, since=self.since)
-            company.save()
+        if self.company:
+            self.company.save()
+        else:
+            self.company = get_company_model().objects.create(denomination=self.denomination, since=self.since)
         super().save()
 
 class CompanyNews(News):
@@ -162,7 +163,7 @@ CHOICES_GOVERNANCE = sorted(list(choices_fr.GOVERNANCE), key=lambda x: x[1])
 CHOICES_EVALUATION = sorted(list(choices_fr.EVALUATION), key=lambda x: x[1])
 class CompanyFR(CompanyAlpha2):
     search_fields = ['denomination', 'siret', 'isin', 'ticker']
-    company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='company_fr')
+    company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='company_fr', blank=True, null=True)
     siren = models.CharField(max_length=9, blank=True, null=True)
     siret = models.CharField(_.fr_siret, max_length=14, unique=True)
     ape = models.CharField(_.fr_ape, max_length=5)
@@ -212,9 +213,6 @@ class CompanyFR(CompanyAlpha2):
             self.slice_effective = None
         if not self.siren:
             self.siren = self.siren_from_siret
-        if not self.company.since:
-            self.company.since = self.since
-        self.company.save()
         super().save()
       
 class CompanyAddressFR(Address):

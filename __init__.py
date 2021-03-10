@@ -47,15 +47,18 @@ def create_company(country, input_obj):
     CompanyModel = get_company_model()
     CompanyCountry = get_company_model("Company%s" % country.upper())
     CompanyAddress = get_company_model("CompanyAddress%s" % country.upper())
-    company, created = CompanyModel.objects.get_or_create(denomination=input_obj['denomination'])
+    #company, created = CompanyModel.objects.get_or_create(denomination=input_obj['denomination'])
+    address = None
     if 'address' in input_obj:
+        address = input_obj['address']
         del input_obj['address']
-        del input_obj['ape_str']
-        del input_obj['legalform_str']
-        del input_obj['slice_str']
-        del input_obj['raw_address']
+    del input_obj['ape_str']
+    del input_obj['legalform_str']
+    del input_obj['slice_str']
+    del input_obj['raw_address']
     data = {key: value for key,value in input_obj.items()}
-    data['company'] = company
     companyC, created = CompanyCountry.objects.get_or_create(**data)
-    company.since = input_obj['since']
-    company.save()
+    print(address)
+    if address:
+        address['company'] = companyC.company
+        companyA, created = CompanyAddress.objects.get_or_create(**address)
