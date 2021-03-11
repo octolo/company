@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils.module_loading import import_string
+from django.utils.html import format_html
 
 from mighty.models import News
 from mighty.models.base import Base
@@ -128,6 +129,24 @@ class Company(Base, Image):
 
     def get_dataset_by_country(self, alpha2):
         return import_string('%s.models.Company%s' % (self.app_label, alpha2.upper()))
+
+    @property
+    def siege_or_first_fr(self):
+        return self.siege_fr if self.siege_fr else self.company_fr.first()
+
+    @property
+    def siege_fr_address(self):
+        return self.companyfr_address.first().raw_address
+
+    @property
+    def capital_text(self):
+        return format_html('200 000 €<br/>');
+
+    @property
+    def capital_var_text(self):
+        return format_html('500 000 €<br/>');
+
+    
 
 class CompanyAlpha2(Base):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, blank=True, null=True)

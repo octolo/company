@@ -58,6 +58,7 @@ class SearchBackend(SearchBackend):
         headers = ['Accept: application/json', 'Authorization: Bearer %s' % access_token]
         url = "%s?q=%s&nombre=%s&debut=%s&masquerValeursNulles=true" % (self.siret_url, qreq, number, offset)
         buffer, response_code = self.call_webservice(url, headers)
+        print(buffer)
         if'header' in buffer:
             message = False if buffer['header']['message'] == "OK" else buffer['header']['message']
             total = buffer['header'].get('total', 0)
