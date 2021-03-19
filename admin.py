@@ -22,6 +22,7 @@ class CompanyAdmin(BaseAdmin):
             'capital_division',
             'current',
             'share_capital',
+            'turnover',
             'floating',
             'icb',
             'market',
