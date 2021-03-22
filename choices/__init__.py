@@ -5,6 +5,13 @@ YESNO = (
 ("NO", _('no')),
 )
 
+ISTYPE = (
+("COMPANY", _("Société")),
+("ASSOCIATION", _("Association")),
+("COOWNER", _("Co-propriété")),
+("BIGMASTER", _("Grand compte")),
+)
+
 ICB = (
 ("MATERIALBASE", _("Matériaux de base")),
 ("INDUSTRY", _("Industries")),

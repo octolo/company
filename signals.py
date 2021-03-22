@@ -26,9 +26,15 @@ def AddressFrInit(sender, instance, **kwargs):
             addressfr.save()
 #post_save.connect(AddressFrInit, CompanyFR)
 
-def DefaultSiege(sender, instance, **kwargs):
-    companyfr = instance.company_fr.all()
-    if not instance.siege_fr and companyfr:
-        instance.siege_fr = companyfr[0]
-        instance.save()
-post_save.connect(DefaultSiege, CompanyModel)
+def DefaultSiegeFR(sender, instance, **kwargs):
+    company = instance.company
+    if instance.rna: company.is_type = "ASSOCIATION"
+    if instance.siege:
+        company.siege_fr = instance
+        company.save()
+    elif not instance.company.siege_fr:
+        companyfr = instance.company.company_fr.all().order_by('siege')
+        if len(companyfr):
+            company.siege_fr = companyfr[0]
+            company.save()
+post_save.connect(DefaultSiegeFR, CompanyFR)

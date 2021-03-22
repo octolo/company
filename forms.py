@@ -31,11 +31,4 @@ class CompanyAddByCountry(forms.ModelForm):
         print(self.cleaned_data)
         results = self.get_results('fr', self.cleaned_data.get('search'))
         data = results['object_list'][self.cleaned_data.get('position')]
-        create_company('fr', data)
-        #model_datas = {field: self.cleaned_data.get(field) for field in self.country_fields}
-        #if  not self.parent_object:
-        #    self.parent_object = CompanyModel(denomination=model_datas['denomination'], since=model_datas['since'])
-        #    self.parent_object.save()
-        #model_datas.update({"company": self.parent_object})
-        #self.cmodel, status = self.country_model.objects.get_or_create(**model_datas)
-        #self.cmodel.save()
+        self.new_company = create_company('fr', data)

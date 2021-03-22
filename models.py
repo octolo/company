@@ -10,7 +10,7 @@ from mighty.applications.address.models import Address
 
 from company import translates as _, managers, get_company_model
 from company.apps import CompanyConfig as conf
-from company.choices import ICB, MARKET, YESNO
+from company.choices import ICB, MARKET, YESNO, ISTYPE
 
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -22,7 +22,9 @@ class Company(Base, Image):
     effective = models.BigIntegerField(blank=True, null=True)
     secretary = models.CharField(_.secretary, max_length=255, blank=True, null=True)
     resume = CKEditor5Field(blank=True, null=True)
-    
+
+    is_type = models.CharField(max_length=15, choices=ISTYPE, default="COMPANY")
+
     purpose = models.CharField(_.purpose, max_length=3, choices=YESNO, blank=True, null=True)
     instance_comex = models.BooleanField(_.instance_comex, default=False)
     matrix_skills = models.BooleanField(_.matrix_skills, default=False)
@@ -185,6 +187,7 @@ class CompanyFR(CompanyAlpha2):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='company_fr', blank=True, null=True)
     siren = models.CharField(max_length=9, blank=True, null=True)
     siret = models.CharField(_.fr_siret, max_length=14, unique=True)
+    rna = models.CharField(max_length=10, blank=True, null=True, unique=True)
     ape = models.CharField(_.fr_ape, max_length=5)
     ape_noun = models.CharField(_.fr_ape_noun, max_length=10, blank=True, null=True)
     category = models.CharField(_.fr_category, max_length=15, blank=True, null=True)
@@ -223,7 +226,7 @@ class CompanyFR(CompanyAlpha2):
     @property
     def legalform_code(self): return self.legalform if self.legalform else _.legalform_null
     @property
-    def legalform_label(self): return dict(choices_fr.LEGALFORM).get(self.legalform)
+    def legalform_label(self): return dict(choices_fr.LEGALFORM).get(int(self.legalform_code))
 
     def save(self, *args, **kwargs):
         try:
@@ -232,6 +235,9 @@ class CompanyFR(CompanyAlpha2):
             self.slice_effective = None
         if not self.siren:
             self.siren = self.siren_from_siret
+        if self.rna and self.company:
+            self.company.is_type = "ASSOCIATION"
+            self.company.save()
         super().save()
       
 class CompanyAddressFR(Address):

@@ -144,10 +144,8 @@ class AddByCountry(CanContainParentObject, FormView):
 
     def form_valid(self, form):
         form.save()
-        self.success_url = form.cmodel.company.admin_change_url if self.admin else form.cmodel.company.detail_url
+        self.success_url = form.new_company.admin_change_url if self.admin else form.new_company.detail_url
         return super().form_valid(form)
-
-
 
 @method_decorator(login_required, name='dispatch')
 class AddBySiren(APISearchByCountry):
@@ -162,11 +160,27 @@ class AddBySiren(APISearchByCountry):
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context, safe=True, **response_kwargs)
 
+@method_decorator(login_required, name='dispatch')
+class AddByRna(APISearchByCountry):
+    def get_context_data(self, **kwargs):
+        if self.request.GET.get('rna'):
+            results = self.get_results(self.request.GET.get('rna'))
+            if len(results['object_list']) == 1:
+                create_company('FR', results['object_list'][0])
+                return results['object_list'][0]
+        return {}
+
+    def render_to_response(self, context, **response_kwargs):
+        return JsonResponse(context, safe=True, **response_kwargs)
+
 from mighty.views import CheckData
-class CompanyCheck(CheckData):
+class CompanyCheckSiren(CheckData):
     model = company_model
     test_field = 'company_fr__siren'
     
+class CompanyCheckRna(CheckData):
+    model = company_model
+    test_field = 'company_fr__rna'
 
 #@method_decorator(login_required, name='dispatch')
 #class DetailBySiren(DetailView):
@@ -220,6 +234,18 @@ if 'rest_framework' in settings.INSTALLED_APPS:
         def get_context_data(self, **kwargs):
             if self.request.GET.get('siren'):
                 results = self.get_results(self.request.GET.get('siren'))
+                if len(results['object_list']) == 1:
+                    create_company('FR', results['object_list'][0])
+                    return results['object_list'][0]
+            return {}
+
+        def get(self, request, format=None):
+            return Response(self.get_context_data())
+
+    class AddByRna(SearchByCountryBase, APIView):
+        def get_context_data(self, **kwargs):
+            if self.request.GET.get('rna'):
+                results = self.get_results(self.request.GET.get('rna'))
                 if len(results['object_list']) == 1:
                     create_company('FR', results['object_list'][0])
                     return results['object_list'][0]

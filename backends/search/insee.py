@@ -58,7 +58,6 @@ class SearchBackend(SearchBackend):
         headers = ['Accept: application/json', 'Authorization: Bearer %s' % access_token]
         url = "%s?q=%s&nombre=%s&debut=%s&masquerValeursNulles=true" % (self.siret_url, qreq, number, offset)
         buffer, response_code = self.call_webservice(url, headers)
-        print(buffer)
         if'header' in buffer:
             message = False if buffer['header']['message'] == "OK" else buffer['header']['message']
             total = buffer['header'].get('total', 0)
@@ -75,6 +74,7 @@ class SearchBackend(SearchBackend):
                         'category': company['uniteLegale'].get('categorieEntreprise', ''),
                         'slice_effective': company['uniteLegale'].get('trancheEffectifsUniteLegale', ''),
                         'siege':company.get('etablissementSiege', False),
+                        'rna': company['uniteLegale'].get('identifiantAssociationUniteLegale', None),
                         'address': {
                             'address': ' '.join(filter(None, [
                                 company['adresseEtablissement'].get('numeroVoieEtablissement'),
@@ -119,9 +119,14 @@ class SearchBackend(SearchBackend):
     def get_company_by_siren(self, siren):
         return self.get_companies('siren:%s+AND+etablissementSiege:true' % siren)
 
+    def get_company_by_rna(self, rna):
+        return self.get_companies('identifiantAssociationUniteLegale:%s+AND+etablissementSiege:true' % rna)
+
     def get_active_companies(self, number, offset):
         return self.get_companies('etatAdministratifUniteLegale:A', number, offset)
 
     def get_company_by_fulltext(self, fulltext):
+        if len(fulltext) == 10 and fulltext[0] == 'W':
+            return self.get_company_by_rna(fulltext)
         fulltext = re.sub(r"\s+", '-', fulltext)
         return self.get_companies('denominationUniteLegale:%s+AND+etatAdministratifUniteLegale:A' % make_searchable(fulltext))

@@ -46,6 +46,7 @@ serializer = (
 ###
 fr = (
     'siret',
+    'rna',
     'ape',
     'ape_noun',
     'category',

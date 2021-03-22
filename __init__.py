@@ -62,3 +62,4 @@ def create_company(country, input_obj):
     if address:
         address['company'] = companyC.company
         companyA, created = CompanyAddress.objects.get_or_create(**address)
+    return companyC.company
