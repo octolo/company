@@ -148,7 +148,15 @@ class Company(Base, Image):
     def capital_var_text(self):
         return format_html('500 000 €<br/>');
 
-    
+    @property
+    def is_association(self):
+        return (self.is_type == "ASSOCIATION")
+
+    @property
+    def kind(self):
+        if self.is_association:
+            return "association"
+        return "entreprise"
 
 class CompanyAlpha2(Base):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, blank=True, null=True)
