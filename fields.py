@@ -1,3 +1,5 @@
+from company.apps import CompanyConfig as conf
+
 company = (
     'denomination',
     'since',
@@ -21,6 +23,9 @@ company = (
     'stock_min_status',
     'resume'
 )
+
+if conf.named_id:
+    company += ('named_id',)
 
 country = ('denomination', 'since')
 country_params = ('denomination', 'since')

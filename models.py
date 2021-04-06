@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.module_loading import import_string
 from django.utils.html import format_html
+from django.template.defaultfilters import slugify
 
 from mighty.models import News
 from mighty.models.base import Base
@@ -57,6 +58,9 @@ class Company(Base, Image):
 
     siege_fr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE, related_name='siege_fr', blank=True, null=True)
 
+    if conf.named_id:
+        named_id = models.CharField(max_length=255, db_index=True, null=True, editable=False)
+
     objects = models.Manager()
     objectsB = managers.CompanyManager()
 
@@ -75,6 +79,8 @@ class Company(Base, Image):
             self.floating = float(self.capital_division['Flottant'])
         except Exception:
             pass
+        if hasattr(self, 'named_id'): 
+            self.named_id = slugify(conf.named_tpl % self)
         super().save(*args, **kwargs)
         
     def __str__(self):
@@ -153,10 +159,19 @@ class Company(Base, Image):
         return (self.is_type == "ASSOCIATION")
 
     @property
+    def siren_or_rna(self):
+        return getattr(self.siege_or_first_fr, "rna", self.siege_or_first_fr.siren)
+
+    @property
     def kind(self):
         if self.is_association:
             return "association"
         return "entreprise"
+
+    @property
+    def raw_address(self):
+        first_address = self.companyfr_address.first()
+        return first_address.raw if first_address else None
 
 class CompanyAlpha2(Base):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, blank=True, null=True)
@@ -235,6 +250,8 @@ class CompanyFR(CompanyAlpha2):
     def legalform_code(self): return self.legalform if self.legalform else _.legalform_null
     @property
     def legalform_label(self): return dict(choices_fr.LEGALFORM).get(int(self.legalform_code))
+    @property
+    def slice_label(self): return dict(choices_fr.SLICE_EFFECTIVE).get(self.slice_effective) 
 
     def save(self, *args, **kwargs):
         try:

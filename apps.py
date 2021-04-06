@@ -6,6 +6,8 @@ class Config:
     app_label = 'company'
     countries = {}
     sz_fields = ()
+    named_id = True
+    named_tpl = "%(denomination)s"
 
     class Model:
         Company = 'Company'

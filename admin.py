@@ -50,6 +50,12 @@ class CompanyAdmin(BaseAdmin):
     readonly_fields = ('siege_fr',)
     search_template = None
 
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        if conf.named_id:
+            self.readonly_fields += ('named_id',)
+            self.add_field('informations', ('named_id',))
+
     def render_change_form(self, request, context, add=False, change=False, form_url="", obj=None):
         response = super().render_change_form(request, context, add, change, form_url, obj)
         if hasattr(self.model, "changelog_model"):
