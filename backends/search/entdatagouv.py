@@ -79,7 +79,6 @@ class SearchBackend(SearchBackend):
         return self.get_companies(self.rna_url, rna)
 
     def get_company_by_fulltext(self, fulltext):
-        print('tata: %s'%fulltext)
         if len(fulltext) == 10 and fulltext[0] == 'W':
             self.get_company_by_rna(fulltext)
         fulltext = re.sub(r"\s+", '-', fulltext)

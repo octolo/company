@@ -58,7 +58,6 @@ def create_company(country, input_obj):
     del input_obj['raw_address']
     data = {key: value for key,value in input_obj.items()}
     companyC, created = CompanyCountry.objects.get_or_create(**data)
-    print(address)
     if address:
         address['company'] = companyC.company
         companyA, created = CompanyAddress.objects.get_or_create(**address)

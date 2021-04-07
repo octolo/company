@@ -7,7 +7,7 @@ class Config:
     countries = {}
     sz_fields = ()
     named_id = True
-    named_tpl = "%(denomination)s"
+    named_tpl = "%(named)s-%(id)s"
 
     class Model:
         Company = 'Company'

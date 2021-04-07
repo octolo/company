@@ -80,7 +80,7 @@ class Company(Base, Image):
         except Exception:
             pass
         if hasattr(self, 'named_id'): 
-            self.named_id = slugify(conf.named_tpl % self)
+            self.named_id = conf.named_tpl % {"named": slugify(self.denomination), "id": self.siren_or_rna}
         super().save(*args, **kwargs)
         
     def __str__(self):
@@ -160,7 +160,10 @@ class Company(Base, Image):
 
     @property
     def siren_or_rna(self):
-        return getattr(self.siege_or_first_fr, "rna", self.siege_or_first_fr.siren)
+        sof = self.siege_or_first_fr
+        if sof:
+            return sof.rna if sof.rna else sof.siren
+        return None
 
     @property
     def kind(self):
