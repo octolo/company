@@ -17,7 +17,7 @@ from company.apps import CompanyConfig as conf
 class CompanyAdmin(BaseAdmin):
     fieldsets = (
         (None, {"classes": ("wide",), "fields": ('denomination', 'is_type', 'since', 'site', 'effective', 'secretary', 'resume')}),
-        ('informations', {"classes": ("wide",), "fields": ('purpose', 'instance_comex', 'matrix_skills')}),
+        ('comex & purpose', {"classes": ("wide",), "fields": ('purpose', 'instance_comex', 'matrix_skills')}),
         ('market', {"classes": ("wide",), "fields": (
             'capital_division',
             'current',
@@ -54,7 +54,7 @@ class CompanyAdmin(BaseAdmin):
         super().__init__(model, admin_site)
         if conf.named_id:
             self.readonly_fields += ('named_id',)
-            self.add_field('informations', ('named_id',))
+            self.add_field('Informations', ('named_id',))
 
     def render_change_form(self, request, context, add=False, change=False, form_url="", obj=None):
         response = super().render_change_form(request, context, add, change, form_url, obj)

@@ -1,5 +1,5 @@
 {% extends 'admin/change_list.html' %}
-{% load mighty admin_urls static %}
+{% load mighty admin_urls static i18n %}
 
 {% block extrastyle %}
 {{ block.super }}
@@ -14,7 +14,7 @@ thead th { padding: 5px 10px!important; }
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-<a href="{% url 'admin:index' %}">{{ mighty.home }}</a>
+<a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
 &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
 &rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
 {% if parent_object %}
