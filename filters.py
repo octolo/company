@@ -116,7 +116,7 @@ class SearchByCoderef(filters.ParamMultiChoicesFilter):
         self.field = kwargs.get('field', 'company_fr__coderef')
         self.choices = kwargs.get('choices', [m[0] for m in choices_fr.CODEREF])
 
-class SearchFRByISIN(filters.SearchFilter):
+class SearchFRByISIN(filters.ParamFilter):
     def __init__(self, id='isin', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
         self.field = kwargs.get('field', 'company_fr__isin')
