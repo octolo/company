@@ -166,6 +166,17 @@ class Company(Base, Image):
         return None
 
     @property
+    def isin(self):
+        return self.siege_or_first_fr.isin
+    @property
+    def siren(self):
+        return self.siege_or_first_fr.siren
+
+    @property
+    def index(self):
+        return self.siege_or_first_fr.index
+
+    @property
     def kind(self):
         if self.is_association:
             return "association"
