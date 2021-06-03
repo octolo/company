@@ -15,26 +15,26 @@ except_mask = ('uid', 'denomination', 'capital_division', 'image_url')
 class CompanyFRSerializer(ModelSerializer):
     class Meta:
         model = fr_model
-        fields = fields.fr + ('siren', 'ape_label', 'legalform_label')
+        fields = fields.fr + ('siren', 'ape_label', 'legalform_label', 'siren', 'isin', 'index')
 
 @maskedSerializer(except_mask=('uid',))
 class CompanyAddressFRSerializer(ModelSerializer):
     class Meta:
         model = addressfr_model
-        fields = address_fields + ('representation',)
+        fields = address_fields + ('representation', 'siren', 'isin', 'index')
 
 @maskedSerializer(except_mask=except_mask)
 class CompanyMinSerializer(ModelSerializer):
     class Meta:
         model = company_model
-        fields = ('uid', 'denomination', 'image_url')
+        fields = ('uid', 'denomination', 'image_url', 'siren', 'isin', 'index')
 
 class CompanySerializer(ModelSerializer):
     siege_fr = CompanyFRSerializer(many=False)
 
     class Meta:
         model = company_model
-        fields = fields.serializer + CompanyConfig.sz_fields
+        fields = fields.serializer + CompanyConfig.sz_fields + ('siren', 'isin', 'index')
 
 @maskedSerializer(except_mask=except_mask)
 class CompanyWithAddrFRSerializer(ModelSerializer):
@@ -43,4 +43,4 @@ class CompanyWithAddrFRSerializer(ModelSerializer):
 
     class Meta:
         model = company_model
-        fields = fields.serializer + CompanyConfig.sz_fields
+        fields = fields.serializer + CompanyConfig.sz_fields + ('siren', 'isin', 'index')
