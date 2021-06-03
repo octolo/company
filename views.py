@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from mighty.views import TemplateView, FormView, DetailView, AddView, ListView
 from mighty.functions import get_form_model
 from mighty.filters import FiltersManager, Foxid
+from mighty.views import CheckData
 
 from company.apps import CompanyConfig as conf
 from company.models import Company
@@ -173,7 +174,7 @@ class AddByRna(APISearchByCountry):
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context, safe=True, **response_kwargs)
 
-from mighty.views import CheckData
+
 class CompanyCheckSiren(CheckData):
     model = company_model
     test_field = 'company_fr__siren'
@@ -235,8 +236,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('siren'):
                 results = self.get_results(self.request.GET.get('siren'))
                 if len(results['object_list']) == 1:
-                    create_company('FR', results['object_list'][0])
-                    return results['object_list'][0]
+                    return create_company('FR', results['object_list'][0])
             return {}
 
         def get(self, request, format=None):
