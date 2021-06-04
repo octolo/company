@@ -21,7 +21,7 @@ class CompanyFRSerializer(ModelSerializer):
 class CompanyAddressFRSerializer(ModelSerializer):
     class Meta:
         model = addressfr_model
-        fields = address_fields + ('representation', 'siren', 'isin', 'index')
+        fields = address_fields + ('representation',)
 
 @maskedSerializer(except_mask=except_mask)
 class CompanyMinSerializer(ModelSerializer):
@@ -43,4 +43,4 @@ class CompanyWithAddrFRSerializer(ModelSerializer):
 
     class Meta:
         model = company_model
-        fields = fields.serializer + CompanyConfig.sz_fields + ('siren', 'isin', 'index')
+        fields = fields.serializer + CompanyConfig.sz_fields + ('siren', 'isin', 'index', 'companyfr_address')

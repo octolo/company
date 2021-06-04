@@ -19,6 +19,7 @@ class CompanyAdmin(BaseAdmin):
         (None, {"classes": ("wide",), "fields": ('denomination', 'is_type', 'since', 'site', 'effective', 'secretary', 'resume')}),
         ('comex & purpose', {"classes": ("wide",), "fields": ('purpose', 'instance_comex', 'matrix_skills')}),
         ('market', {"classes": ("wide",), "fields": (
+            'capital_socnomtotal',
             'capital_division',
             'current',
             'share_capital',
