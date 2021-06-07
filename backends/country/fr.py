@@ -29,4 +29,4 @@ def new_company(input_obj):
         "slice_effective": companyC.slice_effective,
         "siege": companyC.siege,
         "rna": companyC.rna,
-    }
+    }, companyC.company

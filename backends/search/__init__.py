@@ -1,5 +1,6 @@
 from company.choices import fr as choices
-import datetime
+import datetime, logging
+logger = logging.getLogger(__name__)
 
 CHOICES_APE = dict(choices.APE)
 CHOICES_LEGALFORM = dict(choices.LEGALFORM)
@@ -44,6 +45,7 @@ class SearchBackend:
         return datetime.datetime.strptime(date, self.iso_format).strftime("%Y-%m-%d")
 
     def since(self, date):
+        logger.warning(date)
         return datetime.datetime.strptime(date, self.since_format).strftime("%Y-%m-%d")
 
     def get_companies(self, companies, response_code):

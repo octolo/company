@@ -154,8 +154,8 @@ class AddBySiren(APISearchByCountry):
         if self.request.GET.get('siren'):
             results = self.get_results(self.request.GET.get('siren'))
             if len(results['object_list']) == 1:
-                create_company('FR', results['object_list'][0])
-                return results['object_list'][0]
+                data, company = create_company('FR', results['object_list'][0])
+                return data
         return {}
 
     def render_to_response(self, context, **response_kwargs):
@@ -167,8 +167,8 @@ class AddByRna(APISearchByCountry):
         if self.request.GET.get('rna'):
             results = self.get_results(self.request.GET.get('rna'))
             if len(results['object_list']) == 1:
-                create_company('FR', results['object_list'][0])
-                return results['object_list'][0]
+                data, company = create_company('FR', results['object_list'][0])
+                return data
         return {}
 
     def render_to_response(self, context, **response_kwargs):
@@ -236,7 +236,8 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('siren'):
                 results = self.get_results(self.request.GET.get('siren'))
                 if len(results['object_list']) == 1:
-                    return create_company('FR', results['object_list'][0])
+                    data, company = create_company('FR', results['object_list'][0])
+                    return data
             return {}
 
         def get(self, request, format=None):
@@ -247,8 +248,8 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('rna'):
                 results = self.get_results(self.request.GET.get('rna'))
                 if len(results['object_list']) == 1:
-                    create_company('FR', results['object_list'][0])
-                    return results['object_list'][0]
+                    data, company = create_company('FR', results['object_list'][0])
+                    return data
             return {}
 
         def get(self, request, format=None):

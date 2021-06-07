@@ -30,4 +30,4 @@ class CompanyAddByCountry(forms.ModelForm):
     def save(self, commit=True, user=None, author=None):
         results = self.get_results('fr', self.cleaned_data.get('search'))
         data = results['object_list'][self.cleaned_data.get('position')]
-        self.new_company = create_company('fr', data)
+        data, self.new_company = create_company('fr', data)

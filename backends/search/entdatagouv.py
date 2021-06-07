@@ -1,6 +1,8 @@
 from company.backends.search import SearchBackend
 from io import BytesIO
-import base64, pycurl, json, re
+import base64, pycurl, json, re, logging
+
+logger = logging.getLogger(__name__)
 
 class SearchBackend(SearchBackend):
     siren_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/siren/%s'
@@ -20,24 +22,30 @@ class SearchBackend(SearchBackend):
         c.close()
         return json.loads(buffer.getvalue()), response_code
 
+    def get_date_creation(self, company):
+        date = company.get('date_creation',  company.get('date_creation_entreprise', None))
+        return self.since(date) if date else None
+
     def get_companies(self, url, qreq):
         message, companies, total, pages = (False, [], 0, 0)
         buffer, response_code = self.call_webservice(url % qreq)
+        logger.warning(url)
         if url == self.siren_url:
             list_company = [self.companies(buffer.get('siege_social', [buffer]), response_code)]
-        if url == self.rna_url:
+        elif url == self.rna_url:
             list_company = [self.companies(buffer.get('association', [buffer]), response_code)]
         else:
             list_company = self.companies(buffer.get('etablissement', [buffer]), response_code)
         if not self.message:
             for company in list_company:
+                logger.warning(company)
                 new_company = {
                     'siret': company.get('siret', None),
                     'denomination':company.get('l1_normalisee', None),
                     'legalform': company.get('nature_juridique_entreprise', None),
                     'ape': company.get('activite_principale', None),
                     'ape_noun': None,
-                    'since': self.since(company.get('date_creation', None)),
+                    'since': self.get_date_creation(company),
                     'category': company.get('categorie_entreprise', None),
                     'slice_effective':  company.get('tranche_effectif_salarie_entreprise', None),
                     'siege': company.get('is_siege', False),
