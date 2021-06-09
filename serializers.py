@@ -39,7 +39,7 @@ class CompanySerializer(ModelSerializer):
 @maskedSerializer(except_mask=except_mask)
 class CompanyWithAddrFRSerializer(ModelSerializer):
     siege_fr = CompanyFRSerializer(many=False)
-    companyfr_address = CompanyAddressFRSerializer(many=True)
+    companyfr_address = CompanyAddressFRSerializer(many=True, read_only=True)
 
     class Meta:
         model = company_model
