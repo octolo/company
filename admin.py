@@ -173,7 +173,7 @@ class CompanyFRAdminInline(admin.StackedInline):
     max_num = 0
 
 class CompanyAddressFRAdminInline(AddressAdminInline):
-    fields = address_fields
+    fields = address_fields + ('is_siege', 'is_active')
 
 class BaloAdmin(BaseAdmin):
     fieldsets = ((None, {"classes": ("wide",), "fields": fields.balo}),)
