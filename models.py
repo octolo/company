@@ -144,7 +144,7 @@ class Company(Base, Image):
 
     @property
     def siege_fr_address(self):
-        addr = self.companyfr_address.order_by('is_siege').first()
+        addr = self.companyfr_address.order_by('-is_siege').first()
         return addr.raw_address if addr else None
 
     @property
@@ -288,7 +288,7 @@ class CompanyAddressFR(Address):
 
     class Meta(Base.Meta):
         abstract = True
-        ordering = ('is_siege',)
+        ordering = ('-is_siege',)
 
 CHOICES_ANNOUNCE = sorted(list(choices_fr.ANNOUNCE), key=lambda x: x[1])
 class Balo(Base):
