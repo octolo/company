@@ -28,6 +28,7 @@ age_limit_dg  = _("dg age limit")
 stock_min_status = _("company status minimum stock")
 stock_min_rule = _("council rules minimum stock")
 share_capital = _("share capital")
+share_kind = _("Type de membre")
 
 results = _('%s companies found')
 result = _('%s company found')

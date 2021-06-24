@@ -11,8 +11,8 @@ from mighty.applications.address.models import Address
 
 from company import translates as _, managers, get_company_model
 from company.apps import CompanyConfig as conf
-from company.choices import ICB, MARKET, YESNO, ISTYPE
-
+from company.choices import (ICB, MARKET, YESNO, ISTYPE, 
+    MEMBER_KINDS, MEMBER_SHAREHOLDER, MEMBER_ASSOCIATE, MEMBER_MEMBER, MEMBER_ADHERENT, MEMBER_ADVISE, MEMBER_DEFAULT)
 from django_ckeditor_5.fields import CKEditor5Field
 
 class Company(Base, Image):
@@ -55,6 +55,7 @@ class Company(Base, Image):
     age_limit_dg = models.BooleanField(_.age_limit_dg, default=False)    
     stock_min_rule = models.PositiveIntegerField(_.stock_min_rule, blank=True, null=True)
     stock_min_status = models.PositiveIntegerField(_.stock_min_status, blank=True, null=True)
+    share_kind = models.CharField(_.share_kind, max_length=20, choices=MEMBER_KINDS, default=MEMBER_SHAREHOLDER)
 
     siege_fr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE, related_name='siege_fr', blank=True, null=True)
 
@@ -70,19 +71,40 @@ class Company(Base, Image):
         verbose_name_plural = _.vp_company
         ordering = ['denomination']
 
-    def save(self, *args, **kwargs):
+    def set_siege_fr(self):
         try:
             self.siege_fr = self.company_fr.get(siege=True)
         except Exception:
             pass
+
+    def set_floating(self):
         try:
             self.floating = float(self.capital_division['Flottant'])
         except Exception:
             pass
+
+    def set_named_id(self):
         if hasattr(self, 'named_id'): 
             self.named_id = conf.named_tpl % {"named": slugify(self.denomination), "id": self.siren_or_rna}
-        super().save(*args, **kwargs)
-        
+
+    def set_share_kind(self):
+        fr_data = self.siege_or_first_fr
+        if fr_data and hasattr(self, "sharekind_%s" % str(fr_data.legalform_code)):
+            self.share_kind = getattr(self, "sharekind_%s" % str(fr_data.legalform_code))
+        self.share_kind = self.share_kind_default()
+
+    def share_kind_default(self, legalform=None):
+        if legalform and str(legalform) in MEMBER_DEFAULT:
+            return MEMBER_DEFAULT[str(legalform)]
+        return MEMBER_SHAREHOLDER
+
+
+    def pre_save(self):
+        self.set_siege_fr()
+        self.set_floating()
+        self.set_named_id()
+        self.set_share_kind()
+
     def __str__(self):
         return self.denomination
 
@@ -266,7 +288,7 @@ class CompanyFR(CompanyAlpha2):
     @property
     def legalform_label(self): return dict(choices_fr.LEGALFORM).get(int(self.legalform_code))
     @property
-    def slice_label(self): return dict(choices_fr.SLICE_EFFECTIVE).get(self.slice_effective) 
+    def slice_label(self): return dict(choices_fr.SLICE_EFFECTIVE).get(self.slice_effective)
 
     def save(self, *args, **kwargs):
         try:

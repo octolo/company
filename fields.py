@@ -22,7 +22,8 @@ company = (
     'age_limit_dg',
     'stock_min_rule',
     'stock_min_status',
-    'resume'
+    'resume',
+    'share_kind'
 )
 
 if conf.named_id:
