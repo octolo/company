@@ -5,6 +5,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 from mighty.functions import test
 from company.apps import CompanyConfig as conf
+from company import translates as _
 
 def search_by_siren(backend, siren):
     return backend.get_company_by_siren(siren)
@@ -64,3 +65,25 @@ def create_company(country, input_obj):
     #    address['company'] = companyC.company
     #    companyA, created = CompanyAddress.objects.get_or_create(**address)
     #return companyC.company
+
+
+def get_results(country, search):
+    message, companies, total, pages = backends_loop(country, search)
+    return {
+        'search': search,
+        'object_list': companies,
+        'message': message,
+        'total': total,
+        'pages': pages,
+        'error': False,#cf.message,
+        'results': _.results % total if int(total) > 1 else _.result % total,
+        'strpages': _.pages % pages if int(pages) > 1 else _.page % pages,
+        'toomuch': _.toomuch % total,
+    }
+
+def create_at_unique(country, search):
+    results = get_results(country, search)
+    if len(results['object_list']) == 1:
+        data, company = create_company('FR', results['object_list'][0])
+        return data
+    return {}

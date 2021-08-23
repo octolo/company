@@ -9,6 +9,9 @@ class Config:
     named_id = True
     named_tpl = "%(named)s-%(id)s"
 
+    class Test:
+        fr_siren = '820807246'
+
     class Model:
         Company = 'Company'
         CompanyFR = 'CompanyFR'
