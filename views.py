@@ -174,7 +174,6 @@ class AddByRna(APISearchByCountry):
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context, safe=True, **response_kwargs)
 
-
 class CompanyCheckSiren(CheckData):
     model = company_model
     test_field = 'company_fr__siren'
