@@ -182,12 +182,6 @@ class CompanyCheckRna(CheckData):
     model = company_model
     test_field = 'company_fr__rna'
 
-#@method_decorator(login_required, name='dispatch')
-#class DetailBySiren(DetailView):
-#    model = company_model
-#
-#    def get_object(self):
-#        self.model.objects.get(company_fr__siren=self.request)
 
 if 'rest_framework' in settings.INSTALLED_APPS:
     from rest_framework.views import APIView

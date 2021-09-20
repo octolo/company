@@ -1,6 +1,5 @@
 from django import forms
-from company import get_company_model, backends_loop, create_company
-CompanyModel = get_company_model()
+from company import  backends_loop, create_company
 
 class CompanySearchByCountryForm(forms.Form):
     search = forms.CharField(required=True)
@@ -31,3 +30,4 @@ class CompanyAddByCountry(forms.ModelForm):
         results = self.get_results('fr', self.cleaned_data.get('search'))
         data = results['object_list'][self.cleaned_data.get('position')]
         data, self.new_company = create_company('fr', data)
+

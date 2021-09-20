@@ -84,6 +84,6 @@ def get_results(country, search):
 def create_at_unique(country, search):
     results = get_results(country, search)
     if len(results['object_list']) == 1:
-        data, company = create_company('FR', results['object_list'][0])
+        data, company = create_company(country.upper(), results['object_list'][0])
         return data
     return {}
