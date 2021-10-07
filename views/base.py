@@ -1,3 +1,4 @@
+from django.conf import settings
 from mighty.functions import get_form_model
 from company.apps import CompanyConfig as conf
 from company.forms import CompanyAddByCountry
@@ -19,14 +20,12 @@ class CanContainParentObject:
     def country_fields(self):
         return fields.country + getattr(fields, self.get_country())[0:5]
 
-    @property
-    def country(self):
-        return self.kwargs.get('country', self.country)
+
 
     @property
     def country_form(self):
         return get_form_model(self.country_model, form_class=CompanyAddByCountry, form_fields=self.country_fields)
-    
+ 
     def get_country(self):
         return self.kwargs.get('country', self.country)
 
@@ -67,10 +66,10 @@ class SearchByCountryBase(CanContainParentObject):
     def country_definition(self):
         country = self.get_country()
         return {
-            'fake_country': self.get_country_model()(),
+            'fake_country': self.country_model(),
             'country': country,
             'nationality': self.get_nationality(country),
-            'country_fields': self.get_country_fields(),
+            'country_fields': self.country_fields,
         }
 
     def get_nationality(self, country):

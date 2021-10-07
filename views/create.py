@@ -18,8 +18,8 @@ class AddByCountry(CanContainParentObject, FormView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({
-            "country_model": self.get_country_model(),
-            "country_fields": self.get_country_fields(),
+            "country_model": self.country_model,
+            "country_fields": self.country_fields,
             "parent_object": self.get_parent_object(),
             "admin": self.admin,
         })

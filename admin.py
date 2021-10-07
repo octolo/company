@@ -112,7 +112,8 @@ class CompanyAdmin(BaseAdmin):
             "template_name": self.search_template or "admin/company_country_search.html",
         }
         from company.views import SearchByCountry
-        return SearchByCountry.as_view(**defaults)(request)
+        print(defaults)
+        return SearchByCountry.as_view(**defaults)(request=request)
 
     @never_cache
     def country_add_view(self, request, country, object_id=None, extra_context=None):
