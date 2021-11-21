@@ -1,6 +1,7 @@
 from django.db import transaction
 from mighty.management import ModelBaseCommand
 from company import get_company_model, get_backend_data
+from company.backends.data import BackendError
 import time
 
 class Command(ModelBaseCommand):
@@ -42,9 +43,15 @@ class Command(ModelBaseCommand):
     def model_use(self):
         return get_company_model("CompanyFR")
 
+    #def get_queryset(self, *args, **kwargs):
+    #    manager = kwargs.get('manager', self.manager)
+    #    model = self.model_use
+    #    return getattr(model, manager).all()[0:5]
+    #    #return getattr(model, manager).filter(**dict(x.split(',') for x in self.filter.split(';')) if self.filter else {})
+
     def do(self):
         if self.backend_path:
-            self.logger.info("backend path: %s" % self.backend)
+            self.logger.info("backend path: %s" % self.backend_path)
             if self.in_test:
                 CompanyModel = self.model_use
                 self.current_object = CompanyModel()
@@ -64,12 +71,17 @@ class Command(ModelBaseCommand):
             self.logger.warning("--backend param needed")
 
     def on_object(self, obj):
-        self.logger.info(self.backend)
-        self.backend = get_backend_data(self.backend_path)(obj=obj)
-        for data in self.list_to_set:
-            self.backend.set_one_data(data)
-        for data in self.list_to_set:
-            try:
-                self.logger.debug("%s: %s" % (data, getattr(self.backend.obj.company, data)))
-            except Exception:
-                self.logger.debug("%s: %s" % (data, getattr(self.backend.obj, data)))
+        try:
+            self.logger.info(self.backend)
+            self.backend = get_backend_data(self.backend_path)(obj=obj)
+            for data in self.list_to_set:
+                self.backend.set_one_data(data)
+            self.backend.save()
+            for data in self.list_to_set:
+                try:
+                    self.logger.debug("%s: %s" % (data, getattr(self.backend.obj.company, data)))
+                except Exception:
+                    self.logger.debug("%s: %s" % (data, getattr(self.backend.obj, data)))
+            #time.sleep(5)
+        except BackendError as e:
+            self.logger.warning(str(e))

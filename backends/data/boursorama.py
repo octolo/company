@@ -1,7 +1,7 @@
 from company.backends.data import CompanyDataBackend
 from mighty.functions import similar_text
 from lxml import html
-import requests, re, json
+import requests, re, json, time
 
 class CompanyDataBackend(CompanyDataBackend):
     icb = {
@@ -147,16 +147,33 @@ class CompanyDataBackend(CompanyDataBackend):
         choices = {m[1]: m[0] for m in self.choices.MARKET}
         return choices
 
+    def prepare_boursorama_lxml(self):
+        url_search = self.urls["search"]+self.obj.isin
+        self.html_search = self.get_page(url_search)
+        if self.html_search.url != url_search:
+            redirect = re.search("/cours/.*/", self.html_search.url).group(0)
+            self.html_home = self.get_page(redirect.replace("/cours/", self.urls["home"]))
+            self.lxml_home = html.fromstring(self.html_home.content)
+            self.html_profil = self.get_page(redirect.replace("/cours/", self.urls["profil"]))
+            self.lxml_profil = html.fromstring(self.html_profil.content)
+            self.html_keysnumber = self.get_page(redirect.replace("/cours/", self.urls["keysnumber"]))
+            self.lxml_keysnumber = html.fromstring(self.html_keysnumber.content)
+        else:
+            self.backend_error("Can't init for %s" % self.obj)
+
+    def try_to_prepare(self):
+        try:
+            self.prepare_boursorama_lxml()
+        except requests.ConnectionError:
+            self.logger.warning("Connection error waiting 60seconds")
+            time.sleep(60)
+            self.try_to_prepare()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.html_search = self.get_page(self.urls["search"]+self.obj.isin)
-        redirect = re.search("/cours/.*/", self.html_search.url).group(0)
-        self.html_home = self.get_page(redirect.replace("/cours/", self.urls["home"]))
-        self.lxml_home = html.fromstring(self.html_home.content)
-        self.html_profil = self.get_page(redirect.replace("/cours/", self.urls["profil"]))
-        self.lxml_profil = html.fromstring(self.html_profil.content)
-        self.html_keysnumber = self.get_page(redirect.replace("/cours/", self.urls["keysnumber"]))
-        self.lxml_keysnumber = html.fromstring(self.html_keysnumber.content)
+        self.try_to_prepare()
+
+
 
     def get_page(self, url):
         return requests.get(url)
