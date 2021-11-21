@@ -18,6 +18,9 @@ def get_backend(backend, search):
         return search_by_siren(import_string(backend)(), search)
     return search_by_fulltext(import_string(backend)(), search)
 
+def get_backend_data(backend):
+    return import_string(backend+".CompanyDataBackend")
+
 def merge_company(backends):
     base = {}
     for pos, datas in enumerate(backends):
