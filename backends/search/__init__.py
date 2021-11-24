@@ -1,4 +1,5 @@
 from company.choices import fr as choices
+from mighty.errors import BackendError
 import datetime, logging
 logger = logging.getLogger(__name__)
 
@@ -13,6 +14,9 @@ class SearchBackend:
 
     def in_error(self, message):
         self.message = message
+
+    def backend_error(self, msg):
+        raise BackendError(msg)
 
     def companies(self, companies, response_code):
         if str(response_code)[0] == '4': self.in_error(companies[0]['message'])

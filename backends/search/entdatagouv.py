@@ -13,14 +13,19 @@ class SearchBackend(SearchBackend):
     raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
     def call_webservice(self, url):
-        buffer = BytesIO() 
-        c = pycurl.Curl() 
-        c.setopt(c.URL, url) 
-        c.setopt(c.WRITEDATA, buffer) 
-        c.perform() 
-        response_code = c.getinfo(c.RESPONSE_CODE) 
-        c.close()
-        return json.loads(buffer.getvalue()), response_code
+        try:
+            buffer = BytesIO() 
+            c = pycurl.Curl() 
+            c.setopt(c.URL, url) 
+            c.setopt(c.WRITEDATA, buffer) 
+            c.setopt(c.CONNECTTIMEOUT, 3)
+            c.setopt(c.TIMEOUT, 3)
+            c.perform() 
+            response_code = c.getinfo(c.RESPONSE_CODE) 
+            c.close()
+            return json.loads(buffer.getvalue()), response_code
+        except Exception:
+            self.backend_error("Error backend")
 
     def get_date_creation(self, company):
         date = company.get('date_creation',  company.get('date_creation_entreprise', None))

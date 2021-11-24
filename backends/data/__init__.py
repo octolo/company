@@ -1,12 +1,10 @@
 from mighty.functions import similar_text
 from mighty.applications.logger import EnableLogger
+from mighty.errors import BackendError
 
 from company import choices
 from io import BytesIO
 import re
-
-class BackendError(Exception):
-    pass
 
 class CompanyDataBackend(EnableLogger):
     user_agent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0'

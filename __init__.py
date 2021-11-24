@@ -4,6 +4,7 @@ from django.apps import apps as django_apps
 from django.conf import settings
 from django.utils.module_loading import import_string
 from mighty.functions import test
+from mighty.errors import BackendError
 from company.apps import CompanyConfig as conf
 from company import translates as _
 
@@ -39,9 +40,12 @@ def backends_loop(country, search):
     results = {}
     message, results, total, pages = ('Nothing', [], 0, 0)
     for backend in settings.COMPANY_BACKENDS[country]:
-        message, results, total, pages = get_backend('%s.SearchBackend' % backend, search)
-        if total:
-            break
+        try:
+            message, results, total, pages = get_backend('%s.SearchBackend' % backend, search)
+            if total:
+                break
+        except BackendError:
+            pass
     return message, results, total, pages
 
 def get_company_model(address_or_country='Company'):
