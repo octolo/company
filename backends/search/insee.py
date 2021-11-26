@@ -62,7 +62,6 @@ class SearchBackend(SearchBackend):
             message = False if buffer['header']['message'] == "OK" else buffer['header']['message']
             total = buffer['header'].get('total', 0)
             pages = round(total/number) if total else 0
-            print(buffer)
             if str(response_code)[0] in ["2", "3"]:
                 for company in buffer.get('etablissements', [buffer['header']]):
                     new_company = {
