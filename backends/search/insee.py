@@ -64,6 +64,7 @@ class SearchBackend(SearchBackend):
             pages = round(total/number) if total else 0
             if str(response_code)[0] in ["2", "3"]:
                 for company in buffer.get('etablissements', [buffer['header']]):
+                    logger.debug(company)
                     new_company = {
                         'siret': company.get('siret'),
                         'denomination': company['uniteLegale'].get('denominationUniteLegale', company['uniteLegale'].get('nomUniteLegale')),
