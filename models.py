@@ -167,7 +167,7 @@ class Company(Base, Image):
     @property
     def siege_fr_address(self):
         addr = self.companyfr_address.order_by('-is_siege').first()
-        return addr.raw_address if addr else None
+        return addr if addr else None
 
     @property
     def capital_text(self):
