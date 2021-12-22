@@ -312,6 +312,9 @@ class CompanyAddressFR(Address):
         abstract = True
         ordering = ('-is_siege',)
 
+    def __str__(self):
+        return self.raw
+
 CHOICES_ANNOUNCE = sorted(list(choices_fr.ANNOUNCE), key=lambda x: x[1])
 class Balo(Base):
     companyfr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE)
