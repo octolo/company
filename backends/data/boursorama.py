@@ -173,8 +173,6 @@ class CompanyDataBackend(CompanyDataBackend):
         super().__init__(*args, **kwargs)
         self.try_to_prepare()
 
-
-
     def get_page(self, url):
         return requests.get(url)
     def scrap_data(self, doc, path, raw=False):

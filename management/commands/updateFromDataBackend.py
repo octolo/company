@@ -41,13 +41,9 @@ class Command(ModelBaseCommand):
 
     @property
     def model_use(self):
-        return get_company_model("CompanyFR")
-
-    #def get_queryset(self, *args, **kwargs):
-    #    manager = kwargs.get('manager', self.manager)
-    #    model = self.model_use
-    #    return getattr(model, manager).all()[0:5]
-    #    #return getattr(model, manager).filter(**dict(x.split(',') for x in self.filter.split(';')) if self.filter else {})
+        if self.siret:
+            return get_company_model("CompanyFR").get(siret=self.siret)
+        return get_company_model("CompanyFR").get(isin=self.isin)
 
     def do(self):
         if self.backend_path:
@@ -58,7 +54,6 @@ class Command(ModelBaseCommand):
                 self.current_object.company = get_company_model()()
                 self.current_object.denomination = "Test"
                 self.current_object.isin = self.isin
-                #self.current_object.isin = self.isin
                 self.on_object(self.current_object)
             elif self.siret or self.isin:
                 self.current_object = self.model_use
