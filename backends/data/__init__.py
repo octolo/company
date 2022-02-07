@@ -36,6 +36,11 @@ class CompanyDataBackend(EnableLogger):
             self.logger.info("set value: %s" % value)
             getattr(self, "set_data_%s" % data)(value) if hasattr(self, "set_data_%s" % data) else setattr(self.obj.company, data, value)
 
+    def get_one_data(self, data):
+        value = getattr(self, "data_%s" % data)
+        self.logger.info("value found: %s" % value)
+        return value if value else getattr(self.obj.company, data, value)
+
     def save(self):
         if self.value_update > 0:
             self.obj.save()

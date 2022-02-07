@@ -59,3 +59,6 @@ fr_governance = _('governance')
 fr_evaluation = _('evaluation')
 fr_quality_independent = _('quality independent')
 fr_secretary = _('secretary')
+
+# Errors
+fr_siret_already_used = "Siret already used"

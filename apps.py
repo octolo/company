@@ -9,6 +9,23 @@ class Config:
     named_id = True
     named_tpl = "%(named)s-%(id)s"
 
+    class FR:
+        list_to_set = [
+            "site",
+            "ticker",
+            "market",
+            "icb",
+            "capital_division",
+            "floating",
+            "capitalisation",
+            "effective",
+            "current",
+            "securities",
+            "dividend",
+            "net_profit",
+            "turnover",
+        ]
+
     class Test:
         fr_siren = '820807246'
 

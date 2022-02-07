@@ -1,6 +1,7 @@
 from django.db import transaction
 from mighty.management import ModelBaseCommand
 from company import get_company_model, get_backend_data
+from company.apps import CompanyConfig
 from company.backends.data import BackendError
 import time
 
@@ -9,21 +10,7 @@ class Command(ModelBaseCommand):
     backend_path = None
     manager = "objects"
     backend = None
-    list_to_set = [
-        "site",
-        "ticker",
-        "market",
-        "icb",
-        "capital_division",
-        "floating",
-        "capitalisation",
-        "effective",
-        "current",
-        "securities",
-        "dividend",
-        "net_profit",
-        "turnover",
-    ]
+    list_to_set = CompanyConfig.FR.list_to_set
 
     def add_arguments(self, parser):
         super().add_arguments(parser)

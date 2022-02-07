@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 from django.utils.html import format_html
 from django.template.defaultfilters import slugify
+from django.core.exceptions import ValidationError
 
 from mighty.models import News
 from mighty.models.base import Base
@@ -213,7 +214,7 @@ class Company(Base, Image):
 class CompanyAlpha2(Base):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, blank=True, null=True)
     denomination = models.CharField(max_length=255)
-    since = models.DateField(_.since, null=True)
+    since = models.DateField(_.since, blank=True, null=True)
 
     class Meta(Base.Meta):
         abstract = True
@@ -246,12 +247,12 @@ class CompanyFR(CompanyAlpha2):
     search_fields = ['denomination', 'siret', 'isin', 'ticker']
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='company_fr', blank=True, null=True)
     siren = models.CharField(max_length=9, blank=True, null=True)
-    siret = models.CharField(_.fr_siret, max_length=14, unique=True)
+    siret = models.CharField(_.fr_siret, max_length=14, blank=True, null=True)
     rna = models.CharField(max_length=10, blank=True, null=True, unique=True)
-    ape = models.CharField(_.fr_ape, max_length=5)
+    ape = models.CharField(_.fr_ape, max_length=5, blank=True, null=True)
     ape_noun = models.CharField(_.fr_ape_noun, max_length=10, blank=True, null=True)
     category = models.CharField(_.fr_category, max_length=15, blank=True, null=True)
-    legalform = models.CharField(_.fr_legalform, max_length=4)
+    legalform = models.CharField(_.fr_legalform, max_length=4, blank=True, null=True)
     slice_effective = models.CharField(_.fr_slice_effective, choices=choices_fr.SLICE_EFFECTIVE, blank=True, null=True, max_length=2)
     effective = models.BigIntegerField(_.fr_effective, blank=True, null=True)
     isin = models.CharField(_.fr_isin, max_length=25, blank=True, null=True)
@@ -276,7 +277,7 @@ class CompanyFR(CompanyAlpha2):
     @property
     def date_rcs(self): return self.since
     @property
-    def siren_from_siret(self): return self.siret[:9]
+    def siren_from_siret(self): return self.siret[:9] if self.siret else None
     @property
     def nic(self): return self.siret[9:]
     @property
@@ -284,13 +285,23 @@ class CompanyFR(CompanyAlpha2):
     @property
     def ape_label(self): return dict(choices_fr.APE).get(self.ape)
     @property
-    def legalform_code(self): return self.legalform if self.legalform else _.legalform_null
-    @property
-    def legalform_label(self): return dict(choices_fr.LEGALFORM).get(int(self.legalform_code))
-    @property
     def slice_label(self): return dict(choices_fr.SLICE_EFFECTIVE).get(self.slice_effective)
+    @property
+    def legalform_code(self): return self.legalform if self.legalform else _.fr_legalform_null
+    @property
+    def legalform_label(self): 
+        return dict(choices_fr.LEGALFORM).get(int(self.legalform_code)) if self.legalform else _.fr_legalform_null
+
+    def check_siret(self):
+        if self.siret and type(self).objects.filter(siret=self.siret).exists():
+            raise ValidationError(_.fr_siret_already_used, "siret_already_used")
+    
+    def clean(self):
+        self.check_siret()
+        super().clean()
 
     def save(self, *args, **kwargs):
+        self.check_siret()
         try:
             int(self.slice_effective)
         except Exception:

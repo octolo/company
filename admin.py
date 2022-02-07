@@ -6,11 +6,14 @@ from django.contrib.admin.utils import unquote
 from django.urls import reverse, resolve
 from django.http import Http404, HttpResponseRedirect
 from django.template.response import TemplateResponse
+from django.shortcuts import redirect
 
 from mighty.admin.models import BaseAdmin
 from mighty.applications.address import fields as address_fields
 from mighty.applications.address.admin import AddressAdminInline
 
+from company import get_company_model, get_backend_data
+from company.apps import CompanyConfig
 from company import models, fields, translates as _
 from company.apps import CompanyConfig as conf
 
@@ -57,11 +60,21 @@ class CompanyAdmin(BaseAdmin):
             self.readonly_fields += ('named_id',)
             self.add_field('Informations', ('named_id',))
 
+    def is_from_update(self, request, obj, response):
+        backend = request.GET.get("update_from")
+        country = request.GET.get("country")
+        country_id = request.GET.get("country_id")
+        if backend and country and country_id:
+            from django.shortcuts import redirect
+            name = "admin:%s_%s_update_from" % (self.model._meta.app_label, self.model._meta.model_name)
+            return redirect(name, object_id=obj.id, country=country, country_id=country_id, backend=backend)
+        return response
+
     def render_change_form(self, request, context, add=False, change=False, form_url="", obj=None):
         response = super().render_change_form(request, context, add, change, form_url, obj)
         if hasattr(self.model, "changelog_model"):
             response.template_name = self.change_form_logs_template
-        return response
+        return self.is_from_update(request, obj, response)
 
     def country_choice_view(self, request, object_id=None, extra_context=None):
         current_url = resolve(request.path_info).url_name
@@ -115,6 +128,55 @@ class CompanyAdmin(BaseAdmin):
         return SearchByCountry.as_view(**defaults)(request=request)
 
     @never_cache
+    def update_from_view(self, request, object_id, backend, country, country_id, extra_context=None):
+        opts = self.model._meta
+        to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
+        obj = self.get_object(request, unquote(object_id), to_field) if object_id else None
+        backend = backend
+
+        from company import get_company_model, get_backend_data
+        from company.apps import CompanyConfig
+        cmodel = get_company_model('Company%s' % country.upper())
+        backend_object = cmodel.objects.get(id=country_id)
+        backend_path = "company.backends.data.%s" % backend
+        backend_script = get_backend_data(backend_path)(obj=backend_object)
+        ndata = {}
+        for data in CompanyConfig.FR.list_to_set:
+            ndata[data] = backend_script.get_one_data(data)
+
+        context = {
+            **self.admin_site.each_context(request),
+            'object_name': str(opts.verbose_name),
+            'object': obj,
+            'backend': backend,
+            'opts': opts,
+            'app_label': opts.app_label,
+            'media': self.media,
+            'title': backend,
+            'ndata': ndata,
+        }
+        request.current_app = self.admin_site.name
+        return TemplateResponse(request, 'admin/company_update_from.html', context)
+
+    @never_cache
+    def valid_update_from_view(self, request, object_id, backend, country, country_id, extra_context=None):
+        opts = self.model._meta
+        to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
+        obj = self.get_object(request, unquote(object_id), to_field) if object_id else None
+        backend = backend
+        cmodel = get_company_model('Company%s' % country.upper())
+        backend_object = cmodel.objects.get(id=country_id)
+        backend_path = "company.backends.data.%s" % backend
+        backend_script = get_backend_data(backend_path)(obj=backend_object)
+        ndata = {}
+        for data in CompanyConfig.FR.list_to_set:
+            backend_script.set_one_data(data)
+        backend_script.save()
+        name = "admin:%s_%s_change" % (self.model._meta.app_label, self.model._meta.model_name)
+        return redirect(name, object_id=obj.id)
+
+
+    @never_cache
     def country_add_view(self, request, country, object_id=None, extra_context=None):
         current_url = resolve(request.path_info).url_name
         opts = self.model._meta
@@ -146,6 +208,7 @@ class CompanyAdmin(BaseAdmin):
         from django.urls import path, include
         urls = super().get_urls()
         info = self.model._meta.app_label, self.model._meta.model_name
+        print(info)
         my_urls = [
             path("choices/", include([
                 path("", self.country_choice_view, name="%s_%s_country_choice" % info),
@@ -160,7 +223,12 @@ class CompanyAdmin(BaseAdmin):
                     path("", self.country_search_view, name="%s_%s_country_search_extend" % info),
                     path("add/", self.country_add_view, name="%s_%s_country_add_extend" % info),
                 ]))
-            ]))
+            ])),
+            path('<path:object_id>/update/<str:backend>/<str:country>/', include([
+                path("<int:country_id>/", self.wrap(self.update_from_view), name='%s_%s_update_from' % info),
+                path("<int:country_id>/valid/", self.wrap(self.valid_update_from_view), name='%s_%s_valid_from' % info),
+                
+            ])),
         ]
         return my_urls + urls
 
@@ -170,7 +238,7 @@ class CompanyAdmin(BaseAdmin):
 class CompanyFRAdminInline(admin.StackedInline):
     fields = fields.country + fields.fr
     extra = 0
-    max_num = 0
+    max_num = 1
 
 class CompanyAddressFRAdminInline(AddressAdminInline):
     fields = address_fields + ('is_siege', 'is_active')

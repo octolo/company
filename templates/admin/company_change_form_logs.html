@@ -14,8 +14,14 @@
 </div>
 {% endblock %}
 
+
 {% block object-tools-items %}
 {% url opts|admin_urlname:'country_choice_extend' original.pk as search_url %}
 <li><a href="{{ search_url }}">Search</a></li>
 {{ block.super }}
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+{% include "admin/company_actions_current.html" %}
 {% endblock %}
