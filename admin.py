@@ -208,7 +208,6 @@ class CompanyAdmin(BaseAdmin):
         from django.urls import path, include
         urls = super().get_urls()
         info = self.model._meta.app_label, self.model._meta.model_name
-        print(info)
         my_urls = [
             path("choices/", include([
                 path("", self.country_choice_view, name="%s_%s_country_choice" % info),
