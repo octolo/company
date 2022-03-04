@@ -19,7 +19,17 @@ from company.apps import CompanyConfig as conf
 
 class CompanyAdmin(BaseAdmin):
     fieldsets = (
-        (None, {"classes": ("wide",), "fields": ('denomination', 'is_type', 'since', 'site', 'effective', 'secretary', 'resume', 'share_kind')}),
+        (None, {"classes": ("wide",), "fields": (
+            'denomination',
+            'is_type',
+            'since',
+            'site',
+            'effective',
+            'secretary',
+            'resume',
+            'stackholder_kind',
+            'stock_kind',
+        )}),
         ('comex & purpose', {"classes": ("wide",), "fields": ('purpose', 'instance_comex', 'matrix_skills')}),
         ('market', {"classes": ("wide",), "fields": (
             'capital_socnomtotal',

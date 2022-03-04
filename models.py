@@ -12,8 +12,7 @@ from mighty.applications.address.models import Address
 
 from company import translates as _, managers, get_company_model
 from company.apps import CompanyConfig as conf
-from company.choices import (ICB, MARKET, YESNO, ISTYPE, 
-    MEMBER_KINDS, MEMBER_SHAREHOLDER, MEMBER_ASSOCIATE, MEMBER_MEMBER, MEMBER_ADHERENT, MEMBER_ADVISE, MEMBER_DEFAULT)
+from company import choices as _c
 from django_ckeditor_5.fields import CKEditor5Field
 
 class Company(Base, Image):
@@ -25,9 +24,9 @@ class Company(Base, Image):
     secretary = models.CharField(_.secretary, max_length=255, blank=True, null=True)
     resume = CKEditor5Field(blank=True, null=True)
 
-    is_type = models.CharField(max_length=15, choices=ISTYPE, default="COMPANY")
+    is_type = models.CharField(max_length=15, choices=_c.ISTYPE, default="COMPANY")
 
-    purpose = models.CharField(_.purpose, max_length=3, choices=YESNO, blank=True, null=True)
+    purpose = models.CharField(_.purpose, max_length=3, choices=_c.YESNO, blank=True, null=True)
     instance_comex = models.BooleanField(_.instance_comex, default=False)
     matrix_skills = models.BooleanField(_.matrix_skills, default=False)
     
@@ -44,8 +43,8 @@ class Company(Base, Image):
     current = models.FloatField(blank=True, null=True)
     share_capital = models.FloatField(_.share_capital, blank=True, null=True)
     floating = models.FloatField(blank=True, null=True)
-    icb = models.CharField(_.icb, max_length=40, choices=ICB, blank=True, null=True, db_index=True)
-    market = models.CharField(_.market, max_length=40, choices=MARKET, blank=True, null=True, db_index=True)
+    icb = models.CharField(_.icb, max_length=40, choices=_c.ICB, blank=True, null=True, db_index=True)
+    market = models.CharField(_.market, max_length=40, choices=_c.MARKET, blank=True, null=True, db_index=True)
     dowjones = models.BooleanField(default=False)
     nasdaq = models.BooleanField(default=False)
     gaia = models.BooleanField(default=False)
@@ -56,8 +55,9 @@ class Company(Base, Image):
     age_limit_dg = models.BooleanField(_.age_limit_dg, default=False)    
     stock_min_rule = models.PositiveIntegerField(_.stock_min_rule, blank=True, null=True)
     stock_min_status = models.PositiveIntegerField(_.stock_min_status, blank=True, null=True)
-    share_kind = models.CharField(_.share_kind, max_length=20, choices=MEMBER_KINDS, default=MEMBER_SHAREHOLDER)
-
+    stackholder_kind = models.CharField(max_length=20, choices=_c.STACKHOLDER_KINDS, default=_c.STACKHOLDER_SHAREHOLDER, blank=True, null=True)
+    stock_kind = models.CharField(max_length=20, choices=_c.STOCK_KINDS, default=_c.STOCK_SHAREHOLDER, blank=True, null=True)
+    
     siege_fr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE, related_name='siege_fr', blank=True, null=True)
 
     if conf.named_id:
@@ -90,21 +90,31 @@ class Company(Base, Image):
 
     def set_share_kind(self):
         fr_data = self.siege_or_first_fr
-        if fr_data and hasattr(self, "sharekind_%s" % str(fr_data.legalform_code)):
-            self.share_kind = getattr(self, "sharekind_%s" % str(fr_data.legalform_code))
-        self.share_kind = self.share_kind_default()
+        if fr_data:
+            self.stackholder_kind = self.stackholder_kind_default(fr_data.legalform)
 
-    def share_kind_default(self, legalform=None):
-        if legalform and str(legalform) in MEMBER_DEFAULT:
-            return MEMBER_DEFAULT[str(legalform)]
-        return MEMBER_SHAREHOLDER
+    def stackholder_kind_default(self, legalform=None):
+        if legalform and str(legalform) in _c.STACKHOLDER_DEFAULT:
+            return _c.STACKHOLDER_DEFAULT[str(legalform)]
+        return _c.STACKHOLDER_SHAREHOLDER
 
+    def set_stock_kind(self):
+        fr_data = self.siege_or_first_fr
+        if fr_data:
+            self.stock_kind = self.stock_kind_default(fr_data.legalform)
+        print(self.stock_kind)
+
+    def stock_kind_default(self, legalform=None):
+        if legalform and str(legalform) in _c.STOCK_DEFAULT:
+            return _c.STOCK_DEFAULT[str(legalform)]
+        return _c.STOCK_SHAREHOLDER
 
     def pre_save(self):
         self.set_siege_fr()
         self.set_floating()
         self.set_named_id()
         self.set_share_kind()
+        self.set_stock_kind()
 
     def __str__(self):
         return self.denomination
@@ -261,7 +271,7 @@ class CompanyFR(CompanyAlpha2):
     index = models.CharField(_.fr_index, choices=choices_fr.INDEX, max_length=255, blank=True, null=True, db_index=True)
     governance = models.CharField(_.fr_governance, max_length=255, choices=CHOICES_GOVERNANCE, blank=True, null=True, db_index=True)
     evaluation = models.CharField(_.fr_evaluation, max_length=255, choices=CHOICES_EVALUATION, blank=True, null=True)
-    quality_independent = models.CharField(_.fr_quality_independent, max_length=3, choices=YESNO, blank=True, null=True)
+    quality_independent = models.CharField(_.fr_quality_independent, max_length=3, choices=_c.YESNO, blank=True, null=True)
     secretary = models.CharField(_.fr_secretary, max_length=255, blank=True, null=True)
     siege = models.BooleanField(default=False)
     resume = CKEditor5Field(blank=True, null=True)
@@ -293,7 +303,10 @@ class CompanyFR(CompanyAlpha2):
         return dict(choices_fr.LEGALFORM).get(int(self.legalform_code)) if self.legalform else _.fr_legalform_null
 
     def check_siret(self):
-        if self.siret and type(self).objects.filter(siret=self.siret).exists():
+        qs = type(self).objects.filter(siret=self.siret)
+        if self.pk: 
+            qs = qs.exclude(id=self.id)
+        if self.siret and qs.exists():
             raise ValidationError(_.fr_siret_already_used, "siret_already_used")
     
     def clean(self):
@@ -312,6 +325,7 @@ class CompanyFR(CompanyAlpha2):
             self.company.is_type = "ASSOCIATION"
             self.company.save()
         super().save()
+
       
 class CompanyAddressFR(Address):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='companyfr_address')

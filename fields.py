@@ -23,7 +23,8 @@ company = (
     'stock_min_rule',
     'stock_min_status',
     'resume',
-    'share_kind'
+    'stackholder_kind',
+    'stock_kind',
 )
 
 if conf.named_id:
@@ -46,6 +47,10 @@ serializer = (
     'marketplace',
     'rules',
     'siege_fr',
+    'stackholder_kind',
+    'get_stackholder_kind_display',
+    'stock_kind',
+    'get_stock_kind_display',
 )
 
 
