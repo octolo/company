@@ -292,3 +292,30 @@ STOCK_DEFAULT = {
     "9230": STOCK_VOICE,
     "9260": STOCK_VOICE,
 }
+
+
+COMMON = "COMMON"
+PREFERRED = "PREFERRED"
+BSPCE = "BSPCE"
+BSA = "BSA"
+BSAAR = "BSAAR"
+AGA = "AGA"
+
+COMMON_TR = _("Ordinaire")
+PREFERRED_TR = _("Préférences")
+BSPCE_TR = _("Bon(s) de souscription de part(s) de créateur d'entreprise")
+BSA_TR = _("Bon(s) de souscription d'action(s)")
+BSAR_TR = _("Bon(s) de souscription d'action(s) remboursable(s)")
+BSAAR_TR = _("Bon(s) de souscription et/ou d'acquisition d'action(s) remboursable(s)")
+AGA_TR = _("Attribution gratuite d’action(s)")
+
+STOCK_TYPE_DEFAULT = (
+    (COMMON, COMMON_TR),
+    (PREFERRED, PREFERRED_TR),
+    (BSPCE, BSPCE_TR),
+    (BSA, BSA_TR),
+    (BSAAR, BSAAR_TR),
+    (AGA, AGA_TR),
+)
+
+STOCK_TYPE_MEMBER = ((COMMON, COMMON_TR),)

@@ -88,10 +88,14 @@ class Company(Base, Image):
         if hasattr(self, 'named_id'): 
             self.named_id = conf.named_tpl % {"named": slugify(self.denomination), "id": self.siren_or_rna}
 
-    def set_share_kind(self):
+    def set_stackholder_kind(self):
         fr_data = self.siege_or_first_fr
         if fr_data:
             self.stackholder_kind = self.stackholder_kind_default(fr_data.legalform)
+
+    @property
+    def stackholder_name(self):
+        return self.get_stackholder_kind_display()
 
     def stackholder_kind_default(self, legalform=None):
         if legalform and str(legalform) in _c.STACKHOLDER_DEFAULT:
@@ -102,18 +106,26 @@ class Company(Base, Image):
         fr_data = self.siege_or_first_fr
         if fr_data:
             self.stock_kind = self.stock_kind_default(fr_data.legalform)
-        print(self.stock_kind)
+
+    @property
+    def stock_name(self):
+        return self.get_stock_kind_display()
 
     def stock_kind_default(self, legalform=None):
         if legalform and str(legalform) in _c.STOCK_DEFAULT:
             return _c.STOCK_DEFAULT[str(legalform)]
         return _c.STOCK_SHAREHOLDER
 
+    @property
+    def stock_type_default(self):
+        st = "STOCK_TYPE_%s" % self.stackholder_kind
+        return getattr(_c, st) if hasattr(_c, st) else _c.STOCK_TYPE_DEFAULT
+
     def pre_save(self):
         self.set_siege_fr()
         self.set_floating()
         self.set_named_id()
-        self.set_share_kind()
+        self.set_stackholder_kind()
         self.set_stock_kind()
 
     def __str__(self):
@@ -301,6 +313,14 @@ class CompanyFR(CompanyAlpha2):
     @property
     def legalform_label(self): 
         return dict(choices_fr.LEGALFORM).get(int(self.legalform_code)) if self.legalform else _.fr_legalform_null
+        
+    stocktype = [
+        "Ordinaire,COMMON,FFCA00FF",
+        "Préférence,PREFERRED,#218FE4",
+        "BSPCE,BSPCE,#8D80B7",
+        "BSA,BSA,#C3D66A",
+        "AGA,AGA,#F47A89"
+    ]
 
     def check_siret(self):
         qs = type(self).objects.filter(siret=self.siret)

@@ -2045,3 +2045,4 @@ ANNOUNCE = (
 ("6", _('AVIS DIVERS')),
 ("7", _('BULLETIN OFFICIEL DE L’AMF')),
 )
+
