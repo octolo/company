@@ -5,10 +5,10 @@ import base64, pycurl, json, re, logging
 logger = logging.getLogger(__name__)
 
 class SearchBackend(SearchBackend):
-    siren_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/siren/%s'
-    fulltext_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/full_text/%s'
-    rna_url = 'https://entreprise.data.gouv.fr/api/rna/v1/id/%s'
-    rna_fulltext_url = 'https://entreprise.data.gouv.fr/api/rna/v1/full_text/%s'
+    siren_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/siren/%s?is_siege=yes'
+    fulltext_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/full_text/%s?is_siege=yes'
+    rna_url = 'https://entreprise.data.gouv.fr/api/rna/v1/id/%s?is_siege=yes'
+    rna_fulltext_url = 'https://entreprise.data.gouv.fr/api/rna/v1/full_text/%s?is_siege=yes'
     since_format = '%Y%m%d'
     raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
@@ -43,7 +43,6 @@ class SearchBackend(SearchBackend):
             list_company = self.companies(buffer.get('etablissement', [buffer]), response_code)
         if not self.message:
             for company in list_company:
-                logger.warning(company)
                 new_company = {
                     'siret': company.get('siret', None),
                     'denomination':company.get('l1_normalisee', None),
@@ -53,7 +52,7 @@ class SearchBackend(SearchBackend):
                     'since': self.get_date_creation(company),
                     'category': company.get('categorie_entreprise', None),
                     'slice_effective':  company.get('tranche_effectif_salarie_entreprise', None),
-                    'siege': company.get('is_siege', False),
+                    'siege': int(company.get('is_siege', False)),
                     'rna': company.get('id_association', None),
                     'address': {
                         'address': ' '.join(filter(None, [
@@ -77,7 +76,8 @@ class SearchBackend(SearchBackend):
                 new_company['ape_str'] = self.get_ape_str(new_company['ape'])
                 new_company['legalform_str'] = self.get_legalform_str(new_company['legalform'])
                 new_company['slice_str'] = self.get_slice_str(new_company['slice_effective'])
-                companies.append(new_company)
+                if new_company["siege"]:
+                    companies.append(new_company)
             total = buffer.get('total_results', 0)
             pages = buffer.get('total_pages', 0)
         return message, companies, total, pages

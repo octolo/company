@@ -72,6 +72,11 @@ class Company(Base, Image):
         verbose_name_plural = _.vp_company
         ordering = ['denomination']
 
+    @property
+    def slack_notify(self):
+        from company.notify.slack import SlackCompany
+        return SlackCompany(self)
+
     def set_siege_fr(self):
         try:
             self.siege_fr = self.company_fr.get(siege=True)
@@ -89,9 +94,10 @@ class Company(Base, Image):
             self.named_id = conf.named_tpl % {"named": slugify(self.denomination), "id": self.siren_or_rna}
 
     def set_stackholder_kind(self):
-        fr_data = self.siege_or_first_fr
-        if fr_data:
-            self.stackholder_kind = self.stackholder_kind_default(fr_data.legalform)
+        if not self.stackholder_kind:
+            fr_data = self.siege_or_first_fr
+            if fr_data:
+                self.stackholder_kind = self.stackholder_kind_default(fr_data.legalform)
 
     @property
     def stackholder_name(self):
@@ -103,9 +109,10 @@ class Company(Base, Image):
         return _c.STACKHOLDER_SHAREHOLDER
 
     def set_stock_kind(self):
-        fr_data = self.siege_or_first_fr
-        if fr_data:
-            self.stock_kind = self.stock_kind_default(fr_data.legalform)
+        if not self.set_stock_kind:
+            fr_data = self.siege_or_first_fr
+            if fr_data:
+                self.stock_kind = self.stock_kind_default(fr_data.legalform)
 
     @property
     def stock_name(self):
