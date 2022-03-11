@@ -195,7 +195,7 @@ STOCK_VOICE = "VOICE"
 STOCK_SHARES = "SHARES"
 STOCK_TITLE = "TITLE"
 STOCK_KINDS = (
-    (STOCK_SHAREHOLDER, _("Action(s)")),
+    (STOCK_SHAREHOLDER, _("Titre(s)")),
     (STOCK_VOICE, _("Voix")),
     (STOCK_SHARES, _("Part(s) sociale(s)")),
     (STOCK_TITLE, _("Titre(s)")),
