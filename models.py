@@ -31,7 +31,8 @@ class Company(Base, Image):
     matrix_skills = models.BooleanField(_.matrix_skills, default=False)
     
     capital_socnomtotal = models.DecimalField(_.capital_socnomtotal, blank=True, null=True, decimal_places=2, max_digits=15)
-    capitalisation = models.FloatField(_.capitalisation, default=0)
+    capitalisation = models.DecimalField(_.capitalisation, decimal_places=2, max_digits=15, default=0.0)
+    nominal = models.DecimalField(_.nominal, decimal_places=2, max_digits=15, default=0.0)
     turnover = models.BigIntegerField(_.turnover, blank=True, null=True)
     net_profit = models.BigIntegerField(_.net_profit, blank=True, null=True, help_text=_.net_profit_help)
     dividend = models.FloatField(_.total_dividend, blank=True, null=True)

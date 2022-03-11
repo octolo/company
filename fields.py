@@ -38,6 +38,8 @@ serializer = (
     'denomination',
     'image_url',
     'capital_socnomtotal',
+    'capitalisation',
+    'nominal',
     'since',
     'site',
     'effective',
