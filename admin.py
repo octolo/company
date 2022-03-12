@@ -109,7 +109,7 @@ class CompanyAdmin(BaseAdmin):
         from company.views import ChoiceCountry
         return ChoiceCountry.as_view(**defaults)(request)
 
-    @never_cache
+    #@never_cache
     def country_search_view(self, request, country, object_id=None, extra_context=None):
         current_url = resolve(request.path_info).url_name
         opts = self.model._meta
@@ -137,7 +137,7 @@ class CompanyAdmin(BaseAdmin):
         from company.views import SearchByCountry
         return SearchByCountry.as_view(**defaults)(request=request)
 
-    @never_cache
+    #@never_cache
     def update_from_view(self, request, object_id, backend, country, country_id, extra_context=None):
         opts = self.model._meta
         to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
@@ -168,7 +168,7 @@ class CompanyAdmin(BaseAdmin):
         request.current_app = self.admin_site.name
         return TemplateResponse(request, 'admin/company_update_from.html', context)
 
-    @never_cache
+    #@never_cache
     def valid_update_from_view(self, request, object_id, backend, country, country_id, extra_context=None):
         opts = self.model._meta
         to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
@@ -186,7 +186,7 @@ class CompanyAdmin(BaseAdmin):
         return redirect(name, object_id=obj.id)
 
 
-    @never_cache
+    #@never_cache
     def country_add_view(self, request, country, object_id=None, extra_context=None):
         current_url = resolve(request.path_info).url_name
         opts = self.model._meta

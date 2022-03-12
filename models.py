@@ -9,11 +9,11 @@ from mighty.models import News
 from mighty.models.base import Base
 from mighty.models.image import Image
 from mighty.applications.address.models import Address
+from mighty.fields import RichTextField
 
 from company import translates as _, managers, get_company_model
 from company.apps import CompanyConfig as conf
 from company import choices as _c
-from django_ckeditor_5.fields import CKEditor5Field
 
 class Company(Base, Image):
     search_fields = ['denomination']
@@ -22,7 +22,7 @@ class Company(Base, Image):
     site = models.URLField(blank=True, null=True)
     effective = models.BigIntegerField(blank=True, null=True)
     secretary = models.CharField(_.secretary, max_length=255, blank=True, null=True)
-    resume = CKEditor5Field(blank=True, null=True)
+    resume = RichTextField(blank=True, null=True)
 
     is_type = models.CharField(max_length=15, choices=_c.ISTYPE, default="COMPANY")
 
@@ -294,7 +294,7 @@ class CompanyFR(CompanyAlpha2):
     quality_independent = models.CharField(_.fr_quality_independent, max_length=3, choices=_c.YESNO, blank=True, null=True)
     secretary = models.CharField(_.fr_secretary, max_length=255, blank=True, null=True)
     siege = models.BooleanField(default=False)
-    resume = CKEditor5Field(blank=True, null=True)
+    resume = RichTextField(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
 
     class Meta(Base.Meta):
