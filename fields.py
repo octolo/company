@@ -49,6 +49,7 @@ serializer = (
     'marketplace',
     'rules',
     'siege_fr',
+    'is_type',
     'stackholder_kind',
     'get_stackholder_kind_display',
     'stock_kind',
