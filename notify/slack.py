@@ -24,6 +24,5 @@ class SlackCompany(NotifyBackend):
 		{ "type": "divider" }]
 
     def send_msg_create(self):
-        hook = self.setting("SLACK_HOOK")["notifications"]
         text = "New company on the platform : %s" % self.company.date_create.strftime('%Y-%m-%d %H:%M')
-        notify_slack(hook, text=text, blocks=self.slack_msg_creation)
+        notify_slack("notifications", text=text, blocks=self.slack_msg_creation)

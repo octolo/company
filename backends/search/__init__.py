@@ -49,7 +49,6 @@ class SearchBackend:
         return datetime.datetime.strptime(date, self.iso_format).strftime("%Y-%m-%d")
 
     def since(self, date):
-        logger.warning(date)
         return datetime.datetime.strptime(date, self.since_format).strftime("%Y-%m-%d")
 
     def get_companies(self, companies, response_code):

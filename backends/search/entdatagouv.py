@@ -34,7 +34,6 @@ class SearchBackend(SearchBackend):
     def get_companies(self, url, qreq):
         message, companies, total, pages = (False, [], 0, 0)
         buffer, response_code = self.call_webservice(url % qreq)
-        logger.warning(url)
         if url == self.siren_url:
             list_company = [self.companies(buffer.get('siege_social', [buffer]), response_code)]
         elif url == self.rna_url:
