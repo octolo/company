@@ -324,7 +324,7 @@ class CompanyDataBackend(CompanyDataBackend):
             for tr in turnover.xpath('.//tr'):
                 if "Chiffre d'affaires" in tr[0].xpath('.//div')[0].text_content():
                     turnover = tr[-1].xpath('.//div')[0].text_content().strip().replace(' ', '')
-                    return int(turnover)
+                    return int(turnover)*1000
                     break
         except Exception as e:
             self.logger.warning("turnover not found")
