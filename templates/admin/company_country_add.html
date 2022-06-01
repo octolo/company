@@ -30,6 +30,7 @@
     {% csrf_token %}
     {{ parent_object }}
     {% include "company/countries/add.html" %}
-    <input type="submit">
+    <button name="action" value="create">Creer</button>
+    <button name="action" value="duplicate">Duplicate</button>
 </form>
 {% endblock %}

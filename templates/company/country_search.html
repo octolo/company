@@ -20,24 +20,24 @@
 
 
     {% if object_list %}
-<table id="change-history">
-    <thead>
-        <tr>
-            <th scope="col">{% field_name fake_country 'denomination' %}</th>
-            <th scope="col">{% field_name fake_country 'since' %}</th>
-            <th scope="col">{% field_name fake_country 'siren' %}</th>
-            <th scope="col">{% field_name fake_country 'category' %}</th>
-            <th scope="col">{% field_name fake_country 'ape' %}</th>
-            <th scope="col">{% field_name fake_country 'legalform' %}</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-    <tbody>
-        {% for company in object_list %}
-        {% include "company/countries/table_form_results.html" %}
-        {% endfor %}
-    </tbody>
-</table>
+    <table id="change-history">
+        <thead>
+            <tr>
+                <th scope="col">{% field_name fake_country 'denomination' %}</th>
+                <th scope="col">{% field_name fake_country 'since' %}</th>
+                <th scope="col">{% field_name fake_country 'siren' %}</th>
+                <th scope="col">{% field_name fake_country 'category' %}</th>
+                <th scope="col">{% field_name fake_country 'ape' %}</th>
+                <th scope="col">{% field_name fake_country 'legalform' %}</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+        <tbody>
+            {% for company in object_list %}
+            {% include "company/countries/table_form_results.html" %}
+            {% endfor %}
+        </tbody>
+    </table>
 {% elif message %}
 {{ message }}
 {% endif %}

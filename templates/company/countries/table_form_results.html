@@ -7,7 +7,8 @@
             {% include "company/countries/fr/form_search_based.html" %}
             <input type="hidden" name="position" value="{{ forloop.counter0 }}">
             <input type="hidden" name="search" value="{{ search }}">
-            <input type="submit">
+            <input type="submit" name="action" value="create">
+            <input type="submit" name="action" value="duplicate">
         </form>
     </td>
 </tr>

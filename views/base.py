@@ -20,8 +20,6 @@ class CanContainParentObject:
     def country_fields(self):
         return fields.country + getattr(fields, self.get_country())[0:5]
 
-
-
     @property
     def country_form(self):
         return get_form_model(self.country_model, form_class=CompanyAddByCountry, form_fields=self.country_fields)

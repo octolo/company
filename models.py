@@ -90,9 +90,14 @@ class Company(Base, Image):
         except Exception:
             pass
 
-    def set_named_id(self):
+    def set_named_id(self, offset=0):
         if hasattr(self, 'named_id'): 
             self.named_id = conf.named_tpl % {"named": slugify(self.denomination), "id": self.siren_or_rna}
+            if offset: self.named_id += "-"+str(offset)
+            try:
+                self.model.objects.get(named_id=self.named_id)
+            except self.model.DoesNotExist:
+                self.set_named_id(offset+1)
 
     def set_stackholder_kind(self):
         if not self.stackholder_kind:
@@ -296,6 +301,7 @@ class CompanyFR(CompanyAlpha2):
     siege = models.BooleanField(default=False)
     resume = RichTextField(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
+    accept_duplicate = False
 
     class Meta(Base.Meta):
         abstract = True
@@ -322,20 +328,13 @@ class CompanyFR(CompanyAlpha2):
     def legalform_label(self): 
         return dict(choices_fr.LEGALFORM).get(int(self.legalform_code)) if self.legalform else _.fr_legalform_null
         
-    stocktype = [
-        "Ordinaire,COMMON,FFCA00FF",
-        "Préférence,PREFERRED,#218FE4",
-        "BSPCE,BSPCE,#8D80B7",
-        "BSA,BSA,#C3D66A",
-        "AGA,AGA,#F47A89"
-    ]
-
     def check_siret(self):
-        qs = type(self).objects.filter(siret=self.siret)
-        if self.pk: 
-            qs = qs.exclude(id=self.id)
-        if self.siret and qs.exists():
-            raise ValidationError(_.fr_siret_already_used, "siret_already_used")
+        if not self.accept_duplicate:
+            qs = type(self).objects.filter(siret=self.siret)
+            if self.pk: 
+                qs = qs.exclude(id=self.id)
+            if self.siret and qs.exists():
+                raise ValidationError(_.fr_siret_already_used, "siret_already_used")
     
     def clean(self):
         self.check_siret()
