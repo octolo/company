@@ -13,6 +13,7 @@ class SearchBackend(SearchBackend):
     raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
     def call_webservice(self, url):
+        print(url)
         try:
             buffer = BytesIO() 
             c = pycurl.Curl() 

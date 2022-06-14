@@ -99,10 +99,9 @@ class Company(Base, Image):
         if hasattr(self, 'named_id'): 
             self.named_id = conf.named_tpl % {"named": slugify(self.denomination), "id": self.siren_or_rna}
             if offset: self.named_id += "-"+str(offset)
-            try:
-                self.model.objects.get(named_id=self.named_id)
-            except self.model.DoesNotExist:
-                self.set_named_id(offset+1)
+            qs = self.model.objects.filter(named_id=self.named_id)
+            if self.pk: qs = qs.exclude(pk=self.pk)
+            if len(qs): self.set_named_id(offset+1)
 
     def set_stackholder_kind(self):
         if not self.stackholder_kind:
