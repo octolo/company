@@ -78,6 +78,11 @@ class Company(Base, Image):
         from company.notify.slack import SlackCompany
         return SlackCompany(self)
 
+    @property
+    def discord_notify(self):
+        from company.notify.discord import DiscordCompany
+        return DiscordCompany(self)
+
     def set_siege_fr(self):
         try:
             self.siege_fr = self.company_fr.get(siege=True)
@@ -133,6 +138,10 @@ class Company(Base, Image):
     def stock_type_default(self):
         st = "STOCK_TYPE_%s" % self.stackholder_kind
         return getattr(_c, st) if hasattr(_c, st) else _c.STOCK_TYPE_DEFAULT
+
+    def post_create(self):
+        self.slack_notify.send_msg_create()
+        self.discord_notify.send_msg_create()
 
     def pre_save(self):
         self.set_siege_fr()
