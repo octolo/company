@@ -35,6 +35,7 @@ country_params = ('denomination', 'since')
 
 serializer = (
     'uid',
+    'named_id',
     'denomination',
     'image_url',
     'capital_socnomtotal',

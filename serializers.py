@@ -27,7 +27,7 @@ class CompanyAddressFRSerializer(ModelSerializer):
 class CompanyMinSerializer(ModelSerializer):
     class Meta:
         model = company_model
-        fields = ('uid', 'denomination', 'image_url', 'siren', 'isin', 'index')
+        fields = ('uid', 'named_id', 'denomination', 'image_url', 'siren', 'isin', 'index')
 
 class CompanySerializer(ModelSerializer):
     siege_fr = CompanyFRSerializer(many=False)
