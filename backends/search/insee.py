@@ -5,7 +5,7 @@ from company.backends.search import SearchBackend
 from company.choices.fr import LEGALFORM, APE
 
 from io import BytesIO
-import base64, pycurl, json, re, logging, time, datetime
+import base64, requests, json, re, logging, time, datetime
 
 logger = logging.getLogger(__name__)
 
@@ -20,33 +20,29 @@ class SearchBackend(SearchBackend):
 
 
     def call_webservice(self, url, headers, postfields=None):
-        buffer = BytesIO() # buffer
-        c = pycurl.Curl() # ouverture du navigateur
-        c.setopt(c.URL, url) # définition de l'URL
-        c.setopt(c.WRITEDATA, buffer) # définition du buffer
-        c.setopt(c.HTTPHEADER, headers) # Ajoute l'entete d'autorisation avec la concatenation
-        if postfields:
-            c.setopt(c.POSTFIELDS, postfields) # ajoute les champs envoyer avec la method POST
         try:
-            c.perform() # execute le navigateur
-            response_code = c.getinfo(c.RESPONSE_CODE) # récupération du code de réponse http
-            c.close() # fermeture du navigateur
-            datas = json.loads(buffer.getvalue())
+            if postfields:
+                buffer = requests.post(url, headers=headers, data=postfields)
+            else:
+                buffer = requests.get(url, headers=headers)
+            return buffer.json(), buffer.status_code
         except Exception as e:
-            logger.error(buffer.getvalue())
             logger.error(e)
             self.error-=1
             if self.error:
                 return self.call_webservice(url, headers, postfields)
             else:
-                raise e
-        return datas, response_code
+                raise e                
 
     def get_token(self):
         basic = '%s:%s' % (settings.INSEE_KEY, settings.INSEE_SECRET)
         basic = base64.b64encode(basic.encode('utf-8')).decode('utf-8')
-        headers = ["Authorization: Basic %s" % basic]
-        buffer, response_code = self.call_webservice(self.token_url, headers, "grant_type=client_credentials")
+        headers = {
+            "accept": "application/json",
+            "Authorization": "Basic %s" % basic,
+        }
+        buffer, response_code = self.call_webservice(self.token_url, headers, {"grant_type": "client_credentials"})
+        print(buffer)
         try:
             return buffer["access_token"]
         except Exception:
@@ -55,7 +51,7 @@ class SearchBackend(SearchBackend):
     def get_companies(self, qreq, number=50, offset=0):
         message, companies, total, pages = (False, [], 0, 0)
         access_token = self.get_token()
-        headers = ['Accept: application/json', 'Authorization: Bearer %s' % access_token]
+        headers = {'Accept': 'application/json', 'Authorization': 'Bearer %s' % access_token}
         url = "%s?q=%s&nombre=%s&debut=%s&masquerValeursNulles=true" % (self.siret_url, qreq, number, offset)
         buffer, response_code = self.call_webservice(url, headers)
         if'header' in buffer:

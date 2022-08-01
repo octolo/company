@@ -1,6 +1,6 @@
 from company.backends.search import SearchBackend
 from io import BytesIO
-import base64, pycurl, json, re, logging
+import base64, requests, json, re, logging
 
 logger = logging.getLogger(__name__)
 
@@ -13,20 +13,11 @@ class SearchBackend(SearchBackend):
     raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
     def call_webservice(self, url):
-        print(url)
         try:
-            buffer = BytesIO() 
-            c = pycurl.Curl() 
-            c.setopt(c.URL, url) 
-            c.setopt(c.WRITEDATA, buffer) 
-            c.setopt(c.CONNECTTIMEOUT, 3)
-            c.setopt(c.TIMEOUT, 3)
-            c.perform() 
-            response_code = c.getinfo(c.RESPONSE_CODE) 
-            c.close()
-            return json.loads(buffer.getvalue()), response_code
-        except Exception:
-            self.backend_error("Error backend")
+            buffer = requests.get(url)
+            return buffer.json(), buffer.status_code
+        except Exception as e:
+            raise e
 
     def get_date_creation(self, company):
         date = company.get('date_creation',  company.get('date_creation_entreprise', None))
