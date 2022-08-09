@@ -1,4 +1,3 @@
-from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator

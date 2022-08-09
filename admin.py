@@ -3,7 +3,7 @@ from django.conf import settings
 from django.views.decorators.cache import never_cache
 from django.contrib.admin.options import TO_FIELD_VAR
 from django.contrib.admin.utils import unquote
-from django.urls import reverse, resolve
+from django.urls import resolve
 from django.http import Http404, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.shortcuts import redirect
