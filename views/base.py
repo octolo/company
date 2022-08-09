@@ -48,6 +48,7 @@ class CanContainParentObject:
 
 class SearchByCountryBase(CanContainParentObject):
     def get_results(self, search):
+        print("here 1")
         message, companies, total, pages = backends_loop(self.kwargs.get('country', 'fr'), search)
         return {
             'search': search,

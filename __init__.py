@@ -39,6 +39,7 @@ def merge_backends(results):
 def backends_loop(country, search):
     results = {}
     message, results, total, pages = ('Nothing', [], 0, 0)
+    print("here")
     for backend in settings.COMPANY_BACKENDS[country]:
         try:
             message, results, total, pages = get_backend('%s.SearchBackend' % backend, search)
