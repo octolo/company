@@ -42,7 +42,6 @@ class SearchBackend(SearchBackend):
             "Authorization": "Basic %s" % basic,
         }
         buffer, response_code = self.call_webservice(self.token_url, headers, {"grant_type": "client_credentials"})
-        print(buffer)
         try:
             return buffer["access_token"]
         except Exception:
