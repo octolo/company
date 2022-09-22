@@ -16,5 +16,4 @@ class Command(ModelBaseCommand):
     def do(self):
         message, companies, total, pages = backends_loop(self.country, self.info)
         if len(companies) > 0:
-            request_kept.request.user = self._user
             data, self.new_company = create_company(self.country, companies[0])
