@@ -320,5 +320,56 @@ STOCK_TYPE_DEFAULT = (
     (BSAAR, BSAAR_TR),
     (AGA, AGA_TR),
 )
-
 STOCK_TYPE_MEMBER = ((COMMON, COMMON_TR),)
+
+OCTOLO = "OCTOLO"
+BRING = "BRING"
+MBRSHIP = "MBRSHIP"
+PLEDGE = "PLEDGE"
+EMITPART = "EMITPART"
+EMITBS = "EMITBS"
+REDEEM = "REDEEM"
+ASSIGN = "ASSIGN"
+EXCHANGE = "EXCHANGE"
+DONATE = "DONATE"
+LOAN = "LOAN"
+FUSION = "FUSION"
+SPLIT = "SPLIT"
+CONVENTION = "CONVENTION"
+TRUST = "TRUST"
+SEIZURE = "SEIZURE"
+
+OCTOLO_TR = _("inscription octolo")
+BRING_TR = _("apports de parts sociales/actions")
+MBRSHIP_TR  = _("adhésion")
+PLEDGE_TR = _("nantissement de parts sociales")
+EMITPART_TR = _("émission d’action /parts")
+EMITBS_TR = _("émission de titres (BSA, BSPCE …)")
+REDEEM_TR = _("rachat d’actions par la société")
+ASSIGN_TR = _("cessions")
+EXCHANGE_TR = _("échange")
+DONATE_TR = _("donations")
+LOAN_TR = _("prêt d’actions")
+FUSION_TR = _("fusion")
+SPLIT_TR = _("scission")
+CONVENTION_TR = _("conventions sur les parts sociales")
+TRUST_TR = _("fiducie")
+SEIZURE_TR = _("saisie de parts sociales")
+MOVE_TYPE_DEFAULT = (
+    (OCTOLO, OCTOLO_TR),
+    (BRING, BRING_TR),
+    (MBRSHIP, MBRSHIP_TR),
+    (PLEDGE, PLEDGE_TR),
+    (EMITPART, EMITPART_TR),
+    (EMITBS, EMITBS_TR),
+    (REDEEM, REDEEM_TR),
+    (ASSIGN, ASSIGN_TR),
+    (EXCHANGE, EXCHANGE_TR),
+    (DONATE, DONATE_TR),
+    (LOAN, LOAN_TR),
+    (FUSION, FUSION_TR),
+    (SPLIT, SPLIT_TR),
+    (CONVENTION, CONVENTION_TR),
+    (TRUST, TRUST_TR),
+    (SEIZURE, SEIZURE_TR),
+)

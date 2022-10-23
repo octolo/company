@@ -138,6 +138,11 @@ class Company(Base, Image):
         st = "STOCK_TYPE_%s" % self.stackholder_kind
         return getattr(_c, st) if hasattr(_c, st) else _c.STOCK_TYPE_DEFAULT
 
+    @property
+    def move_type_default(self):
+        st = "MOVE_TYPE_%s" % self.stackholder_kind
+        return getattr(_c, st) if hasattr(_c, st) else _c.MOVE_TYPE_DEFAULT
+
     def post_create(self):
         self.slack_notify.send_msg_create()
         self.discord_notify.send_msg_create()
