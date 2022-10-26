@@ -138,6 +138,9 @@ class Company(Base, Image):
         st = "STOCK_TYPE_%s" % self.stackholder_kind
         return getattr(_c, st) if hasattr(_c, st) else _c.STOCK_TYPE_DEFAULT
 
+    def stock_type_diluted(self, st):
+        return (st in _c.STOCK_TYPE_DILUTED)
+
     @property
     def move_type_default(self):
         st = "MOVE_TYPE_%s" % self.stackholder_kind
