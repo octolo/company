@@ -133,19 +133,6 @@ class Company(Base, Image):
             return _c.STOCK_DEFAULT[str(legalform)]
         return _c.STOCK_SHAREHOLDER
 
-    @property
-    def stock_type_default(self):
-        st = "STOCK_TYPE_%s" % self.stackholder_kind
-        return getattr(_c, st) if hasattr(_c, st) else _c.STOCK_TYPE_DEFAULT
-
-    def stock_type_diluted(self, st):
-        return (st in _c.STOCK_TYPE_DILUTED)
-
-    @property
-    def move_type_default(self):
-        st = "MOVE_TYPE_%s" % self.stackholder_kind
-        return getattr(_c, st) if hasattr(_c, st) else _c.MOVE_TYPE_DEFAULT
-
     def post_create(self):
         self.slack_notify.send_msg_create()
         self.discord_notify.send_msg_create()

@@ -201,7 +201,7 @@ STOCK_KINDS = (
     (STOCK_TITLE, _("Titre(s)")),
 )
 
-STOCK_DEFAULT = {
+INSTRUMENTST = {
     "5196": STOCK_SHARES,
     "5202": STOCK_SHARES,
     "5203": STOCK_SHARES,
@@ -293,86 +293,3 @@ STOCK_DEFAULT = {
     "9230": STOCK_VOICE,
     "9260": STOCK_VOICE,
 }
-
-
-COMMON = "COMMON"
-PREFERRED = "PREFERRED"
-BSPCE = "BSPCE"
-BSA = "BSA"
-BSAR = "BSAR"
-BSAAR = "BSAAR"
-AGA = "AGA"
-
-COMMON_TR = _("Ordinaire")
-PREFERRED_TR = _("Préférences")
-BSPCE_TR = _("Bon(s) de souscription de part(s) de créateur d'entreprise")
-BSA_TR = _("Bon(s) de souscription d'action(s)")
-BSAR_TR = _("Bon(s) de souscription d'action(s) remboursable(s)")
-BSAAR_TR = _("Bon(s) de souscription et/ou d'acquisition d'action(s) remboursable(s)")
-AGA_TR = _("Attribution gratuite d’action(s)")
-
-STOCK_TYPE_DEFAULT = (
-    (COMMON, COMMON_TR),
-    (PREFERRED, PREFERRED_TR),
-    (BSPCE, BSPCE_TR),
-    (BSA, BSA_TR),
-    (BSAR, BSAR_TR),
-    (BSAAR, BSAAR_TR),
-    (AGA, AGA_TR),
-)
-STOCK_TYPE_MEMBER = ((COMMON, COMMON_TR),)
-STOCK_TYPE_DILUTED = (BSPCE, BSA, BSAR, BSAAR, AGA)
-
-OCTOLO = "OCTOLO"
-BRING = "BRING"
-MBRSHIP = "MBRSHIP"
-PLEDGE = "PLEDGE"
-EMITPART = "EMITPART"
-EMITBS = "EMITBS"
-REDEEM = "REDEEM"
-ASSIGN = "ASSIGN"
-EXCHANGE = "EXCHANGE"
-DONATE = "DONATE"
-LOAN = "LOAN"
-FUSION = "FUSION"
-SPLIT = "SPLIT"
-CONVENTION = "CONVENTION"
-TRUST = "TRUST"
-SEIZURE = "SEIZURE"
-
-OCTOLO_TR = _("inscription octolo")
-BRING_TR = _("apports de parts sociales/actions")
-MBRSHIP_TR  = _("adhésion")
-PLEDGE_TR = _("nantissement de parts sociales")
-EMITPART_TR = _("émission d’action /parts")
-EMITBS_TR = _("émission de titres (BSA, BSPCE …)")
-REDEEM_TR = _("rachat d’actions par la société")
-ASSIGN_TR = _("cessions")
-EXCHANGE_TR = _("échange")
-DONATE_TR = _("donations")
-LOAN_TR = _("prêt d’actions")
-FUSION_TR = _("fusion")
-SPLIT_TR = _("scission")
-CONVENTION_TR = _("conventions sur les parts sociales")
-TRUST_TR = _("fiducie")
-SEIZURE_TR = _("saisie de parts sociales")
-ATTRIBUTION_TR = _("attribution")
-EXERCICE_TR = _("exercice")
-MOVE_TYPE_DEFAULT = (
-    (OCTOLO, OCTOLO_TR),
-    (BRING, BRING_TR),
-    (MBRSHIP, MBRSHIP_TR),
-    (PLEDGE, PLEDGE_TR),
-    (EMITPART, EMITPART_TR),
-    (EMITBS, EMITBS_TR),
-    (REDEEM, REDEEM_TR),
-    (ASSIGN, ASSIGN_TR),
-    (EXCHANGE, EXCHANGE_TR),
-    (DONATE, DONATE_TR),
-    (LOAN, LOAN_TR),
-    (FUSION, FUSION_TR),
-    (SPLIT, SPLIT_TR),
-    (CONVENTION, CONVENTION_TR),
-    (TRUST, TRUST_TR),
-    (SEIZURE, SEIZURE_TR),
-)
