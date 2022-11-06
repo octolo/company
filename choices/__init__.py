@@ -356,6 +356,8 @@ SPLIT_TR = _("scission")
 CONVENTION_TR = _("conventions sur les parts sociales")
 TRUST_TR = _("fiducie")
 SEIZURE_TR = _("saisie de parts sociales")
+ATTRIBUTION_TR = _("attribution")
+EXERCICE_TR = _("exercice")
 MOVE_TYPE_DEFAULT = (
     (OCTOLO, OCTOLO_TR),
     (BRING, BRING_TR),
