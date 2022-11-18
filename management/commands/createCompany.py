@@ -1,8 +1,8 @@
-from mighty.management import ModelBaseCommand
+from mighty.management import CSVModelCommand
 from company import  backends_loop, create_company
 from mighty.functions import request_kept
 
-class Command(ModelBaseCommand):
+class Command(CSVModelCommand):
     def add_arguments(self, parser):
         super().add_arguments(parser)
         parser.add_argument('--country', default="fr")
@@ -11,9 +11,18 @@ class Command(ModelBaseCommand):
     def handle(self, *args, **options):
         self.country = options.get('country')
         self.info = options.get('info')
-        super(ModelBaseCommand, self).handle(*args, **options)
+        super().handle(*args, **options)
 
     def do(self):
-        message, companies, total, pages = backends_loop(self.country, self.info)
+        if self.csvfile:
+            self.loop_qs("on_row")
+        else:
+            self.create_company_arg(self.country, self.info)
+
+    def on_row(self, row):
+        self.create_company(row["country"], row["info"])
+
+    def create_company(self, country, info):
+        message, companies, total, pages = backends_loop(country, info)
         if len(companies) > 0:
-            data, self.new_company = create_company(self.country, companies[0])
+            data, new_company = create_company(country, companies[0])
