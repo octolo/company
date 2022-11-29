@@ -128,6 +128,10 @@ class Company(Base, Image):
     def stock_name(self):
         return self.get_stock_kind_display()
 
+    @property
+    def stock_name_min(self):
+        return self.get_stock_kind_display().lower()
+
     def stock_kind_default(self, legalform=None):
         if legalform and str(legalform) in _c.STOCK_DEFAULT:
             return _c.STOCK_DEFAULT[str(legalform)]
