@@ -21,6 +21,8 @@ class Command(CSVModelCommand):
 
     def on_row(self, row):
         self.create_company(row["country"], row["info"])
+        if self.position >= 1:
+            self.stop_loop = True
 
     def create_company(self, country, info):
         message, companies, total, pages = backends_loop(country, info)
