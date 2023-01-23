@@ -1,4 +1,5 @@
 from company.choices import fr as choices
+from mighty.backend import Backend
 from mighty.errors import BackendError
 import datetime, logging
 logger = logging.getLogger(__name__)
@@ -7,7 +8,7 @@ CHOICES_APE = dict(choices.APE)
 CHOICES_LEGALFORM = dict(choices.LEGALFORM)
 CHOICES_SLICE = dict(choices.SLICE_EFFECTIVE)
 
-class SearchBackend:
+class SearchBackend(Backend):
     message = None
     since_format = None
     iso_format = '%Y-%m-%dT%H:%M:%S.%f%z'

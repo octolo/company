@@ -5,14 +5,15 @@ import base64, requests, json, re, logging
 logger = logging.getLogger(__name__)
 
 class SearchBackend(SearchBackend):
-    siren_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/siren/%s?is_siege=yes'
-    fulltext_url = 'https://entreprise.data.gouv.fr/api/sirene/v1/full_text/%s?is_siege=yes'
+    siren_url = 'https://recherche-entreprises.api.gouv.fr/search?q=%s&is_siege=yes'
+    fulltext_url = 'https://recherche-entreprises.api.gouv.fr/search?q=%s&is_siege=yes'
     rna_url = 'https://entreprise.data.gouv.fr/api/rna/v1/id/%s?is_siege=yes'
     rna_fulltext_url = 'https://entreprise.data.gouv.fr/api/rna/v1/full_text/%s?is_siege=yes'
-    since_format = '%Y%m%d'
+    since_format = '%Y-%m-%d'
     raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
     def call_webservice(self, url):
+        self.logger.info(url)
         try:
             buffer = requests.get(url)
             return buffer.json(), buffer.status_code
@@ -27,40 +28,41 @@ class SearchBackend(SearchBackend):
         message, companies, total, pages = (False, [], 0, 0)
         buffer, response_code = self.call_webservice(url % qreq)
         if url == self.siren_url:
-            list_company = [self.companies(buffer.get('siege_social', [buffer]), response_code)]
+            list_company = self.companies(buffer.get('resuelts', [buffer]), response_code)
         elif url == self.rna_url:
-            list_company = [self.companies(buffer.get('association', [buffer]), response_code)]
+            list_company = self.companies(buffer.get('association', [buffer]), response_code)
         else:
             list_company = self.companies(buffer.get('etablissement', [buffer]), response_code)
         if not self.message:
             for company in list_company:
+                siege = company.get("siege")
                 new_company = {
-                    'siret': company.get('siret', None),
-                    'denomination':company.get('l1_normalisee', None),
-                    'legalform': company.get('nature_juridique_entreprise', None),
+                    'siret': siege.get('siret', None),
+                    'denomination': company.get('nom_raison_sociale', None),
+                    'legalform': company.get('nature_juridique', None),
                     'ape': company.get('activite_principale', None),
                     'ape_noun': None,
                     'since': self.get_date_creation(company),
                     'category': company.get('categorie_entreprise', None),
-                    'slice_effective':  company.get('tranche_effectif_salarie_entreprise', None),
-                    'siege': int(company.get('is_siege', False)),
-                    'rna': company.get('id_association', None),
+                    'slice_effective':  company.get('tranche_effectif_salarie', None),
+                    'siege': int(siege.get('est_siege', False)),
+                    'rna': siege.get('id_association', None),
                     'address': {
                         'address': ' '.join(filter(None, [
-                            company.get("numero_voie", None),
-                            company.get("type_voie", None),
-                            company.get("libelle_voie", None),
+                            siege.get("numero_voie", None),
+                            siege.get("type_voie", None),
+                            siege.get("libelle_voie", None),
                         ])),
                         'complement': None,
-                        'locality': company.get("libelle_commune", None),
-                        'postal_code': company.get("code_postal", None),
+                        'locality': siege.get("libelle_commune", None),
+                        'postal_code': siege.get("code_postal", None),
                         'country': 'france',
                         'country_code': 'fr',
-                        'cedex': company.get("cedex", None),
+                        'cedex': siege.get("cedex", None),
                         'cedex_code': None,
                         'special': None,
                         'index': None,
-                        'nic': company.get('nic_siege')
+                        'nic': siege.get('nic_siege')
                     }
                 }
                 new_company['raw_address'] = self.raw_address % (new_company['address'])
