@@ -73,7 +73,6 @@ def create_company(country, input_obj):
     #    companyA, created = CompanyAddress.objects.get_or_create(**address)
     #return companyC.company
 
-
 def get_results(country, search):
     message, companies, total, pages = backends_loop(country, search)
     return {

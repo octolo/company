@@ -18,7 +18,6 @@ class SearchBackend(SearchBackend):
     error = 5
     raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
-
     def call_webservice(self, url, headers, postfields=None):
         try:
             if postfields:
@@ -27,7 +26,6 @@ class SearchBackend(SearchBackend):
                 buffer = requests.get(url, headers=headers)
             return buffer.json(), buffer.status_code
         except Exception as e:
-            logger.error(e)
             self.error-=1
             if self.error:
                 return self.call_webservice(url, headers, postfields)

@@ -1,5 +1,5 @@
 from mighty.management import CSVModelCommand
-from company import  backends_loop, create_company
+from company import backends_loop, create_company
 from mighty.functions import request_kept
 
 class Command(CSVModelCommand):
