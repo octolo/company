@@ -56,7 +56,7 @@ class CompanyAdmin(BaseAdmin):
             'siege_fr',
         )}))
 
-    list_display = ('denomination', 'since', 'siege_fr')
+    list_display = ('denomination', 'since', 'siege_fr', 'is_type')
     search_fields = ("denomination", "company_fr__siret")
     change_list_template = "admin/company_change_list.html"
     change_form_template = "admin/company_change_form.html"
