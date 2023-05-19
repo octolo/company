@@ -17,7 +17,7 @@ class Command(CSVModelCommand):
         if self.csvfile:
             self.loop_qs("on_row")
         else:
-            self.create_company_arg(self.country, self.info)
+            self.create_company(self.country, self.info)
 
     def on_row(self, row):
         self.create_company(row["country"], row["info"])
