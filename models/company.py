@@ -34,7 +34,7 @@ class Company(Base, Image):
     purpose = models.CharField(_.purpose, max_length=3, choices=_c.YESNO, blank=True, null=True)
     instance_comex = models.BooleanField(_.instance_comex, default=False)
     matrix_skills = models.BooleanField(_.matrix_skills, default=False)
-    
+
     capital_socnomtotal = models.DecimalField(_.capital_socnomtotal, blank=True, null=True, decimal_places=2, max_digits=15)
     capitalisation = models.DecimalField(_.capitalisation, decimal_places=2, max_digits=15, default=0.0)
     nominal = models.DecimalField(_.nominal, decimal_places=2, max_digits=15, default=0.0)
@@ -54,16 +54,16 @@ class Company(Base, Image):
     dowjones = models.BooleanField(default=False)
     nasdaq = models.BooleanField(default=False)
     gaia = models.BooleanField(default=False)
-    
+
     settle_internal = models.BooleanField(_.settle_internal, default=False)
     duration_mandate = models.PositiveSmallIntegerField(_.duration_mandate, blank=True, null=True)
     age_limit_pdg = models.BooleanField(_.age_limit_pdg, default=False)
-    age_limit_dg = models.BooleanField(_.age_limit_dg, default=False)    
+    age_limit_dg = models.BooleanField(_.age_limit_dg, default=False)
     stock_min_rule = models.PositiveIntegerField(_.stock_min_rule, blank=True, null=True)
     stock_min_status = models.PositiveIntegerField(_.stock_min_status, blank=True, null=True)
     stackholder_kind = models.CharField(max_length=20, choices=_c.STACKHOLDER_KINDS, default=_c.STACKHOLDER_SHAREHOLDER, blank=True, null=True)
     stock_kind = models.CharField(max_length=20, choices=_c.STOCK_KINDS, default=_c.STOCK_SHAREHOLDER, blank=True, null=True)
-    
+
     siege_fr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE, related_name='siege_fr', blank=True, null=True)
 
     if conf.named_id:
@@ -91,7 +91,7 @@ class Company(Base, Image):
             pass
 
     def set_named_id(self, offset=0):
-        if hasattr(self, 'named_id'): 
+        if hasattr(self, 'named_id'):
             self.named_id = conf.named_tpl % {"named": slugify(self.denomination), "id": self.siren_or_rna}
             if offset: self.named_id += "-"+str(offset)
             qs = self.model.objects.filter(named_id=self.named_id)
@@ -157,7 +157,9 @@ class Company(Base, Image):
     @property
     def stackholder_name(self): return self.get_stackholder_kind_display()
     @property
-    def is_association(self): return (self.is_type == "ASSOCIATION")
+    def is_association(self): return (self.is_type == _c.ASSOCIATION)
+    @property
+    def is_habitat(self): return (self.is_type == _c.HABITAT)
     @property
     def kind(self): return "association" if self.is_association else "entreprise"
 
