@@ -6,13 +6,11 @@ YESNO = (
 )
 
 COMPANY = "COMPANY"
-HABITAT = "HABITAT"
 ASSOCIATION = "ASSOCIATION"
 COOWNER = "COOWNER"
 BIGMASTER = "BIGMASTER"
 ISTYPE = (
     (COMPANY, _("Société")),
-    (HABITAT, _("Habitat")),
     (ASSOCIATION, _("Association")),
     (COOWNER, _("Co-propriété")),
     (BIGMASTER, _("Grand compte")),

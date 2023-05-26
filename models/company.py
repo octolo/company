@@ -159,8 +159,6 @@ class Company(Base, Image):
     @property
     def is_association(self): return (self.is_type == _c.ASSOCIATION)
     @property
-    def is_habitat(self): return (self.is_type == _c.HABITAT)
-    @property
     def kind(self): return "association" if self.is_association else "entreprise"
 
     def stock_kind_default(self, legalform=None):

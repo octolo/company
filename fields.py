@@ -52,7 +52,6 @@ serializer = (
     'siege_fr',
     'is_type',
     'is_association',
-    'is_habitat',
     'stackholder_kind',
     'get_stackholder_kind_display',
     'stock_kind',
