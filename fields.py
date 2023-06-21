@@ -27,6 +27,40 @@ company = (
     'stock_kind',
 )
 
+form =(
+    'is_type',
+    'stackholder_kind',
+    'stock_kind',
+)
+
+comex_purpose = ('purpose', 'instance_comex', 'matrix_skills')
+market = (
+    'capital_socnomtotal',
+    'capital_division',
+    'current',
+    'share_capital',
+    'turnover',
+    'floating',
+    'icb',
+    'market',
+    'dowjones',
+    'nasdaq',
+    'gaia'
+)
+
+rules = (
+    'duration_mandate',
+    'settle_internal',
+    'age_limit_pdg',
+    'age_limit_dg',
+    'stock_min_rule',
+    'stock_min_status'
+)
+
+countries = (
+    "siege_fr",
+)
+
 if conf.named_id:
     company += ('named_id',)
 

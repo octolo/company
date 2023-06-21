@@ -21,41 +21,13 @@ class CompanyAdmin(BaseAdmin):
     fieldsets = (
         (None, {"classes": ("wide",), "fields": (
             'denomination',
-            'is_type',
             'since',
             'site',
             'effective',
             'secretary',
             'resume',
-            'stackholder_kind',
-            'stock_kind',
         )}),
-        ('comex & purpose', {"classes": ("wide",), "fields": ('purpose', 'instance_comex', 'matrix_skills')}),
-        ('market', {"classes": ("wide",), "fields": (
-            'capital_socnomtotal',
-            'capital_division',
-            'current',
-            'share_capital',
-            'turnover',
-            'floating',
-            'icb',
-            'market',
-            'dowjones',
-            'nasdaq',
-            'gaia'
-        )}),
-        ('rules', {"classes": ("wide",), "fields": (
-            'duration_mandate',
-            'settle_internal',
-            'age_limit_pdg',
-            'age_limit_dg',
-            'stock_min_rule',
-            'stock_min_status'
-        )}),
-        ('sieges', {"classes": ("wide",), "fields": (
-            'siege_fr',
-        )}))
-
+    )
     list_display = ('denomination', 'since', 'siege_fr', 'is_type')
     search_fields = ("denomination", "company_fr__siret")
     change_list_template = "admin/company_change_list.html"
@@ -66,9 +38,14 @@ class CompanyAdmin(BaseAdmin):
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
+        self.add_field("Form", fields.form)
+        self.add_field('Comex & Purpose', fields.comex_purpose)
+        self.add_field('Market', fields.market)
+        self.add_field('Rules', fields.rules)
+        self.add_field('Countries', fields.countries)
         if conf.named_id:
-            self.readonly_fields += ('named_id',)
             self.add_field('Informations', ('named_id',))
+            self.readonly_fields += ('named_id',)
 
     def is_from_update(self, request, obj, response):
         backend = request.GET.get("update_from")
@@ -236,7 +213,7 @@ class CompanyAdmin(BaseAdmin):
             path('<path:object_id>/update/<str:backend>/<str:country>/', include([
                 path("<int:country_id>/", self.wrap(self.update_from_view), name='%s_%s_update_from' % info),
                 path("<int:country_id>/valid/", self.wrap(self.valid_update_from_view), name='%s_%s_valid_from' % info),
-                
+
             ])),
         ]
         return my_urls + urls
