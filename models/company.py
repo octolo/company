@@ -102,7 +102,7 @@ class Company(Base, Image):
         self.slack_notify.send_msg_create()
         self.discord_notify.send_msg_create()
 
-    def pre_save(self):
+    def pre_update(self):
         self.set_siege_fr()
         self.set_floating()
         self.set_named_id()
@@ -144,7 +144,7 @@ class Company(Base, Image):
         return import_string('%s.models.Company%s' % (self.app_label, alpha2.upper()))
 
     @property
-    def siege_or_first_fr(self): return self.siege_fr if self.siege_fr else self.company_fr.first()
+    def siege_or_first_fr(self): return self.siege_fr if self.siege_fr_id else self.company_fr.first()
     @property
     def siege_fr_address(self): return self.companyfr_address.order_by('-is_siege').first()
 
@@ -207,6 +207,7 @@ class Company(Base, Image):
     def siren_or_rna(self):
         if self.siege_or_first_fr:
             return self.rna if self.rna else self.siren
+        return "n-a"
 
     def set_siege_fr(self):
         try:
