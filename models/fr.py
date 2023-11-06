@@ -43,6 +43,8 @@ class CompanyFR(CompanyAlpha2):
     class Meta(CompanyAlpha2.Meta):
         abstract = True
         ordering = ['denomination',]
+        verbose_name = _.v_companyfr
+        verbose_name_plural = _.vp_companyfr
 
     def __str__(self):
         return self.denomination if hasattr(self, 'denomination') else super().__str__()
@@ -62,17 +64,17 @@ class CompanyFR(CompanyAlpha2):
     @property
     def legalform_code(self): return self.legalform if self.legalform else _.fr_legalform_null
     @property
-    def legalform_label(self): 
+    def legalform_label(self):
         return dict(choices_fr.LEGALFORM).get(int(self.legalform_code)) if self.legalform else _.fr_legalform_null
-        
+
     def check_siret(self):
         if not self.accept_duplicate:
             qs = type(self).objects.filter(siret=self.siret)
-            if self.pk: 
+            if self.pk:
                 qs = qs.exclude(id=self.id)
             if self.siret and qs.exists():
                 raise ValidationError(_.fr_siret_already_used, "siret_already_used")
-    
+
     def clean(self):
         self.check_siret()
         super().clean()
@@ -90,7 +92,7 @@ class CompanyFR(CompanyAlpha2):
             self.company.save()
         super().save()
 
-      
+
 class CompanyAddressFR(Address):
     company = models.ForeignKey(conf.Model.Company, on_delete=models.CASCADE, related_name='companyfr_address')
     nic = models.CharField(max_length=5, blank=True, null=True)
