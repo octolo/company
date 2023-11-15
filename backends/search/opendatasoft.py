@@ -43,6 +43,7 @@ class SearchBackend(SearchBackend):
         if response_code == 200:
             total = buffer['total_count']
             pages = round(total/number) if total else 0
+            new_item = {}
             for record in buffer.get('results', []):
                 new_item = {
                     'siren': record.get('siren'),
