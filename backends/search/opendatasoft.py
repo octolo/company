@@ -44,44 +44,46 @@ class SearchBackend(SearchBackend):
             total = buffer['total_count']
             pages = round(total/number) if total else 0
             new_item = {}
-            for record in buffer.get('results', []):
-                new_item = {
-                    'siren': record.get('siren'),
-                    'siret': record.get('siret'),
-                    'denomination': record.get('denominationunitelegale'),
-                    'legalform': record.get('categoriejuridiqueunitelegale'),
-                    'ape': record.get('activiteprincipaleunitelegale').replace('.', ''),
-                    'ape_noun': record.get('nomenclatureactiviteprincipaleunitelegale'),
-                    'since': self.since(record.get('datecreationunitelegale')),
-                    'category': record.get('categorieentreprise', ''),
-                    'slice_effective': record.get('trancheeffectifsunitelegale', ''),
-                    'siege': True if record.get('etablissementsiege', '').strip().lower() == 'oui' else False,
-                    'rna': record.get('identifiantassociationunitelegale', None),
-                    'address': {
-                        'address': ' '.join(filter(None, [
-                            str(record.get('numerovoieetablissement')),
-                            record.get('typevoieetablissement'),
-                            record.get('libellevoieetablissement')
-                        ])),
-                        'complement': record.get('complementadresseetablissement', ''),
-                        'locality': record.get('libellecommuneetablissement'),
-                        'postal_code': record.get('codepostaletablissement'),
-                        'country': (record.get('libellepaysetrangeretablissement') or 'france').lower(),
-                        'country_code': (record.get('codepaysetrangeretablissement') or 'fr').lower(),
-                        'cedex': record.get('libellecedexetablissement', ''),
-                        'cedex_code': record.get('codecedexetablissement', ''),
-                        'special': record.get('distributionspecialeetablissement', ''),
-                        'index': record.get('indicerepetitionetablissement', ''),
-                        'nic': record.get('nic')
+            if total > 0:
+                for record in buffer.get('results', []):
+                    new_item = {
+                        'siren': record.get('siren'),
+                        'siret': record.get('siret'),
+                        'denomination': record.get('denominationunitelegale'),
+                        'legalform': record.get('categoriejuridiqueunitelegale'),
+                        'ape': record.get('activiteprincipaleunitelegale').replace('.', ''),
+                        'ape_noun': record.get('nomenclatureactiviteprincipaleunitelegale'),
+                        'since': self.since(record.get('datecreationunitelegale')),
+                        'category': record.get('categorieentreprise', ''),
+                        'slice_effective': record.get('trancheeffectifsunitelegale', ''),
+                        'siege': True if record.get('etablissementsiege', '').strip().lower() == 'oui' else False,
+                        'rna': record.get('identifiantassociationunitelegale', None),
+                        'address': {
+                            'address': ' '.join(filter(None, [
+                                str(record.get('numerovoieetablissement')),
+                                record.get('typevoieetablissement'),
+                                record.get('libellevoieetablissement')
+                            ])),
+                            'complement': record.get('complementadresseetablissement', ''),
+                            'locality': record.get('libellecommuneetablissement'),
+                            'postal_code': record.get('codepostaletablissement'),
+                            'country': (record.get('libellepaysetrangeretablissement') or 'france').lower(),
+                            'country_code': (record.get('codepaysetrangeretablissement') or 'fr').lower(),
+                            'cedex': record.get('libellecedexetablissement', ''),
+                            'cedex_code': record.get('codecedexetablissement', ''),
+                            'special': record.get('distributionspecialeetablissement', ''),
+                            'index': record.get('indicerepetitionetablissement', ''),
+                            'nic': record.get('nic')
+                        }
                     }
-                }
-            new_item['raw_address'] = self.raw_address % (new_item['address'])
-            new_item['ape_str'] = self.get_ape_str(new_item['ape'])
-            new_item['legalform_str'] = self.get_legalform_str(new_item['legalform'])
-            new_item['slice_str'] = self.get_slice_str(new_item['slice_effective'])
-            items.append(new_item)
+                new_item['raw_address'] = self.raw_address % (new_item['address'])
+                new_item['ape_str'] = self.get_ape_str(new_item['ape'])
+                new_item['legalform_str'] = self.get_legalform_str(new_item['legalform'])
+                new_item['slice_str'] = self.get_slice_str(new_item['slice_effective'])
+                items.append(new_item)
+            else:
+                message = f"Company not found"
         else:
             message = f"Error fetching data from API. Response code: {response_code}"
-
         return message, items, total, pages
 
