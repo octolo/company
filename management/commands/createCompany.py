@@ -20,11 +20,19 @@ class Command(CSVModelCommand):
             self.create_company(self.country, self.info)
 
     def on_row(self, row):
-        self.create_company(row["country"], row["info"])
+        self.create_company(row["country"], row["info"], row)
         if self.position >= 1:
             self.stop_loop = True
 
-    def create_company(self, country, info):
+    def create_company(self, country, info, row=None):
         message, companies, total, pages = backends_loop(country, info)
+
         if len(companies) > 0:
             data, new_company = create_company(country, companies[0])
+
+            if row:
+                for k,v in row.items():
+                    if k not in ("country", "info"):
+                        if v and hasattr(new_company, k):
+                            setattr(new_company, k, v)
+                new_company.save()
