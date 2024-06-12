@@ -66,6 +66,9 @@ class CompanyFR(CompanyAlpha2):
     @property
     def legalform_label(self):
         return dict(choices_fr.LEGALFORM).get(int(self.legalform_code)) if self.legalform else _.fr_legalform_null
+    @property
+    def siren_or_rna(self):
+        return self.rna if self.rna else self.siren
 
     def check_siret(self):
         if not self.accept_duplicate:
