@@ -57,9 +57,7 @@ rules = (
     'stock_min_status'
 )
 
-countries = (
-    "siege_fr",
-)
+countryfr = ("siege_fr", "siege_fr_address")
 
 if conf.named_id:
     company += ('named_id',)

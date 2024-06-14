@@ -64,7 +64,9 @@ class Company(Base, Image):
     stackholder_kind = models.CharField(max_length=20, choices=_c.STACKHOLDER_KINDS, default=_c.STACKHOLDER_SHAREHOLDER, blank=True, null=True)
     stock_kind = models.CharField(max_length=20, choices=_c.STOCK_KINDS, default=_c.STOCK_SHAREHOLDER, blank=True, null=True)
 
+    # FR
     siege_fr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE, related_name='siege_fr', blank=True, null=True)
+    siege_fr_address = models.ForeignKey(conf.Model.CompanyAddressFR, on_delete=models.CASCADE, related_name='siege_fr_address', blank=True, null=True)
 
     if conf.named_id:
         named_id = models.CharField(max_length=255, db_index=True, null=True, editable=False)
@@ -104,6 +106,7 @@ class Company(Base, Image):
 
     def pre_update(self):
         self.set_siege_fr()
+        self.set_siege_fr_address()
         self.set_floating()
         self.set_named_id()
         self.set_stackholder_kind()
@@ -146,8 +149,7 @@ class Company(Base, Image):
     @property
     def siege_or_first_fr(self): return self.siege_fr if self.siege_fr_id else self.company_fr.first()
     @property
-    def siege_fr_address(self): return self.companyfr_address.order_by('-is_siege').first()
-
+    def siege_of_first_fr_address(self): return self.companyfr_address.order_by('-is_siege').first()
 
     # KIND
     @property
@@ -212,6 +214,12 @@ class Company(Base, Image):
     def set_siege_fr(self):
         try:
             self.siege_fr = self.company_fr.get(siege=True)
+        except Exception:
+            pass
+
+    def set_siege_fr_address(self):
+        try:
+            self.siege_fr_address = self.companyfr_address.get(is_siege=True)
         except Exception:
             pass
 

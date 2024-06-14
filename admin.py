@@ -33,7 +33,7 @@ class CompanyAdmin(BaseAdmin):
     change_list_template = "admin/company_change_list.html"
     change_form_template = "admin/company_change_form.html"
     change_form_logs_template = "admin/company_change_form_logs.html"
-    readonly_fields = ('siege_fr',)
+    readonly_fields = ('siege_fr', 'siege_fr_address')
     search_template = None
 
     def __init__(self, model, admin_site):
@@ -42,7 +42,7 @@ class CompanyAdmin(BaseAdmin):
         self.add_field('Comex & Purpose', fields.comex_purpose)
         self.add_field('Market', fields.market)
         self.add_field('Rules', fields.rules)
-        self.add_field('Countries', fields.countries)
+        self.add_field('FR', fields.countryfr)
         if conf.named_id:
             self.add_field('Informations', ('named_id',))
             self.readonly_fields += ('named_id',)
@@ -232,6 +232,3 @@ class CompanyAddressFRAdminInline(AddressAdminInline):
 class BaloAdmin(BaseAdmin):
     fieldsets = ((None, {"classes": ("wide",), "fields": fields.balo}),)
 
-#####################
-# US
-#####################
