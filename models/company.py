@@ -149,7 +149,7 @@ class Company(Base, Image):
     @property
     def siege_or_first_fr(self): return self.siege_fr if self.siege_fr_id else self.company_fr.first()
     @property
-    def siege_of_first_fr_address(self): return self.companyfr_address.order_by('-is_siege').first()
+    def siege_of_first_fr_address(self): return self.siege_fr_address if self.siege_fr_address_id else self.companyfr_address.order_by('-is_siege').first()
 
     # KIND
     @property
