@@ -1,0 +1,6332 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-23 17:18+0200\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: company/choices/__init__.py:4
+msgid "yes"
+msgstr ""
+
+#: company/choices/__init__.py:5
+msgid "no"
+msgstr ""
+
+#: company/choices/__init__.py:13
+msgid "Société"
+msgstr ""
+
+#: company/choices/__init__.py:14
+msgid "Association"
+msgstr ""
+
+#: company/choices/__init__.py:15
+msgid "Co-propriété"
+msgstr ""
+
+#: company/choices/__init__.py:16
+msgid "Grand compte"
+msgstr ""
+
+#: company/choices/__init__.py:30
+msgid "Matériaux de base"
+msgstr ""
+
+#: company/choices/__init__.py:31
+msgid "Industries"
+msgstr ""
+
+#: company/choices/__init__.py:32
+msgid "Services aux consommateurs"
+msgstr ""
+
+#: company/choices/__init__.py:33
+msgid "Biens de consommation"
+msgstr ""
+
+#: company/choices/__init__.py:34
+msgid "Sociétés Financières"
+msgstr ""
+
+#: company/choices/__init__.py:35
+msgid "Services aux collectivités"
+msgstr ""
+
+#: company/choices/__init__.py:36
+msgid "Santé"
+msgstr ""
+
+#: company/choices/__init__.py:37
+msgid "Technologies"
+msgstr ""
+
+#: company/choices/__init__.py:38
+msgid "Pétrole et gaz"
+msgstr ""
+
+#: company/choices/__init__.py:39 company/choices/fr.py:1559
+msgid "Télécommunications"
+msgstr ""
+
+#: company/choices/__init__.py:53
+msgid "SRD"
+msgstr ""
+
+#: company/choices/__init__.py:54
+msgid "Compartiment A"
+msgstr ""
+
+#: company/choices/__init__.py:55
+msgid "Compartiment B"
+msgstr ""
+
+#: company/choices/__init__.py:56
+msgid "Compartiment C"
+msgstr ""
+
+#: company/choices/__init__.py:57
+msgid "Euronext Growth"
+msgstr ""
+
+#: company/choices/__init__.py:58
+msgid "Euronext Access"
+msgstr ""
+
+#: company/choices/__init__.py:59
+msgid "Autres titres"
+msgstr ""
+
+#: company/choices/__init__.py:60
+msgid "Hors titres"
+msgstr ""
+
+#: company/choices/__init__.py:61
+msgid "Compartiment spécial"
+msgstr ""
+
+#: company/choices/__init__.py:62
+msgid "Valeurs Radiées"
+msgstr ""
+
+#: company/choices/__init__.py:72
+msgid "Actionnaire(s)"
+msgstr ""
+
+#: company/choices/__init__.py:73
+msgid "Membre(s)"
+msgstr ""
+
+#: company/choices/__init__.py:74
+msgid "Associé(es)"
+msgstr ""
+
+#: company/choices/__init__.py:75
+msgid "Adhérent(es)"
+msgstr ""
+
+#: company/choices/__init__.py:76
+msgid "Conseiller(es)"
+msgstr ""
+
+#: company/choices/__init__.py:77
+msgid "Propriétaire(s)"
+msgstr ""
+
+#: company/choices/__init__.py:199 company/choices/__init__.py:202
+msgid "Titre(s)"
+msgstr ""
+
+#: company/choices/__init__.py:200
+msgid "Voix"
+msgstr ""
+
+#: company/choices/__init__.py:201
+msgid "Part(s) sociale(s)"
+msgstr ""
+
+#: company/choices/fr.py:4
+msgid ""
+"0 salarié (n'ayant pas d'effectif au 31/12 mais ayant employé des salariés "
+"au cours de l'année de référence)"
+msgstr ""
+
+#: company/choices/fr.py:5
+msgid "1 ou 2 salariés"
+msgstr ""
+
+#: company/choices/fr.py:6
+msgid "3 à 5 salariés"
+msgstr ""
+
+#: company/choices/fr.py:7
+msgid "6 à 9 salariés"
+msgstr ""
+
+#: company/choices/fr.py:8
+msgid "10 à 19 salariés"
+msgstr ""
+
+#: company/choices/fr.py:9
+msgid "20 à 49 salariés"
+msgstr ""
+
+#: company/choices/fr.py:10
+msgid "50 à 99 salariés"
+msgstr ""
+
+#: company/choices/fr.py:11
+msgid "100 à 199 salariés"
+msgstr ""
+
+#: company/choices/fr.py:12
+msgid "200 à 249 salariés"
+msgstr ""
+
+#: company/choices/fr.py:13
+msgid "250 à 499 salariés"
+msgstr ""
+
+#: company/choices/fr.py:14
+msgid "500 à 999 salariés"
+msgstr ""
+
+#: company/choices/fr.py:15
+msgid "1 000 à 1 999 salariés"
+msgstr ""
+
+#: company/choices/fr.py:16
+msgid "2 000 à 4 999 salariés"
+msgstr ""
+
+#: company/choices/fr.py:17
+msgid "5 000 à 9 999 salariés"
+msgstr ""
+
+#: company/choices/fr.py:18
+msgid "10 000 salariés et plus"
+msgstr ""
+
+#: company/choices/fr.py:22
+msgid "Afep MEDEF"
+msgstr ""
+
+#: company/choices/fr.py:23
+msgid "MiddleNext"
+msgstr ""
+
+#: company/choices/fr.py:27
+msgid "CAC40"
+msgstr ""
+
+#: company/choices/fr.py:28
+msgid "NEXT80"
+msgstr ""
+
+#: company/choices/fr.py:29
+msgid "NEXT++"
+msgstr ""
+
+#: company/choices/fr.py:33
+msgid "CA avec PDG"
+msgstr ""
+
+#: company/choices/fr.py:34
+msgid "CA à gouvernance dissociée"
+msgstr ""
+
+#: company/choices/fr.py:35
+msgid "Conseil de Surveillance/Directoire"
+msgstr ""
+
+#: company/choices/fr.py:36
+msgid "Commandite"
+msgstr ""
+
+#: company/choices/fr.py:40
+msgid "Auto-évaluation chaque année"
+msgstr ""
+
+#: company/choices/fr.py:41
+msgid "Auto-évaluation (1 fois tous les 2 ans)"
+msgstr ""
+
+#: company/choices/fr.py:42
+msgid "Auto-évaluation (1 fois tous les 3 ans)"
+msgstr ""
+
+#: company/choices/fr.py:43
+msgid "Consultant externe chaque année"
+msgstr ""
+
+#: company/choices/fr.py:44
+msgid "Consultant externe tous les 2 ans"
+msgstr ""
+
+#: company/choices/fr.py:45
+msgid "Consultant externe tous les 3 ans"
+msgstr ""
+
+#: company/choices/fr.py:46
+msgid "Auto-évaluation annuelle et consultant externe tous les 2 ans"
+msgstr ""
+
+#: company/choices/fr.py:47
+msgid "Auto-évaluation annuelle et consultant externe tous les 3 ans"
+msgstr ""
+
+#: company/choices/fr.py:48
+msgid ""
+"Le Président estime qu’il n’est pas nécessaire de procéder à l’évaluation du "
+"fonctionnement du Conseil d’administration."
+msgstr ""
+
+#: company/choices/fr.py:49
+msgid ""
+"A ce jour, aucune procédure d’auto-évaluation du fonctionnement n’est mise "
+"en place par le Conseil."
+msgstr ""
+
+#: company/choices/fr.py:50
+msgid ""
+"Aucune évaluation formalisée du Conseil n’a été réalisée jusqu’à aujourd’hui"
+msgstr ""
+
+#: company/choices/fr.py:54
+msgid "Entrepreneur individue"
+msgstr ""
+
+#: company/choices/fr.py:55
+msgid "Indivision entre personnes physiques"
+msgstr ""
+
+#: company/choices/fr.py:56
+msgid "Indivision avec personne morale"
+msgstr ""
+
+#: company/choices/fr.py:57
+msgid "Société créée de fait entre personnes physiques"
+msgstr ""
+
+#: company/choices/fr.py:58
+msgid "Société créée de fait avec personne morale"
+msgstr ""
+
+#: company/choices/fr.py:59
+msgid "Société en participation entre personnes physiques"
+msgstr ""
+
+#: company/choices/fr.py:60
+msgid "Société en participation avec personne morale"
+msgstr ""
+
+#: company/choices/fr.py:61
+msgid "Société en participation de professions libérales"
+msgstr ""
+
+#: company/choices/fr.py:62
+msgid "Fiducie"
+msgstr ""
+
+#: company/choices/fr.py:63
+msgid "Paroisse hors zone concordataire"
+msgstr ""
+
+#: company/choices/fr.py:64
+msgid "Autre groupement de droit privé non doté de la personnalité morale"
+msgstr ""
+
+#: company/choices/fr.py:65
+msgid ""
+"Représentation ou agence commerciale d'état ou organisme public étranger "
+"immatriculé au RCS"
+msgstr ""
+
+#: company/choices/fr.py:66
+msgid "Société commerciale étrangère immatriculée au RC"
+msgstr ""
+
+#: company/choices/fr.py:67
+msgid "Organisation internationale"
+msgstr ""
+
+#: company/choices/fr.py:68
+msgid "État, collectivité ou établissement public étrange"
+msgstr ""
+
+#: company/choices/fr.py:69
+msgid "Société étrangère non immatriculée au RCS"
+msgstr ""
+
+#: company/choices/fr.py:70
+msgid "Autre personne morale de droit étranger"
+msgstr ""
+
+#: company/choices/fr.py:71
+msgid ""
+"Établissement public national à caractère industriel ou commercial doté d'un "
+"comptable public"
+msgstr ""
+
+#: company/choices/fr.py:72
+msgid ""
+"Établissement public national à caractère industriel ou commercial non doté "
+"d'un comptable public"
+msgstr ""
+
+#: company/choices/fr.py:73
+msgid "Exploitant public"
+msgstr ""
+
+#: company/choices/fr.py:74
+msgid "Établissement public local à caractère industriel ou commercial"
+msgstr ""
+
+#: company/choices/fr.py:75
+msgid "Régie d'une collectivité locale à caractère industriel ou commercial"
+msgstr ""
+
+#: company/choices/fr.py:76
+msgid "Institution Banque de France"
+msgstr ""
+
+#: company/choices/fr.py:77
+msgid "Société de caution mutuelle"
+msgstr ""
+
+#: company/choices/fr.py:78
+msgid "Société coopérative de banque populaire"
+msgstr ""
+
+#: company/choices/fr.py:79
+msgid "Caisse de crédit maritime mutuel"
+msgstr ""
+
+#: company/choices/fr.py:80
+msgid "Caisse (fédérale) de crédit mutuel"
+msgstr ""
+
+#: company/choices/fr.py:81
+msgid "Association coopérative inscrite (droit local Alsace Moselle)"
+msgstr ""
+
+#: company/choices/fr.py:82
+msgid "Caisse d'épargne et de prévoyance à forme coopérative"
+msgstr ""
+
+#: company/choices/fr.py:83
+msgid "Société en nom collectif"
+msgstr ""
+
+#: company/choices/fr.py:84
+msgid "Société en nom collectif coopérative"
+msgstr ""
+
+#: company/choices/fr.py:85
+msgid "Société en commandite simple"
+msgstr ""
+
+#: company/choices/fr.py:86
+msgid "Société en commandite simple coopérative"
+msgstr ""
+
+#: company/choices/fr.py:87
+msgid "Société en commandite par actions"
+msgstr ""
+
+#: company/choices/fr.py:88
+msgid "Société en commandite par actions coopérative"
+msgstr ""
+
+#: company/choices/fr.py:89
+msgid ""
+"Société de Participations Financières de Profession Libérale Société en "
+"commandite par actions (SPFPL SCA"
+msgstr ""
+
+#: company/choices/fr.py:90
+msgid "Société d'exercice libéral en commandite par actions"
+msgstr ""
+
+#: company/choices/fr.py:91
+msgid "SARL nationale"
+msgstr ""
+
+#: company/choices/fr.py:92
+msgid "SARL d'économie mixte"
+msgstr ""
+
+#: company/choices/fr.py:93
+msgid "SARL immobilière pour le commerce et l'industrie (SICOMI)"
+msgstr ""
+
+#: company/choices/fr.py:94
+msgid "SARL immobilière de gestio"
+msgstr ""
+
+#: company/choices/fr.py:95
+msgid "SARL d'aménagement foncier et d'équipement rural (SAFER"
+msgstr ""
+
+#: company/choices/fr.py:96
+msgid "SARL mixte d'intérêt agricole (SMIA)"
+msgstr ""
+
+#: company/choices/fr.py:97
+msgid "SARL d'intérêt collectif agricole (SICA)"
+msgstr ""
+
+#: company/choices/fr.py:98
+msgid "SARL d'attribution"
+msgstr ""
+
+#: company/choices/fr.py:99
+msgid "SARL coopérative de construction"
+msgstr ""
+
+#: company/choices/fr.py:100
+msgid "SARL coopérative de consommation"
+msgstr ""
+
+#: company/choices/fr.py:101
+msgid "SARL coopérative artisanale"
+msgstr ""
+
+#: company/choices/fr.py:102
+msgid "SARL coopérative d'intérêt maritime"
+msgstr ""
+
+#: company/choices/fr.py:103
+msgid "SARL coopérative de transpor"
+msgstr ""
+
+#: company/choices/fr.py:104
+msgid "SARL coopérative ouvrière de production (SCOP"
+msgstr ""
+
+#: company/choices/fr.py:105
+msgid "SARL union de sociétés coopératives"
+msgstr ""
+
+#: company/choices/fr.py:106
+msgid "Autre SARL coopérative"
+msgstr ""
+
+#: company/choices/fr.py:107
+msgid ""
+"Société de Participations Financières de Profession Libérale Société à "
+"responsabilité limitée (SPFPL SARL"
+msgstr ""
+
+#: company/choices/fr.py:108
+msgid "Société d'exercice libéral à responsabilité limitée"
+msgstr ""
+
+#: company/choices/fr.py:109
+msgid "SARL unipersonnelle"
+msgstr ""
+
+#: company/choices/fr.py:110
+msgid "Société à responsabilité limitée (sans autre indication"
+msgstr ""
+
+#: company/choices/fr.py:111
+msgid "SA à participation ouvrière à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:112
+msgid "SA nationale à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:113
+msgid "SA d'économie mixte à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:114
+msgid "Fonds à forme sociétale à conseil d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:115
+msgid ""
+"SA immobilière pour le commerce et l'industrie (SICOMI) à conseil "
+"d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:116
+msgid "SA immobilière d'investissement à conseil d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:117
+msgid ""
+"SA d'aménagement foncier et d'équipement rural (SAFER) à conseil "
+"d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:118
+msgid ""
+"Société anonyme mixte d'intérêt agricole (SMIA) à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:119
+msgid "SA d'intérêt collectif agricole (SICA) à conseil d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:120
+msgid "SA d'attribution à conseil d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:121
+msgid "SA coopérative de construction à conseil d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:122
+msgid "SA de HLM à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:123
+msgid "SA coopérative de production de HLM à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:124
+msgid "SA de crédit immobilier à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:125
+msgid "SA coopérative de consommation à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:126
+msgid "SA coopérative de commerçants-détaillants à conseil d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:127
+msgid "SA coopérative artisanale à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:128
+msgid "SA coopérative (d'intérêt) maritime à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:129
+msgid "SA coopérative de transport à conseil d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:130
+msgid "SA coopérative ouvrière de production (SCOP) à conseil d'administratio"
+msgstr ""
+
+#: company/choices/fr.py:131
+msgid "SA union de sociétés coopératives à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:132
+msgid "Autre SA coopérative à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:133
+msgid ""
+"Société de Participations Financières de Profession Libérale Société anonyme "
+"à conseil d'administration (SPFPL SA à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:134
+msgid "Société d'exercice libéral à forme anonyme à conseil d'administration"
+msgstr ""
+
+#: company/choices/fr.py:135
+msgid "SA à conseil d'administration (s.a.i."
+msgstr ""
+
+#: company/choices/fr.py:136
+msgid "SA à participation ouvrière à directoire"
+msgstr ""
+
+#: company/choices/fr.py:137
+msgid "SA nationale à directoire"
+msgstr ""
+
+#: company/choices/fr.py:138
+msgid "SA d'économie mixte à directoire"
+msgstr ""
+
+#: company/choices/fr.py:139
+msgid "Fonds à forme sociétale à directoire"
+msgstr ""
+
+#: company/choices/fr.py:140
+msgid "SA immobilière pour le commerce et l'industrie (SICOMI) à directoire"
+msgstr ""
+
+#: company/choices/fr.py:141
+msgid "SA immobilière d'investissement à directoire"
+msgstr ""
+
+#: company/choices/fr.py:142
+msgid "Safer anonyme à directoire"
+msgstr ""
+
+#: company/choices/fr.py:143
+msgid "SA mixte d'intérêt agricole (SMIA"
+msgstr ""
+
+#: company/choices/fr.py:144
+msgid "SA d'intérêt collectif agricole (SICA"
+msgstr ""
+
+#: company/choices/fr.py:145
+msgid "SA d'attribution à directoire"
+msgstr ""
+
+#: company/choices/fr.py:146
+msgid "SA coopérative de construction à directoire"
+msgstr ""
+
+#: company/choices/fr.py:147
+msgid "SA de HLM à directoire"
+msgstr ""
+
+#: company/choices/fr.py:148
+msgid "Société coopérative de production de HLM anonyme à directoire"
+msgstr ""
+
+#: company/choices/fr.py:149
+msgid "SA de crédit immobilier à directoire"
+msgstr ""
+
+#: company/choices/fr.py:150
+msgid "SA coopérative de consommation à directoire"
+msgstr ""
+
+#: company/choices/fr.py:151
+msgid "SA coopérative de commerçants-détaillants à directoire"
+msgstr ""
+
+#: company/choices/fr.py:152
+msgid "SA coopérative artisanale à directoire"
+msgstr ""
+
+#: company/choices/fr.py:153
+msgid "SA coopérative d'intérêt maritime à directoire"
+msgstr ""
+
+#: company/choices/fr.py:154
+msgid "SA coopérative de transport à directoire"
+msgstr ""
+
+#: company/choices/fr.py:155
+msgid "SA coopérative ouvrière de production (SCOP) à directoire"
+msgstr ""
+
+#: company/choices/fr.py:156
+msgid "SA union de sociétés coopératives à directoire"
+msgstr ""
+
+#: company/choices/fr.py:157
+msgid "Autre SA coopérative à directoire"
+msgstr ""
+
+#: company/choices/fr.py:158
+msgid ""
+"Société de Participations Financières de Profession Libérale Société anonyme "
+"à Directoire (SPFPL SA à directoire)"
+msgstr ""
+
+#: company/choices/fr.py:159
+msgid "Société d'exercice libéral à forme anonyme à directoire"
+msgstr ""
+
+#: company/choices/fr.py:160
+msgid "SA à directoire (s.a.i."
+msgstr ""
+
+#: company/choices/fr.py:161
+msgid "SAS, société par actions simplifiée"
+msgstr ""
+
+#: company/choices/fr.py:162
+msgid ""
+"Société par actions simplifiée à associé unique ou société par actions "
+"simplifiée unipersonnelle"
+msgstr ""
+
+#: company/choices/fr.py:163
+msgid ""
+"Société de Participations Financières de Profession Libérale Société par "
+"actions simplifiée (SPFPL SAS)"
+msgstr ""
+
+#: company/choices/fr.py:164
+msgid "Société d'exercice libéral par action simplifiée"
+msgstr ""
+
+#: company/choices/fr.py:165
+msgid "Société européenne"
+msgstr ""
+
+#: company/choices/fr.py:166
+msgid "Caisse d'Épargne et de Prévoyance"
+msgstr ""
+
+#: company/choices/fr.py:167
+msgid "Groupement européen d'intérêt économique (GEIE)"
+msgstr ""
+
+#: company/choices/fr.py:168
+msgid "Groupement d'intérêt économique (GIE)"
+msgstr ""
+
+#: company/choices/fr.py:169
+msgid "Coopérative d'utilisation de matériel agricole en commun (CUMA)"
+msgstr ""
+
+#: company/choices/fr.py:170
+msgid "Société coopérative agricole"
+msgstr ""
+
+#: company/choices/fr.py:171
+msgid "Union de sociétés coopératives agricoles"
+msgstr ""
+
+#: company/choices/fr.py:172
+msgid "Société d'assurance à forme mutuell"
+msgstr ""
+
+#: company/choices/fr.py:173
+msgid "Sociétés Interprofessionnelles de Soins Ambulatoires"
+msgstr ""
+
+#: company/choices/fr.py:174
+msgid "Société civile de placement collectif immobilier (SCPI)"
+msgstr ""
+
+#: company/choices/fr.py:175
+msgid "Société civile d'intérêt collectif agricole (SICA)"
+msgstr ""
+
+#: company/choices/fr.py:176
+msgid "Groupement agricole d'exploitation en commun (GAEC)"
+msgstr ""
+
+#: company/choices/fr.py:177
+msgid "Groupement foncier agricole"
+msgstr ""
+
+#: company/choices/fr.py:178
+msgid "Groupement agricole foncier"
+msgstr ""
+
+#: company/choices/fr.py:179
+msgid "Groupement forestier"
+msgstr ""
+
+#: company/choices/fr.py:180
+msgid "Groupement pastoral"
+msgstr ""
+
+#: company/choices/fr.py:181
+msgid "Groupement foncier et rura"
+msgstr ""
+
+#: company/choices/fr.py:182
+msgid "Société civile foncière"
+msgstr ""
+
+#: company/choices/fr.py:183
+msgid "Société civile immobilière"
+msgstr ""
+
+#: company/choices/fr.py:184
+msgid "Société civile immobilière de construction-vent"
+msgstr ""
+
+#: company/choices/fr.py:185
+msgid "Société civile d'attribution"
+msgstr ""
+
+#: company/choices/fr.py:186
+msgid "Société civile coopérative de construction"
+msgstr ""
+
+#: company/choices/fr.py:187
+msgid "Société civile immobilière d' accession progressive à la propriété"
+msgstr ""
+
+#: company/choices/fr.py:188
+msgid "Société civile coopérative de consommation"
+msgstr ""
+
+#: company/choices/fr.py:189
+msgid "Société civile coopérative d'intérêt maritime"
+msgstr ""
+
+#: company/choices/fr.py:190
+msgid "Société civile coopérative entre médecins"
+msgstr ""
+
+#: company/choices/fr.py:191
+msgid "Autre société civile coopérative"
+msgstr ""
+
+#: company/choices/fr.py:192
+msgid "SCP d'avocats"
+msgstr ""
+
+#: company/choices/fr.py:193
+msgid "SCP d'avocats aux conseils"
+msgstr ""
+
+#: company/choices/fr.py:194
+msgid "SCP d'avoués d'appel"
+msgstr ""
+
+#: company/choices/fr.py:195
+msgid "SCP d'huissiers"
+msgstr ""
+
+#: company/choices/fr.py:196
+msgid "SCP de notaires"
+msgstr ""
+
+#: company/choices/fr.py:197
+msgid "SCP de commissaires-priseurs"
+msgstr ""
+
+#: company/choices/fr.py:198
+msgid "SCP de greffiers de tribunal de commerce"
+msgstr ""
+
+#: company/choices/fr.py:199
+msgid "SCP de conseils juridiques"
+msgstr ""
+
+#: company/choices/fr.py:200
+msgid "SCP de commissaires aux comptes"
+msgstr ""
+
+#: company/choices/fr.py:201
+msgid "SCP de médecins"
+msgstr ""
+
+#: company/choices/fr.py:202
+msgid "SCP de dentistes"
+msgstr ""
+
+#: company/choices/fr.py:203
+msgid "SCP d'infirmiers"
+msgstr ""
+
+#: company/choices/fr.py:204
+msgid "SCP de masseurs-kinésithérapeute"
+msgstr ""
+
+#: company/choices/fr.py:205
+msgid "SCP de directeurs de laboratoire d'analyse médicale"
+msgstr ""
+
+#: company/choices/fr.py:206
+msgid "SCP de vétérinaires"
+msgstr ""
+
+#: company/choices/fr.py:207
+msgid "SCP de géomètres expert"
+msgstr ""
+
+#: company/choices/fr.py:208
+msgid "SCP d'architectes"
+msgstr ""
+
+#: company/choices/fr.py:209
+msgid "Autre société civile professionnell"
+msgstr ""
+
+#: company/choices/fr.py:210
+msgid "Société civile laitière"
+msgstr ""
+
+#: company/choices/fr.py:211
+msgid "Société civile de moyens"
+msgstr ""
+
+#: company/choices/fr.py:212
+msgid "Caisse locale de crédit mutuel"
+msgstr ""
+
+#: company/choices/fr.py:213
+msgid "Caisse de crédit agricole mutuel"
+msgstr ""
+
+#: company/choices/fr.py:214
+msgid "Société civile d'exploitation agricole"
+msgstr ""
+
+#: company/choices/fr.py:215
+msgid "Exploitation agricole à responsabilité limitée"
+msgstr ""
+
+#: company/choices/fr.py:216
+msgid "Autre société civile"
+msgstr ""
+
+#: company/choices/fr.py:217
+msgid ""
+"Autre personne de droit privé inscrite au registre du commerce et des société"
+msgstr ""
+
+#: company/choices/fr.py:218
+msgid "Autorité constitutionnelle"
+msgstr ""
+
+#: company/choices/fr.py:219
+msgid "Autorité administrative ou publique indépendant"
+msgstr ""
+
+#: company/choices/fr.py:220
+msgid "Ministère"
+msgstr ""
+
+#: company/choices/fr.py:221
+msgid "Service central d'un ministère"
+msgstr ""
+
+#: company/choices/fr.py:222
+msgid "Service du ministère de la Défense"
+msgstr ""
+
+#: company/choices/fr.py:223
+msgid "Service déconcentré à compétence nationale d'un ministère (hors Défense"
+msgstr ""
+
+#: company/choices/fr.py:224
+msgid "Service déconcentré de l'État à compétence (inter) régionale"
+msgstr ""
+
+#: company/choices/fr.py:225
+msgid "Service déconcentré de l'État à compétence (inter) départementale"
+msgstr ""
+
+#: company/choices/fr.py:226
+msgid "(Autre) Service déconcentré de l'État à compétence territoriale"
+msgstr ""
+
+#: company/choices/fr.py:227
+msgid "Ecole nationale non dotée de la personnalité morale"
+msgstr ""
+
+#: company/choices/fr.py:228
+msgid "Commune et commune nouvelle"
+msgstr ""
+
+#: company/choices/fr.py:229
+msgid "Département"
+msgstr ""
+
+#: company/choices/fr.py:230
+msgid "Collectivité et territoire d'Outre Me"
+msgstr ""
+
+#: company/choices/fr.py:231
+msgid "(Autre) Collectivité territoriale"
+msgstr ""
+
+#: company/choices/fr.py:232
+msgid "Région"
+msgstr ""
+
+#: company/choices/fr.py:233
+msgid "Commune associée et commune déléguée"
+msgstr ""
+
+#: company/choices/fr.py:234
+msgid "Section de commune"
+msgstr ""
+
+#: company/choices/fr.py:235
+msgid "Ensemble urbain"
+msgstr ""
+
+#: company/choices/fr.py:236
+msgid "Association syndicale autorisée"
+msgstr ""
+
+#: company/choices/fr.py:237
+msgid "Association foncière urbaine"
+msgstr ""
+
+#: company/choices/fr.py:238
+msgid "Association foncière de remembrement"
+msgstr ""
+
+#: company/choices/fr.py:239
+msgid "Établissement public local d'enseignement"
+msgstr ""
+
+#: company/choices/fr.py:240
+msgid "Pôle métropolitai"
+msgstr ""
+
+#: company/choices/fr.py:241
+msgid "Secteur de commune"
+msgstr ""
+
+#: company/choices/fr.py:242
+msgid "District urbain"
+msgstr ""
+
+#: company/choices/fr.py:243
+msgid "Communauté urbaine"
+msgstr ""
+
+#: company/choices/fr.py:244
+msgid "Métropol"
+msgstr ""
+
+#: company/choices/fr.py:245
+msgid "Syndicat intercommunal à vocation multiple (SIVOM)"
+msgstr ""
+
+#: company/choices/fr.py:246
+msgid "Communauté de communes"
+msgstr ""
+
+#: company/choices/fr.py:247
+msgid "Communauté de villes"
+msgstr ""
+
+#: company/choices/fr.py:248
+msgid "Communauté d'agglomération"
+msgstr ""
+
+#: company/choices/fr.py:249
+msgid ""
+"Autre établissement public local de coopération non spécialisé ou entente"
+msgstr ""
+
+#: company/choices/fr.py:250
+msgid "Institution interdépartementale ou entent"
+msgstr ""
+
+#: company/choices/fr.py:251
+msgid "Institution interrégionale ou entente"
+msgstr ""
+
+#: company/choices/fr.py:252
+msgid "Syndicat intercommunal à vocation unique (SIVU)"
+msgstr ""
+
+#: company/choices/fr.py:253
+msgid "Syndicat mixte fermé"
+msgstr ""
+
+#: company/choices/fr.py:254
+msgid "Syndicat mixte ouver"
+msgstr ""
+
+#: company/choices/fr.py:255
+msgid "Commission syndicale pour la gestion des biens indivis des communes"
+msgstr ""
+
+#: company/choices/fr.py:256
+msgid "Pôle d'équilibre territorial et rural (PETR"
+msgstr ""
+
+#: company/choices/fr.py:257
+msgid "Centre communal d'action sociale"
+msgstr ""
+
+#: company/choices/fr.py:258
+msgid "Caisse des écoles"
+msgstr ""
+
+#: company/choices/fr.py:259
+msgid "Caisse de crédit municipal"
+msgstr ""
+
+#: company/choices/fr.py:260
+msgid "Établissement d'hospitalisation"
+msgstr ""
+
+#: company/choices/fr.py:261
+msgid "Syndicat inter hospitalier"
+msgstr ""
+
+#: company/choices/fr.py:262
+msgid "Établissement public local social et médico-social"
+msgstr ""
+
+#: company/choices/fr.py:263
+msgid "Centre Intercommunal d'action sociale (CIAS"
+msgstr ""
+
+#: company/choices/fr.py:264
+msgid "Office public d'habitation à loyer modéré (OPHLM)"
+msgstr ""
+
+#: company/choices/fr.py:265
+msgid "Service départemental d'incendie et de secours (SDIS"
+msgstr ""
+
+#: company/choices/fr.py:266
+msgid "Établissement public local culturel"
+msgstr ""
+
+#: company/choices/fr.py:267
+msgid "Régie d'une collectivité locale à caractère administratif"
+msgstr ""
+
+#: company/choices/fr.py:268
+msgid "(Autre) Établissement public administratif local"
+msgstr ""
+
+#: company/choices/fr.py:269
+msgid "Organisme consulaire"
+msgstr ""
+
+#: company/choices/fr.py:270
+msgid "Établissement public national ayant fonction d'administration centrale"
+msgstr ""
+
+#: company/choices/fr.py:271
+msgid ""
+"Établissement public national à caractère scientifique culturel et "
+"professionnel"
+msgstr ""
+
+#: company/choices/fr.py:272
+msgid "Autre établissement public national d'enseignement"
+msgstr ""
+
+#: company/choices/fr.py:273
+msgid ""
+"Autre établissement public national administratif à compétence territoriale "
+"limitée"
+msgstr ""
+
+#: company/choices/fr.py:274
+msgid "Établissement public national à caractère administratif"
+msgstr ""
+
+#: company/choices/fr.py:275
+msgid "Groupement d'intérêt public (GIP)"
+msgstr ""
+
+#: company/choices/fr.py:276
+msgid "Établissement public des cultes d'Alsace-Lorraine"
+msgstr ""
+
+#: company/choices/fr.py:277
+msgid "Etablissement public administratif, cercle et foyer dans les armées"
+msgstr ""
+
+#: company/choices/fr.py:278
+msgid "Groupement de coopération sanitaire à gestion publique"
+msgstr ""
+
+#: company/choices/fr.py:279
+msgid "Autre personne morale de droit administratif"
+msgstr ""
+
+#: company/choices/fr.py:280
+msgid "Régime général de la Sécurité Social"
+msgstr ""
+
+#: company/choices/fr.py:281
+msgid "Régime spécial de Sécurité Social"
+msgstr ""
+
+#: company/choices/fr.py:282
+msgid "Institution de retraite complémentaire"
+msgstr ""
+
+#: company/choices/fr.py:283
+msgid "Mutualité sociale agricole"
+msgstr ""
+
+#: company/choices/fr.py:284
+msgid "Régime maladie des non-salariés non agricoles"
+msgstr ""
+
+#: company/choices/fr.py:285
+msgid ""
+"Régime vieillesse ne dépendant pas du régime général de la Sécurité Social"
+msgstr ""
+
+#: company/choices/fr.py:286
+msgid "Régime d'assurance chômage"
+msgstr ""
+
+#: company/choices/fr.py:287
+msgid "Autre régime de prévoyance sociale"
+msgstr ""
+
+#: company/choices/fr.py:288
+msgid "Mutuelle"
+msgstr ""
+
+#: company/choices/fr.py:289
+msgid "Assurance mutuelle agricole"
+msgstr ""
+
+#: company/choices/fr.py:290
+msgid "Autre organisme mutualiste"
+msgstr ""
+
+#: company/choices/fr.py:291
+msgid "Comité central d'entreprise"
+msgstr ""
+
+#: company/choices/fr.py:292
+msgid "Comité d'établissement"
+msgstr ""
+
+#: company/choices/fr.py:293
+msgid "Syndicat de salariés"
+msgstr ""
+
+#: company/choices/fr.py:294
+msgid "Syndicat patronal"
+msgstr ""
+
+#: company/choices/fr.py:295
+msgid "Ordre professionnel ou assimilé"
+msgstr ""
+
+#: company/choices/fr.py:296
+msgid ""
+"Centre technique industriel ou comité professionnel du développement "
+"économique"
+msgstr ""
+
+#: company/choices/fr.py:297
+msgid "Autre organisme professionnel"
+msgstr ""
+
+#: company/choices/fr.py:298
+msgid "Institution de prévoyance"
+msgstr ""
+
+#: company/choices/fr.py:299
+msgid "Institution de retraite supplémentaire"
+msgstr ""
+
+#: company/choices/fr.py:300
+msgid "Syndicat de copropriété"
+msgstr ""
+
+#: company/choices/fr.py:301
+msgid "Association syndicale libre"
+msgstr ""
+
+#: company/choices/fr.py:302
+msgid "Association non déclarée"
+msgstr ""
+
+#: company/choices/fr.py:303
+msgid "Association déclarée"
+msgstr ""
+
+#: company/choices/fr.py:304
+msgid "Association déclarée d'insertion par l'économiqu"
+msgstr ""
+
+#: company/choices/fr.py:305
+msgid "Association intermédiaire"
+msgstr ""
+
+#: company/choices/fr.py:306
+msgid "Groupement d'employeurs"
+msgstr ""
+
+#: company/choices/fr.py:307
+msgid "Association d'avocats à responsabilité professionnelle individuell"
+msgstr ""
+
+#: company/choices/fr.py:308
+msgid "Association déclarée, reconnue d'utilité publiqu"
+msgstr ""
+
+#: company/choices/fr.py:309
+msgid "Congrégation"
+msgstr ""
+
+#: company/choices/fr.py:310
+msgid "Association de droit local (Bas-Rhin, Haut-Rhin et Moselle"
+msgstr ""
+
+#: company/choices/fr.py:311
+msgid "Fondation"
+msgstr ""
+
+#: company/choices/fr.py:312
+msgid "Autre personne morale de droit privé"
+msgstr ""
+
+#: company/choices/fr.py:313
+msgid "Groupement de coopération sanitaire à gestion privée"
+msgstr ""
+
+#: company/choices/fr.py:317
+msgid "Culture et production animale, chasse et services annexes"
+msgstr ""
+
+#: company/choices/fr.py:318
+msgid "Cultures non permanentes"
+msgstr ""
+
+#: company/choices/fr.py:319 company/choices/fr.py:320
+msgid ""
+"Culture de céréales (à l'exception du riz), de légumineuses et de graines "
+"oléagineuses"
+msgstr ""
+
+#: company/choices/fr.py:321 company/choices/fr.py:322
+msgid "Culture du riz"
+msgstr ""
+
+#: company/choices/fr.py:323 company/choices/fr.py:324
+msgid "Culture de légumes, de melons, de racines et de tubercules"
+msgstr ""
+
+#: company/choices/fr.py:325 company/choices/fr.py:326
+msgid "Culture de la canne à sucre"
+msgstr ""
+
+#: company/choices/fr.py:327 company/choices/fr.py:328
+msgid "Culture du tabac"
+msgstr ""
+
+#: company/choices/fr.py:329 company/choices/fr.py:330
+msgid "Culture de plantes à fibres"
+msgstr ""
+
+#: company/choices/fr.py:331 company/choices/fr.py:332
+msgid "Autres cultures non permanentes"
+msgstr ""
+
+#: company/choices/fr.py:333
+msgid "Cultures permanentes"
+msgstr ""
+
+#: company/choices/fr.py:334 company/choices/fr.py:335
+msgid "Culture de la vigne"
+msgstr ""
+
+#: company/choices/fr.py:336 company/choices/fr.py:337
+msgid "Culture de fruits tropicaux et subtropicaux"
+msgstr ""
+
+#: company/choices/fr.py:338 company/choices/fr.py:339
+msgid "Culture d'agrumes"
+msgstr ""
+
+#: company/choices/fr.py:340 company/choices/fr.py:341
+msgid "Culture de fruits à pépins et à noyau"
+msgstr ""
+
+#: company/choices/fr.py:342 company/choices/fr.py:343
+msgid "Culture d'autres fruits d'arbres ou d'arbustes et de fruits à coque"
+msgstr ""
+
+#: company/choices/fr.py:344 company/choices/fr.py:345
+msgid "Culture de fruits oléagineux"
+msgstr ""
+
+#: company/choices/fr.py:346 company/choices/fr.py:347
+msgid "Culture de plantes à boissons"
+msgstr ""
+
+#: company/choices/fr.py:348 company/choices/fr.py:349
+msgid ""
+"Culture de plantes à épices, aromatiques, médicinales et pharmaceutiques"
+msgstr ""
+
+#: company/choices/fr.py:350 company/choices/fr.py:351
+msgid "Autres cultures permanentes"
+msgstr ""
+
+#: company/choices/fr.py:352 company/choices/fr.py:353
+#: company/choices/fr.py:354
+msgid "Reproduction de plantes"
+msgstr ""
+
+#: company/choices/fr.py:355
+msgid "Production animale"
+msgstr ""
+
+#: company/choices/fr.py:356 company/choices/fr.py:357
+msgid "Élevage de vaches laitières"
+msgstr ""
+
+#: company/choices/fr.py:358 company/choices/fr.py:359
+msgid "Élevage d'autres bovins et de buffles"
+msgstr ""
+
+#: company/choices/fr.py:360 company/choices/fr.py:361
+msgid "Élevage de chevaux et d'autres équidés"
+msgstr ""
+
+#: company/choices/fr.py:362 company/choices/fr.py:363
+msgid "Élevage de chameaux et d'autres camélidés"
+msgstr ""
+
+#: company/choices/fr.py:364 company/choices/fr.py:365
+msgid "Élevage d'ovins et de caprins"
+msgstr ""
+
+#: company/choices/fr.py:366 company/choices/fr.py:367
+msgid "Élevage de porcins"
+msgstr ""
+
+#: company/choices/fr.py:368 company/choices/fr.py:369
+msgid "Élevage de volailles"
+msgstr ""
+
+#: company/choices/fr.py:370 company/choices/fr.py:371
+msgid "Élevage d'autres animaux"
+msgstr ""
+
+#: company/choices/fr.py:372 company/choices/fr.py:373
+#: company/choices/fr.py:374
+msgid "Culture et élevage associés"
+msgstr ""
+
+#: company/choices/fr.py:375
+msgid ""
+"Activités de soutien à l'agriculture et traitement primaire des récoltes"
+msgstr ""
+
+#: company/choices/fr.py:376 company/choices/fr.py:377
+msgid "Activités de soutien aux cultures"
+msgstr ""
+
+#: company/choices/fr.py:378 company/choices/fr.py:379
+msgid "Activités de soutien à la production animale"
+msgstr ""
+
+#: company/choices/fr.py:380 company/choices/fr.py:381
+msgid "Traitement primaire des récoltes"
+msgstr ""
+
+#: company/choices/fr.py:382 company/choices/fr.py:383
+msgid "Traitement des semences"
+msgstr ""
+
+#: company/choices/fr.py:384 company/choices/fr.py:385
+#: company/choices/fr.py:386
+msgid "Chasse, piégeage et services annexes"
+msgstr ""
+
+#: company/choices/fr.py:387
+msgid "Sylviculture et exploitation forestière"
+msgstr ""
+
+#: company/choices/fr.py:388 company/choices/fr.py:389
+#: company/choices/fr.py:390
+msgid "Sylviculture et autres activités forestières"
+msgstr ""
+
+#: company/choices/fr.py:391 company/choices/fr.py:392
+#: company/choices/fr.py:393
+msgid "Exploitation forestière"
+msgstr ""
+
+#: company/choices/fr.py:394 company/choices/fr.py:395
+#: company/choices/fr.py:396
+msgid "Récolte de produits forestiers non ligneux poussant à l'état sauvage"
+msgstr ""
+
+#: company/choices/fr.py:397 company/choices/fr.py:398
+#: company/choices/fr.py:399
+msgid "Services de soutien à l'exploitation forestière"
+msgstr ""
+
+#: company/choices/fr.py:400
+msgid "Pêche et aquaculture"
+msgstr ""
+
+#: company/choices/fr.py:401
+msgid "Pêche"
+msgstr ""
+
+#: company/choices/fr.py:402 company/choices/fr.py:403
+msgid "Pêche en mer"
+msgstr ""
+
+#: company/choices/fr.py:404 company/choices/fr.py:405
+msgid "Pêche en eau douce"
+msgstr ""
+
+#: company/choices/fr.py:406
+msgid "Aquaculture"
+msgstr ""
+
+#: company/choices/fr.py:407 company/choices/fr.py:408
+msgid "Aquaculture en mer"
+msgstr ""
+
+#: company/choices/fr.py:409 company/choices/fr.py:410
+msgid "Aquaculture en eau douce"
+msgstr ""
+
+#: company/choices/fr.py:411
+msgid "Extraction de houille et de lignite"
+msgstr ""
+
+#: company/choices/fr.py:412 company/choices/fr.py:413
+#: company/choices/fr.py:414
+msgid "Extraction de houille"
+msgstr ""
+
+#: company/choices/fr.py:415 company/choices/fr.py:416
+#: company/choices/fr.py:417
+msgid "Extraction de lignite"
+msgstr ""
+
+#: company/choices/fr.py:418
+msgid "Extraction d'hydrocarbures"
+msgstr ""
+
+#: company/choices/fr.py:419 company/choices/fr.py:420
+#: company/choices/fr.py:421
+msgid "Extraction de pétrole brut"
+msgstr ""
+
+#: company/choices/fr.py:422 company/choices/fr.py:423
+#: company/choices/fr.py:424
+msgid "Extraction de gaz naturel"
+msgstr ""
+
+#: company/choices/fr.py:425
+msgid "Extraction de minerais métalliques"
+msgstr ""
+
+#: company/choices/fr.py:426 company/choices/fr.py:427
+#: company/choices/fr.py:428
+msgid "Extraction de minerais de fer"
+msgstr ""
+
+#: company/choices/fr.py:429
+msgid "Extraction de minerais de métaux non ferreux"
+msgstr ""
+
+#: company/choices/fr.py:430 company/choices/fr.py:431
+msgid "Extraction de minerais d'uranium et de thorium"
+msgstr ""
+
+#: company/choices/fr.py:432 company/choices/fr.py:433
+msgid "Extraction d'autres minerais de métaux non ferreux"
+msgstr ""
+
+#: company/choices/fr.py:434
+msgid "Autres industries extractives"
+msgstr ""
+
+#: company/choices/fr.py:435
+msgid "Extraction de pierres, de sables et d'argiles"
+msgstr ""
+
+#: company/choices/fr.py:436 company/choices/fr.py:437
+msgid ""
+"Extraction de pierres ornementales et de construction, de calcaire "
+"industriel, de gypse, de craie et d'ardoise"
+msgstr ""
+
+#: company/choices/fr.py:438 company/choices/fr.py:439
+msgid ""
+"Exploitation de gravières et sablières, extraction d’argiles et de kaolin"
+msgstr ""
+
+#: company/choices/fr.py:440
+msgid "Activités extractives n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:441 company/choices/fr.py:442
+msgid "Extraction des minéraux chimiques et d'engrais minéraux "
+msgstr ""
+
+#: company/choices/fr.py:443 company/choices/fr.py:444
+msgid "Extraction de tourbe"
+msgstr ""
+
+#: company/choices/fr.py:445 company/choices/fr.py:446
+msgid "Production de sel "
+msgstr ""
+
+#: company/choices/fr.py:447 company/choices/fr.py:448
+msgid "Autres activités extractives n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:449
+msgid "Services de soutien aux industries extractives"
+msgstr ""
+
+#: company/choices/fr.py:450 company/choices/fr.py:451
+#: company/choices/fr.py:452
+msgid "Activités de soutien à l'extraction d'hydrocarbures"
+msgstr ""
+
+#: company/choices/fr.py:453
+msgid "Activités de soutien aux autres industries extractives"
+msgstr ""
+
+#: company/choices/fr.py:454 company/choices/fr.py:455
+msgid "Activités de soutien aux autres industries extractives "
+msgstr ""
+
+#: company/choices/fr.py:456
+msgid "Industries alimentaires"
+msgstr ""
+
+#: company/choices/fr.py:457
+msgid ""
+"Transformation et conservation de la viande et préparation de produits à "
+"base de viande"
+msgstr ""
+
+#: company/choices/fr.py:458 company/choices/fr.py:459
+msgid "Transformation et conservation de la viande de boucherie"
+msgstr ""
+
+#: company/choices/fr.py:460 company/choices/fr.py:461
+msgid "Transformation et conservation de la viande de volaille"
+msgstr ""
+
+#: company/choices/fr.py:462
+msgid "Préparation de produits à base de viande"
+msgstr ""
+
+#: company/choices/fr.py:463
+msgid "Préparation industrielle de produits à base de viande"
+msgstr ""
+
+#: company/choices/fr.py:464
+msgid "Charcuterie"
+msgstr ""
+
+#: company/choices/fr.py:465 company/choices/fr.py:466
+#: company/choices/fr.py:467
+msgid ""
+"Transformation et conservation de poisson, de crustacés et de mollusques"
+msgstr ""
+
+#: company/choices/fr.py:468
+msgid "Transformation et conservation de fruits et légumes"
+msgstr ""
+
+#: company/choices/fr.py:469 company/choices/fr.py:470
+msgid "Transformation et conservation de pommes de terre"
+msgstr ""
+
+#: company/choices/fr.py:471 company/choices/fr.py:472
+msgid "Préparation de jus de fruits et légumes"
+msgstr ""
+
+#: company/choices/fr.py:473
+msgid "Autre transformation et conservation de fruits et légumes"
+msgstr ""
+
+#: company/choices/fr.py:474
+msgid "Autre transformation et conservation de légumes"
+msgstr ""
+
+#: company/choices/fr.py:475
+msgid "Transformation et conservation de fruits"
+msgstr ""
+
+#: company/choices/fr.py:476
+msgid "Fabrication d’huiles et graisses végétales et animales"
+msgstr ""
+
+#: company/choices/fr.py:477
+msgid "Fabrication d'huiles et graisses"
+msgstr ""
+
+#: company/choices/fr.py:478
+msgid "Fabrication d'huiles et graisses brutes"
+msgstr ""
+
+#: company/choices/fr.py:479
+msgid "Fabrication d'huiles et graisses raffinées"
+msgstr ""
+
+#: company/choices/fr.py:480 company/choices/fr.py:481
+msgid "Fabrication de margarine et graisses comestibles similaires"
+msgstr ""
+
+#: company/choices/fr.py:482
+msgid "Fabrication de produits laitiers"
+msgstr ""
+
+#: company/choices/fr.py:483
+msgid "Exploitation de laiteries et fabrication de fromage"
+msgstr ""
+
+#: company/choices/fr.py:484
+msgid "Fabrication de lait liquide et de produits frais"
+msgstr ""
+
+#: company/choices/fr.py:485
+msgid "Fabrication de beurre"
+msgstr ""
+
+#: company/choices/fr.py:486
+msgid "Fabrication de fromage"
+msgstr ""
+
+#: company/choices/fr.py:487
+msgid "Fabrication d'autres produits laitiers"
+msgstr ""
+
+#: company/choices/fr.py:488 company/choices/fr.py:489
+msgid "Fabrication de glaces et sorbets"
+msgstr ""
+
+#: company/choices/fr.py:490
+msgid "Travail des grains ; fabrication de produits amylacés"
+msgstr ""
+
+#: company/choices/fr.py:491
+msgid "Travail des grains"
+msgstr ""
+
+#: company/choices/fr.py:492
+msgid "Meunerie"
+msgstr ""
+
+#: company/choices/fr.py:493
+msgid "Autres activités du travail des grains"
+msgstr ""
+
+#: company/choices/fr.py:494 company/choices/fr.py:495
+msgid "Fabrication de produits amylacés"
+msgstr ""
+
+#: company/choices/fr.py:496
+msgid ""
+"Fabrication de produits de boulangerie-pâtisserie et de pâtes alimentaires"
+msgstr ""
+
+#: company/choices/fr.py:497
+msgid "Fabrication de pain et de pâtisserie fraîche"
+msgstr ""
+
+#: company/choices/fr.py:498
+msgid "Fabrication industrielle de pain et de pâtisserie fraîche"
+msgstr ""
+
+#: company/choices/fr.py:499
+msgid "Cuisson de produits de boulangerie"
+msgstr ""
+
+#: company/choices/fr.py:500
+msgid "Boulangerie et boulangerie-pâtisserie"
+msgstr ""
+
+#: company/choices/fr.py:501
+msgid "Pâtisserie"
+msgstr ""
+
+#: company/choices/fr.py:502 company/choices/fr.py:503
+msgid "Fabrication de biscuits, biscottes et pâtisseries de conservation"
+msgstr ""
+
+#: company/choices/fr.py:504 company/choices/fr.py:505
+msgid "Fabrication de pâtes alimentaires"
+msgstr ""
+
+#: company/choices/fr.py:506
+msgid "Fabrication d'autres produits alimentaires"
+msgstr ""
+
+#: company/choices/fr.py:507 company/choices/fr.py:508
+msgid "Fabrication de sucre"
+msgstr ""
+
+#: company/choices/fr.py:509 company/choices/fr.py:510
+msgid "Fabrication de cacao, chocolat et de produits de confiserie"
+msgstr ""
+
+#: company/choices/fr.py:511 company/choices/fr.py:512
+msgid "Transformation du thé et du café"
+msgstr ""
+
+#: company/choices/fr.py:513 company/choices/fr.py:514
+msgid "Fabrication de condiments et assaisonnements"
+msgstr ""
+
+#: company/choices/fr.py:515 company/choices/fr.py:516
+msgid "Fabrication de plats préparés"
+msgstr ""
+
+#: company/choices/fr.py:517 company/choices/fr.py:518
+msgid "Fabrication d'aliments homogénéisés et diététiques"
+msgstr ""
+
+#: company/choices/fr.py:519 company/choices/fr.py:520
+msgid "Fabrication d'autres produits alimentaires n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:521
+msgid "Fabrication d'aliments pour animaux"
+msgstr ""
+
+#: company/choices/fr.py:522 company/choices/fr.py:523
+msgid "Fabrication d'aliments pour animaux de ferme"
+msgstr ""
+
+#: company/choices/fr.py:524 company/choices/fr.py:525
+msgid "Fabrication d'aliments pour animaux de compagnie"
+msgstr ""
+
+#: company/choices/fr.py:526 company/choices/fr.py:527
+msgid "Fabrication de boissons"
+msgstr ""
+
+#: company/choices/fr.py:528 company/choices/fr.py:529
+msgid "Production de boissons alcooliques distillées"
+msgstr ""
+
+#: company/choices/fr.py:530
+msgid "Production de vin (de raisin)"
+msgstr ""
+
+#: company/choices/fr.py:531
+msgid "Fabrication de vins effervescents"
+msgstr ""
+
+#: company/choices/fr.py:532
+msgid "Vinification"
+msgstr ""
+
+#: company/choices/fr.py:533
+msgid "Fabrication de cidre et de vins de fruits  "
+msgstr ""
+
+#: company/choices/fr.py:534
+msgid "Fabrication de cidre et de vins de fruits "
+msgstr ""
+
+#: company/choices/fr.py:535 company/choices/fr.py:536
+msgid "Production d'autres boissons fermentées non distillées"
+msgstr ""
+
+#: company/choices/fr.py:537 company/choices/fr.py:538
+msgid "Fabrication de bière"
+msgstr ""
+
+#: company/choices/fr.py:539 company/choices/fr.py:540
+msgid "Fabrication de malt"
+msgstr ""
+
+#: company/choices/fr.py:541
+msgid ""
+"Industrie des eaux minérales et autres eaux embouteillées et des boissons "
+"rafraîchissantes"
+msgstr ""
+
+#: company/choices/fr.py:542
+msgid "Industrie des eaux de table"
+msgstr ""
+
+#: company/choices/fr.py:543
+msgid "Production de boissons rafraîchissantes"
+msgstr ""
+
+#: company/choices/fr.py:544 company/choices/fr.py:545
+#: company/choices/fr.py:546 company/choices/fr.py:547
+msgid "Fabrication de produits à base de tabac"
+msgstr ""
+
+#: company/choices/fr.py:548
+msgid "Fabrication de textiles"
+msgstr ""
+
+#: company/choices/fr.py:549 company/choices/fr.py:550
+#: company/choices/fr.py:551
+msgid "Préparation de fibres textiles et filature"
+msgstr ""
+
+#: company/choices/fr.py:552 company/choices/fr.py:553
+#: company/choices/fr.py:554
+msgid "Tissage"
+msgstr ""
+
+#: company/choices/fr.py:555 company/choices/fr.py:556
+#: company/choices/fr.py:557
+msgid "Ennoblissement textile"
+msgstr ""
+
+#: company/choices/fr.py:558
+msgid "Fabrication d'autres textiles"
+msgstr ""
+
+#: company/choices/fr.py:559 company/choices/fr.py:560
+msgid "Fabrication d'étoffes à mailles"
+msgstr ""
+
+#: company/choices/fr.py:561 company/choices/fr.py:562
+msgid "Fabrication d'articles textiles, sauf habillement"
+msgstr ""
+
+#: company/choices/fr.py:563 company/choices/fr.py:564
+msgid "Fabrication de tapis et moquettes"
+msgstr ""
+
+#: company/choices/fr.py:565 company/choices/fr.py:566
+msgid "Fabrication de ficelles, cordes et filets"
+msgstr ""
+
+#: company/choices/fr.py:567 company/choices/fr.py:568
+msgid "Fabrication de non-tissés, sauf habillement"
+msgstr ""
+
+#: company/choices/fr.py:569 company/choices/fr.py:570
+msgid "Fabrication d'autres textiles techniques et industriels"
+msgstr ""
+
+#: company/choices/fr.py:571 company/choices/fr.py:572
+msgid "Fabrication d'autres textiles n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:573
+msgid "Industrie de l'habillement"
+msgstr ""
+
+#: company/choices/fr.py:574
+msgid "Fabrication de vêtements, autres qu'en fourrure"
+msgstr ""
+
+#: company/choices/fr.py:575 company/choices/fr.py:576
+msgid "Fabrication de vêtements en cuir"
+msgstr ""
+
+#: company/choices/fr.py:577 company/choices/fr.py:578
+msgid "Fabrication de vêtements de travail"
+msgstr ""
+
+#: company/choices/fr.py:579 company/choices/fr.py:580
+msgid "Fabrication de vêtements de dessus"
+msgstr ""
+
+#: company/choices/fr.py:581 company/choices/fr.py:582
+msgid "Fabrication de vêtements de dessous"
+msgstr ""
+
+#: company/choices/fr.py:583 company/choices/fr.py:584
+msgid "Fabrication d'autres vêtements et accessoires"
+msgstr ""
+
+#: company/choices/fr.py:585 company/choices/fr.py:586
+#: company/choices/fr.py:587
+msgid "Fabrication d'articles en fourrure"
+msgstr ""
+
+#: company/choices/fr.py:588
+msgid "Fabrication d'articles à mailles"
+msgstr ""
+
+#: company/choices/fr.py:589 company/choices/fr.py:590
+msgid "Fabrication d'articles chaussants à mailles"
+msgstr ""
+
+#: company/choices/fr.py:591 company/choices/fr.py:592
+msgid "Fabrication d'autres articles à mailles"
+msgstr ""
+
+#: company/choices/fr.py:593
+msgid "Industrie du cuir et de la chaussure"
+msgstr ""
+
+#: company/choices/fr.py:594
+msgid ""
+"Apprêt et tannage des cuirs ; préparation et teinture des fourrures ; "
+"fabrication d'articles de voyage, de maroquinerie et de sellerie"
+msgstr ""
+
+#: company/choices/fr.py:595 company/choices/fr.py:596
+msgid "Apprêt et tannage des cuirs ; préparation et teinture des fourrures"
+msgstr ""
+
+#: company/choices/fr.py:597 company/choices/fr.py:598
+msgid "Fabrication d'articles de voyage, de maroquinerie et de sellerie"
+msgstr ""
+
+#: company/choices/fr.py:599 company/choices/fr.py:600
+#: company/choices/fr.py:601
+msgid "Fabrication de chaussures"
+msgstr ""
+
+#: company/choices/fr.py:602
+msgid ""
+"Travail du bois et fabrication d'articles en bois et en liège, à l’exception "
+"des meubles ; fabrication d’articles en vannerie et sparterie"
+msgstr ""
+
+#: company/choices/fr.py:603 company/choices/fr.py:604
+msgid "Sciage et rabotage du bois"
+msgstr ""
+
+#: company/choices/fr.py:605
+msgid "Sciage et rabotage du bois, hors imprégnation"
+msgstr ""
+
+#: company/choices/fr.py:606
+msgid "Imprégnation du bois"
+msgstr ""
+
+#: company/choices/fr.py:607
+msgid "Fabrication d'articles en bois, liège, vannerie et sparterie"
+msgstr ""
+
+#: company/choices/fr.py:608 company/choices/fr.py:609
+msgid "Fabrication de placage et de panneaux de bois"
+msgstr ""
+
+#: company/choices/fr.py:610 company/choices/fr.py:611
+msgid "Fabrication de parquets assemblés"
+msgstr ""
+
+#: company/choices/fr.py:612 company/choices/fr.py:613
+msgid "Fabrication de charpentes et d'autres menuiseries"
+msgstr ""
+
+#: company/choices/fr.py:614 company/choices/fr.py:615
+msgid "Fabrication d'emballages en bois"
+msgstr ""
+
+#: company/choices/fr.py:616 company/choices/fr.py:617
+msgid ""
+"Fabrication d'objets divers en bois ; fabrication d'objets en liège, "
+"vannerie et sparterie"
+msgstr ""
+
+#: company/choices/fr.py:618
+msgid "Industrie du papier et du carton"
+msgstr ""
+
+#: company/choices/fr.py:619
+msgid "Fabrication de pâte à papier, de papier et de carton"
+msgstr ""
+
+#: company/choices/fr.py:620 company/choices/fr.py:621
+msgid "Fabrication de pâte à papier"
+msgstr ""
+
+#: company/choices/fr.py:622 company/choices/fr.py:623
+msgid "Fabrication de papier et de carton"
+msgstr ""
+
+#: company/choices/fr.py:624
+msgid "Fabrication d'articles en papier ou en carton"
+msgstr ""
+
+#: company/choices/fr.py:625
+msgid ""
+"Fabrication de papier et carton ondulés et d'emballages en papier ou en "
+"carton"
+msgstr ""
+
+#: company/choices/fr.py:626
+msgid "Fabrication de carton ondulé"
+msgstr ""
+
+#: company/choices/fr.py:627
+msgid "Fabrication de cartonnages "
+msgstr ""
+
+#: company/choices/fr.py:628
+msgid "Fabrication d'emballages en papier"
+msgstr ""
+
+#: company/choices/fr.py:629 company/choices/fr.py:630
+msgid "Fabrication d'articles en papier à usage sanitaire ou domestique"
+msgstr ""
+
+#: company/choices/fr.py:631 company/choices/fr.py:632
+msgid "Fabrication d'articles de papeterie"
+msgstr ""
+
+#: company/choices/fr.py:633 company/choices/fr.py:634
+msgid "Fabrication de papiers peints"
+msgstr ""
+
+#: company/choices/fr.py:635 company/choices/fr.py:636
+msgid "Fabrication d'autres articles en papier ou en carton"
+msgstr ""
+
+#: company/choices/fr.py:637
+msgid "Imprimerie et reproduction d'enregistrements"
+msgstr ""
+
+#: company/choices/fr.py:638
+msgid "Imprimerie et services annexes"
+msgstr ""
+
+#: company/choices/fr.py:639 company/choices/fr.py:640
+msgid "Imprimerie de journaux"
+msgstr ""
+
+#: company/choices/fr.py:641 company/choices/fr.py:642
+msgid "Autre imprimerie (labeur)"
+msgstr ""
+
+#: company/choices/fr.py:643 company/choices/fr.py:644
+msgid "Activités de pré-presse "
+msgstr ""
+
+#: company/choices/fr.py:645 company/choices/fr.py:646
+msgid "Reliure et activités connexes"
+msgstr ""
+
+#: company/choices/fr.py:647 company/choices/fr.py:648
+#: company/choices/fr.py:649
+msgid "Reproduction d'enregistrements"
+msgstr ""
+
+#: company/choices/fr.py:650
+msgid "Cokéfaction et raffinage"
+msgstr ""
+
+#: company/choices/fr.py:651 company/choices/fr.py:652
+#: company/choices/fr.py:653
+msgid "Cokéfaction"
+msgstr ""
+
+#: company/choices/fr.py:654 company/choices/fr.py:655
+#: company/choices/fr.py:656
+msgid "Raffinage du pétrole"
+msgstr ""
+
+#: company/choices/fr.py:657
+msgid "Industrie chimique"
+msgstr ""
+
+#: company/choices/fr.py:658
+msgid ""
+"Fabrication de produits chimiques de base, de produits azotés et d'engrais, "
+"de matières plastiques de base et de caoutchouc synthétique"
+msgstr ""
+
+#: company/choices/fr.py:659 company/choices/fr.py:660
+msgid "Fabrication de gaz industriels"
+msgstr ""
+
+#: company/choices/fr.py:661 company/choices/fr.py:662
+msgid "Fabrication de colorants et de pigments"
+msgstr ""
+
+#: company/choices/fr.py:663
+msgid "Fabrication d'autres produits chimiques inorganiques de base"
+msgstr ""
+
+#: company/choices/fr.py:664
+msgid "Enrichissement et  retraitement de matières nucléaires"
+msgstr ""
+
+#: company/choices/fr.py:665
+msgid "Fabrication d'autres produits chimiques inorganiques de base n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:666 company/choices/fr.py:667
+msgid "Fabrication d'autres produits chimiques organiques de base"
+msgstr ""
+
+#: company/choices/fr.py:668 company/choices/fr.py:669
+msgid "Fabrication de produits azotés et d'engrais"
+msgstr ""
+
+#: company/choices/fr.py:670 company/choices/fr.py:671
+msgid "Fabrication de matières plastiques de base"
+msgstr ""
+
+#: company/choices/fr.py:672 company/choices/fr.py:673
+msgid "Fabrication de caoutchouc synthétique"
+msgstr ""
+
+#: company/choices/fr.py:674
+msgid "Fabrication de pesticides et d’autres produits agrochimiques "
+msgstr ""
+
+#: company/choices/fr.py:675 company/choices/fr.py:676
+msgid "Fabrication de pesticides et d’autres produits agrochimiques"
+msgstr ""
+
+#: company/choices/fr.py:677 company/choices/fr.py:678
+#: company/choices/fr.py:679
+msgid "Fabrication de peintures, vernis, encres et mastics"
+msgstr ""
+
+#: company/choices/fr.py:680
+msgid "Fabrication de savons, de produits d'entretien et de parfums"
+msgstr ""
+
+#: company/choices/fr.py:681 company/choices/fr.py:682
+msgid "Fabrication de savons, détergents et produits d'entretien"
+msgstr ""
+
+#: company/choices/fr.py:683 company/choices/fr.py:684
+msgid "Fabrication de parfums et de produits pour la toilette"
+msgstr ""
+
+#: company/choices/fr.py:685
+msgid "Fabrication d'autres produits chimiques"
+msgstr ""
+
+#: company/choices/fr.py:686 company/choices/fr.py:687
+msgid "Fabrication de produits explosifs"
+msgstr ""
+
+#: company/choices/fr.py:688 company/choices/fr.py:689
+msgid "Fabrication de colles"
+msgstr ""
+
+#: company/choices/fr.py:690 company/choices/fr.py:691
+msgid "Fabrication d'huiles essentielles"
+msgstr ""
+
+#: company/choices/fr.py:692 company/choices/fr.py:693
+msgid "Fabrication d'autres produits chimiques n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:694 company/choices/fr.py:695
+#: company/choices/fr.py:696
+msgid "Fabrication de fibres artificielles ou synthétiques"
+msgstr ""
+
+#: company/choices/fr.py:697
+msgid "Industrie pharmaceutique"
+msgstr ""
+
+#: company/choices/fr.py:698 company/choices/fr.py:699
+#: company/choices/fr.py:700
+msgid "Fabrication de produits pharmaceutiques de base"
+msgstr ""
+
+#: company/choices/fr.py:701 company/choices/fr.py:702
+#: company/choices/fr.py:703
+msgid "Fabrication de préparations pharmaceutiques"
+msgstr ""
+
+#: company/choices/fr.py:704
+msgid "Fabrication de produits en caoutchouc et en plastique"
+msgstr ""
+
+#: company/choices/fr.py:705
+msgid "Fabrication de produits en caoutchouc"
+msgstr ""
+
+#: company/choices/fr.py:706 company/choices/fr.py:707
+msgid "Fabrication et rechapage de pneumatiques"
+msgstr ""
+
+#: company/choices/fr.py:708 company/choices/fr.py:709
+msgid "Fabrication d'autres articles en caoutchouc"
+msgstr ""
+
+#: company/choices/fr.py:710
+msgid "Fabrication  de produits en plastique"
+msgstr ""
+
+#: company/choices/fr.py:711 company/choices/fr.py:712
+msgid ""
+"Fabrication de plaques, feuilles, tubes et profilés en matières plastiques"
+msgstr ""
+
+#: company/choices/fr.py:713 company/choices/fr.py:714
+msgid "Fabrication d'emballages en matières plastiques"
+msgstr ""
+
+#: company/choices/fr.py:715 company/choices/fr.py:716
+msgid "Fabrication d'éléments en matières plastiques pour la construction"
+msgstr ""
+
+#: company/choices/fr.py:717
+msgid "Fabrication d'autres articles en matières plastiques"
+msgstr ""
+
+#: company/choices/fr.py:718
+msgid "Fabrication de pièces techniques à base de matières plastiques"
+msgstr ""
+
+#: company/choices/fr.py:719
+msgid "Fabrication de produits de consommation courante en matières plastiques"
+msgstr ""
+
+#: company/choices/fr.py:720
+msgid "Fabrication d'autres produits minéraux non métalliques"
+msgstr ""
+
+#: company/choices/fr.py:721
+msgid "Fabrication de verre et d'articles en verre"
+msgstr ""
+
+#: company/choices/fr.py:722 company/choices/fr.py:723
+msgid "Fabrication de verre plat"
+msgstr ""
+
+#: company/choices/fr.py:724 company/choices/fr.py:725
+msgid "Façonnage et transformation du verre plat"
+msgstr ""
+
+#: company/choices/fr.py:726 company/choices/fr.py:727
+msgid "Fabrication de verre creux"
+msgstr ""
+
+#: company/choices/fr.py:728 company/choices/fr.py:729
+msgid "Fabrication de fibres de verre"
+msgstr ""
+
+#: company/choices/fr.py:730 company/choices/fr.py:731
+msgid ""
+"Fabrication et façonnage d'autres articles en verre, y compris verre "
+"technique"
+msgstr ""
+
+#: company/choices/fr.py:732 company/choices/fr.py:733
+#: company/choices/fr.py:734
+msgid "Fabrication de produits réfractaires"
+msgstr ""
+
+#: company/choices/fr.py:735
+msgid "Fabrication de matériaux de construction en terre cuite"
+msgstr ""
+
+#: company/choices/fr.py:736 company/choices/fr.py:737
+msgid "Fabrication de carreaux en céramique"
+msgstr ""
+
+#: company/choices/fr.py:738 company/choices/fr.py:739
+msgid ""
+"Fabrication de briques, tuiles et produits de construction, en terre cuite"
+msgstr ""
+
+#: company/choices/fr.py:740
+msgid "Fabrication d'autres produits en céramique et en porcelaine "
+msgstr ""
+
+#: company/choices/fr.py:741 company/choices/fr.py:742
+msgid "Fabrication d'articles céramiques à usage domestique ou ornemental"
+msgstr ""
+
+#: company/choices/fr.py:743 company/choices/fr.py:744
+msgid "Fabrication d'appareils sanitaires en céramique"
+msgstr ""
+
+#: company/choices/fr.py:745 company/choices/fr.py:746
+msgid "Fabrication d'isolateurs et pièces isolantes en céramique"
+msgstr ""
+
+#: company/choices/fr.py:747 company/choices/fr.py:748
+msgid "Fabrication d'autres produits céramiques à usage technique"
+msgstr ""
+
+#: company/choices/fr.py:749
+msgid "Fabrication d'autres produits céramiques "
+msgstr ""
+
+#: company/choices/fr.py:750
+msgid "Fabrication d'autres produits céramiques"
+msgstr ""
+
+#: company/choices/fr.py:751
+msgid "Fabrication de ciment, chaux et plâtre"
+msgstr ""
+
+#: company/choices/fr.py:752 company/choices/fr.py:753
+msgid "Fabrication de ciment"
+msgstr ""
+
+#: company/choices/fr.py:754 company/choices/fr.py:755
+msgid "Fabrication de chaux et plâtre"
+msgstr ""
+
+#: company/choices/fr.py:756
+msgid "Fabrication d'ouvrages en béton, en ciment ou en plâtre"
+msgstr ""
+
+#: company/choices/fr.py:757 company/choices/fr.py:758
+msgid "Fabrication d'éléments en béton pour la construction"
+msgstr ""
+
+#: company/choices/fr.py:759 company/choices/fr.py:760
+msgid "Fabrication d'éléments en plâtre pour la construction"
+msgstr ""
+
+#: company/choices/fr.py:761 company/choices/fr.py:762
+msgid "Fabrication de béton prêt à l'emploi"
+msgstr ""
+
+#: company/choices/fr.py:763 company/choices/fr.py:764
+msgid "Fabrication de mortiers et bétons secs"
+msgstr ""
+
+#: company/choices/fr.py:765 company/choices/fr.py:766
+msgid "Fabrication d'ouvrages en fibre-ciment"
+msgstr ""
+
+#: company/choices/fr.py:767 company/choices/fr.py:768
+msgid "Fabrication d'autres ouvrages en béton, en ciment ou en plâtre"
+msgstr ""
+
+#: company/choices/fr.py:769
+msgid "Taille, façonnage et finissage de pierres "
+msgstr ""
+
+#: company/choices/fr.py:770 company/choices/fr.py:771
+msgid "Taille, façonnage et finissage de pierres"
+msgstr ""
+
+#: company/choices/fr.py:772
+msgid ""
+"Fabrication de produits abrasifs et de produits minéraux non métalliques n.c."
+"a."
+msgstr ""
+
+#: company/choices/fr.py:773 company/choices/fr.py:774
+msgid "Fabrication de produits abrasifs"
+msgstr ""
+
+#: company/choices/fr.py:775 company/choices/fr.py:776
+msgid "Fabrication d'autres produits minéraux non métalliques n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:777
+msgid "Métallurgie"
+msgstr ""
+
+#: company/choices/fr.py:778 company/choices/fr.py:779
+#: company/choices/fr.py:780
+msgid "Sidérurgie"
+msgstr ""
+
+#: company/choices/fr.py:781 company/choices/fr.py:782
+#: company/choices/fr.py:783
+msgid ""
+"Fabrication de tubes, tuyaux, profilés creux et accessoires correspondants "
+"en acier "
+msgstr ""
+
+#: company/choices/fr.py:784
+msgid "Fabrication d'autres produits de première transformation de l'acier"
+msgstr ""
+
+#: company/choices/fr.py:785 company/choices/fr.py:786
+msgid "Étirage à froid de barres"
+msgstr ""
+
+#: company/choices/fr.py:787 company/choices/fr.py:788
+msgid "Laminage à froid de feuillards"
+msgstr ""
+
+#: company/choices/fr.py:789 company/choices/fr.py:790
+msgid "Profilage à froid par formage ou pliage"
+msgstr ""
+
+#: company/choices/fr.py:791 company/choices/fr.py:792
+msgid "Tréfilage à froid"
+msgstr ""
+
+#: company/choices/fr.py:793
+msgid "Production de métaux précieux et d'autres métaux non ferreux"
+msgstr ""
+
+#: company/choices/fr.py:794 company/choices/fr.py:795
+msgid "Production de métaux précieux"
+msgstr ""
+
+#: company/choices/fr.py:796 company/choices/fr.py:797
+msgid "Métallurgie de l'aluminium"
+msgstr ""
+
+#: company/choices/fr.py:798 company/choices/fr.py:799
+msgid "Métallurgie du plomb, du zinc ou de l'étain"
+msgstr ""
+
+#: company/choices/fr.py:800 company/choices/fr.py:801
+msgid "Métallurgie du cuivre"
+msgstr ""
+
+#: company/choices/fr.py:802 company/choices/fr.py:803
+msgid "Métallurgie des autres métaux non ferreux"
+msgstr ""
+
+#: company/choices/fr.py:804 company/choices/fr.py:805
+msgid "Élaboration et transformation de matières nucléaires"
+msgstr ""
+
+#: company/choices/fr.py:806
+msgid "Fonderie"
+msgstr ""
+
+#: company/choices/fr.py:807 company/choices/fr.py:808
+msgid "Fonderie de fonte"
+msgstr ""
+
+#: company/choices/fr.py:809 company/choices/fr.py:810
+msgid "Fonderie d'acier"
+msgstr ""
+
+#: company/choices/fr.py:811 company/choices/fr.py:812
+msgid "Fonderie de métaux légers"
+msgstr ""
+
+#: company/choices/fr.py:813 company/choices/fr.py:814
+msgid "Fonderie d'autres métaux non ferreux"
+msgstr ""
+
+#: company/choices/fr.py:815
+msgid ""
+"Fabrication de produits métalliques, à l’exception des machines et des "
+"équipements"
+msgstr ""
+
+#: company/choices/fr.py:816
+msgid "Fabrication d'éléments en métal pour la construction"
+msgstr ""
+
+#: company/choices/fr.py:817 company/choices/fr.py:818
+msgid "Fabrication de structures métalliques et de parties de structures"
+msgstr ""
+
+#: company/choices/fr.py:819 company/choices/fr.py:820
+msgid "Fabrication de portes et fenêtres en métal"
+msgstr ""
+
+#: company/choices/fr.py:821
+msgid "Fabrication de réservoirs, citernes et conteneurs métalliques"
+msgstr ""
+
+#: company/choices/fr.py:822 company/choices/fr.py:823
+msgid "Fabrication de radiateurs et de chaudières pour le chauffage central"
+msgstr ""
+
+#: company/choices/fr.py:824 company/choices/fr.py:825
+msgid "Fabrication d'autres réservoirs, citernes et conteneurs métalliques"
+msgstr ""
+
+#: company/choices/fr.py:826 company/choices/fr.py:827
+#: company/choices/fr.py:828
+msgid ""
+"Fabrication de générateurs de vapeur, à l'exception des chaudières pour le "
+"chauffage central"
+msgstr ""
+
+#: company/choices/fr.py:829 company/choices/fr.py:830
+#: company/choices/fr.py:831
+msgid "Fabrication d'armes et de munitions"
+msgstr ""
+
+#: company/choices/fr.py:832 company/choices/fr.py:833
+msgid "Forge, emboutissage, estampage ; métallurgie des poudres"
+msgstr ""
+
+#: company/choices/fr.py:834
+msgid "Forge, estampage, matriçage ; métallurgie des poudres"
+msgstr ""
+
+#: company/choices/fr.py:835
+msgid "Découpage, emboutissage"
+msgstr ""
+
+#: company/choices/fr.py:836
+msgid "Traitement et revêtement des métaux ; usinage"
+msgstr ""
+
+#: company/choices/fr.py:837 company/choices/fr.py:838
+msgid "Traitement et revêtement des métaux"
+msgstr ""
+
+#: company/choices/fr.py:839
+msgid "Usinage"
+msgstr ""
+
+#: company/choices/fr.py:840
+msgid "Décolletage"
+msgstr ""
+
+#: company/choices/fr.py:841
+msgid "Mécanique industrielle"
+msgstr ""
+
+#: company/choices/fr.py:842
+msgid "Fabrication de coutellerie, d'outillage et de quincaillerie"
+msgstr ""
+
+#: company/choices/fr.py:843 company/choices/fr.py:844
+msgid "Fabrication de coutellerie"
+msgstr ""
+
+#: company/choices/fr.py:845 company/choices/fr.py:846
+msgid "Fabrication de serrures et de ferrures"
+msgstr ""
+
+#: company/choices/fr.py:847
+msgid "Fabrication d'outillage"
+msgstr ""
+
+#: company/choices/fr.py:848
+msgid "Fabrication de moules et modèles"
+msgstr ""
+
+#: company/choices/fr.py:849
+msgid "Fabrication d'autres outillages"
+msgstr ""
+
+#: company/choices/fr.py:850
+msgid "Fabrication d'autres ouvrages en métaux"
+msgstr ""
+
+#: company/choices/fr.py:851 company/choices/fr.py:852
+msgid "Fabrication de fûts et emballages métalliques similaires"
+msgstr ""
+
+#: company/choices/fr.py:853 company/choices/fr.py:854
+msgid "Fabrication d'emballages métalliques légers"
+msgstr ""
+
+#: company/choices/fr.py:855 company/choices/fr.py:856
+msgid "Fabrication d'articles en fils métalliques, de chaînes et de ressorts"
+msgstr ""
+
+#: company/choices/fr.py:857 company/choices/fr.py:858
+msgid "Fabrication de vis et de boulons"
+msgstr ""
+
+#: company/choices/fr.py:859
+msgid "Fabrication d'autres produits métalliques n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:860
+msgid "Fabrication d'articles métalliques ménagers"
+msgstr ""
+
+#: company/choices/fr.py:861
+msgid "Fabrication d'autres articles métalliques"
+msgstr ""
+
+#: company/choices/fr.py:862
+msgid "Fabrication de produits informatiques, électroniques et optiques"
+msgstr ""
+
+#: company/choices/fr.py:863
+msgid "Fabrication de composants et cartes électroniques"
+msgstr ""
+
+#: company/choices/fr.py:864 company/choices/fr.py:865
+msgid "Fabrication de composants électroniques"
+msgstr ""
+
+#: company/choices/fr.py:866 company/choices/fr.py:867
+msgid "Fabrication de cartes électroniques assemblées"
+msgstr ""
+
+#: company/choices/fr.py:868 company/choices/fr.py:869
+#: company/choices/fr.py:870
+msgid "Fabrication d'ordinateurs et d'équipements périphériques"
+msgstr ""
+
+#: company/choices/fr.py:871
+msgid "Fabrication d'équipements de communication"
+msgstr ""
+
+#: company/choices/fr.py:872 company/choices/fr.py:873
+msgid "Fabrication d'équipements de communication "
+msgstr ""
+
+#: company/choices/fr.py:874 company/choices/fr.py:875
+#: company/choices/fr.py:876
+msgid "Fabrication de produits électroniques grand public"
+msgstr ""
+
+#: company/choices/fr.py:877
+msgid ""
+"Fabrication d'instruments et d'appareils de mesure, d'essai et de "
+"navigation ; horlogerie"
+msgstr ""
+
+#: company/choices/fr.py:878
+msgid ""
+"Fabrication d'instruments et d'appareils de mesure, d'essai et de navigation"
+msgstr ""
+
+#: company/choices/fr.py:879
+msgid "Fabrication d'équipements d'aide à la navigation"
+msgstr ""
+
+#: company/choices/fr.py:880
+msgid "Fabrication d'instrumentation scientifique et technique"
+msgstr ""
+
+#: company/choices/fr.py:881 company/choices/fr.py:882
+msgid "Horlogerie"
+msgstr ""
+
+#: company/choices/fr.py:883
+msgid ""
+"Fabrication d'équipements d'irradiation médicale, d'équipements "
+"électromédicaux et électrothérapeutiques"
+msgstr ""
+
+#: company/choices/fr.py:884 company/choices/fr.py:885
+msgid ""
+"Fabrication d'équipements d'irradiation médicale, d'équipements "
+"électromédicaux et électrothérapeutiques "
+msgstr ""
+
+#: company/choices/fr.py:886 company/choices/fr.py:887
+#: company/choices/fr.py:888
+msgid "Fabrication de matériels optique et photographique"
+msgstr ""
+
+#: company/choices/fr.py:889 company/choices/fr.py:890
+#: company/choices/fr.py:891
+msgid "Fabrication de supports magnétiques et optiques"
+msgstr ""
+
+#: company/choices/fr.py:892
+msgid "Fabrication d'équipements électriques"
+msgstr ""
+
+#: company/choices/fr.py:893
+msgid ""
+"Fabrication de moteurs, génératrices et transformateurs électriques et de "
+"matériel de distribution et de commande électrique"
+msgstr ""
+
+#: company/choices/fr.py:894 company/choices/fr.py:895
+msgid "Fabrication de moteurs, génératrices et transformateurs électriques"
+msgstr ""
+
+#: company/choices/fr.py:896 company/choices/fr.py:897
+msgid "Fabrication de matériel de distribution et de commande électrique"
+msgstr ""
+
+#: company/choices/fr.py:898 company/choices/fr.py:899
+#: company/choices/fr.py:900
+msgid "Fabrication de piles et d'accumulateurs électriques"
+msgstr ""
+
+#: company/choices/fr.py:901
+msgid "Fabrication de fils et câbles et de matériel d'installation électrique"
+msgstr ""
+
+#: company/choices/fr.py:902 company/choices/fr.py:903
+msgid "Fabrication de câbles de fibres optiques"
+msgstr ""
+
+#: company/choices/fr.py:904 company/choices/fr.py:905
+msgid "Fabrication d'autres fils et câbles électroniques ou électriques"
+msgstr ""
+
+#: company/choices/fr.py:906 company/choices/fr.py:907
+msgid "Fabrication de matériel d'installation électrique"
+msgstr ""
+
+#: company/choices/fr.py:908 company/choices/fr.py:909
+#: company/choices/fr.py:910
+msgid "Fabrication d'appareils d'éclairage électrique"
+msgstr ""
+
+#: company/choices/fr.py:911
+msgid "Fabrication d'appareils ménagers"
+msgstr ""
+
+#: company/choices/fr.py:912 company/choices/fr.py:913
+msgid "Fabrication d'appareils électroménagers"
+msgstr ""
+
+#: company/choices/fr.py:914 company/choices/fr.py:915
+msgid "Fabrication d'appareils ménagers non électriques"
+msgstr ""
+
+#: company/choices/fr.py:916 company/choices/fr.py:917
+#: company/choices/fr.py:918
+msgid "Fabrication d'autres matériels électriques"
+msgstr ""
+
+#: company/choices/fr.py:919
+msgid "Fabrication de machines et équipements n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:920
+msgid "Fabrication de machines d'usage général"
+msgstr ""
+
+#: company/choices/fr.py:921 company/choices/fr.py:922
+msgid ""
+"Fabrication de moteurs et turbines, à l'exception des moteurs d’avions et de "
+"véhicules"
+msgstr ""
+
+#: company/choices/fr.py:923 company/choices/fr.py:924
+msgid "Fabrication d'équipements hydrauliques et pneumatiques"
+msgstr ""
+
+#: company/choices/fr.py:925 company/choices/fr.py:926
+msgid "Fabrication d'autres pompes et compresseurs"
+msgstr ""
+
+#: company/choices/fr.py:927 company/choices/fr.py:928
+msgid "Fabrication d'autres articles de robinetterie"
+msgstr ""
+
+#: company/choices/fr.py:929 company/choices/fr.py:930
+msgid "Fabrication d'engrenages et d'organes mécaniques de transmission"
+msgstr ""
+
+#: company/choices/fr.py:931 company/choices/fr.py:944
+msgid "Fabrication d'autres machines d'usage général"
+msgstr ""
+
+#: company/choices/fr.py:932 company/choices/fr.py:933
+msgid "Fabrication de fours et brûleurs"
+msgstr ""
+
+#: company/choices/fr.py:934 company/choices/fr.py:935
+msgid "Fabrication de matériel de levage et de manutention"
+msgstr ""
+
+#: company/choices/fr.py:936 company/choices/fr.py:937
+msgid ""
+"Fabrication de machines et d'équipements de bureau (à l'exception des "
+"ordinateurs et équipements périphériques)"
+msgstr ""
+
+#: company/choices/fr.py:938 company/choices/fr.py:939
+msgid "Fabrication d'outillage portatif à moteur incorporé"
+msgstr ""
+
+#: company/choices/fr.py:940 company/choices/fr.py:941
+msgid "Fabrication d'équipements aérauliques et frigorifiques industriels"
+msgstr ""
+
+#: company/choices/fr.py:942
+msgid "Fabrication de machines diverses d'usage général"
+msgstr ""
+
+#: company/choices/fr.py:943
+msgid "Fabrication d'équipements d'emballage, de conditionnement et de pesage "
+msgstr ""
+
+#: company/choices/fr.py:945 company/choices/fr.py:946
+#: company/choices/fr.py:947
+msgid "Fabrication de machines agricoles et forestières"
+msgstr ""
+
+#: company/choices/fr.py:948
+msgid "Fabrication de machines de formage des métaux et de machines-outils"
+msgstr ""
+
+#: company/choices/fr.py:949
+msgid "Fabrication de machines de formage des métaux"
+msgstr ""
+
+#: company/choices/fr.py:950
+msgid "Fabrication de machines-outils pour le travail des métaux"
+msgstr ""
+
+#: company/choices/fr.py:951 company/choices/fr.py:952
+msgid "Fabrication d'autres machines-outils "
+msgstr ""
+
+#: company/choices/fr.py:953
+msgid "Fabrication d'autres machines d'usage spécifique"
+msgstr ""
+
+#: company/choices/fr.py:954 company/choices/fr.py:955
+msgid "Fabrication de machines pour la métallurgie"
+msgstr ""
+
+#: company/choices/fr.py:956 company/choices/fr.py:957
+msgid "Fabrication de machines pour l'extraction ou la construction"
+msgstr ""
+
+#: company/choices/fr.py:958 company/choices/fr.py:959
+msgid "Fabrication de machines pour l'industrie agro-alimentaire"
+msgstr ""
+
+#: company/choices/fr.py:960 company/choices/fr.py:961
+msgid "Fabrication de machines pour les industries textiles"
+msgstr ""
+
+#: company/choices/fr.py:962 company/choices/fr.py:963
+msgid "Fabrication de machines pour les industries du papier et du carton"
+msgstr ""
+
+#: company/choices/fr.py:964 company/choices/fr.py:965
+msgid "Fabrication de machines pour le travail du caoutchouc ou des plastiques"
+msgstr ""
+
+#: company/choices/fr.py:966
+msgid "Fabrication d'autres machines d'usage spécifique n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:967
+msgid "Fabrication de machines d'imprimerie"
+msgstr ""
+
+#: company/choices/fr.py:968
+msgid "Fabrication d'autres machines spécialisées"
+msgstr ""
+
+#: company/choices/fr.py:969
+msgid "Industrie automobile"
+msgstr ""
+
+#: company/choices/fr.py:970 company/choices/fr.py:971
+#: company/choices/fr.py:972
+msgid "Construction de véhicules automobiles"
+msgstr ""
+
+#: company/choices/fr.py:973 company/choices/fr.py:974
+#: company/choices/fr.py:975
+msgid "Fabrication de carrosseries et remorques"
+msgstr ""
+
+#: company/choices/fr.py:976
+msgid "Fabrication d'équipements automobiles"
+msgstr ""
+
+#: company/choices/fr.py:977 company/choices/fr.py:978
+msgid "Fabrication d'équipements électriques et électroniques automobiles"
+msgstr ""
+
+#: company/choices/fr.py:979 company/choices/fr.py:980
+msgid "Fabrication d'autres équipements automobiles"
+msgstr ""
+
+#: company/choices/fr.py:981
+msgid "Fabrication d'autres matériels de transport"
+msgstr ""
+
+#: company/choices/fr.py:982
+msgid "Construction navale"
+msgstr ""
+
+#: company/choices/fr.py:983 company/choices/fr.py:984
+msgid "Construction de navires et de structures flottantes"
+msgstr ""
+
+#: company/choices/fr.py:985 company/choices/fr.py:986
+msgid "Construction de bateaux de plaisance"
+msgstr ""
+
+#: company/choices/fr.py:987
+msgid "Construction de locomotives et d'autre matériel ferroviaire roulant"
+msgstr ""
+
+#: company/choices/fr.py:988 company/choices/fr.py:989
+msgid "Construction de locomotives et d'autre matériel ferroviaire roulant "
+msgstr ""
+
+#: company/choices/fr.py:990 company/choices/fr.py:991
+#: company/choices/fr.py:992
+msgid "Construction aéronautique et spatiale "
+msgstr ""
+
+#: company/choices/fr.py:993
+msgid "Construction de véhicules militaires de combat"
+msgstr ""
+
+#: company/choices/fr.py:994 company/choices/fr.py:995
+msgid "Construction de véhicules militaires de combat "
+msgstr ""
+
+#: company/choices/fr.py:996
+msgid "Fabrication de matériels de transport n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:997 company/choices/fr.py:998
+msgid "Fabrication de motocycles"
+msgstr ""
+
+#: company/choices/fr.py:999 company/choices/fr.py:1000
+msgid "Fabrication de bicyclettes et de véhicules pour invalides"
+msgstr ""
+
+#: company/choices/fr.py:1001 company/choices/fr.py:1002
+msgid "Fabrication d’autres équipements de transport n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1003 company/choices/fr.py:1004
+msgid "Fabrication de meubles"
+msgstr ""
+
+#: company/choices/fr.py:1005 company/choices/fr.py:1006
+msgid "Fabrication de meubles de bureau et de magasin"
+msgstr ""
+
+#: company/choices/fr.py:1007 company/choices/fr.py:1008
+msgid "Fabrication de meubles de cuisine "
+msgstr ""
+
+#: company/choices/fr.py:1009 company/choices/fr.py:1010
+msgid "Fabrication de matelas"
+msgstr ""
+
+#: company/choices/fr.py:1011
+msgid "Fabrication d'autres meubles"
+msgstr ""
+
+#: company/choices/fr.py:1012
+msgid "Fabrication de sièges d'ameublement d'intérieur"
+msgstr ""
+
+#: company/choices/fr.py:1013
+msgid "Fabrication d’autres meubles et industries connexes de l’ameublement"
+msgstr ""
+
+#: company/choices/fr.py:1014
+msgid "Autres industries manufacturières"
+msgstr ""
+
+#: company/choices/fr.py:1015
+msgid "Fabrication d’articles de joaillerie, bijouterie et articles similaires"
+msgstr ""
+
+#: company/choices/fr.py:1016 company/choices/fr.py:1017
+msgid "Frappe de monnaie"
+msgstr ""
+
+#: company/choices/fr.py:1018 company/choices/fr.py:1019
+msgid "Fabrication d’articles de joaillerie et bijouterie"
+msgstr ""
+
+#: company/choices/fr.py:1020 company/choices/fr.py:1021
+msgid "Fabrication d’articles de bijouterie fantaisie et articles similaires"
+msgstr ""
+
+#: company/choices/fr.py:1022 company/choices/fr.py:1023
+#: company/choices/fr.py:1024
+msgid "Fabrication d'instruments de musique"
+msgstr ""
+
+#: company/choices/fr.py:1025 company/choices/fr.py:1026
+#: company/choices/fr.py:1027
+msgid "Fabrication d'articles de sport"
+msgstr ""
+
+#: company/choices/fr.py:1028 company/choices/fr.py:1029
+#: company/choices/fr.py:1030
+msgid "Fabrication de jeux et jouets"
+msgstr ""
+
+#: company/choices/fr.py:1031
+msgid "Fabrication d'instruments et de fournitures à usage médical et dentaire"
+msgstr ""
+
+#: company/choices/fr.py:1032
+msgid ""
+"Fabrication d'instruments et de fournitures à usage médical et dentaire "
+msgstr ""
+
+#: company/choices/fr.py:1033
+msgid "Fabrication de matériel médico-chirurgical et dentaire"
+msgstr ""
+
+#: company/choices/fr.py:1034
+msgid "Fabrication de lunettes"
+msgstr ""
+
+#: company/choices/fr.py:1035
+msgid "Activités manufacturières n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1036 company/choices/fr.py:1037
+msgid "Fabrication d’articles de brosserie"
+msgstr ""
+
+#: company/choices/fr.py:1038 company/choices/fr.py:1039
+msgid "Autres activités manufacturières n.c.a. "
+msgstr ""
+
+#: company/choices/fr.py:1040
+msgid "Réparation et installation de machines et d'équipements "
+msgstr ""
+
+#: company/choices/fr.py:1041
+msgid "Réparation d'ouvrages en métaux, de machines et d'équipements"
+msgstr ""
+
+#: company/choices/fr.py:1042 company/choices/fr.py:1043
+msgid "Réparation d'ouvrages en métaux"
+msgstr ""
+
+#: company/choices/fr.py:1044 company/choices/fr.py:1045
+msgid "Réparation de machines et équipements mécaniques"
+msgstr ""
+
+#: company/choices/fr.py:1046 company/choices/fr.py:1047
+msgid "Réparation de matériels électroniques et optiques"
+msgstr ""
+
+#: company/choices/fr.py:1048 company/choices/fr.py:1049
+msgid "Réparation d'équipements électriques"
+msgstr ""
+
+#: company/choices/fr.py:1050 company/choices/fr.py:1051
+msgid "Réparation et maintenance navale"
+msgstr ""
+
+#: company/choices/fr.py:1052 company/choices/fr.py:1053
+msgid "Réparation et maintenance d'aéronefs et d'engins spatiaux "
+msgstr ""
+
+#: company/choices/fr.py:1054 company/choices/fr.py:1055
+msgid "Réparation et maintenance d'autres équipements de transport"
+msgstr ""
+
+#: company/choices/fr.py:1056 company/choices/fr.py:1057
+msgid "Réparation d'autres équipements"
+msgstr ""
+
+#: company/choices/fr.py:1058 company/choices/fr.py:1059
+msgid "Installation de machines et d'équipements industriels"
+msgstr ""
+
+#: company/choices/fr.py:1060
+msgid "Installation de structures métalliques, chaudronnées et de tuyauterie"
+msgstr ""
+
+#: company/choices/fr.py:1061
+msgid "Installation de machines et équipements mécaniques"
+msgstr ""
+
+#: company/choices/fr.py:1062
+msgid ""
+"Conception d'ensemble et assemblage sur site industriel d'équipements de "
+"contrôle des processus industriels "
+msgstr ""
+
+#: company/choices/fr.py:1063
+msgid ""
+"Installation d'équipements électriques, de matériels électroniques et "
+"optiques ou d'autres matériels"
+msgstr ""
+
+#: company/choices/fr.py:1064
+msgid ""
+"Production et distribution d'électricité, de gaz, de vapeur et d'air "
+"conditionné"
+msgstr ""
+
+#: company/choices/fr.py:1065
+msgid "Production, transport et distribution d'électricité"
+msgstr ""
+
+#: company/choices/fr.py:1066 company/choices/fr.py:1067
+msgid "Production d'électricité"
+msgstr ""
+
+#: company/choices/fr.py:1068 company/choices/fr.py:1069
+msgid "Transport d'électricité"
+msgstr ""
+
+#: company/choices/fr.py:1070 company/choices/fr.py:1071
+msgid "Distribution d'électricité"
+msgstr ""
+
+#: company/choices/fr.py:1072 company/choices/fr.py:1073
+msgid "Commerce d'électricité"
+msgstr ""
+
+#: company/choices/fr.py:1074
+msgid "Production et distribution de combustibles gazeux"
+msgstr ""
+
+#: company/choices/fr.py:1075 company/choices/fr.py:1076
+msgid "Production de combustibles gazeux"
+msgstr ""
+
+#: company/choices/fr.py:1077 company/choices/fr.py:1078
+msgid "Distribution de combustibles gazeux par conduites"
+msgstr ""
+
+#: company/choices/fr.py:1079 company/choices/fr.py:1080
+msgid "Commerce de combustibles gazeux par conduites"
+msgstr ""
+
+#: company/choices/fr.py:1081
+msgid "Production et distribution de vapeur et d'air conditionné"
+msgstr ""
+
+#: company/choices/fr.py:1082 company/choices/fr.py:1083
+msgid "Production et distribution de vapeur et d'air conditionné "
+msgstr ""
+
+#: company/choices/fr.py:1084
+msgid "Captage, traitement et distribution d'eau "
+msgstr ""
+
+#: company/choices/fr.py:1085 company/choices/fr.py:1086
+#: company/choices/fr.py:1087
+msgid "Captage, traitement et distribution d'eau"
+msgstr ""
+
+#: company/choices/fr.py:1088 company/choices/fr.py:1089
+#: company/choices/fr.py:1090 company/choices/fr.py:1091
+msgid "Collecte et traitement des eaux usées"
+msgstr ""
+
+#: company/choices/fr.py:1092
+msgid "Collecte, traitement et élimination des déchets ; récupération"
+msgstr ""
+
+#: company/choices/fr.py:1093
+msgid "Collecte des déchets"
+msgstr ""
+
+#: company/choices/fr.py:1094 company/choices/fr.py:1095
+msgid "Collecte des déchets non dangereux"
+msgstr ""
+
+#: company/choices/fr.py:1096 company/choices/fr.py:1097
+msgid "Collecte des déchets dangereux"
+msgstr ""
+
+#: company/choices/fr.py:1098
+msgid "Traitement et élimination des déchets"
+msgstr ""
+
+#: company/choices/fr.py:1099 company/choices/fr.py:1100
+msgid "Traitement et élimination des déchets non dangereux"
+msgstr ""
+
+#: company/choices/fr.py:1101 company/choices/fr.py:1102
+msgid "Traitement et élimination des déchets dangereux"
+msgstr ""
+
+#: company/choices/fr.py:1103
+msgid "Récupération"
+msgstr ""
+
+#: company/choices/fr.py:1104 company/choices/fr.py:1105
+msgid "Démantèlement d'épaves"
+msgstr ""
+
+#: company/choices/fr.py:1106 company/choices/fr.py:1107
+msgid "Récupération de déchets triés"
+msgstr ""
+
+#: company/choices/fr.py:1108 company/choices/fr.py:1109
+#: company/choices/fr.py:1110 company/choices/fr.py:1111
+msgid "Dépollution et autres services de gestion des déchets"
+msgstr ""
+
+#: company/choices/fr.py:1112
+msgid "Construction de bâtiments "
+msgstr ""
+
+#: company/choices/fr.py:1113 company/choices/fr.py:1114
+msgid "Promotion immobilière"
+msgstr ""
+
+#: company/choices/fr.py:1115
+msgid "Promotion immobilière de logements"
+msgstr ""
+
+#: company/choices/fr.py:1116
+msgid "Promotion immobilière de bureaux"
+msgstr ""
+
+#: company/choices/fr.py:1117
+msgid "Promotion immobilière d'autres bâtiments"
+msgstr ""
+
+#: company/choices/fr.py:1118
+msgid "Supports juridiques de programmes"
+msgstr ""
+
+#: company/choices/fr.py:1119 company/choices/fr.py:1120
+msgid "Construction de bâtiments résidentiels et non résidentiels"
+msgstr ""
+
+#: company/choices/fr.py:1121
+msgid "Construction de maisons individuelles"
+msgstr ""
+
+#: company/choices/fr.py:1122
+msgid "Construction d'autres bâtiments"
+msgstr ""
+
+#: company/choices/fr.py:1123
+msgid "Génie civil"
+msgstr ""
+
+#: company/choices/fr.py:1124
+msgid "Construction de routes et de voies ferrées "
+msgstr ""
+
+#: company/choices/fr.py:1125 company/choices/fr.py:1126
+msgid "Construction de routes et autoroutes"
+msgstr ""
+
+#: company/choices/fr.py:1127 company/choices/fr.py:1128
+msgid "Construction de voies ferrées de surface et souterraines"
+msgstr ""
+
+#: company/choices/fr.py:1129
+msgid "Construction de ponts et tunnels"
+msgstr ""
+
+#: company/choices/fr.py:1130
+msgid "Construction d'ouvrages d'art"
+msgstr ""
+
+#: company/choices/fr.py:1131
+msgid "Construction et entretien de tunnels"
+msgstr ""
+
+#: company/choices/fr.py:1132
+msgid "Construction de réseaux et de lignes"
+msgstr ""
+
+#: company/choices/fr.py:1133 company/choices/fr.py:1134
+msgid "Construction de réseaux pour fluides"
+msgstr ""
+
+#: company/choices/fr.py:1135 company/choices/fr.py:1136
+msgid "Construction de réseaux électriques et de télécommunications"
+msgstr ""
+
+#: company/choices/fr.py:1137
+msgid "Construction d'autres ouvrages de génie civil "
+msgstr ""
+
+#: company/choices/fr.py:1138 company/choices/fr.py:1139
+msgid "Construction d'ouvrages maritimes et fluviaux"
+msgstr ""
+
+#: company/choices/fr.py:1140 company/choices/fr.py:1141
+msgid "Construction d'autres ouvrages de génie civil n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1142
+msgid "Travaux de construction spécialisés "
+msgstr ""
+
+#: company/choices/fr.py:1143
+msgid "Démolition et préparation des sites"
+msgstr ""
+
+#: company/choices/fr.py:1144 company/choices/fr.py:1145
+msgid "Travaux de démolition"
+msgstr ""
+
+#: company/choices/fr.py:1146
+msgid "Travaux de préparation des sites"
+msgstr ""
+
+#: company/choices/fr.py:1147
+msgid "Travaux de terrassement courants et travaux préparatoires"
+msgstr ""
+
+#: company/choices/fr.py:1148
+msgid "Travaux de terrassement spécialisés ou de grande masse"
+msgstr ""
+
+#: company/choices/fr.py:1149 company/choices/fr.py:1150
+msgid "Forages et sondages"
+msgstr ""
+
+#: company/choices/fr.py:1151
+msgid ""
+"Travaux d'installation électrique, plomberie et autres travaux d'installation"
+msgstr ""
+
+#: company/choices/fr.py:1152
+msgid "Installation électrique"
+msgstr ""
+
+#: company/choices/fr.py:1153
+msgid "Travaux d'installation électrique dans tous locaux"
+msgstr ""
+
+#: company/choices/fr.py:1154
+msgid "Travaux d'installation électrique sur la voie publique"
+msgstr ""
+
+#: company/choices/fr.py:1155
+msgid ""
+"Travaux de plomberie et installation de chauffage et de conditionnement d'air"
+msgstr ""
+
+#: company/choices/fr.py:1156
+msgid "Travaux d'installation d'eau et de gaz en tous locaux"
+msgstr ""
+
+#: company/choices/fr.py:1157
+msgid "Travaux d'installation d'équipements thermiques et de climatisation"
+msgstr ""
+
+#: company/choices/fr.py:1158
+msgid "Autres travaux d'installation"
+msgstr ""
+
+#: company/choices/fr.py:1159
+msgid "Travaux d'isolation"
+msgstr ""
+
+#: company/choices/fr.py:1160
+msgid "Autres travaux d'installation n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1161
+msgid "Travaux de finition"
+msgstr ""
+
+#: company/choices/fr.py:1162 company/choices/fr.py:1163
+msgid "Travaux de plâtrerie"
+msgstr ""
+
+#: company/choices/fr.py:1164
+msgid "Travaux de menuiserie"
+msgstr ""
+
+#: company/choices/fr.py:1165
+msgid "Travaux de menuiserie bois et PVC"
+msgstr ""
+
+#: company/choices/fr.py:1166
+msgid "Travaux de menuiserie métallique et serrurerie"
+msgstr ""
+
+#: company/choices/fr.py:1167
+msgid "Agencement de lieux de vente"
+msgstr ""
+
+#: company/choices/fr.py:1168 company/choices/fr.py:1169
+msgid "Travaux de revêtement des sols et des murs"
+msgstr ""
+
+#: company/choices/fr.py:1170 company/choices/fr.py:1171
+msgid "Travaux de peinture et vitrerie"
+msgstr ""
+
+#: company/choices/fr.py:1172 company/choices/fr.py:1173
+msgid "Autres travaux de finition"
+msgstr ""
+
+#: company/choices/fr.py:1174
+msgid "Autres travaux de construction spécialisés"
+msgstr ""
+
+#: company/choices/fr.py:1175
+msgid "Travaux de couverture"
+msgstr ""
+
+#: company/choices/fr.py:1176
+msgid "Travaux de charpente"
+msgstr ""
+
+#: company/choices/fr.py:1177
+msgid "Travaux de couverture par éléments"
+msgstr ""
+
+#: company/choices/fr.py:1178
+msgid "Autres travaux de construction spécialisés n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1179
+msgid "Travaux d'étanchéification"
+msgstr ""
+
+#: company/choices/fr.py:1180
+msgid "Travaux de montage de structures métalliques"
+msgstr ""
+
+#: company/choices/fr.py:1181
+msgid "Travaux de maçonnerie générale et gros œuvre de bâtiment"
+msgstr ""
+
+#: company/choices/fr.py:1182
+msgid "Autres travaux spécialisés de construction"
+msgstr ""
+
+#: company/choices/fr.py:1183
+msgid "Location avec opérateur de matériel de construction"
+msgstr ""
+
+#: company/choices/fr.py:1184
+msgid "Commerce et réparation d'automobiles et de motocycles"
+msgstr ""
+
+#: company/choices/fr.py:1185
+msgid "Commerce de véhicules automobiles"
+msgstr ""
+
+#: company/choices/fr.py:1186 company/choices/fr.py:1187
+msgid "Commerce de voitures et de véhicules automobiles légers"
+msgstr ""
+
+#: company/choices/fr.py:1188 company/choices/fr.py:1189
+msgid "Commerce d'autres véhicules automobiles"
+msgstr ""
+
+#: company/choices/fr.py:1190 company/choices/fr.py:1191
+msgid "Entretien et réparation de véhicules automobiles"
+msgstr ""
+
+#: company/choices/fr.py:1192
+msgid "Entretien et réparation de véhicules automobiles légers"
+msgstr ""
+
+#: company/choices/fr.py:1193
+msgid "Entretien et réparation d'autres véhicules automobiles"
+msgstr ""
+
+#: company/choices/fr.py:1194
+msgid "Commerce d'équipements automobiles"
+msgstr ""
+
+#: company/choices/fr.py:1195 company/choices/fr.py:1196
+msgid "Commerce de gros d'équipements automobiles"
+msgstr ""
+
+#: company/choices/fr.py:1197 company/choices/fr.py:1198
+msgid "Commerce de détail d'équipements automobiles"
+msgstr ""
+
+#: company/choices/fr.py:1199 company/choices/fr.py:1200
+#: company/choices/fr.py:1201
+msgid "Commerce et réparation de motocycles"
+msgstr ""
+
+#: company/choices/fr.py:1202
+msgid "Commerce de gros, à l’exception des automobiles et des motocycles"
+msgstr ""
+
+#: company/choices/fr.py:1203
+msgid "Intermédiaires du commerce de gros"
+msgstr ""
+
+#: company/choices/fr.py:1204 company/choices/fr.py:1205
+msgid ""
+"Intermédiaires du commerce en matières premières agricoles, animaux vivants, "
+"matières premières textiles et produits semi-finis"
+msgstr ""
+
+#: company/choices/fr.py:1206
+msgid ""
+"Intermédiaires du commerce en combustibles, métaux, minéraux et produits "
+"chimiques"
+msgstr ""
+
+#: company/choices/fr.py:1207
+msgid "Centrales d'achat de carburant"
+msgstr ""
+
+#: company/choices/fr.py:1208
+msgid ""
+"Autres intermédiaires du commerce en combustibles, métaux, minéraux et "
+"produits chimiques"
+msgstr ""
+
+#: company/choices/fr.py:1209 company/choices/fr.py:1210
+msgid "Intermédiaires du commerce en bois et matériaux de construction"
+msgstr ""
+
+#: company/choices/fr.py:1211 company/choices/fr.py:1212
+msgid ""
+"Intermédiaires du commerce en machines, équipements industriels, navires et "
+"avions"
+msgstr ""
+
+#: company/choices/fr.py:1213 company/choices/fr.py:1214
+msgid ""
+"Intermédiaires du commerce en meubles, articles de ménage et quincaillerie"
+msgstr ""
+
+#: company/choices/fr.py:1215 company/choices/fr.py:1216
+msgid ""
+"Intermédiaires du commerce en textiles, habillement, fourrures, chaussures "
+"et articles en cuir"
+msgstr ""
+
+#: company/choices/fr.py:1217
+msgid "Intermédiaires du commerce en denrées, boissons et tabac"
+msgstr ""
+
+#: company/choices/fr.py:1218
+msgid "Centrales d'achat alimentaires"
+msgstr ""
+
+#: company/choices/fr.py:1219
+msgid "Autres intermédiaires du commerce en denrées, boissons et tabac"
+msgstr ""
+
+#: company/choices/fr.py:1220 company/choices/fr.py:1221
+msgid ""
+"Intermédiaires spécialisés dans le commerce d'autres produits spécifiques"
+msgstr ""
+
+#: company/choices/fr.py:1222
+msgid "Intermédiaires du commerce en produits divers"
+msgstr ""
+
+#: company/choices/fr.py:1223
+msgid "Centrales d'achat non alimentaires"
+msgstr ""
+
+#: company/choices/fr.py:1224
+msgid "Autres intermédiaires du commerce en produits divers"
+msgstr ""
+
+#: company/choices/fr.py:1225
+msgid "Commerce de gros de produits agricoles bruts et d'animaux vivants"
+msgstr ""
+
+#: company/choices/fr.py:1226
+msgid ""
+"Commerce de gros de céréales, de tabac non manufacturé, de semences et "
+"d'aliments pour le bétail "
+msgstr ""
+
+#: company/choices/fr.py:1227
+msgid ""
+"Commerce de gros (commerce interentreprises) de céréales, de tabac non "
+"manufacturé, de semences et d'aliments pour le bétail "
+msgstr ""
+
+#: company/choices/fr.py:1228
+msgid "Commerce de gros de fleurs et plantes"
+msgstr ""
+
+#: company/choices/fr.py:1229
+msgid "Commerce de gros (commerce interentreprises) de fleurs et plantes"
+msgstr ""
+
+#: company/choices/fr.py:1230
+msgid "Commerce de gros d'animaux vivants"
+msgstr ""
+
+#: company/choices/fr.py:1231
+msgid "Commerce de gros (commerce interentreprises) d'animaux vivants"
+msgstr ""
+
+#: company/choices/fr.py:1232
+msgid "Commerce de gros de cuirs et peaux"
+msgstr ""
+
+#: company/choices/fr.py:1233
+msgid "Commerce de gros (commerce interentreprises) de cuirs et peaux"
+msgstr ""
+
+#: company/choices/fr.py:1234
+msgid "Commerce de gros de produits alimentaires, de boissons et de tabac"
+msgstr ""
+
+#: company/choices/fr.py:1235
+msgid "Commerce de gros de fruits et légumes"
+msgstr ""
+
+#: company/choices/fr.py:1236
+msgid "Commerce de gros (commerce interentreprises) de fruits et légumes"
+msgstr ""
+
+#: company/choices/fr.py:1237
+msgid "Commerce de gros de viandes et de produits à base de viande"
+msgstr ""
+
+#: company/choices/fr.py:1238
+msgid "Commerce de gros (commerce interentreprises) de viandes de boucherie"
+msgstr ""
+
+#: company/choices/fr.py:1239
+msgid ""
+"Commerce de gros (commerce interentreprises) de produits à base de viande"
+msgstr ""
+
+#: company/choices/fr.py:1240
+msgid "Commerce de gros (commerce interentreprises) de volailles et gibier"
+msgstr ""
+
+#: company/choices/fr.py:1241
+msgid ""
+"Commerce de gros de produits laitiers, œufs, huiles et matières grasses "
+"comestibles"
+msgstr ""
+
+#: company/choices/fr.py:1242
+msgid ""
+"Commerce de gros (commerce interentreprises) de produits laitiers, œufs, "
+"huiles et matières grasses comestibles"
+msgstr ""
+
+#: company/choices/fr.py:1243
+msgid "Commerce de gros de boissons"
+msgstr ""
+
+#: company/choices/fr.py:1244
+msgid "Commerce de gros (commerce interentreprises) de boissons"
+msgstr ""
+
+#: company/choices/fr.py:1245
+msgid "Commerce de gros de produits à base de tabac"
+msgstr ""
+
+#: company/choices/fr.py:1246
+msgid ""
+"Commerce de gros (commerce interentreprises) de produits à base de tabac"
+msgstr ""
+
+#: company/choices/fr.py:1247
+msgid "Commerce de gros de sucre, chocolat et confiserie"
+msgstr ""
+
+#: company/choices/fr.py:1248
+msgid ""
+"Commerce de gros (commerce interentreprises) de sucre, chocolat et confiserie"
+msgstr ""
+
+#: company/choices/fr.py:1249
+msgid "Commerce de gros de café, thé, cacao et épices"
+msgstr ""
+
+#: company/choices/fr.py:1250
+msgid ""
+"Commerce de gros (commerce interentreprises) de café, thé, cacao et épices"
+msgstr ""
+
+#: company/choices/fr.py:1251
+msgid ""
+"Commerce de gros d'autres produits alimentaires, y compris poissons, "
+"crustacés et mollusques"
+msgstr ""
+
+#: company/choices/fr.py:1252
+msgid ""
+"Commerce de gros (commerce interentreprises) de poissons, crustacés et "
+"mollusques"
+msgstr ""
+
+#: company/choices/fr.py:1253
+msgid ""
+"Commerce de gros (commerce interentreprises) alimentaire spécialisé divers"
+msgstr ""
+
+#: company/choices/fr.py:1254
+msgid "Commerce de gros non spécialisé de denrées, boissons et tabac"
+msgstr ""
+
+#: company/choices/fr.py:1255
+msgid "Commerce de gros (commerce interentreprises) de produits surgelés"
+msgstr ""
+
+#: company/choices/fr.py:1256
+msgid "Commerce de gros (commerce interentreprises) alimentaire non spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1257
+msgid "Commerce de gros de biens domestiques"
+msgstr ""
+
+#: company/choices/fr.py:1258
+msgid "Commerce de gros de textiles"
+msgstr ""
+
+#: company/choices/fr.py:1259
+msgid "Commerce de gros (commerce interentreprises) de textiles"
+msgstr ""
+
+#: company/choices/fr.py:1260
+msgid "Commerce de gros d'habillement et de chaussures"
+msgstr ""
+
+#: company/choices/fr.py:1261
+msgid ""
+"Commerce de gros (commerce interentreprises) d'habillement et de chaussures"
+msgstr ""
+
+#: company/choices/fr.py:1262
+msgid "Commerce de gros d'appareils électroménagers"
+msgstr ""
+
+#: company/choices/fr.py:1263
+msgid ""
+"Commerce de gros (commerce interentreprises) d'appareils électroménagers"
+msgstr ""
+
+#: company/choices/fr.py:1264
+msgid "Commerce de gros de vaisselle, verrerie et produits d'entretien"
+msgstr ""
+
+#: company/choices/fr.py:1265
+msgid ""
+"Commerce de gros (commerce interentreprises) de vaisselle, verrerie et "
+"produits d'entretien"
+msgstr ""
+
+#: company/choices/fr.py:1266
+msgid "Commerce de gros de parfumerie et de produits de beauté"
+msgstr ""
+
+#: company/choices/fr.py:1267
+msgid ""
+"Commerce de gros (commerce interentreprises) de parfumerie et de produits de "
+"beauté"
+msgstr ""
+
+#: company/choices/fr.py:1268
+msgid "Commerce de gros de produits pharmaceutiques"
+msgstr ""
+
+#: company/choices/fr.py:1269
+msgid ""
+"Commerce de gros (commerce interentreprises) de produits pharmaceutiques"
+msgstr ""
+
+#: company/choices/fr.py:1270
+msgid "Commerce de gros de meubles, de tapis et d'appareils d'éclairage "
+msgstr ""
+
+#: company/choices/fr.py:1271
+msgid ""
+"Commerce de gros (commerce interentreprises) de meubles, de tapis et "
+"d'appareils d'éclairage "
+msgstr ""
+
+#: company/choices/fr.py:1272
+msgid "Commerce de gros d'articles d'horlogerie et de bijouterie"
+msgstr ""
+
+#: company/choices/fr.py:1273
+msgid ""
+"Commerce de gros (commerce interentreprises) d'articles d'horlogerie et de "
+"bijouterie"
+msgstr ""
+
+#: company/choices/fr.py:1274
+msgid "Commerce de gros d'autres biens domestiques"
+msgstr ""
+
+#: company/choices/fr.py:1275
+msgid ""
+"Commerce de gros (commerce interentreprises) d'autres biens domestiques "
+msgstr ""
+
+#: company/choices/fr.py:1276
+msgid "Commerce de gros d'équipements de l'information et de la communication "
+msgstr ""
+
+#: company/choices/fr.py:1277
+msgid ""
+"Commerce de gros d'ordinateurs, d'équipements informatiques périphériques et "
+"de logiciels"
+msgstr ""
+
+#: company/choices/fr.py:1278
+msgid ""
+"Commerce de gros (commerce interentreprises) d'ordinateurs, d'équipements "
+"informatiques périphériques et de logiciels"
+msgstr ""
+
+#: company/choices/fr.py:1279
+msgid ""
+"Commerce de gros de composants et d'équipements électroniques et de "
+"télécommunication"
+msgstr ""
+
+#: company/choices/fr.py:1280
+msgid ""
+"Commerce de gros (commerce interentreprises) de composants et d'équipements "
+"électroniques et de télécommunication"
+msgstr ""
+
+#: company/choices/fr.py:1281
+msgid "Commerce de gros d'autres équipements industriels"
+msgstr ""
+
+#: company/choices/fr.py:1282
+msgid "Commerce de gros de matériel agricole"
+msgstr ""
+
+#: company/choices/fr.py:1283
+msgid "Commerce de gros (commerce interentreprises) de matériel agricole"
+msgstr ""
+
+#: company/choices/fr.py:1284
+msgid "Commerce de gros de machines-outils"
+msgstr ""
+
+#: company/choices/fr.py:1285
+msgid "Commerce de gros (commerce interentreprises) de machines-outils"
+msgstr ""
+
+#: company/choices/fr.py:1286
+msgid ""
+"Commerce de gros de machines pour l'extraction, la construction et le génie "
+"civil "
+msgstr ""
+
+#: company/choices/fr.py:1287
+msgid ""
+"Commerce de gros (commerce interentreprises) de machines pour l'extraction, "
+"la construction et le génie civil "
+msgstr ""
+
+#: company/choices/fr.py:1288
+msgid "Commerce de gros de machines pour l'industrie textile et l'habillement"
+msgstr ""
+
+#: company/choices/fr.py:1289
+msgid ""
+"Commerce de gros (commerce interentreprises) de machines pour l'industrie "
+"textile et l'habillement"
+msgstr ""
+
+#: company/choices/fr.py:1290
+msgid "Commerce de gros de mobilier de bureau"
+msgstr ""
+
+#: company/choices/fr.py:1291
+msgid "Commerce de gros (commerce interentreprises) de mobilier de bureau"
+msgstr ""
+
+#: company/choices/fr.py:1292
+msgid "Commerce de gros d'autres machines et équipements de bureau "
+msgstr ""
+
+#: company/choices/fr.py:1293
+msgid ""
+"Commerce de gros (commerce interentreprises) d'autres machines et "
+"équipements de bureau "
+msgstr ""
+
+#: company/choices/fr.py:1294
+msgid "Commerce de gros d'autres machines et équipements"
+msgstr ""
+
+#: company/choices/fr.py:1295
+msgid "Commerce de gros (commerce interentreprises) de matériel électrique"
+msgstr ""
+
+#: company/choices/fr.py:1296
+msgid ""
+"Commerce de gros (commerce interentreprises) de fournitures et équipements "
+"industriels divers"
+msgstr ""
+
+#: company/choices/fr.py:1297
+msgid ""
+"Commerce de gros (commerce interentreprises) de fournitures et équipements "
+"divers pour le commerce et les services"
+msgstr ""
+
+#: company/choices/fr.py:1298
+msgid "Autres commerces de gros spécialisés"
+msgstr ""
+
+#: company/choices/fr.py:1299
+msgid "Commerce de gros de combustibles et de produits annexes"
+msgstr ""
+
+#: company/choices/fr.py:1300
+msgid ""
+"Commerce de gros (commerce interentreprises) de combustibles et de produits "
+"annexes"
+msgstr ""
+
+#: company/choices/fr.py:1301
+msgid "Commerce de gros de minerais et métaux"
+msgstr ""
+
+#: company/choices/fr.py:1302
+msgid "Commerce de gros (commerce interentreprises) de minerais et métaux"
+msgstr ""
+
+#: company/choices/fr.py:1303
+msgid ""
+"Commerce de gros de bois, de matériaux de construction et d'appareils "
+"sanitaires "
+msgstr ""
+
+#: company/choices/fr.py:1304
+msgid ""
+"Commerce de gros (commerce interentreprises) de bois et de matériaux de "
+"construction "
+msgstr ""
+
+#: company/choices/fr.py:1305
+msgid ""
+"Commerce de gros (commerce interentreprises) d'appareils sanitaires et de "
+"produits de décoration"
+msgstr ""
+
+#: company/choices/fr.py:1306
+msgid ""
+"Commerce de gros de quincaillerie et fournitures pour plomberie et chauffage"
+msgstr ""
+
+#: company/choices/fr.py:1307
+msgid "Commerce de gros (commerce interentreprises) de quincaillerie"
+msgstr ""
+
+#: company/choices/fr.py:1308
+msgid ""
+"Commerce de gros (commerce interentreprises) de fournitures pour la "
+"plomberie et le chauffage"
+msgstr ""
+
+#: company/choices/fr.py:1309
+msgid "Commerce de gros de produits chimiques"
+msgstr ""
+
+#: company/choices/fr.py:1310
+msgid "Commerce de gros (commerce interentreprises) de produits chimiques"
+msgstr ""
+
+#: company/choices/fr.py:1311
+msgid "Commerce de gros d'autres produits intermédiaires"
+msgstr ""
+
+#: company/choices/fr.py:1312
+msgid ""
+"Commerce de gros (commerce interentreprises) d'autres produits intermédiaires"
+msgstr ""
+
+#: company/choices/fr.py:1313
+msgid "Commerce de gros de déchets et débris"
+msgstr ""
+
+#: company/choices/fr.py:1314
+msgid "Commerce de gros (commerce interentreprises) de déchets et débris"
+msgstr ""
+
+#: company/choices/fr.py:1315 company/choices/fr.py:1316
+msgid "Commerce de gros non spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1317
+msgid "Commerce de gros (commerce interentreprises) non spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1318
+msgid "Commerce de détail, à l’exception des automobiles et des motocycles"
+msgstr ""
+
+#: company/choices/fr.py:1319
+msgid "Commerce de détail en magasin non spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1320
+msgid "Commerce de détail en magasin non spécialisé à prédominance alimentaire"
+msgstr ""
+
+#: company/choices/fr.py:1321
+msgid "Commerce de détail de produits surgelés"
+msgstr ""
+
+#: company/choices/fr.py:1322
+msgid "Commerce d'alimentation générale"
+msgstr ""
+
+#: company/choices/fr.py:1323
+msgid "Supérettes"
+msgstr ""
+
+#: company/choices/fr.py:1324
+msgid "Supermarchés"
+msgstr ""
+
+#: company/choices/fr.py:1325
+msgid "Magasins multi-commerces"
+msgstr ""
+
+#: company/choices/fr.py:1326
+msgid "Hypermarchés"
+msgstr ""
+
+#: company/choices/fr.py:1327
+msgid "Autre commerce de détail en magasin non spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1328
+msgid "Grands magasins"
+msgstr ""
+
+#: company/choices/fr.py:1329
+msgid "Autres commerces de détail en magasin non spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1330
+msgid "Commerce de détail alimentaire en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1331 company/choices/fr.py:1332
+msgid "Commerce de détail de fruits et légumes en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1333 company/choices/fr.py:1334
+msgid ""
+"Commerce de détail de viandes et de produits à base de viande en magasin "
+"spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1335 company/choices/fr.py:1336
+msgid ""
+"Commerce de détail de poissons, crustacés et mollusques en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1337 company/choices/fr.py:1338
+msgid ""
+"Commerce de détail de pain, pâtisserie et confiserie en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1339 company/choices/fr.py:1340
+msgid "Commerce de détail de boissons en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1341 company/choices/fr.py:1342
+msgid "Commerce de détail de produits à base de tabac en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1343 company/choices/fr.py:1344
+msgid "Autres commerces de détail alimentaires en magasin spécialisé "
+msgstr ""
+
+#: company/choices/fr.py:1345 company/choices/fr.py:1346
+#: company/choices/fr.py:1347
+msgid "Commerce de détail de carburants en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1348
+msgid ""
+"Commerce de détail d'équipements de l'information et de la communication en "
+"magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1349 company/choices/fr.py:1350
+msgid ""
+"Commerce de détail d'ordinateurs, d'unités périphériques et de logiciels en "
+"magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1351 company/choices/fr.py:1352
+msgid ""
+"Commerce de détail de matériels de télécommunication en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1353
+msgid "Commerce de détail de matériels audio/vidéo en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1354
+msgid "Commerce de détail de matériels audio et vidéo en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1355
+msgid "Commerce de détail d'autres équipements du foyer en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1356 company/choices/fr.py:1357
+msgid "Commerce de détail de textiles en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1358
+msgid ""
+"Commerce de détail de quincaillerie, peintures et verres en magasin "
+"spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1359
+msgid ""
+"Commerce de détail de quincaillerie, peintures et verres en petites surfaces "
+"(moins de 400 m2)"
+msgstr ""
+
+#: company/choices/fr.py:1360
+msgid ""
+"Commerce de détail de quincaillerie, peintures et verres en grandes surfaces "
+"(400 m2et plus)"
+msgstr ""
+
+#: company/choices/fr.py:1361 company/choices/fr.py:1362
+msgid ""
+"Commerce de détail de tapis, moquettes et revêtements de murs et de sols en "
+"magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1363 company/choices/fr.py:1364
+msgid "Commerce de détail d'appareils électroménagers en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1365
+msgid ""
+"Commerce de détail de meubles, appareils d'éclairage et autres articles de "
+"ménage en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1366
+msgid "Commerce de détail de meubles"
+msgstr ""
+
+#: company/choices/fr.py:1367
+msgid "Commerce de détail d'autres équipements du foyer"
+msgstr ""
+
+#: company/choices/fr.py:1368
+msgid ""
+"Commerce de détail de biens culturels et de loisirs en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1369 company/choices/fr.py:1370
+msgid "Commerce de détail de livres en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1371 company/choices/fr.py:1372
+msgid "Commerce de détail de journaux et papeterie en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1373 company/choices/fr.py:1374
+msgid ""
+"Commerce de détail d'enregistrements musicaux et vidéo en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1375 company/choices/fr.py:1376
+msgid "Commerce de détail d'articles de sport en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1377 company/choices/fr.py:1378
+msgid "Commerce de détail de jeux et jouets en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1379
+msgid "Autres commerces de détail en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1380 company/choices/fr.py:1381
+msgid "Commerce de détail d'habillement en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1382
+msgid ""
+"Commerce de détail de chaussures et d'articles en cuir en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1383
+msgid "Commerce de détail de la chaussure"
+msgstr ""
+
+#: company/choices/fr.py:1384
+msgid "Commerce de détail de maroquinerie et d'articles de voyage"
+msgstr ""
+
+#: company/choices/fr.py:1385 company/choices/fr.py:1386
+msgid "Commerce de détail de produits pharmaceutiques en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1387 company/choices/fr.py:1388
+msgid ""
+"Commerce de détail d'articles médicaux et orthopédiques en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1389 company/choices/fr.py:1390
+msgid ""
+"Commerce de détail de parfumerie et de produits de beauté en magasin "
+"spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1391 company/choices/fr.py:1392
+msgid ""
+"Commerce de détail de fleurs, plantes, graines, engrais, animaux de "
+"compagnie et aliments pour ces animaux en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1393 company/choices/fr.py:1394
+msgid ""
+"Commerce de détail d'articles d'horlogerie et de bijouterie en magasin "
+"spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1395
+msgid "Autre commerce de détail de biens neufs en magasin spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1396
+msgid "Commerces de détail d'optique"
+msgstr ""
+
+#: company/choices/fr.py:1397
+msgid "Commerces de détail de charbons et combustibles"
+msgstr ""
+
+#: company/choices/fr.py:1398
+msgid "Autres commerces de détail spécialisés divers"
+msgstr ""
+
+#: company/choices/fr.py:1399 company/choices/fr.py:1400
+msgid "Commerce de détail de biens d'occasion en magasin"
+msgstr ""
+
+#: company/choices/fr.py:1401
+msgid "Commerce de détail sur éventaires et marchés"
+msgstr ""
+
+#: company/choices/fr.py:1402 company/choices/fr.py:1403
+msgid "Commerce de détail alimentaire sur éventaires et marchés"
+msgstr ""
+
+#: company/choices/fr.py:1404 company/choices/fr.py:1405
+msgid ""
+"Commerce de détail de textiles, d'habillement et de chaussures sur "
+"éventaires et marchés"
+msgstr ""
+
+#: company/choices/fr.py:1406 company/choices/fr.py:1407
+msgid "Autres commerces de détail sur éventaires et marchés"
+msgstr ""
+
+#: company/choices/fr.py:1408
+msgid "Commerce de détail hors magasin, éventaires ou marchés"
+msgstr ""
+
+#: company/choices/fr.py:1409
+msgid "Vente à distance"
+msgstr ""
+
+#: company/choices/fr.py:1410
+msgid "Vente à distance sur catalogue général"
+msgstr ""
+
+#: company/choices/fr.py:1411
+msgid "Vente à distance sur catalogue spécialisé"
+msgstr ""
+
+#: company/choices/fr.py:1412
+msgid "Autres commerces de détail hors magasin, éventaires ou marchés"
+msgstr ""
+
+#: company/choices/fr.py:1413
+msgid "Vente à domicile"
+msgstr ""
+
+#: company/choices/fr.py:1414
+msgid ""
+"Vente par automates et autres commerces de détail hors magasin, éventaires "
+"ou marchés n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1415
+msgid "Transports terrestres et transport par conduites"
+msgstr ""
+
+#: company/choices/fr.py:1416 company/choices/fr.py:1417
+#: company/choices/fr.py:1418
+msgid "Transport ferroviaire interurbain de voyageurs"
+msgstr ""
+
+#: company/choices/fr.py:1419
+msgid "Transports ferroviaires de fret"
+msgstr ""
+
+#: company/choices/fr.py:1420 company/choices/fr.py:1421
+msgid "Transports ferroviaires de fret "
+msgstr ""
+
+#: company/choices/fr.py:1422
+msgid "Autres transports terrestres de voyageurs"
+msgstr ""
+
+#: company/choices/fr.py:1423 company/choices/fr.py:1424
+msgid "Transports urbains et suburbains de voyageurs"
+msgstr ""
+
+#: company/choices/fr.py:1425 company/choices/fr.py:1426
+msgid "Transports de voyageurs par taxis"
+msgstr ""
+
+#: company/choices/fr.py:1427
+msgid "Autres transports terrestres de voyageurs n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1428
+msgid "Transports routiers réguliers de voyageurs"
+msgstr ""
+
+#: company/choices/fr.py:1429
+msgid "Autres transports routiers de voyageurs "
+msgstr ""
+
+#: company/choices/fr.py:1430
+msgid "Téléphériques et remontées mécaniques"
+msgstr ""
+
+#: company/choices/fr.py:1431
+msgid "Transports routiers de fret et services de déménagement"
+msgstr ""
+
+#: company/choices/fr.py:1432
+msgid "Transports routiers de fret"
+msgstr ""
+
+#: company/choices/fr.py:1433
+msgid "Transports routiers de fret interurbains"
+msgstr ""
+
+#: company/choices/fr.py:1434
+msgid "Transports routiers de fret de proximité"
+msgstr ""
+
+#: company/choices/fr.py:1435
+msgid "Location de camions avec chauffeur"
+msgstr ""
+
+#: company/choices/fr.py:1436 company/choices/fr.py:1437
+msgid "Services de déménagement"
+msgstr ""
+
+#: company/choices/fr.py:1438 company/choices/fr.py:1439
+#: company/choices/fr.py:1440
+msgid "Transports par conduites"
+msgstr ""
+
+#: company/choices/fr.py:1441
+msgid "Transports par eau"
+msgstr ""
+
+#: company/choices/fr.py:1442 company/choices/fr.py:1443
+#: company/choices/fr.py:1444
+msgid "Transports maritimes et côtiers de passagers"
+msgstr ""
+
+#: company/choices/fr.py:1445 company/choices/fr.py:1446
+#: company/choices/fr.py:1447
+msgid "Transports maritimes et côtiers de fret"
+msgstr ""
+
+#: company/choices/fr.py:1448 company/choices/fr.py:1449
+#: company/choices/fr.py:1450
+msgid "Transports fluviaux de passagers"
+msgstr ""
+
+#: company/choices/fr.py:1451
+msgid "Transports fluviaux de fret"
+msgstr ""
+
+#: company/choices/fr.py:1452 company/choices/fr.py:1453
+msgid "Transports fluviaux de fret "
+msgstr ""
+
+#: company/choices/fr.py:1454
+msgid "Transports aériens"
+msgstr ""
+
+#: company/choices/fr.py:1455 company/choices/fr.py:1456
+#: company/choices/fr.py:1457
+msgid "Transports aériens de passagers"
+msgstr ""
+
+#: company/choices/fr.py:1458
+msgid "Transports aériens de fret et transports spatiaux"
+msgstr ""
+
+#: company/choices/fr.py:1459 company/choices/fr.py:1460
+msgid "Transports aériens de fret"
+msgstr ""
+
+#: company/choices/fr.py:1461 company/choices/fr.py:1462
+msgid "Transports spatiaux"
+msgstr ""
+
+#: company/choices/fr.py:1463
+msgid "Entreposage et services auxiliaires des transports"
+msgstr ""
+
+#: company/choices/fr.py:1464 company/choices/fr.py:1465
+msgid "Entreposage et stockage"
+msgstr ""
+
+#: company/choices/fr.py:1466
+msgid "Entreposage et stockage frigorifique"
+msgstr ""
+
+#: company/choices/fr.py:1467
+msgid "Entreposage et stockage non frigorifique"
+msgstr ""
+
+#: company/choices/fr.py:1468
+msgid "Services auxiliaires des transports"
+msgstr ""
+
+#: company/choices/fr.py:1469 company/choices/fr.py:1470
+msgid "Services auxiliaires des transports terrestres"
+msgstr ""
+
+#: company/choices/fr.py:1471 company/choices/fr.py:1472
+msgid "Services auxiliaires des transports par eau"
+msgstr ""
+
+#: company/choices/fr.py:1473 company/choices/fr.py:1474
+msgid "Services auxiliaires des transports aériens"
+msgstr ""
+
+#: company/choices/fr.py:1475
+msgid "Manutention"
+msgstr ""
+
+#: company/choices/fr.py:1476
+msgid "Manutention portuaire"
+msgstr ""
+
+#: company/choices/fr.py:1477
+msgid "Manutention non portuaire"
+msgstr ""
+
+#: company/choices/fr.py:1478
+msgid "Autres services auxiliaires des transports "
+msgstr ""
+
+#: company/choices/fr.py:1479
+msgid "Messagerie, fret express"
+msgstr ""
+
+#: company/choices/fr.py:1480
+msgid "Affrètement et organisation des transports "
+msgstr ""
+
+#: company/choices/fr.py:1481
+msgid "Activités de poste et de courrier"
+msgstr ""
+
+#: company/choices/fr.py:1482
+msgid "Activités de poste dans le cadre d'une obligation de service universel"
+msgstr ""
+
+#: company/choices/fr.py:1483 company/choices/fr.py:1484
+msgid "Activités de poste dans le cadre d'une obligation de service universel "
+msgstr ""
+
+#: company/choices/fr.py:1485 company/choices/fr.py:1486
+#: company/choices/fr.py:1487
+msgid "Autres activités de poste et de courrier"
+msgstr ""
+
+#: company/choices/fr.py:1488
+msgid "Hébergement"
+msgstr ""
+
+#: company/choices/fr.py:1489
+msgid "Hôtels et hébergement similaire"
+msgstr ""
+
+#: company/choices/fr.py:1490 company/choices/fr.py:1491
+msgid "Hôtels et hébergement similaire "
+msgstr ""
+
+#: company/choices/fr.py:1492 company/choices/fr.py:1493
+#: company/choices/fr.py:1494
+msgid "Hébergement touristique et autre hébergement de courte durée "
+msgstr ""
+
+#: company/choices/fr.py:1495 company/choices/fr.py:1496
+#: company/choices/fr.py:1497
+msgid "Terrains de camping et parcs pour caravanes ou véhicules de loisirs"
+msgstr ""
+
+#: company/choices/fr.py:1498 company/choices/fr.py:1499
+#: company/choices/fr.py:1500
+msgid "Autres hébergements "
+msgstr ""
+
+#: company/choices/fr.py:1501
+msgid "Restauration"
+msgstr ""
+
+#: company/choices/fr.py:1502 company/choices/fr.py:1503
+msgid "Restaurants et services de restauration mobile"
+msgstr ""
+
+#: company/choices/fr.py:1504
+msgid "Restauration traditionnelle"
+msgstr ""
+
+#: company/choices/fr.py:1505
+msgid "Cafétérias et autres libres-services"
+msgstr ""
+
+#: company/choices/fr.py:1506
+msgid "Restauration de type rapide"
+msgstr ""
+
+#: company/choices/fr.py:1507
+msgid "Traiteurs et autres services de restauration"
+msgstr ""
+
+#: company/choices/fr.py:1508 company/choices/fr.py:1509
+msgid "Services des traiteurs "
+msgstr ""
+
+#: company/choices/fr.py:1510
+msgid "Autres services de restauration "
+msgstr ""
+
+#: company/choices/fr.py:1511
+msgid "Restauration collective sous contrat"
+msgstr ""
+
+#: company/choices/fr.py:1512
+msgid "Autres services de restauration n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1513 company/choices/fr.py:1514
+#: company/choices/fr.py:1515
+msgid "Débits de boissons"
+msgstr ""
+
+#: company/choices/fr.py:1516
+msgid "Édition"
+msgstr ""
+
+#: company/choices/fr.py:1517
+msgid "Édition de livres et périodiques et autres activités d'édition "
+msgstr ""
+
+#: company/choices/fr.py:1518 company/choices/fr.py:1519
+msgid "Édition de livres"
+msgstr ""
+
+#: company/choices/fr.py:1520 company/choices/fr.py:1521
+msgid "Édition de répertoires et de fichiers d'adresses"
+msgstr ""
+
+#: company/choices/fr.py:1522 company/choices/fr.py:1523
+msgid "Édition de journaux"
+msgstr ""
+
+#: company/choices/fr.py:1524 company/choices/fr.py:1525
+msgid "Édition de revues et périodiques"
+msgstr ""
+
+#: company/choices/fr.py:1526 company/choices/fr.py:1527
+msgid "Autres activités d'édition"
+msgstr ""
+
+#: company/choices/fr.py:1528
+msgid "Édition de logiciels"
+msgstr ""
+
+#: company/choices/fr.py:1529 company/choices/fr.py:1530
+msgid "Édition de jeux électroniques"
+msgstr ""
+
+#: company/choices/fr.py:1531
+msgid "Édition d'autres logiciels"
+msgstr ""
+
+#: company/choices/fr.py:1532
+msgid "Édition de logiciels système et de réseau"
+msgstr ""
+
+#: company/choices/fr.py:1533
+msgid "Edition de logiciels outils de développement et de langages"
+msgstr ""
+
+#: company/choices/fr.py:1534
+msgid "Edition de logiciels applicatifs"
+msgstr ""
+
+#: company/choices/fr.py:1535
+msgid ""
+"Production de films cinématographiques, de vidéo et de programmes de "
+"télévision ; enregistrement sonore et édition musicale"
+msgstr ""
+
+#: company/choices/fr.py:1536
+msgid "Activités cinématographiques, vidéo et de télévision"
+msgstr ""
+
+#: company/choices/fr.py:1537
+msgid ""
+"Production de films cinématographiques, de vidéo et de programmes de "
+"télévision "
+msgstr ""
+
+#: company/choices/fr.py:1538
+msgid "Production de films et de programmes pour la télévision "
+msgstr ""
+
+#: company/choices/fr.py:1539
+msgid "Production de films institutionnels et publicitaires"
+msgstr ""
+
+#: company/choices/fr.py:1540
+msgid "Production de films pour le cinéma"
+msgstr ""
+
+#: company/choices/fr.py:1541 company/choices/fr.py:1542
+msgid ""
+"Post-production de films cinématographiques, de vidéo et de programmes de "
+"télévision"
+msgstr ""
+
+#: company/choices/fr.py:1543
+msgid ""
+"Distribution de films cinématographiques, de vidéo et de programmes de "
+"télévision "
+msgstr ""
+
+#: company/choices/fr.py:1544
+msgid "Distribution de films cinématographiques"
+msgstr ""
+
+#: company/choices/fr.py:1545
+msgid "Edition et distribution vidéo"
+msgstr ""
+
+#: company/choices/fr.py:1546 company/choices/fr.py:1547
+msgid "Projection de films cinématographiques"
+msgstr ""
+
+#: company/choices/fr.py:1548
+msgid "Enregistrement sonore et édition musicale"
+msgstr ""
+
+#: company/choices/fr.py:1549 company/choices/fr.py:1550
+msgid "Enregistrement sonore et édition musicale "
+msgstr ""
+
+#: company/choices/fr.py:1551
+msgid "Programmation et diffusion"
+msgstr ""
+
+#: company/choices/fr.py:1552 company/choices/fr.py:1553
+#: company/choices/fr.py:1554
+msgid "Édition et diffusion de programmes radio"
+msgstr ""
+
+#: company/choices/fr.py:1555 company/choices/fr.py:1556
+msgid "Programmation de télévision et télédiffusion"
+msgstr ""
+
+#: company/choices/fr.py:1557
+msgid "Edition de chaînes généralistes"
+msgstr ""
+
+#: company/choices/fr.py:1558
+msgid "Edition de chaînes thématiques"
+msgstr ""
+
+#: company/choices/fr.py:1560 company/choices/fr.py:1561
+#: company/choices/fr.py:1562
+msgid "Télécommunications filaires"
+msgstr ""
+
+#: company/choices/fr.py:1563 company/choices/fr.py:1564
+#: company/choices/fr.py:1565
+msgid "Télécommunications sans fil "
+msgstr ""
+
+#: company/choices/fr.py:1566 company/choices/fr.py:1567
+#: company/choices/fr.py:1568
+msgid "Télécommunications par satellite"
+msgstr ""
+
+#: company/choices/fr.py:1569
+msgid "Autres activités de télécommunication"
+msgstr ""
+
+#: company/choices/fr.py:1570 company/choices/fr.py:1571
+msgid "Autres activités de télécommunication "
+msgstr ""
+
+#: company/choices/fr.py:1572 company/choices/fr.py:1573
+msgid "Programmation, conseil et autres activités informatiques "
+msgstr ""
+
+#: company/choices/fr.py:1574 company/choices/fr.py:1575
+msgid "Programmation informatique"
+msgstr ""
+
+#: company/choices/fr.py:1576
+msgid "Conseil informatique "
+msgstr ""
+
+#: company/choices/fr.py:1577
+msgid "Conseil en systèmes et logiciels informatiques"
+msgstr ""
+
+#: company/choices/fr.py:1578
+msgid "Tierce maintenance de systèmes et d’applications informatiques"
+msgstr ""
+
+#: company/choices/fr.py:1579 company/choices/fr.py:1580
+msgid "Gestion d'installations informatiques"
+msgstr ""
+
+#: company/choices/fr.py:1581 company/choices/fr.py:1582
+msgid "Autres activités informatiques"
+msgstr ""
+
+#: company/choices/fr.py:1583
+msgid "Services d'information"
+msgstr ""
+
+#: company/choices/fr.py:1584
+msgid ""
+"Traitement de données, hébergement et activités connexes ; portails Internet"
+msgstr ""
+
+#: company/choices/fr.py:1585 company/choices/fr.py:1586
+msgid "Traitement de données, hébergement et activités connexes"
+msgstr ""
+
+#: company/choices/fr.py:1587 company/choices/fr.py:1588
+msgid "Portails Internet"
+msgstr ""
+
+#: company/choices/fr.py:1589
+msgid "Autres services d'information"
+msgstr ""
+
+#: company/choices/fr.py:1590 company/choices/fr.py:1591
+msgid "Activités des agences de presse"
+msgstr ""
+
+#: company/choices/fr.py:1592 company/choices/fr.py:1593
+msgid "Autres services d'information n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1594
+msgid ""
+"Activités des services financiers, hors assurance et caisses de retraite"
+msgstr ""
+
+#: company/choices/fr.py:1595
+msgid "Intermédiation monétaire"
+msgstr ""
+
+#: company/choices/fr.py:1596 company/choices/fr.py:1597
+msgid "Activités de banque centrale"
+msgstr ""
+
+#: company/choices/fr.py:1598 company/choices/fr.py:1599
+msgid "Autres intermédiations monétaires"
+msgstr ""
+
+#: company/choices/fr.py:1600 company/choices/fr.py:1601
+#: company/choices/fr.py:1602
+msgid "Activités des sociétés holding"
+msgstr ""
+
+#: company/choices/fr.py:1603 company/choices/fr.py:1604
+#: company/choices/fr.py:1605
+msgid "Fonds de placement et entités financières similaires"
+msgstr ""
+
+#: company/choices/fr.py:1606
+msgid ""
+"Autres activités des services financiers, hors assurance et caisses de "
+"retraite"
+msgstr ""
+
+#: company/choices/fr.py:1607 company/choices/fr.py:1608
+msgid "Crédit-bail "
+msgstr ""
+
+#: company/choices/fr.py:1609 company/choices/fr.py:1610
+msgid "Autre distribution de crédit"
+msgstr ""
+
+#: company/choices/fr.py:1611 company/choices/fr.py:1612
+msgid ""
+"Autres activités des services financiers, hors assurance et caisses de "
+"retraite, n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1613 company/choices/fr.py:1614
+msgid "Assurance"
+msgstr ""
+
+#: company/choices/fr.py:1615
+msgid "Assurance vie "
+msgstr ""
+
+#: company/choices/fr.py:1616
+msgid "Assurance vie"
+msgstr ""
+
+#: company/choices/fr.py:1617 company/choices/fr.py:1618
+msgid "Autres assurances"
+msgstr ""
+
+#: company/choices/fr.py:1619 company/choices/fr.py:1620
+#: company/choices/fr.py:1621
+msgid "Réassurance"
+msgstr ""
+
+#: company/choices/fr.py:1622 company/choices/fr.py:1623
+#: company/choices/fr.py:1624
+msgid "Caisses de retraite"
+msgstr ""
+
+#: company/choices/fr.py:1625
+msgid "Activités auxiliaires de services financiers et d'assurance "
+msgstr ""
+
+#: company/choices/fr.py:1626
+msgid ""
+"Activités auxiliaires de services financiers, hors assurance et caisses de "
+"retraite"
+msgstr ""
+
+#: company/choices/fr.py:1627 company/choices/fr.py:1628
+msgid "Administration de marchés financiers"
+msgstr ""
+
+#: company/choices/fr.py:1629 company/choices/fr.py:1630
+msgid "Courtage de valeurs mobilières et de marchandises"
+msgstr ""
+
+#: company/choices/fr.py:1631
+msgid ""
+"Autres activités auxiliaires de services financiers, hors assurance et "
+"caisses de retraite"
+msgstr ""
+
+#: company/choices/fr.py:1632
+msgid "Supports juridiques de gestion de patrimoine mobilier"
+msgstr ""
+
+#: company/choices/fr.py:1633
+msgid ""
+"Autres activités auxiliaires de services financiers, hors assurance et "
+"caisses de retraite, n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1634
+msgid "Activités auxiliaires d'assurance et de caisses de retraite"
+msgstr ""
+
+#: company/choices/fr.py:1635 company/choices/fr.py:1636
+msgid "Évaluation des risques et dommages"
+msgstr ""
+
+#: company/choices/fr.py:1637 company/choices/fr.py:1638
+msgid "Activités des agents et courtiers d'assurances"
+msgstr ""
+
+#: company/choices/fr.py:1639 company/choices/fr.py:1640
+msgid "Autres activités auxiliaires d'assurance et de caisses de retraite"
+msgstr ""
+
+#: company/choices/fr.py:1641 company/choices/fr.py:1642
+#: company/choices/fr.py:1643
+msgid "Gestion de fonds"
+msgstr ""
+
+#: company/choices/fr.py:1644
+msgid "Activités immobilières"
+msgstr ""
+
+#: company/choices/fr.py:1645 company/choices/fr.py:1646
+#: company/choices/fr.py:1647
+msgid "Activités des marchands de biens immobiliers"
+msgstr ""
+
+#: company/choices/fr.py:1648
+msgid "Location et exploitation de biens immobiliers propres ou loués"
+msgstr ""
+
+#: company/choices/fr.py:1649
+msgid "Location et exploitation de biens immobiliers propres ou loués "
+msgstr ""
+
+#: company/choices/fr.py:1650
+msgid "Location de logements"
+msgstr ""
+
+#: company/choices/fr.py:1651
+msgid "Location de terrains et d'autres biens immobiliers"
+msgstr ""
+
+#: company/choices/fr.py:1652
+msgid "Activités immobilières pour compte de tiers"
+msgstr ""
+
+#: company/choices/fr.py:1653 company/choices/fr.py:1654
+msgid "Agences immobilières"
+msgstr ""
+
+#: company/choices/fr.py:1655
+msgid "Administration de biens immobiliers"
+msgstr ""
+
+#: company/choices/fr.py:1656
+msgid "Administration d'immeubles et autres biens immobiliers"
+msgstr ""
+
+#: company/choices/fr.py:1657
+msgid "Supports juridiques de gestion de patrimoine immobilier"
+msgstr ""
+
+#: company/choices/fr.py:1658
+msgid "Activités juridiques et comptables"
+msgstr ""
+
+#: company/choices/fr.py:1659 company/choices/fr.py:1660
+#: company/choices/fr.py:1661
+msgid "Activités juridiques"
+msgstr ""
+
+#: company/choices/fr.py:1662 company/choices/fr.py:1663
+#: company/choices/fr.py:1664
+msgid "Activités comptables"
+msgstr ""
+
+#: company/choices/fr.py:1665
+msgid "Activités des sièges sociaux ; conseil de gestion"
+msgstr ""
+
+#: company/choices/fr.py:1666 company/choices/fr.py:1667
+#: company/choices/fr.py:1668
+msgid "Activités des sièges sociaux"
+msgstr ""
+
+#: company/choices/fr.py:1669
+msgid "Conseil de gestion"
+msgstr ""
+
+#: company/choices/fr.py:1670 company/choices/fr.py:1671
+msgid "Conseil en relations publiques et communication"
+msgstr ""
+
+#: company/choices/fr.py:1672 company/choices/fr.py:1673
+msgid "Conseil pour les affaires et autres conseils de gestion"
+msgstr ""
+
+#: company/choices/fr.py:1674
+msgid ""
+"Activités d'architecture et d'ingénierie ; activités de contrôle et analyses "
+"techniques"
+msgstr ""
+
+#: company/choices/fr.py:1675
+msgid "Activités d'architecture et d'ingénierie"
+msgstr ""
+
+#: company/choices/fr.py:1676 company/choices/fr.py:1677
+msgid "Activités d'architecture "
+msgstr ""
+
+#: company/choices/fr.py:1678
+msgid "Activités d'ingénierie"
+msgstr ""
+
+#: company/choices/fr.py:1679
+msgid "Activité des géomètres"
+msgstr ""
+
+#: company/choices/fr.py:1680
+msgid "Ingénierie, études techniques"
+msgstr ""
+
+#: company/choices/fr.py:1681 company/choices/fr.py:1682
+msgid "Activités de contrôle et analyses techniques"
+msgstr ""
+
+#: company/choices/fr.py:1683
+msgid "Contrôle technique automobile"
+msgstr ""
+
+#: company/choices/fr.py:1684
+msgid "Analyses, essais et inspections techniques"
+msgstr ""
+
+#: company/choices/fr.py:1685
+msgid "Recherche-développement scientifique"
+msgstr ""
+
+#: company/choices/fr.py:1686
+msgid "Recherche-développement en sciences physiques et naturelles"
+msgstr ""
+
+#: company/choices/fr.py:1687 company/choices/fr.py:1688
+msgid "Recherche-développement en biotechnologie"
+msgstr ""
+
+#: company/choices/fr.py:1689 company/choices/fr.py:1690
+msgid "Recherche-développement en autres sciences physiques et naturelles"
+msgstr ""
+
+#: company/choices/fr.py:1691 company/choices/fr.py:1692
+#: company/choices/fr.py:1693
+msgid "Recherche-développement en sciences humaines et sociales"
+msgstr ""
+
+#: company/choices/fr.py:1694
+msgid "Publicité et études de marché"
+msgstr ""
+
+#: company/choices/fr.py:1695
+msgid "Publicité"
+msgstr ""
+
+#: company/choices/fr.py:1696 company/choices/fr.py:1697
+msgid "Activités des agences de publicité"
+msgstr ""
+
+#: company/choices/fr.py:1698 company/choices/fr.py:1699
+msgid "Régie publicitaire de médias"
+msgstr ""
+
+#: company/choices/fr.py:1700 company/choices/fr.py:1701
+#: company/choices/fr.py:1702
+msgid "Études de marché et sondages"
+msgstr ""
+
+#: company/choices/fr.py:1703
+msgid "Autres activités spécialisées, scientifiques et techniques"
+msgstr ""
+
+#: company/choices/fr.py:1704 company/choices/fr.py:1705
+#: company/choices/fr.py:1706
+msgid "Activités spécialisées de design"
+msgstr ""
+
+#: company/choices/fr.py:1707 company/choices/fr.py:1708
+#: company/choices/fr.py:1709
+msgid "Activités photographiques"
+msgstr ""
+
+#: company/choices/fr.py:1710 company/choices/fr.py:1711
+#: company/choices/fr.py:1712
+msgid "Traduction et interprétation"
+msgstr ""
+
+#: company/choices/fr.py:1713 company/choices/fr.py:1714
+msgid "Autres activités spécialisées, scientifiques et techniques n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1715
+msgid "Activité des économistes de la construction"
+msgstr ""
+
+#: company/choices/fr.py:1716
+msgid "Activités spécialisées, scientifiques et techniques diverses"
+msgstr ""
+
+#: company/choices/fr.py:1717 company/choices/fr.py:1718
+#: company/choices/fr.py:1719 company/choices/fr.py:1720
+msgid "Activités vétérinaires"
+msgstr ""
+
+#: company/choices/fr.py:1721
+msgid "Activités de location et location-bail"
+msgstr ""
+
+#: company/choices/fr.py:1722
+msgid "Location et location-bail de véhicules automobiles"
+msgstr ""
+
+#: company/choices/fr.py:1723
+msgid ""
+"Location et location-bail de voitures et de véhicules automobiles légers"
+msgstr ""
+
+#: company/choices/fr.py:1724
+msgid "Location de courte durée de voitures et de véhicules automobiles légers"
+msgstr ""
+
+#: company/choices/fr.py:1725
+msgid "Location de longue durée de voitures et de véhicules automobiles légers"
+msgstr ""
+
+#: company/choices/fr.py:1726 company/choices/fr.py:1727
+msgid "Location et location-bail de camions"
+msgstr ""
+
+#: company/choices/fr.py:1728
+msgid "Location et location-bail de biens personnels et domestiques"
+msgstr ""
+
+#: company/choices/fr.py:1729 company/choices/fr.py:1730
+msgid "Location et location-bail d'articles de loisirs et de sport "
+msgstr ""
+
+#: company/choices/fr.py:1731 company/choices/fr.py:1732
+msgid "Location de vidéocassettes et disques vidéo"
+msgstr ""
+
+#: company/choices/fr.py:1733 company/choices/fr.py:1734
+msgid "Location et location-bail d'autres biens personnels et domestiques"
+msgstr ""
+
+#: company/choices/fr.py:1735
+msgid "Location et location-bail d'autres machines, équipements et biens"
+msgstr ""
+
+#: company/choices/fr.py:1736 company/choices/fr.py:1737
+msgid "Location et location-bail de machines et équipements agricoles"
+msgstr ""
+
+#: company/choices/fr.py:1738 company/choices/fr.py:1739
+msgid ""
+"Location et location-bail de machines et équipements pour la construction"
+msgstr ""
+
+#: company/choices/fr.py:1740 company/choices/fr.py:1741
+msgid ""
+"Location et location-bail de machines de bureau et de matériel informatique"
+msgstr ""
+
+#: company/choices/fr.py:1742 company/choices/fr.py:1743
+msgid "Location et location-bail de matériels de transport par eau"
+msgstr ""
+
+#: company/choices/fr.py:1744 company/choices/fr.py:1745
+msgid "Location et location-bail de matériels de transport aérien"
+msgstr ""
+
+#: company/choices/fr.py:1746 company/choices/fr.py:1747
+msgid ""
+"Location et location-bail d'autres machines, équipements et biens matériels "
+"n.c.a. "
+msgstr ""
+
+#: company/choices/fr.py:1748 company/choices/fr.py:1749
+#: company/choices/fr.py:1750
+msgid ""
+"Location-bail de propriété intellectuelle et de produits similaires, à "
+"l'exception des œuvres soumises à copyright"
+msgstr ""
+
+#: company/choices/fr.py:1751
+msgid "Activités liées à l'emploi"
+msgstr ""
+
+#: company/choices/fr.py:1752
+msgid "Activités des agences de placement de main-d'œuvre"
+msgstr ""
+
+#: company/choices/fr.py:1753 company/choices/fr.py:1754
+msgid "Activités des agences de placement de main-d'œuvre "
+msgstr ""
+
+#: company/choices/fr.py:1755
+msgid "Activités des agences de travail temporaire"
+msgstr ""
+
+#: company/choices/fr.py:1756 company/choices/fr.py:1757
+msgid "Activités des agences de travail temporaire "
+msgstr ""
+
+#: company/choices/fr.py:1758 company/choices/fr.py:1759
+#: company/choices/fr.py:1760
+msgid "Autre mise à disposition de ressources humaines"
+msgstr ""
+
+#: company/choices/fr.py:1761
+msgid ""
+"Activités des agences de voyage, voyagistes, services de réservation et "
+"activités connexes"
+msgstr ""
+
+#: company/choices/fr.py:1762
+msgid "Activités des agences de voyage et voyagistes"
+msgstr ""
+
+#: company/choices/fr.py:1763 company/choices/fr.py:1764
+msgid "Activités des agences de voyage"
+msgstr ""
+
+#: company/choices/fr.py:1765 company/choices/fr.py:1766
+msgid "Activités des voyagistes"
+msgstr ""
+
+#: company/choices/fr.py:1767 company/choices/fr.py:1768
+#: company/choices/fr.py:1769
+msgid "Autres services de réservation et activités connexes"
+msgstr ""
+
+#: company/choices/fr.py:1770
+msgid "Enquêtes et sécurité"
+msgstr ""
+
+#: company/choices/fr.py:1771
+msgid "Activités de sécurité privée"
+msgstr ""
+
+#: company/choices/fr.py:1772 company/choices/fr.py:1773
+msgid "Activités de sécurité privée "
+msgstr ""
+
+#: company/choices/fr.py:1774
+msgid "Activités liées aux systèmes de sécurité"
+msgstr ""
+
+#: company/choices/fr.py:1775 company/choices/fr.py:1776
+msgid "Activités liées aux systèmes de sécurité "
+msgstr ""
+
+#: company/choices/fr.py:1777 company/choices/fr.py:1778
+#: company/choices/fr.py:1779
+msgid "Activités d'enquête"
+msgstr ""
+
+#: company/choices/fr.py:1780
+msgid "Services relatifs aux bâtiments et aménagement paysager"
+msgstr ""
+
+#: company/choices/fr.py:1781
+msgid "Activités combinées de soutien lié aux bâtiments"
+msgstr ""
+
+#: company/choices/fr.py:1782 company/choices/fr.py:1783
+msgid "Activités combinées de soutien lié aux bâtiments "
+msgstr ""
+
+#: company/choices/fr.py:1784
+msgid "Activités de nettoyage"
+msgstr ""
+
+#: company/choices/fr.py:1785 company/choices/fr.py:1786
+msgid "Nettoyage courant des bâtiments"
+msgstr ""
+
+#: company/choices/fr.py:1787 company/choices/fr.py:1788
+msgid "Autres activités de nettoyage des bâtiments et nettoyage industriel"
+msgstr ""
+
+#: company/choices/fr.py:1789
+msgid "Autres activités de nettoyage"
+msgstr ""
+
+#: company/choices/fr.py:1790
+msgid "Désinfection, désinsectisation, dératisation"
+msgstr ""
+
+#: company/choices/fr.py:1791
+msgid "Autres activités de nettoyage n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1792
+msgid "Services d'aménagement paysager"
+msgstr ""
+
+#: company/choices/fr.py:1793 company/choices/fr.py:1794
+msgid "Services d'aménagement paysager "
+msgstr ""
+
+#: company/choices/fr.py:1795
+msgid ""
+"Activités administratives et autres activités de soutien aux entreprises"
+msgstr ""
+
+#: company/choices/fr.py:1796
+msgid "Activités administratives "
+msgstr ""
+
+#: company/choices/fr.py:1797 company/choices/fr.py:1798
+msgid "Services administratifs combinés de bureau"
+msgstr ""
+
+#: company/choices/fr.py:1799 company/choices/fr.py:1800
+msgid ""
+"Photocopie, préparation de documents et autres activités spécialisées de "
+"soutien de bureau"
+msgstr ""
+
+#: company/choices/fr.py:1801 company/choices/fr.py:1802
+#: company/choices/fr.py:1803
+msgid "Activités de centres d'appels"
+msgstr ""
+
+#: company/choices/fr.py:1804 company/choices/fr.py:1805
+msgid "Organisation de salons professionnels et congrès"
+msgstr ""
+
+#: company/choices/fr.py:1806
+msgid "Organisation de foires, salons professionnels et congrès"
+msgstr ""
+
+#: company/choices/fr.py:1807
+msgid "Activités de soutien aux entreprises n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1808 company/choices/fr.py:1809
+msgid ""
+"Activités des agences de recouvrement de factures et des sociétés "
+"d'information financière sur la clientèle"
+msgstr ""
+
+#: company/choices/fr.py:1810 company/choices/fr.py:1811
+msgid "Activités de conditionnement"
+msgstr ""
+
+#: company/choices/fr.py:1812 company/choices/fr.py:1813
+msgid "Autres activités de soutien aux entreprises n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1814
+msgid "Administration publique et défense ; sécurité sociale obligatoire"
+msgstr ""
+
+#: company/choices/fr.py:1815
+msgid "Administration générale, économique et sociale"
+msgstr ""
+
+#: company/choices/fr.py:1816 company/choices/fr.py:1817
+msgid "Administration publique générale"
+msgstr ""
+
+#: company/choices/fr.py:1818 company/choices/fr.py:1819
+msgid ""
+"Administration publique (tutelle) de la santé, de la formation, de la "
+"culture et des services sociaux, autre que sécurité sociale "
+msgstr ""
+
+#: company/choices/fr.py:1820 company/choices/fr.py:1821
+msgid "Administration publique (tutelle) des activités économiques"
+msgstr ""
+
+#: company/choices/fr.py:1822
+msgid "Services de prérogative publique"
+msgstr ""
+
+#: company/choices/fr.py:1823 company/choices/fr.py:1824
+msgid "Affaires étrangères"
+msgstr ""
+
+#: company/choices/fr.py:1825 company/choices/fr.py:1826
+msgid "Défense"
+msgstr ""
+
+#: company/choices/fr.py:1827 company/choices/fr.py:1828
+msgid "Justice"
+msgstr ""
+
+#: company/choices/fr.py:1829 company/choices/fr.py:1830
+msgid "Activités d’ordre public et de sécurité"
+msgstr ""
+
+#: company/choices/fr.py:1831 company/choices/fr.py:1832
+msgid "Services du feu et de secours"
+msgstr ""
+
+#: company/choices/fr.py:1833 company/choices/fr.py:1834
+msgid "Sécurité sociale obligatoire"
+msgstr ""
+
+#: company/choices/fr.py:1835
+msgid "Activités générales de sécurité sociale"
+msgstr ""
+
+#: company/choices/fr.py:1836
+msgid "Gestion des retraites complémentaires"
+msgstr ""
+
+#: company/choices/fr.py:1837
+msgid "Distribution sociale de revenus"
+msgstr ""
+
+#: company/choices/fr.py:1838
+msgid "Enseignement"
+msgstr ""
+
+#: company/choices/fr.py:1839 company/choices/fr.py:1840
+#: company/choices/fr.py:1841
+msgid "Enseignement pré-primaire"
+msgstr ""
+
+#: company/choices/fr.py:1842 company/choices/fr.py:1843
+#: company/choices/fr.py:1844
+msgid "Enseignement primaire"
+msgstr ""
+
+#: company/choices/fr.py:1845
+msgid "Enseignement secondaire"
+msgstr ""
+
+#: company/choices/fr.py:1846 company/choices/fr.py:1847
+msgid "Enseignement secondaire général"
+msgstr ""
+
+#: company/choices/fr.py:1848 company/choices/fr.py:1849
+msgid "Enseignement secondaire technique ou professionnel"
+msgstr ""
+
+#: company/choices/fr.py:1850
+msgid "Enseignement supérieur et post-secondaire non supérieur"
+msgstr ""
+
+#: company/choices/fr.py:1851 company/choices/fr.py:1852
+msgid "Enseignement post-secondaire non supérieur"
+msgstr ""
+
+#: company/choices/fr.py:1853 company/choices/fr.py:1854
+msgid "Enseignement supérieur"
+msgstr ""
+
+#: company/choices/fr.py:1855
+msgid "Autres activités d'enseignement"
+msgstr ""
+
+#: company/choices/fr.py:1856 company/choices/fr.py:1857
+msgid "Enseignement de disciplines sportives et d'activités de loisirs"
+msgstr ""
+
+#: company/choices/fr.py:1858 company/choices/fr.py:1859
+msgid "Enseignement culturel"
+msgstr ""
+
+#: company/choices/fr.py:1860 company/choices/fr.py:1861
+msgid "Enseignement de la conduite"
+msgstr ""
+
+#: company/choices/fr.py:1862
+msgid "Enseignements divers"
+msgstr ""
+
+#: company/choices/fr.py:1863
+msgid "Formation continue d'adultes"
+msgstr ""
+
+#: company/choices/fr.py:1864
+msgid "Autres enseignements"
+msgstr ""
+
+#: company/choices/fr.py:1865 company/choices/fr.py:1866
+#: company/choices/fr.py:1867
+msgid "Activités de soutien à l'enseignement"
+msgstr ""
+
+#: company/choices/fr.py:1868
+msgid "Activités pour la santé humaine"
+msgstr ""
+
+#: company/choices/fr.py:1869 company/choices/fr.py:1870
+#: company/choices/fr.py:1871
+msgid "Activités hospitalières"
+msgstr ""
+
+#: company/choices/fr.py:1872
+msgid "Activité des médecins et des dentistes"
+msgstr ""
+
+#: company/choices/fr.py:1873 company/choices/fr.py:1874
+msgid "Activité des médecins généralistes"
+msgstr ""
+
+#: company/choices/fr.py:1875
+msgid "Activité des médecins spécialistes"
+msgstr ""
+
+#: company/choices/fr.py:1876
+msgid "Activités de radiodiagnostic et de radiothérapie"
+msgstr ""
+
+#: company/choices/fr.py:1877
+msgid "Activités chirurgicales"
+msgstr ""
+
+#: company/choices/fr.py:1878
+msgid "Autres activités des médecins spécialistes"
+msgstr ""
+
+#: company/choices/fr.py:1879 company/choices/fr.py:1880
+msgid "Pratique dentaire"
+msgstr ""
+
+#: company/choices/fr.py:1881 company/choices/fr.py:1882
+msgid "Autres activités pour la santé humaine"
+msgstr ""
+
+#: company/choices/fr.py:1883
+msgid "Ambulances"
+msgstr ""
+
+#: company/choices/fr.py:1884
+msgid "Laboratoires d'analyses médicales"
+msgstr ""
+
+#: company/choices/fr.py:1885
+msgid "Centres de collecte et banques d'organes"
+msgstr ""
+
+#: company/choices/fr.py:1886
+msgid "Activités des infirmiers et des sages-femmes"
+msgstr ""
+
+#: company/choices/fr.py:1887
+msgid ""
+"Activités des professionnels de la rééducation, de l’appareillage et des "
+"pédicures-podologues"
+msgstr ""
+
+#: company/choices/fr.py:1888
+msgid "Activités de santé humaine non classées ailleurs"
+msgstr ""
+
+#: company/choices/fr.py:1889
+msgid "Hébergement médico-social et social"
+msgstr ""
+
+#: company/choices/fr.py:1890 company/choices/fr.py:1891
+msgid "Hébergement médicalisé"
+msgstr ""
+
+#: company/choices/fr.py:1892
+msgid "Hébergement médicalisé pour personnes âgées"
+msgstr ""
+
+#: company/choices/fr.py:1893
+msgid "Hébergement médicalisé pour enfants handicapés "
+msgstr ""
+
+#: company/choices/fr.py:1894
+msgid ""
+"Hébergement médicalisé pour adultes handicapés et autre hébergement "
+"médicalisé"
+msgstr ""
+
+#: company/choices/fr.py:1895 company/choices/fr.py:1896
+msgid ""
+"Hébergement social pour personnes handicapées mentales, malades mentales et "
+"toxicomanes"
+msgstr ""
+
+#: company/choices/fr.py:1897
+msgid "Hébergement social pour handicapés mentaux et malades mentaux "
+msgstr ""
+
+#: company/choices/fr.py:1898
+msgid "Hébergement social pour toxicomanes"
+msgstr ""
+
+#: company/choices/fr.py:1899 company/choices/fr.py:1900
+msgid "Hébergement social pour personnes âgées ou handicapées physiques "
+msgstr ""
+
+#: company/choices/fr.py:1901
+msgid "Hébergement social pour personnes âgées"
+msgstr ""
+
+#: company/choices/fr.py:1902
+msgid "Hébergement social pour handicapés  physiques"
+msgstr ""
+
+#: company/choices/fr.py:1903 company/choices/fr.py:1904
+msgid "Autres activités d’hébergement social "
+msgstr ""
+
+#: company/choices/fr.py:1905
+msgid "Hébergement social pour enfants en difficultés "
+msgstr ""
+
+#: company/choices/fr.py:1906
+msgid ""
+"Hébergement social pour adultes et familles en difficultés et autre "
+"hébergement social "
+msgstr ""
+
+#: company/choices/fr.py:1907
+msgid "Action sociale sans hébergement"
+msgstr ""
+
+#: company/choices/fr.py:1908 company/choices/fr.py:1909
+msgid ""
+"Action sociale sans hébergement pour personnes âgées et pour personnes "
+"handicapées "
+msgstr ""
+
+#: company/choices/fr.py:1910
+msgid "Aide à domicile  "
+msgstr ""
+
+#: company/choices/fr.py:1911
+msgid ""
+"Accueil ou accompagnement sans hébergement d’adultes handicapés ou de  "
+"personnes âgées"
+msgstr ""
+
+#: company/choices/fr.py:1912
+msgid "Aide par le travail "
+msgstr ""
+
+#: company/choices/fr.py:1913
+msgid "Autre action sociale sans hébergement"
+msgstr ""
+
+#: company/choices/fr.py:1914
+msgid "Action sociale sans hébergement pour jeunes enfants"
+msgstr ""
+
+#: company/choices/fr.py:1915
+msgid "Accueil de jeunes enfants"
+msgstr ""
+
+#: company/choices/fr.py:1916
+msgid "Accueil ou accompagnement sans hébergement d’enfants handicapés"
+msgstr ""
+
+#: company/choices/fr.py:1917
+msgid "Autre action sociale sans hébergement n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1918
+msgid ""
+"Autre accueil ou accompagnement sans hébergement d’enfants et d’adolescents"
+msgstr ""
+
+#: company/choices/fr.py:1919
+msgid "Action sociale sans hébergement n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1920 company/choices/fr.py:1921
+msgid "Activités créatives, artistiques et de spectacle "
+msgstr ""
+
+#: company/choices/fr.py:1922 company/choices/fr.py:1923
+msgid "Arts du spectacle vivant"
+msgstr ""
+
+#: company/choices/fr.py:1924 company/choices/fr.py:1925
+msgid "Activités de soutien au spectacle vivant"
+msgstr ""
+
+#: company/choices/fr.py:1926
+msgid "Création artistique"
+msgstr ""
+
+#: company/choices/fr.py:1927
+msgid "Création artistique relevant des arts plastiques"
+msgstr ""
+
+#: company/choices/fr.py:1928
+msgid "Autre création artistique"
+msgstr ""
+
+#: company/choices/fr.py:1929 company/choices/fr.py:1930
+msgid "Gestion de salles de spectacles"
+msgstr ""
+
+#: company/choices/fr.py:1931 company/choices/fr.py:1932
+msgid "Bibliothèques, archives, musées et autres activités culturelles"
+msgstr ""
+
+#: company/choices/fr.py:1933 company/choices/fr.py:1934
+msgid "Gestion des bibliothèques et des archives"
+msgstr ""
+
+#: company/choices/fr.py:1935 company/choices/fr.py:1936
+msgid "Gestion des musées"
+msgstr ""
+
+#: company/choices/fr.py:1937 company/choices/fr.py:1938
+msgid ""
+"Gestion des sites et monuments historiques et des attractions touristiques "
+"similaires"
+msgstr ""
+
+#: company/choices/fr.py:1939 company/choices/fr.py:1940
+msgid ""
+"Gestion des jardins botaniques et zoologiques et des réserves naturelles"
+msgstr ""
+
+#: company/choices/fr.py:1941 company/choices/fr.py:1942
+#: company/choices/fr.py:1943 company/choices/fr.py:1944
+msgid "Organisation de jeux de hasard et d'argent"
+msgstr ""
+
+#: company/choices/fr.py:1945
+msgid "Activités sportives, récréatives et de loisirs"
+msgstr ""
+
+#: company/choices/fr.py:1946
+msgid "Activités liées au sport"
+msgstr ""
+
+#: company/choices/fr.py:1947 company/choices/fr.py:1948
+msgid "Gestion d'installations sportives"
+msgstr ""
+
+#: company/choices/fr.py:1949 company/choices/fr.py:1950
+msgid "Activités de clubs de sports"
+msgstr ""
+
+#: company/choices/fr.py:1951 company/choices/fr.py:1952
+msgid "Activités des centres de culture physique"
+msgstr ""
+
+#: company/choices/fr.py:1953 company/choices/fr.py:1954
+msgid "Autres activités liées au sport"
+msgstr ""
+
+#: company/choices/fr.py:1955
+msgid "Activités récréatives et de loisirs"
+msgstr ""
+
+#: company/choices/fr.py:1956 company/choices/fr.py:1957
+msgid "Activités des parcs d'attractions et parcs à thèmes"
+msgstr ""
+
+#: company/choices/fr.py:1958
+msgid "Autres activités récréatives et de loisirs "
+msgstr ""
+
+#: company/choices/fr.py:1959
+msgid "Autres activités récréatives et de loisirs"
+msgstr ""
+
+#: company/choices/fr.py:1960
+msgid "Activités des organisations associatives"
+msgstr ""
+
+#: company/choices/fr.py:1961
+msgid "Activités des organisations économiques, patronales et professionnelles"
+msgstr ""
+
+#: company/choices/fr.py:1962 company/choices/fr.py:1963
+msgid "Activités des organisations patronales et consulaires"
+msgstr ""
+
+#: company/choices/fr.py:1964 company/choices/fr.py:1965
+msgid "Activités des organisations professionnelles"
+msgstr ""
+
+#: company/choices/fr.py:1966 company/choices/fr.py:1967
+#: company/choices/fr.py:1968
+msgid "Activités des syndicats de salariés"
+msgstr ""
+
+#: company/choices/fr.py:1969
+msgid "Activités des autres organisations associatives"
+msgstr ""
+
+#: company/choices/fr.py:1970 company/choices/fr.py:1971
+msgid "Activités des organisations religieuses"
+msgstr ""
+
+#: company/choices/fr.py:1972 company/choices/fr.py:1973
+msgid "Activités des organisations politiques"
+msgstr ""
+
+#: company/choices/fr.py:1974
+msgid "Activités des organisations associatives n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:1975
+msgid "Autres organisations fonctionnant par adhésion volontaire"
+msgstr ""
+
+#: company/choices/fr.py:1976
+msgid "Réparation d'ordinateurs et de biens personnels et domestiques"
+msgstr ""
+
+#: company/choices/fr.py:1977
+msgid "Réparation d'ordinateurs et d'équipements de communication "
+msgstr ""
+
+#: company/choices/fr.py:1978 company/choices/fr.py:1979
+msgid "Réparation d'ordinateurs et d'équipements périphériques"
+msgstr ""
+
+#: company/choices/fr.py:1980 company/choices/fr.py:1981
+msgid "Réparation d'équipements de communication"
+msgstr ""
+
+#: company/choices/fr.py:1982
+msgid "Réparation de biens personnels et domestiques"
+msgstr ""
+
+#: company/choices/fr.py:1983 company/choices/fr.py:1984
+msgid "Réparation de produits électroniques grand public"
+msgstr ""
+
+#: company/choices/fr.py:1985 company/choices/fr.py:1986
+msgid ""
+"Réparation d'appareils électroménagers et d'équipements pour la maison et le "
+"jardin"
+msgstr ""
+
+#: company/choices/fr.py:1987 company/choices/fr.py:1988
+msgid "Réparation de chaussures et d'articles en cuir"
+msgstr ""
+
+#: company/choices/fr.py:1989 company/choices/fr.py:1990
+msgid "Réparation de meubles et d'équipements du foyer"
+msgstr ""
+
+#: company/choices/fr.py:1991 company/choices/fr.py:1992
+msgid "Réparation d'articles d'horlogerie et de bijouterie"
+msgstr ""
+
+#: company/choices/fr.py:1993 company/choices/fr.py:1994
+msgid "Réparation d'autres biens personnels et domestiques"
+msgstr ""
+
+#: company/choices/fr.py:1995 company/choices/fr.py:1996
+msgid "Autres services personnels"
+msgstr ""
+
+#: company/choices/fr.py:1997
+msgid "Blanchisserie-teinturerie"
+msgstr ""
+
+#: company/choices/fr.py:1998
+msgid "Blanchisserie-teinturerie de gros"
+msgstr ""
+
+#: company/choices/fr.py:1999
+msgid "Blanchisserie-teinturerie de détail"
+msgstr ""
+
+#: company/choices/fr.py:2000
+msgid "Coiffure et soins de beauté"
+msgstr ""
+
+#: company/choices/fr.py:2001
+msgid "Coiffure"
+msgstr ""
+
+#: company/choices/fr.py:2002
+msgid "Soins de beauté"
+msgstr ""
+
+#: company/choices/fr.py:2003 company/choices/fr.py:2004
+msgid "Services funéraires"
+msgstr ""
+
+#: company/choices/fr.py:2005 company/choices/fr.py:2006
+msgid "Entretien corporel"
+msgstr ""
+
+#: company/choices/fr.py:2007 company/choices/fr.py:2008
+msgid "Autres services personnels n.c.a."
+msgstr ""
+
+#: company/choices/fr.py:2009 company/choices/fr.py:2010
+#: company/choices/fr.py:2011 company/choices/fr.py:2012
+msgid "Activités des ménages en tant qu'employeurs de personnel domestique"
+msgstr ""
+
+#: company/choices/fr.py:2013
+msgid ""
+"Activités indifférenciées des ménages en tant que producteurs de biens et "
+"services pour usage propre"
+msgstr ""
+
+#: company/choices/fr.py:2014 company/choices/fr.py:2015
+#: company/choices/fr.py:2016
+msgid ""
+"Activités indifférenciées des ménages en tant que producteurs de biens pour "
+"usage propre"
+msgstr ""
+
+#: company/choices/fr.py:2017 company/choices/fr.py:2018
+#: company/choices/fr.py:2019
+msgid ""
+"Activités indifférenciées des ménages en tant que producteurs de services "
+"pour usage propre"
+msgstr ""
+
+#: company/choices/fr.py:2020 company/choices/fr.py:2021
+#: company/choices/fr.py:2022 company/choices/fr.py:2023
+msgid "Activités des organisations et organismes extraterritoriaux"
+msgstr ""
+
+#: company/choices/fr.py:2027
+msgid "EMISSIONS ET COTATIONS"
+msgstr ""
+
+#: company/choices/fr.py:2028
+msgid "Valeurs françaises"
+msgstr ""
+
+#: company/choices/fr.py:2029
+msgid "Valeurs étrangères"
+msgstr ""
+
+#: company/choices/fr.py:2030
+msgid "AVIS DE CONVOCATION/AVIS DE REUNION"
+msgstr ""
+
+#: company/choices/fr.py:2031
+msgid "DROITS DE VOTE"
+msgstr ""
+
+#: company/choices/fr.py:2032
+msgid "PUBLICATIONS PERIODIQUES"
+msgstr ""
+
+#: company/choices/fr.py:2033
+msgid "Comptes annuels"
+msgstr ""
+
+#: company/choices/fr.py:2034
+msgid "Chiffres d’affaires et situations trimestrielles"
+msgstr ""
+
+#: company/choices/fr.py:2035
+msgid "Comptes intermédiaires"
+msgstr ""
+
+#: company/choices/fr.py:2036
+msgid "Entreprises d’assurances et organismes de retraites"
+msgstr ""
+
+#: company/choices/fr.py:2037
+msgid "AUTRES OPERATIONS"
+msgstr ""
+
+#: company/choices/fr.py:2038
+msgid "Réduction de capital"
+msgstr ""
+
+#: company/choices/fr.py:2039
+msgid "Regroupement d’actions/d’obligations"
+msgstr ""
+
+#: company/choices/fr.py:2040
+msgid "Offre de remboursement d’obligations"
+msgstr ""
+
+#: company/choices/fr.py:2041
+msgid ""
+"Décisions prises par des assemblées d’obligataires et homologation de "
+"résolutions"
+msgstr ""
+
+#: company/choices/fr.py:2042
+msgid "Désignation de teneurs de comptes de titres nominatifs"
+msgstr ""
+
+#: company/choices/fr.py:2043
+msgid "Fusions et scissions"
+msgstr ""
+
+#: company/choices/fr.py:2044
+msgid "Liquidations"
+msgstr ""
+
+#: company/choices/fr.py:2045
+msgid "AVIS DIVERS"
+msgstr ""
+
+#: company/choices/fr.py:2046
+msgid "BULLETIN OFFICIEL DE L’AMF"
+msgstr ""
+
+#: company/templates/admin/company_change_form.html:10
+#: company/templates/admin/company_change_form_logs.html:10
+#: company/templates/admin/company_country_add.html:15
+#: company/templates/admin/company_country_choice.html:18
+#: company/templates/admin/company_country_search.html:17
+#: company/templates/admin/company_update_from.html:14
+msgid "Home"
+msgstr ""
+
+#: company/templates/admin/company_change_form.html:13
+#: company/templates/admin/company_change_form_logs.html:13
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: company/translates.py:6
+msgid "since"
+msgstr ""
+
+#: company/translates.py:7
+msgid "industry classification benchmark"
+msgstr ""
+
+#: company/translates.py:8
+msgid "market"
+msgstr ""
+
+#: company/translates.py:9
+msgid "purpose"
+msgstr ""
+
+#: company/translates.py:10 company/translates.py:66
+msgid "secretary"
+msgstr ""
+
+#: company/translates.py:11
+msgid "internal rules of the board"
+msgstr ""
+
+#: company/translates.py:12
+msgid "turn over"
+msgstr ""
+
+#: company/translates.py:13
+msgid "capital social"
+msgstr ""
+
+#: company/translates.py:14
+msgid "valorisation"
+msgstr ""
+
+#: company/translates.py:15
+msgid "nominal"
+msgstr ""
+
+#: company/translates.py:17
+msgid "net profit"
+msgstr ""
+
+#: company/translates.py:18 company/translates.py:20
+msgid "En million d'euros"
+msgstr ""
+
+#: company/translates.py:19
+msgid "dividende total"
+msgstr ""
+
+#: company/translates.py:21
+msgid "dividend"
+msgstr ""
+
+#: company/translates.py:22
+msgid "securities"
+msgstr ""
+
+#: company/translates.py:23
+msgid "current"
+msgstr ""
+
+#: company/translates.py:25
+msgid "duration mandate"
+msgstr ""
+
+#: company/translates.py:26
+msgid "matrix skills"
+msgstr ""
+
+#: company/translates.py:27
+msgid "governing is comex"
+msgstr ""
+
+#: company/translates.py:28
+msgid "pdg age limit"
+msgstr ""
+
+#: company/translates.py:29
+msgid "dg age limit"
+msgstr ""
+
+#: company/translates.py:30
+msgid "company status minimum stock"
+msgstr ""
+
+#: company/translates.py:31
+msgid "council rules minimum stock"
+msgstr ""
+
+#: company/translates.py:32
+msgid "share capital"
+msgstr ""
+
+#: company/translates.py:33
+msgid "Type de membre"
+msgstr ""
+
+#: company/translates.py:35
+#, python-format
+msgid "%s companies found"
+msgstr ""
+
+#: company/translates.py:36
+#, python-format
+msgid "%s company found"
+msgstr ""
+
+#: company/translates.py:37
+#, python-format
+msgid "for %s page"
+msgstr ""
+
+#: company/translates.py:38
+#, python-format
+msgid "for %s pages"
+msgstr ""
+
+#: company/translates.py:40
+msgid "search"
+msgstr ""
+
+#: company/translates.py:41
+msgid "siren, company..."
+msgstr ""
+
+#: company/translates.py:42
+#, python-format
+msgid ""
+"In view of the high number of results (% s) we advise you to search by SIREN"
+msgstr ""
+
+#: company/translates.py:43
+msgid "countries"
+msgstr ""
+
+#: company/translates.py:48
+msgid "core business"
+msgstr ""
+
+#: company/translates.py:49
+msgid "APE code not specified"
+msgstr ""
+
+#: company/translates.py:50
+msgid "ape noun"
+msgstr ""
+
+#: company/translates.py:51
+msgid "legal form"
+msgstr ""
+
+#: company/translates.py:52
+msgid "legal form not specified"
+msgstr ""
+
+#: company/translates.py:53
+msgid "category"
+msgstr ""
+
+#: company/translates.py:54
+msgid "slice effective"
+msgstr ""
+
+#: company/translates.py:55
+msgid "effective"
+msgstr ""
+
+#: company/translates.py:57
+msgid "date rcs"
+msgstr ""
+
+#: company/translates.py:58
+msgid "siret"
+msgstr ""
+
+#: company/translates.py:59
+msgid "isin"
+msgstr ""
+
+#: company/translates.py:60
+msgid "ticker"
+msgstr ""
+
+#: company/translates.py:61
+msgid "code reference"
+msgstr ""
+
+#: company/translates.py:62
+msgid "Paris index"
+msgstr ""
+
+#: company/translates.py:63
+msgid "governance"
+msgstr ""
+
+#: company/translates.py:64
+msgid "evaluation"
+msgstr ""
+
+#: company/translates.py:65
+msgid "quality independent"
+msgstr ""
