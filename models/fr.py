@@ -38,6 +38,7 @@ class CompanyFR(CompanyAlpha2):
     siege = models.BooleanField(default=False)
     resume = RichTextField(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
     accept_duplicate = False
 
     class Meta(CompanyAlpha2.Meta):

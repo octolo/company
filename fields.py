@@ -109,5 +109,6 @@ fr = (
     'index',
     'siege',
     'evaluation',
+    'phone',
 )
 balo =  ('announce', 'company', 'case', 'link', 'file_link', 'date')

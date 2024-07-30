@@ -21,6 +21,7 @@ class CompanyAdmin(BaseAdmin):
     fieldsets = (
         (None, {"classes": ("wide",), "fields": (
             'denomination',
+            'image',
             'since',
             'site',
             'effective',
