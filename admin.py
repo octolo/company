@@ -60,8 +60,6 @@ class CompanyAdmin(BaseAdmin):
 
     def render_change_form(self, request, context, add=False, change=False, form_url="", obj=None):
         response = super().render_change_form(request, context, add, change, form_url, obj)
-        if hasattr(self.model, "changelog_model"):
-            response.template_name = self.change_form_logs_template
         return self.is_from_update(request, obj, response)
 
     def country_choice_view(self, request, object_id=None, extra_context=None):
