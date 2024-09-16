@@ -13,6 +13,7 @@ turnover = _("turn over")
 capital_socnomtotal = _("capital social")
 capitalisation = _("valorisation")
 nominal = _("nominal")
+is_capital_variable = _("capital variable")
 
 net_profit = _("net profit")
 net_profit_help = _("En million d'euros")

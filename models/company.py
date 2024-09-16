@@ -45,6 +45,7 @@ class Company(Base, Image):
     current = models.FloatField(_.current, default=0.0)
     total_dividend = models.IntegerField(_.total_dividend, blank=True, null=True, help_text=_.total_dividend_help)
 
+    is_capital_variable = models.BooleanField(_.is_capital_variable, default=False)
     capital_division = models.JSONField(blank=True, null=True)
     current = models.FloatField(blank=True, null=True)
     share_capital = models.FloatField(_.share_capital, blank=True, null=True)

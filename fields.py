@@ -6,6 +6,7 @@ company = (
     'icb',
     'market',
     'capital_socnomtotal',
+    'is_capital_variable',
     'capital_division',
     'share_capital',
     'floating',
