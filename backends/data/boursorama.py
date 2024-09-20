@@ -109,7 +109,7 @@ class CompanyDataBackend(CompanyDataBackend):
         "ticker": '//*[@id="main-content"]/div/section[1]/header/div/div/div[1]/div[2]/h2',
         "market": '//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[8]/p[2]',
         "capital_division": '//*[@id="main-content"]/div/section[1]/div[3]/div[2]/article/div[3]/div/div[2]/div[1]/div/script',
-        "capitalisation": '//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[7]/p[2]',
+        "valorisation": '//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[7]/p[2]',
         "effective": '//*[@id="main-content"]/div/section/div[3]/div[1]/div/div/div[2]/div/ul/li[5]/p[2]',
         "current": '//*[@id="main-content"]/div/section/header/div/div/div[1]/div[1]/div/div[1]/span[1]',
         "securities": '//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[6]/p[2]',
@@ -207,16 +207,16 @@ class CompanyDataBackend(CompanyDataBackend):
             return self.scrap_data(self.lxml_profil, "site").replace(' ', '')
         except Exception as e:
             self.logger.warning("Site not found")
-        
+
     @property
     def data_icb(self):
-        try:                      
+        try:
             icb = self.scrap_data(self.lxml_profil, "icb1")
             if not len(icb): icb = self.scrap_data(self.lxml_profil, "icb2")
             return self.choices_icb[self.icb[icb]]
         except Exception as e:
             self.logger.warning("Icb not found")
-        
+
     def set_data_ticker(self, value):
         self.obj.ticker = value
     def get_data_ticker(self):
@@ -228,7 +228,7 @@ class CompanyDataBackend(CompanyDataBackend):
             return ticker.split(' ').pop()
         except Exception as e:
             self.logger.warning("Tiker not found")
-        
+
     @property
     def data_market(self):
         try:
@@ -236,7 +236,7 @@ class CompanyDataBackend(CompanyDataBackend):
             return self.choices_market[market]
         except Exception as e:
             self.logger.warning("Market not found")
-        
+
     # CAPITAL DIVISION
     @property
     def data_capital_division(self):
@@ -256,13 +256,13 @@ class CompanyDataBackend(CompanyDataBackend):
 
     # CAPITALISATION
     @property
-    def data_capitalisation(self):
+    def data_valorisation(self):
         try:
-            captz = self.scrap_data(self.lxml_profil, "capitalisation").split(" ")
+            captz = self.scrap_data(self.lxml_profil, "valorisation").split(" ")
             captz.pop()
             return float(''.join(captz))
         except Exception as e:
-            self.logger.warning("Capitalisation not found")
+            self.logger.warning("Valorisation not found")
 
     # EFFECTIVE
     @property

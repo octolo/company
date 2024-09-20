@@ -17,7 +17,7 @@ class Config:
             "icb",
             "capital_division",
             "floating",
-            "capitalisation",
+            "valorisation",
             "effective",
             "current",
             "securities",

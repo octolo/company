@@ -146,16 +146,16 @@ class Command(UpdateModel):
         _.MARKET_DELISTED: MARKET_DELISTED,
     }
 
-    def get_capitalisation(self, document, obj):
+    def get_valorisation(self, document, obj):
         try:
-            capitalisation = document.xpath('//*[@id="main-content"]/div/section[1]/header/div/div/div[3]/div[2]/div/ul/li[2]/p[2]')
-            capitalisation = capitalisation[0].text_content().strip().split(' ')
-            capitalisation.pop()
-            capitalisation = ''.join(capitalisation)
-            return float(capitalisation)
+            valorisation = document.xpath('//*[@id="main-content"]/div/section[1]/header/div/div/div[3]/div[2]/div/ul/li[2]/p[2]')
+            valorisation = valorisation[0].text_content().strip().split(' ')
+            valorisation.pop()
+            valorisation = ''.join(valorisation)
+            return float(valorisation)
         except Exception as e:
-            self.error.add("Capitalisation not found", obj, self.current_row)
-        return obj.capitalisation
+            self.error.add("Valorisation not found", obj, self.current_row)
+        return obj.valorisation
 
     def get_effective(self, document, obj):
         try:
@@ -177,7 +177,7 @@ class Command(UpdateModel):
         return obj.current
 
     def get_icb(self, document, obj):
-        try:                      
+        try:
             icb = document.xpath('//*[@id="main-content"]/div/section/header/div/div/div[2]/div[2]/div/ul/li[1]/p[2]/a')
             if not len(icb):
                 icb = document.xpath('//*[@id="main-content"]/div/section[1]/header/div/div/div[2]/div[2]/div/ul/li[1]/p[2]/a')
@@ -195,7 +195,7 @@ class Command(UpdateModel):
         except Exception as e:
             self.error.add("Ticker not found", obj, self.current_row)
         return obj.ticker
-        
+
     def get_capital_division(self, document, obj):
         import json
         try:
@@ -238,7 +238,7 @@ class Command(UpdateModel):
         except Exception as e:
             self.error.add("Market not found", obj, self.current_row)
         return obj.market
-                   
+
     def get_securities(self, document, obj):
         try:
             securities = document.xpath('//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[6]/p[2]')
@@ -247,7 +247,7 @@ class Command(UpdateModel):
         except Exception as e:
             self.error.add("Securities not found", obj, self.current_row)
         return obj.securities
-    
+
     def get_dividend(self, document, obj):
         try:
             dividend = document.xpath('//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div/div[1]/div[12]/div[2]/div[1]/div/table/tbody')[0]
@@ -260,7 +260,7 @@ class Command(UpdateModel):
         except Exception as e:
             self.error.add("Dividend not found", obj, self.current_row)
         return obj.dividend
-    
+
     def get_net_profit(self, document, obj):
         try:
             net_profit = document.xpath('//*[@id="main-content"]/div/section[1]/div[3]/div/article/div[1]/div/div[2]/div[1]/div/table/tbody')[0]
@@ -309,8 +309,8 @@ class Command(UpdateModel):
                 agdataobj.save()
             agdataobj.capital_division, agdataobj.floating = self.get_capital_division(profil, agdataobj)
             print("agdataobj.capital_division: %s" % agdataobj.capital_division)
-            agdataobj.capitalisation = self.get_capitalisation(profil, agdataobj)
-            print("agdataobj.capitalisation: %s" % agdataobj.capitalisation)
+            agdataobj.valorisation = self.get_valorisation(profil, agdataobj)
+            print("agdataobj.valorisation: %s" % agdataobj.valorisation)
             agdataobj.effective = self.get_effective(profil, agdataobj)
             print("agdataobj.effective: %s" % agdataobj.effective)
             agdataobj.current = self.get_current(profil, agdataobj)

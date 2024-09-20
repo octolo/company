@@ -11,7 +11,7 @@ secretary = _("secretary")
 settle_internal = _("internal rules of the board")
 turnover = _("turn over")
 capital_socnomtotal = _("capital social")
-capitalisation = _("valorisation")
+valorisation = _("valorisation")
 nominal = _("nominal")
 is_capital_variable = _("capital variable")
 
