@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 class SearchBackend(SearchBackend):
     token_url = 'https://api.insee.fr/token'
-    siren_url = 'https://api.insee.fr/entreprises/sirene/V3/siren'
-    siret_url = 'https://api.insee.fr/entreprises/sirene/V3/siret'
+    siren_url = 'https://api.insee.fr/entreprises/sirene/siren'
+    siret_url = 'https://api.insee.fr/entreprises/sirene/siret'
     since_format = '%Y-%m-%d'
     iso_format = '%Y-%m-%dT%H:%M:%S'
     error = 5
@@ -30,7 +30,7 @@ class SearchBackend(SearchBackend):
             if self.error:
                 return self.call_webservice(url, headers, postfields)
             else:
-                raise e                
+                raise e
 
     def get_token(self):
         basic = '%s:%s' % (settings.INSEE_KEY, settings.INSEE_SECRET)
@@ -78,7 +78,7 @@ class SearchBackend(SearchBackend):
                             'complement': company['adresseEtablissement'].get('complementAdresseEtablissement', ''),
                             'locality': company['adresseEtablissement'].get('libelleCommuneEtablissement',
                                 company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement', '')),
-                            'postal_code': company['adresseEtablissement'].get('codePostalEtablissement', 
+                            'postal_code': company['adresseEtablissement'].get('codePostalEtablissement',
                                 company['adresseEtablissement'].get('codeCommuneEtablissement', '')),
                             'country': company['adresseEtablissement'].get('libellePaysEtrangerEtablissement', 'france').lower(),
                             'country_code': company['adresseEtablissement'].get('codePaysEtrangerEtablissement', 'fr').lower(),
