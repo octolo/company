@@ -1,6 +1,7 @@
 import base64
 import datetime
 import logging
+import random
 import re
 import time
 
@@ -24,22 +25,44 @@ class SearchBackend(SearchBackend):
     error = 5
     raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
+    def __init__(self, max_retries=5, base_delay=1, max_delay=32):
+        self.max_retries = max_retries
+        self.base_delay = base_delay
+        self.max_delay = max_delay
+
     def call_webservice(self, url, headers, postfields=None):
-        logger.warning("url: %s, headers: %s, postfields: %s" % (url, headers, postfields))
-        try:
-            if postfields:
-                buffer = requests.post(url, headers=headers, data=postfields)
-            else:
-                buffer = requests.get(url, headers=headers)
-            logger.warning("status_code: %s" % (buffer.status_code))
-            return buffer.json(), buffer.status_code
-        except Exception as e:
-            logger.warning(e)
-            self.error -= 1
-            if self.error:
-                return self.call_webservice(url, headers, postfields)
-            else:
-                raise e
+        """Makes a web service call with exponential backoff."""
+        retries = 0
+
+        while retries < self.max_retries:
+            try:
+                if postfields:
+                    response = requests.post(url, headers=headers, data=postfields)
+                else:
+                    response = requests.get(url, headers=headers)
+
+                # Log response status and return JSON data
+                logger.info("URL: %s, Status Code: %d", url, response.status_code)
+                response.raise_for_status()  # Raise HTTPError for bad responses
+                return response.json(), response.status_code
+
+            except requests.exceptions.RequestException as e:
+                # Log specific errors
+                logger.warning("Error: %s", e)
+
+                # Exponential backoff with jitter
+                retries += 1
+                if retries >= self.max_retries:
+                    logger.error("Max retries reached. Giving up.")
+                    raise e
+
+                delay = min(self.base_delay * (2 ** retries), self.max_delay)
+                delay_with_jitter = delay + random.uniform(0, 0.1 * delay)
+                logger.info("Retrying in %.2f seconds...", delay_with_jitter)
+                time.sleep(delay_with_jitter)
+
+        # If all retries are exhausted, raise an exception
+        raise RuntimeError("Failed to complete the web service call after retries.")
 
     def get_token(self):
         basic = '%s:%s' % (settings.INSEE_KEY, settings.INSEE_SECRET)
@@ -48,17 +71,20 @@ class SearchBackend(SearchBackend):
             "accept": "application/json",
             "Authorization": "Basic %s" % basic,
         }
-        buffer, response_code = self.call_webservice(self.token_url, headers, {"grant_type": "client_credentials"})
+        postfields = {"grant_type": "client_credentials"}
+
         try:
-            return buffer["access_token"]
-        except Exception:
-            return False
+            data, status = self.call_webservice(self.token_url, headers, postfields)
+            logger.info("Response Data: %s", data, status)
+            return data["access_token"]
+        except Exception as e:
+            logger.error("Failed to call webservice: %s", e)
 
     def get_companies(self, qreq, number=50, offset=0):
         message, companies, total, pages = (False, [], 0, 0)
         # access_token = self.get_token()
         # headers = {'Accept': 'application/json', 'Authorization': 'Bearer %s' % access_token}
-        headers = {'Accept': 'application/json', "X-INSEE-Api-Key-Integration": "b7a20c77-3bbe-4de5-a20c-773bbeade5b7"}
+        headers = {'Accept': 'application/json', "X-INSEE-Api-Key-Integration": settings.INSEE_API_KEY}
         url = "%s?q=%s&nombre=%s&debut=%s&masquerValeursNulles=true" % (self.siret_url, qreq, number, offset)
         buffer, response_code = self.call_webservice(url, headers)
         if 'header' in buffer:
