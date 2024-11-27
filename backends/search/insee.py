@@ -1,32 +1,45 @@
+import base64
+import datetime
+import logging
+import re
+import time
+
+import requests
 from django.conf import settings
-from mighty.functions import make_searchable
 
 from company.backends.search import SearchBackend
-from company.choices.fr import LEGALFORM, APE
-
-from io import BytesIO
-import base64, requests, json, re, logging, time, datetime
+from mighty.functions import make_searchable
 
 logger = logging.getLogger(__name__)
 
+
 class SearchBackend(SearchBackend):
     token_url = 'https://api.insee.fr/token'
+<<<<<<< Updated upstream
     siren_url = 'https://api.insee.fr/entreprises/sirene/siren'
     siret_url = 'https://api.insee.fr/entreprises/sirene/siret'
+=======
+    # siren_url = 'https://api.insee.fr/entreprises/sirene/V3/siren'
+    # siret_url = 'https://api.insee.fr/entreprises/sirene/V3/siret'
+    siren_url = 'https://api.insee.fr/api-sirene/3.11/siren'
+    siret_url = 'https://api.insee.fr/api-sirene/3.11/siret'
+>>>>>>> Stashed changes
     since_format = '%Y-%m-%d'
     iso_format = '%Y-%m-%dT%H:%M:%S'
     error = 5
     raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
     def call_webservice(self, url, headers, postfields=None):
+        logger.warning("url: %s, headers: %s, postfields: %s" % (url, headers, postfields))
         try:
             if postfields:
                 buffer = requests.post(url, headers=headers, data=postfields)
             else:
                 buffer = requests.get(url, headers=headers)
+            logger.warning("status_code: %s" % (buffer.status_code))
             return buffer.json(), buffer.status_code
         except Exception as e:
-            self.error-=1
+            self.error -= 1
             if self.error:
                 return self.call_webservice(url, headers, postfields)
             else:
@@ -47,14 +60,15 @@ class SearchBackend(SearchBackend):
 
     def get_companies(self, qreq, number=50, offset=0):
         message, companies, total, pages = (False, [], 0, 0)
-        access_token = self.get_token()
-        headers = {'Accept': 'application/json', 'Authorization': 'Bearer %s' % access_token}
+        # access_token = self.get_token()
+        # headers = {'Accept': 'application/json', 'Authorization': 'Bearer %s' % access_token}
+        headers = {'Accept': 'application/json', "X-INSEE-Api-Key-Integration": "b7a20c77-3bbe-4de5-a20c-773bbeade5b7"}
         url = "%s?q=%s&nombre=%s&debut=%s&masquerValeursNulles=true" % (self.siret_url, qreq, number, offset)
         buffer, response_code = self.call_webservice(url, headers)
-        if'header' in buffer:
+        if 'header' in buffer:
             message = False if buffer['header']['message'] == "OK" else buffer['header']['message']
             total = buffer['header'].get('total', 0)
-            pages = round(total/number) if total else 0
+            pages = round(total / number) if total else 0
             if str(response_code)[0] in ["2", "3"]:
                 for company in buffer.get('etablissements', [buffer['header']]):
                     logger.debug(company)
@@ -67,7 +81,7 @@ class SearchBackend(SearchBackend):
                         'since': self.since(company['uniteLegale'].get('dateCreationUniteLegale')),
                         'category': company['uniteLegale'].get('categorieEntreprise', ''),
                         'slice_effective': company['uniteLegale'].get('trancheEffectifsUniteLegale', ''),
-                        'siege':company.get('etablissementSiege', False),
+                        'siege': company.get('etablissementSiege', False),
                         'rna': company['uniteLegale'].get('identifiantAssociationUniteLegale', None),
                         'address': {
                             'address': ' '.join(filter(None, [
@@ -77,9 +91,15 @@ class SearchBackend(SearchBackend):
                             ])),
                             'complement': company['adresseEtablissement'].get('complementAdresseEtablissement', ''),
                             'locality': company['adresseEtablissement'].get('libelleCommuneEtablissement',
+<<<<<<< Updated upstream
                                 company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement', '')),
                             'postal_code': company['adresseEtablissement'].get('codePostalEtablissement',
                                 company['adresseEtablissement'].get('codeCommuneEtablissement', '')),
+=======
+                                                                            company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement', '')),
+                            'postal_code': company['adresseEtablissement'].get('codePostalEtablissement',
+                                                                               company['adresseEtablissement'].get('codeCommuneEtablissement', '')),
+>>>>>>> Stashed changes
                             'country': company['adresseEtablissement'].get('libellePaysEtrangerEtablissement', 'france').lower(),
                             'country_code': company['adresseEtablissement'].get('codePaysEtrangerEtablissement', 'fr').lower(),
                             'cedex': company['adresseEtablissement'].get('libelleCedexEtablissement', ''),
@@ -98,12 +118,12 @@ class SearchBackend(SearchBackend):
         else:
             if 'fault' in buffer:
                 if buffer['fault']['code'] == 900804:
-                    sleepfor = 61-datetime.datetime.now().second
+                    sleepfor = 61 - datetime.datetime.now().second
                     i = 0
                     while i < sleepfor:
                         logger.info("desc: %s, wait: %s seconds" % (buffer['fault']['description'], sleepfor))
                         time.sleep(1)
-                        sleepfor-=1
+                        sleepfor -= 1
                     return self.get_companies(qreq, number, offset)
                 else:
                     logger.info(buffer)
