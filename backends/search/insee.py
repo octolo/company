@@ -34,6 +34,7 @@ class SearchBackend(SearchBackend):
             logger.warning("status_code: %s" % (buffer.status_code))
             return buffer.json(), buffer.status_code
         except Exception as e:
+            logger.warning(e)
             self.error -= 1
             if self.error:
                 return self.call_webservice(url, headers, postfields)
