@@ -1,9 +1,10 @@
-from company.backends.search import SearchBackend
-
 import requests
 
+from company.backends.search import SearchBackend
+
+
 class SearchBackend(SearchBackend):
-    api_url = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/economicref-france-sirene-v3/records"
+    api_url = "https://data.opendatasoft.com/api/explore/v2.1/catalog/datasets/economicref-france-sirene-v3@public/records"
     since_format = '%Y-%m-%d'
     raw_address = "%(address)s, %(locality)s %(postal_code)s"
 
