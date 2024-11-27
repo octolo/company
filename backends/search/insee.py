@@ -15,15 +15,10 @@ logger = logging.getLogger(__name__)
 
 class SearchBackend(SearchBackend):
     token_url = 'https://api.insee.fr/token'
-<<<<<<< Updated upstream
-    siren_url = 'https://api.insee.fr/entreprises/sirene/siren'
-    siret_url = 'https://api.insee.fr/entreprises/sirene/siret'
-=======
     # siren_url = 'https://api.insee.fr/entreprises/sirene/V3/siren'
     # siret_url = 'https://api.insee.fr/entreprises/sirene/V3/siret'
     siren_url = 'https://api.insee.fr/api-sirene/3.11/siren'
     siret_url = 'https://api.insee.fr/api-sirene/3.11/siret'
->>>>>>> Stashed changes
     since_format = '%Y-%m-%d'
     iso_format = '%Y-%m-%dT%H:%M:%S'
     error = 5
@@ -91,15 +86,9 @@ class SearchBackend(SearchBackend):
                             ])),
                             'complement': company['adresseEtablissement'].get('complementAdresseEtablissement', ''),
                             'locality': company['adresseEtablissement'].get('libelleCommuneEtablissement',
-<<<<<<< Updated upstream
-                                company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement', '')),
-                            'postal_code': company['adresseEtablissement'].get('codePostalEtablissement',
-                                company['adresseEtablissement'].get('codeCommuneEtablissement', '')),
-=======
                                                                             company['adresseEtablissement'].get('libelleCommuneEtrangerEtablissement', '')),
                             'postal_code': company['adresseEtablissement'].get('codePostalEtablissement',
                                                                                company['adresseEtablissement'].get('codeCommuneEtablissement', '')),
->>>>>>> Stashed changes
                             'country': company['adresseEtablissement'].get('libellePaysEtrangerEtablissement', 'france').lower(),
                             'country_code': company['adresseEtablissement'].get('codePaysEtrangerEtablissement', 'fr').lower(),
                             'cedex': company['adresseEtablissement'].get('libelleCedexEtablissement', ''),
