@@ -1,6 +1,7 @@
 from mighty.management import CSVModelCommand
-from company import backends_loop, create_company
-from mighty.functions import request_kept
+from company import create_company
+from company.backends import search_company_or_association
+
 
 class Command(CSVModelCommand):
     def add_arguments(self, parser):
@@ -25,13 +26,11 @@ class Command(CSVModelCommand):
             self.stop_loop = True
 
     def create_company(self, country, info, row=None):
-        message, companies, total, pages = backends_loop(country, info)
-
-        if len(companies) > 0:
-            data, new_company = create_company(country, companies[0])
-
+        total, results = search_company_or_association(info)
+        if len(results) > 0:
+            data, new_company = create_company(country, results[0])
             if row:
-                for k,v in row.items():
+                for k, v in row.items():
                     if k not in ("country", "info"):
                         if v and hasattr(new_company, k):
                             setattr(new_company, k, v)

@@ -1,9 +1,13 @@
 from django.contrib import admin
+from django.urls import path, resolve
+
+
+from django.db.models import Q
+from django.shortcuts import redirect
 from django.conf import settings
 from django.views.decorators.cache import never_cache
 from django.contrib.admin.options import TO_FIELD_VAR
 from django.contrib.admin.utils import unquote
-from django.urls import resolve
 from django.http import Http404, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.shortcuts import redirect
@@ -12,10 +16,14 @@ from mighty.admin.models import BaseAdmin
 from mighty.applications.address import fields as address_fields
 from mighty.applications.address.admin import AddressAdminInline
 
-from company import get_company_model, get_backend_data
+from company import get_company_model
 from company.apps import CompanyConfig
 from company import models, fields, translates as _
 from company.apps import CompanyConfig as conf
+from company.backends import search_company_or_association
+
+CompanyModel = get_company_model("Company")
+
 
 class CompanyAdmin(BaseAdmin):
     fieldsets = (
@@ -31,9 +39,6 @@ class CompanyAdmin(BaseAdmin):
     )
     list_display = ('denomination', 'since', 'siege_fr', 'is_type')
     search_fields = ("denomination", "company_fr__siret")
-    change_list_template = "admin/company_change_list.html"
-    change_form_template = "admin/company_change_form.html"
-    change_form_logs_template = "admin/company_change_form_logs.html"
     readonly_fields = ('siege_fr', 'siege_fr_address')
     search_template = None
 
@@ -48,185 +53,128 @@ class CompanyAdmin(BaseAdmin):
             self.add_field('Informations', ('named_id',))
             self.readonly_fields += ('named_id',)
 
-    def is_from_update(self, request, obj, response):
-        backend = request.GET.get("update_from")
-        country = request.GET.get("country")
-        country_id = request.GET.get("country_id")
-        if backend and country and country_id:
-            from django.shortcuts import redirect
-            name = "admin:%s_%s_update_from" % (self.model._meta.app_label, self.model._meta.model_name)
-            return redirect(name, object_id=obj.id, country=country, country_id=country_id, backend=backend)
-        return response
+    choice_action_admin_path = "actions/"
+    choice_action_admin_suffix = "actions"
+    choice_action_admin_template = "admin/company/actions.html"
+    choice_action_object_tools = {"name": "Actions", "url": "actions", "list": True}
 
-    def render_change_form(self, request, context, add=False, change=False, form_url="", obj=None):
-        response = super().render_change_form(request, context, add, change, form_url, obj)
-        return self.is_from_update(request, obj, response)
+    def choice_action_view(self, request, *args, **kwargs):
+        return self.admincustom_view(request, **{
+            "urlname": self.get_admin_urlname(self.choice_action_admin_suffix),
+            "template": self.choice_action_admin_template
+        })
 
-    def country_choice_view(self, request, object_id=None, extra_context=None):
-        current_url = resolve(request.path_info).url_name
-        opts = self.model._meta
-        to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
-        obj = self.get_object(request, unquote(object_id), to_field) if object_id else None
-        context = {
-            **self.admin_site.each_context(request),
-            "current_url": current_url,
-            "title": "%s (%s)" % (_.countries, obj) if obj else _.countries,
-            "object_name": str(opts.verbose_name),
-            "object": obj,
-            "opts": opts,
-            "app_label": opts.app_label,
-            "media": self.media
-        }
-        request.current_app = self.admin_site.name
-        defaults = {
-            "extra_context": context,
-            "template_name": self.search_template or "admin/company_country_choice.html",
-        }
-        from company.views import ChoiceCountry
-        return ChoiceCountry.as_view(**defaults)(request)
+    choice_country_admin_path = "actions/<str:action>/countries/"
+    choice_country_admin_suffix = "countries"
+    choice_country_admin_template = "admin/company/countries.html"
+    choice_country_object_tools = {"name": "Countries", "url": "countries"}
 
-    #@never_cache
-    def country_search_view(self, request, country, object_id=None, extra_context=None):
-        current_url = resolve(request.path_info).url_name
-        opts = self.model._meta
-        to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
-        parent_object = self.get_object(request, unquote(object_id), to_field) if object_id else None
-        context = {
-            **self.admin_site.each_context(request),
-            "parent_object": parent_object,
-            "app_path": request.get_full_path(),
-            "username": request.user.get_username(),
-            "current_url": current_url,
+    def choice_country_view(self, request, action, object_id=None, form_url=None, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context["action"] = action
+        return self.admincustom_view(request, object_id, extra_context, **{
+            "urlname": self.get_admin_urlname(self.choice_country_admin_suffix),
+            "template": self.choice_country_admin_template
+        })
+
+    search_admin_path = "actions/search/countries/<str:country>/"
+    search_admin_suffix = "search"
+    search_admin_template = "admin/company/search.html"
+    search_object_tools = {"name": "Search", "url": "search"}
+
+    def search_view(self, request, country, object_id=None, form_url=None, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context.update({
             "country": country,
-            "title": _.search,
-            "opts": opts,
-            "app_label": opts.app_label,
-            "media": self.media
-        }
-        defaults = {
-            "extra_context": context,
+            "search": request.GET.get("q"),
+            "results": [],
+            "total": 0
+        })
+        extra_context["country"] = country
+        extra_context["search"] = request.GET.get("q")
+        if extra_context["search"]:
+            total, results = search_company_or_association(extra_context["search"])
+            extra_context["results"] = results
+            extra_context["total"] = total
+        return self.admincustom_view(request, object_id, extra_context, **{
+            "urlname": self.get_admin_urlname(self.search_admin_suffix),
+            "template": self.search_admin_template
+        })
+
+    create_admin_path = "actions/create/countries/<str:country>/<str:rna_or_siren>/"
+    create_admin_suffix = "create"
+    create_admin_template = "admin/company/create.html"
+
+    def create_view(self, request, country, rna_or_siren, object_id=None, form_url=None, extra_context=None):
+        extra_context = extra_context or {}
+        total, results = search_company_or_association(rna_or_siren)
+        extra_context.update({
             "country": country,
-            "parent_object": parent_object if parent_object else None,
-            "success_url": current_url,
-            "template_name": self.search_template or "admin/company_country_search.html",
-        }
-        from company.views import SearchByCountry
-        return SearchByCountry.as_view(**defaults)(request=request)
+            "rna_or_siren": rna_or_siren,
+            "object": results[0],
+        })
+        if request.method == "POST" and request.POST.get("rna_or_siren") == rna_or_siren:
+            import logging
+            from company import create_entity
+            logging.warning("Create entity")
+            create_entity(country, results[0])
+        return self.admincustom_view(request, object_id, extra_context, **{
+            "urlname": self.get_admin_urlname(self.create_admin_suffix),
+            "template": self.create_admin_template
+        })
 
-    #@never_cache
-    def update_from_view(self, request, object_id, backend, country, country_id, extra_context=None):
-        opts = self.model._meta
-        to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
-        obj = self.get_object(request, unquote(object_id), to_field) if object_id else None
-        backend = backend
+    getorcreate_admin_path = "actions/getorcreate/countries/<str:country>/<str:rna_or_siren>/"
+    getorcreate_admin_suffix = "getorcreate"
 
-        from company import get_company_model, get_backend_data
-        from company.apps import CompanyConfig
-        cmodel = get_company_model('Company%s' % country.upper())
-        backend_object = cmodel.objects.get(id=country_id)
-        backend_path = "company.backends.data.%s" % backend
-        backend_script = get_backend_data(backend_path)(obj=backend_object)
-        ndata = {}
-        for data in CompanyConfig.FR.list_to_set:
-            ndata[data] = backend_script.get_one_data(data)
-
-        context = {
-            **self.admin_site.each_context(request),
-            'object_name': str(opts.verbose_name),
-            'object': obj,
-            'backend': backend,
-            'opts': opts,
-            'app_label': opts.app_label,
-            'media': self.media,
-            'title': backend,
-            'ndata': ndata,
-        }
-        request.current_app = self.admin_site.name
-        return TemplateResponse(request, 'admin/company_update_from.html', context)
-
-    #@never_cache
-    def valid_update_from_view(self, request, object_id, backend, country, country_id, extra_context=None):
-        opts = self.model._meta
-        to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
-        obj = self.get_object(request, unquote(object_id), to_field) if object_id else None
-        backend = backend
-        cmodel = get_company_model('Company%s' % country.upper())
-        backend_object = cmodel.objects.get(id=country_id)
-        backend_path = "company.backends.data.%s" % backend
-        backend_script = get_backend_data(backend_path)(obj=backend_object)
-        ndata = {}
-        for data in CompanyConfig.FR.list_to_set:
-            backend_script.set_one_data(data)
-        backend_script.save()
-        name = "admin:%s_%s_change" % (self.model._meta.app_label, self.model._meta.model_name)
-        return redirect(name, object_id=obj.id)
-
-
-    #@never_cache
-    def country_add_view(self, request, country, object_id=None, extra_context=None):
-        current_url = resolve(request.path_info).url_name
-        opts = self.model._meta
-        to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
-        parent_object = self.get_object(request, unquote(object_id), to_field) if object_id else None
-        context = {
-            **self.admin_site.each_context(request),
-            "parent_object": parent_object,
-            "app_path": request.get_full_path(),
-            "username": request.user.get_username(),
-            "current_url": current_url,
-            "country": country,
-            "title": _.search,
-            "opts": opts,
-            "app_label": opts.app_label,
-            "media": self.media
-        }
-        defaults = {
-            "extra_context": context,
-            "admin": True,
-            "country": country,
-            "parent_object": parent_object if parent_object else None,
-            "template_name": self.search_template or "admin/company_country_add.html",
-        }
-        from company.views import AddByCountry
-        return AddByCountry.as_view(**defaults)(request)
+    def getorcreate_view(self, request, country, rna_or_siren, object_id=None, form_url=None, extra_context=None):
+        try:
+            entity = CompanyModel.objects.get(Q(company_fr__rna=rna_or_siren) | Q(company_fr__siren=rna_or_siren))
+            return redirect("admin:%s_%s_change" % (self.model._meta.app_label, self.model._meta.model_name), object_id=entity.id)
+        except CompanyModel.DoesNotExist:
+            suffix = self.get_admin_urlname(self.create_admin_suffix)
+            return redirect(f"admin:{suffix}", country=country, rna_or_siren=rna_or_siren)
 
     def get_urls(self):
-        from django.urls import path, include
         urls = super().get_urls()
-        info = self.model._meta.app_label, self.model._meta.model_name
         my_urls = [
-            path("choices/", include([
-                path("", self.country_choice_view, name="%s_%s_country_choice" % info),
-                path("<str:country>/search/", include([
-                    path("", self.country_search_view, name="%s_%s_country_search" % info),
-                    path("add/", self.country_add_view, name="%s_%s_country_add" % info),
-                ]))
-            ])),
-            path("<path:object_id>/choices/", include([
-                path("", self.country_choice_view, name="%s_%s_country_choice_extend" % info),
-                path("<str:country>/search/", include([
-                    path("", self.country_search_view, name="%s_%s_country_search_extend" % info),
-                    path("add/", self.country_add_view, name="%s_%s_country_add_extend" % info),
-                ]))
-            ])),
-            path('<path:object_id>/update/<str:backend>/<str:country>/', include([
-                path("<int:country_id>/", self.wrap(self.update_from_view), name='%s_%s_update_from' % info),
-                path("<int:country_id>/valid/", self.wrap(self.valid_update_from_view), name='%s_%s_valid_from' % info),
-
-            ])),
+            path(
+                self.choice_action_admin_path,
+                self.wrap(self.choice_action_view, object_tools=self.choice_action_object_tools),
+                name=self.get_admin_urlname(self.choice_action_admin_suffix),
+            ),
+            path(
+                self.choice_country_admin_path,
+                self.wrap(self.choice_country_view, object_tools=self.choice_country_object_tools),
+                name=self.get_admin_urlname(self.choice_country_admin_suffix),
+            ),
+            path(
+                self.search_admin_path,
+                self.wrap(self.search_view, object_tools=self.search_object_tools),
+                name=self.get_admin_urlname(self.search_admin_suffix),
+            ),
+            path(
+                self.create_admin_path,
+                self.wrap(self.create_view),
+                name=self.get_admin_urlname(self.create_admin_suffix),
+            ),
+            path(
+                self.getorcreate_admin_path,
+                self.wrap(self.getorcreate_view),
+                name=self.get_admin_urlname(self.getorcreate_admin_suffix),
+            )
         ]
         return my_urls + urls
 
-#####################
-# FR
-#####################
+
 class CompanyFRAdminInline(admin.StackedInline):
     fields = fields.country + fields.fr
     extra = 0
     max_num = 1
 
+
 class CompanyAddressFRAdminInline(AddressAdminInline):
     fields = address_fields + ('is_siege', 'is_active')
+
 
 class BaloAdmin(BaseAdmin):
     fieldsets = ((None, {"classes": ("wide",), "fields": fields.balo}),)

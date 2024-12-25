@@ -1,6 +1,6 @@
 from company import get_company_model
 
-def new_company(input_obj, accept_duplicate=False):
+def create(input_obj, accept_duplicate=False):
     CompanyModel = get_company_model()
     CompanyCountry = get_company_model("CompanyFR")
     CompanyAddress = get_company_model("CompanyAddressFR")
@@ -12,6 +12,7 @@ def new_company(input_obj, accept_duplicate=False):
     del input_obj['legalform_str']
     del input_obj['slice_str']
     del input_obj['raw_address']
+    del input_obj['rna_or_siren']
     data = {key: value for key,value in input_obj.items()}
     if accept_duplicate:
         companyC = CompanyCountry(**data)

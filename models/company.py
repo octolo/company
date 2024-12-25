@@ -14,7 +14,7 @@ from mighty.fields import RichTextField
 from company import translates as _, managers, get_company_model
 from company.apps import CompanyConfig as conf
 from company import choices as _c
-from company.notify import SlackCompany, DiscordCompany
+
 
 class Company(Base, Image):
     rules_fields = ["settle_internal", "duration_mandate", "age_limit_pdg", "age_limit_dg", "stock_min_rule", "stock_min_status"]
@@ -81,12 +81,6 @@ class Company(Base, Image):
         verbose_name_plural = _.vp_company
         ordering = ['denomination']
 
-    @property
-    def slack_notify(self): return SlackCompany(self)
-    @property
-    def discord_notify(self): return DiscordCompany(self)
-
-
     def set_floating(self):
         try:
             self.floating = float(self.capital_division['Flottant'])
@@ -100,10 +94,6 @@ class Company(Base, Image):
             qs = self.model.objects.filter(named_id=self.named_id)
             if self.pk: qs = qs.exclude(pk=self.pk)
             if len(qs): self.set_named_id(offset+1)
-
-    def post_create(self):
-        self.slack_notify.send_msg_create()
-        self.discord_notify.send_msg_create()
 
     def pre_update(self):
         self.set_siege_fr()
