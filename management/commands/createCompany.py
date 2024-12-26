@@ -1,6 +1,6 @@
 from mighty.management import CSVModelCommand
-from company import create_company
-from company.backends import search_company_or_association
+from company import create_entity
+from company.backends import search_entity
 
 
 class Command(CSVModelCommand):
@@ -26,9 +26,9 @@ class Command(CSVModelCommand):
             self.stop_loop = True
 
     def create_company(self, country, info, row=None):
-        total, results = search_company_or_association(info)
+        total, results = search_entity(country, info)
         if len(results) > 0:
-            data, new_company = create_company(country, results[0])
+            data, new_company = create_entity(country, results[0])
             if row:
                 for k, v in row.items():
                     if k not in ("country", "info"):

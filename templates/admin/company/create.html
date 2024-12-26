@@ -4,12 +4,14 @@
 {% if not is_popup %}
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-<a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
-&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
-&rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
-&rsaquo; <a href="{% url 'admin:'|add:opts.app_label|add:'_'|add:opts.model_name|add:'_actions' %}">Actions</a>
-&rsaquo; <a href="{% url 'admin:'|add:opts.app_label|add:'_'|add:opts.model_name|add:'_search' 'fr' %}">Search</a>
-&rsaquo; Create
+    <a href="{% url 'admin:index' %}">{% trans "Home" %}</a>
+    &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+    &rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+    &rsaquo; <a href="{% url 'admin:'|add:opts.app_label|add:'_'|add:opts.model_name|add:'_actions' %}">{% trans "actions"|capfirst %}</a>
+    &rsaquo; <a href="{% url 'admin:'|add:opts.app_label|add:'_'|add:opts.model_name|add:'_search' 'fr' %}">{% trans "search"|capfirst %}</a>
+    &rsaquo; <a href="{% url 'admin:'|add:opts.app_label|add:'_'|add:opts.model_name|add:'_countries' 'search' %}">{% trans "countries"|capfirst %}</a>
+    &rsaquo; {{ country }}
+    &rsaquo; {% trans "create"|capfirst %}
 </div>
 {% endblock %}
 {% endif %}
@@ -17,24 +19,9 @@
 {% block content %}
 <div id="content-main">
     <ul>
-        <li><strong>{% trans "SIREN" %}:</strong> {{ object.siren }}</li>
-        <li><strong>{% trans "RNA" %}:</strong> {{ object.rna }}</li>
-        <li><strong>{% trans "SIRET" %}:</strong> {{ object.siret }}</li>
-        <li><strong>{% trans "Denomination" %}:</strong> {{ object.denomination }}</li>
-        <li><strong>{% trans "Legal Form" %}:</strong> {{ object.legalform_str }}</li>
-        <li><strong>{% trans "APE Code" %}:</strong> {{ object.ape }}</li>
-        <li><strong>{% trans "Activity" %}:</strong> {{ object.ape_str }}</li>
-        <li><strong>{% trans "Since" %}:</strong> {{ object.since }}</li>
-        <li><strong>{% trans "Category" %}:</strong> {{ object.category }}</li>
-        <li><strong>{% trans "Address" %}:</strong>
-            <ul>
-                <li><strong>{% trans "Street" %}:</strong> {{ object.address.address }}</li>
-                <li><strong>{% trans "City" %}:</strong> {{ object.address.locality }}</li>
-                <li><strong>{% trans "Postal Code" %}:</strong> {{ object.address.postal_code }}</li>
-                <li><strong>{% trans "Country" %}:</strong> {{ object.address.country }}</li>
-            </ul>
-        </li>
-        <li><strong>{% trans "Raw Address" %}:</strong> {{ object.raw_address }}</li>
+        {% for key, value in object.items %}
+        <li><strong>{{ key }}:&nbsp;</strong> {{ value }}</li>
+        {% endfor %}
     </ul>
 
     <form method="post">

@@ -1,26 +1,17 @@
 from django.contrib import admin
-from django.urls import path, resolve
-
-
+from django.urls import path
+from django.utils.module_loading import import_string
 from django.db.models import Q
 from django.shortcuts import redirect
-from django.conf import settings
-from django.views.decorators.cache import never_cache
-from django.contrib.admin.options import TO_FIELD_VAR
-from django.contrib.admin.utils import unquote
-from django.http import Http404, HttpResponseRedirect
-from django.template.response import TemplateResponse
-from django.shortcuts import redirect
-
 from mighty.admin.models import BaseAdmin
 from mighty.applications.address import fields as address_fields
 from mighty.applications.address.admin import AddressAdminInline
 
-from company import get_company_model
-from company.apps import CompanyConfig
-from company import models, fields, translates as _
+from company import create_entity, get_company_model, fields
 from company.apps import CompanyConfig as conf
-from company.backends import search_company_or_association
+from company.backends import search_entity
+from company.choices.countries import get_country_by
+
 
 CompanyModel = get_company_model("Company")
 
@@ -53,28 +44,30 @@ class CompanyAdmin(BaseAdmin):
             self.add_field('Informations', ('named_id',))
             self.readonly_fields += ('named_id',)
 
-    choice_action_admin_path = "actions/"
-    choice_action_admin_suffix = "actions"
-    choice_action_admin_template = "admin/company/actions.html"
-    choice_action_object_tools = {"name": "Actions", "url": "actions", "list": True}
+    action_admin_path = "actions/"
+    action_admin_suffix = "actions"
+    action_admin_template = "admin/company/actions.html"
+    action_object_tools = {"name": "Actions", "url": "actions", "list": True}
 
-    def choice_action_view(self, request, *args, **kwargs):
+    def action_view(self, request, *args, **kwargs):
         return self.admincustom_view(request, **{
-            "urlname": self.get_admin_urlname(self.choice_action_admin_suffix),
-            "template": self.choice_action_admin_template
+            "urlname": self.get_admin_urlname(self.action_admin_suffix),
+            "template": self.action_admin_template
         })
 
-    choice_country_admin_path = "actions/<str:action>/countries/"
-    choice_country_admin_suffix = "countries"
-    choice_country_admin_template = "admin/company/countries.html"
-    choice_country_object_tools = {"name": "Countries", "url": "countries"}
+    country_admin_path = "actions/<str:action>/countries/"
+    country_admin_suffix = "countries"
+    country_admin_template = "admin/company/countries.html"
+    country_object_tools = {"name": "Countries", "url": "countries"}
 
-    def choice_country_view(self, request, action, object_id=None, form_url=None, extra_context=None):
+    def country_view(self, request, action, object_id=None, form_url=None, extra_context=None):
         extra_context = extra_context or {}
         extra_context["action"] = action
+        countries = import_string(f"company.backends.{action}_backends")
+        extra_context["countries"] = {key: get_country_by(key, "alpha2") for key in countries.keys()}
         return self.admincustom_view(request, object_id, extra_context, **{
-            "urlname": self.get_admin_urlname(self.choice_country_admin_suffix),
-            "template": self.choice_country_admin_template
+            "urlname": self.get_admin_urlname(self.country_admin_suffix),
+            "template": self.country_admin_template
         })
 
     search_admin_path = "actions/search/countries/<str:country>/"
@@ -93,7 +86,7 @@ class CompanyAdmin(BaseAdmin):
         extra_context["country"] = country
         extra_context["search"] = request.GET.get("q")
         if extra_context["search"]:
-            total, results = search_company_or_association(extra_context["search"])
+            total, results = search_entity(country, extra_context["search"])
             extra_context["results"] = results
             extra_context["total"] = total
         return self.admincustom_view(request, object_id, extra_context, **{
@@ -107,17 +100,16 @@ class CompanyAdmin(BaseAdmin):
 
     def create_view(self, request, country, rna_or_siren, object_id=None, form_url=None, extra_context=None):
         extra_context = extra_context or {}
-        total, results = search_company_or_association(rna_or_siren)
+        total, results = search_entity(country, rna_or_siren)
         extra_context.update({
             "country": country,
             "rna_or_siren": rna_or_siren,
             "object": results[0],
+            "total": total,
         })
         if request.method == "POST" and request.POST.get("rna_or_siren") == rna_or_siren:
-            import logging
-            from company import create_entity
-            logging.warning("Create entity")
-            create_entity(country, results[0])
+            info, model = create_entity(country, results[0])
+            return redirect("admin:%s_%s_change" % (self.model._meta.app_label, self.model._meta.model_name), object_id=model.id)
         return self.admincustom_view(request, object_id, extra_context, **{
             "urlname": self.get_admin_urlname(self.create_admin_suffix),
             "template": self.create_admin_template
@@ -138,14 +130,14 @@ class CompanyAdmin(BaseAdmin):
         urls = super().get_urls()
         my_urls = [
             path(
-                self.choice_action_admin_path,
-                self.wrap(self.choice_action_view, object_tools=self.choice_action_object_tools),
-                name=self.get_admin_urlname(self.choice_action_admin_suffix),
+                self.action_admin_path,
+                self.wrap(self.action_view, object_tools=self.action_object_tools),
+                name=self.get_admin_urlname(self.action_admin_suffix),
             ),
             path(
-                self.choice_country_admin_path,
-                self.wrap(self.choice_country_view, object_tools=self.choice_country_object_tools),
-                name=self.get_admin_urlname(self.choice_country_admin_suffix),
+                self.country_admin_path,
+                self.wrap(self.country_view, object_tools=self.country_object_tools),
+                name=self.get_admin_urlname(self.country_admin_suffix),
             ),
             path(
                 self.search_admin_path,
@@ -178,4 +170,3 @@ class CompanyAddressFRAdminInline(AddressAdminInline):
 
 class BaloAdmin(BaseAdmin):
     fieldsets = ((None, {"classes": ("wide",), "fields": fields.balo}),)
-

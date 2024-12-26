@@ -5,7 +5,6 @@ from django.utils.html import format_html
 from django.template.defaultfilters import slugify
 from django.core.exceptions import ValidationError
 
-from mighty.models import News
 from mighty.models.base import Base
 from mighty.models.image import Image
 from mighty.applications.address.models import Address
@@ -90,10 +89,13 @@ class Company(Base, Image):
     def set_named_id(self, offset=0):
         if hasattr(self, 'named_id'):
             self.named_id = conf.named_tpl % {"named": slugify(self.denomination), "id": self.siren_or_rna}
-            if offset: self.named_id += "-"+str(offset)
+            if offset:
+                self.named_id += "-"+str(offset)
             qs = self.model.objects.filter(named_id=self.named_id)
-            if self.pk: qs = qs.exclude(pk=self.pk)
-            if len(qs): self.set_named_id(offset+1)
+            if self.pk:
+                qs = qs.exclude(pk=self.pk)
+            if len(qs):
+                self.set_named_id(offset+1)
 
     def pre_update(self):
         self.set_siege_fr()
@@ -108,51 +110,48 @@ class Company(Base, Image):
         return self.denomination
 
     @property
-    def infos(self): return {f: getattr(self, f) for f in self.infos_fields}
+    def infos(self):
+        return {f: getattr(self, f) for f in self.infos_fields}
+
     @property
-    def rules(self): return {f: getattr(self, f) for f in self.rules_fields}
+    def rules(self):
+        return {f: getattr(self, f) for f in self.rules_fields}
+
     @property
     def marketplace(self):
         data = {f: getattr(self, f) for f in self.marketplace_fields}
         data.update({"floating": round(self.floating, 2) if self.floating else None})
         return data
-    @property
-    def capital_text(self): return format_html('200 000 €<br/>');
-    @property
-    def capital_var_text(self): return format_html('500 000 €<br/>');
+
 
     @property
-    def country_choice_url(self): return self.get_url('country-choice')
-    @property
-    def country_choice_extend_url(self): return self.get_url('country-choice-extend', arguments=self.arguments())
-
-    def country_search_url(self, country):
-        return self.get_url('country-search', arguments={'country': country})
-
-    def country_search_extend_url(self, country):
-        args = self.arguments()
-        args['country'] = country
-        return self.get_url('country-search-extend', arguments=args)
-
-    def get_dataset_by_country(self, alpha2):
-        return import_string('%s.models.Company%s' % (self.app_label, alpha2.upper()))
+    def siege_or_first_fr(self):
+        return self.siege_fr if self.siege_fr_id else self.company_fr.first()
 
     @property
-    def siege_or_first_fr(self): return self.siege_fr if self.siege_fr_id else self.company_fr.first()
-    @property
-    def siege_of_first_fr_address(self): return self.siege_fr_address if self.siege_fr_address_id else self.companyfr_address.order_by('-is_siege').first()
+    def siege_of_first_fr_address(self):
+        return self.siege_fr_address if self.siege_fr_address_id else self.companyfr_address.order_by('-is_siege').first()
 
     # KIND
     @property
-    def stock_name(self): return self.get_stock_kind_display()
+    def stock_name(self):
+        return self.get_stock_kind_display()
+
     @property
-    def stock_name_min(self): return self.get_stock_kind_display().lower()
+    def stock_name_min(self):
+        return self.get_stock_kind_display().lower()
+
     @property
-    def stackholder_name(self): return self.get_stackholder_kind_display()
+    def stackholder_name(self):
+        return self.get_stackholder_kind_display()
+
     @property
-    def is_association(self): return (self.is_type == _c.ASSOCIATION)
+    def is_association(self):
+        return (self.is_type == _c.ASSOCIATION)
+
     @property
-    def kind(self): return "association" if self.is_association else "entreprise"
+    def kind(self):
+        return "association" if self.is_association else "entreprise"
 
     def stock_kind_default(self, legalform=None):
         if legalform and str(legalform) in _c.STOCK_DEFAULT:
@@ -183,19 +182,27 @@ class Company(Base, Image):
         elif self.is_type == _c.COOWNER:
             self.stock_kind = _c.STOCK_SHARES
             self.stackholder_kind = _c.STACKHOLDER_OWNER
-        #elif self.is_type == _c.BIGMASTER:
-        #    self.stock_kind = STOCK_TITLE
-        #    self.stackholder_kind = _c.STACKHOLDER_ASSOCIATE
+        # elif self.is_type == _c.BIGMASTER:
+        #     self.stock_kind = STOCK_TITLE
+        #     self.stackholder_kind = _c.STACKHOLDER_ASSOCIATE
 
     # FR
     @property
-    def isin(self): return self.siege_or_first_fr.isin
+    def isin(self):
+        return self.siege_or_first_fr.isin
+
     @property
-    def siren(self): return self.siege_or_first_fr.siren
+    def siren(self):
+        return self.siege_or_first_fr.siren
+
     @property
-    def rna(self): return self.siege_or_first_fr.rna
+    def rna(self):
+        return self.siege_or_first_fr.rna
+
     @property
-    def index(self): return self.siege_or_first_fr.index
+    def index(self):
+        return self.siege_or_first_fr.index
+
     @property
     def siren_or_rna(self):
         if self.siege_or_first_fr:
