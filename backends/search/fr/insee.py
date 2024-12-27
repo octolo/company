@@ -1,4 +1,6 @@
+import requests
 from django.conf import settings
+
 from company.backends.search.fr import SearchBackendFr
 
 
@@ -20,7 +22,7 @@ class SearchBackend(SearchBackendFr):
         },
         "text": {
             "url": "api-sirene/3.11/siret",
-            "query": "denominationUniteLegale:%s+AND+etatAdministratifUniteLegale:A+AND+etablissementSiege:true",
+            "query": "denominationUniteLegale:\"%s\"+AND+etatAdministratifUniteLegale:A+AND+etablissementSiege:true",
         },
     }
 
@@ -67,7 +69,13 @@ class SearchBackend(SearchBackendFr):
         query = f"?q={search_conf['query'] % search}&nombre={self.show_by_page}&debut={self.show_by_page * (page - 1)}&masquerValeursNulles=true"
         url = f"{self.base_url}{search_conf['url']}{query}"
         self._logger.debug(f"URL: {url}")
-        buffer, code = self.do_request(url, "get", headers=self.headers)
+        try:
+            buffer, code = self.do_request(url, "get", headers=self.headers)
+        except requests.exceptions.HTTPError as e:
+            code = e.response.status_code
+            if code != 404:
+                raise e
+
         if str(code)[0] in ["2", "3"]:
             buffer = buffer.json()
             total = buffer.get("header", {}).get("total")

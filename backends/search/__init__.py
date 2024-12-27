@@ -1,9 +1,11 @@
-from company.choices import fr as choices
-import requests
-import re
 import logging
 import random
+import re
 import time
+
+import requests
+
+from company.choices import fr as choices
 
 logger = logging.getLogger(__name__)
 
@@ -44,13 +46,13 @@ class SearchBackend:
             except exceptions as e:
                 self.retries += 1
                 if self.retries >= self.max_retries:
-                    self._logger.error("Failed after %d retries", self.retries)
+                    self._logger.error("Failed after %d retries (exception: %s)", self.retries, e)
                     if return_on_failure is not None:
                         return return_on_failure
                     raise e
                 else:
                     delay_with_jitter = self.calculate_delay(self.base_delay, self.retries, self.max_delay)
-                    self._logger.info("Operation failed (attempt %d). Retrying in %.2f seconds...", retries, delay_with_jitter)
+                    self._logger.info("Operation failed (attempt %d). Retrying in %.2f seconds... (exception: %s)", retries, delay_with_jitter, e)
                     time.sleep(delay_with_jitter)
 
     def get_search_type(self, search):
