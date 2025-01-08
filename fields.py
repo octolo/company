@@ -96,6 +96,7 @@ serializer = (
 # FR
 ###
 fr = (
+    'siren',
     'siret',
     'rna',
     'ape',

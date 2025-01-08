@@ -1,14 +1,14 @@
-from django.db import models
 from django.core.exceptions import ValidationError
+from django.db import models
+
+from company import choices as _c
+from company import translates as _
+from company.apps import CompanyConfig as conf
+from company.choices import fr as choices_fr
+from company.models.alpha import CompanyAlpha2
 from mighty.applications.address.models import Address
 from mighty.fields import RichTextField
 from mighty.models.base import Base
-
-from company import translates as _
-from company.apps import CompanyConfig as conf
-from company.models.alpha import CompanyAlpha2
-from company import choices as _c
-from company.choices import fr as choices_fr
 
 CHOICES_APE = sorted(list(choices_fr.APE), key=lambda x: x[1])
 CHOICES_LEGALFORM = sorted(list(choices_fr.LEGALFORM), key=lambda x: x[1])
@@ -51,50 +51,40 @@ class CompanyFR(CompanyAlpha2):
         return self.denomination if hasattr(self, 'denomination') else super().__str__()
 
     @property
-    def date_rcs(self): return self.since
+    def date_rcs(self):
+        return self.since
+
     @property
-    def siren_from_siret(self): return self.siret[:9] if self.siret else None
+    def siren_from_siret(self):
+        return self.siret[:9] if self.siret else None
+
     @property
-    def nic(self): return self.siret[9:]
+    def nic(self):
+        return self.siret[9:]
+
     @property
-    def ape_code(self): return self.ape if self.ape else _.ape_null
+    def ape_code(self):
+        return self.ape if self.ape else _.ape_null
+
     @property
-    def ape_label(self): return dict(choices_fr.APE).get(self.ape)
+    def ape_label(self):
+        return dict(choices_fr.APE).get(self.ape)
+
     @property
-    def slice_label(self): return dict(choices_fr.SLICE_EFFECTIVE).get(self.slice_effective)
+    def slice_label(self):
+        return dict(choices_fr.SLICE_EFFECTIVE).get(self.slice_effective)
+
     @property
-    def legalform_code(self): return self.legalform if self.legalform else _.fr_legalform_null
+    def legalform_code(self):
+        return self.legalform if self.legalform else _.fr_legalform_null
+
     @property
     def legalform_label(self):
         return dict(choices_fr.LEGALFORM).get(int(self.legalform_code)) if self.legalform else _.fr_legalform_null
+
     @property
     def siren_or_rna(self):
         return self.rna if self.rna else self.siren
-
-    def check_siret(self):
-        if not self.accept_duplicate:
-            qs = type(self).objects.filter(siret=self.siret)
-            if self.pk:
-                qs = qs.exclude(id=self.id)
-            if self.siret and qs.exists():
-                raise ValidationError(_.fr_siret_already_used, "siret_already_used")
-
-    def clean(self):
-        self.check_siret()
-        super().clean()
-
-    def save(self, *args, **kwargs):
-        self.check_siret()
-        try:
-            int(self.slice_effective)
-        except Exception:
-            self.slice_effective = None
-        if not self.siren:
-            self.siren = self.siren_from_siret
-        if self.rna and self.company:
-            self.company.is_type = "ASSOCIATION"
-            self.company.save()
-        super().save()
 
 
 class CompanyAddressFR(Address):
