@@ -68,7 +68,6 @@ class SearchBackend(SearchBackendFr):
         search_conf = self.urls.get(search_type)
         query = f"?q={search_conf['query'] % search}&nombre={self.show_by_page}&debut={self.show_by_page * (page - 1)}&masquerValeursNulles=true"
         url = f"{self.base_url}{search_conf['url']}{query}"
-        self._logger.debug(f"URL: {url}")
         try:
             buffer, code = self.do_request(url, "get", headers=self.headers)
         except requests.exceptions.HTTPError as e:
