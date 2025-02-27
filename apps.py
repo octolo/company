@@ -41,4 +41,4 @@ class CompanyConfig(AppConfig):
         Balo_dateformat = '%Y%m%d'
 
     def ready(self):
-        from . import signals
+        from . import signals  # noqa
