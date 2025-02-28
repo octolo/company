@@ -1,13 +1,16 @@
 from django import forms
-from company import  backends_loop, create_company
+
+from company import backends_loop, create_company
+
 
 class CompanySearchByCountryForm(forms.Form):
     search = forms.CharField(required=True)
 
+
 class CompanyAddByCountry(forms.ModelForm):
     position = forms.IntegerField(required=True)
     search = forms.CharField(required=True)
-    error_messages = { 'invalid_search': 'test', }
+    error_messages = {'invalid_search': 'test'}
 
     def __init__(self, country_model, country_fields, parent_object=None, admin=False, *args, **kwargs):
         self.country_model = country_model
@@ -23,11 +26,10 @@ class CompanyAddByCountry(forms.ModelForm):
             'message': message,
             'total': total,
             'pages': pages,
-            'error': False,#cf.message,
+            'error': False,  # cf.message,
         }
 
     def save(self, commit=True, user=None, author=None):
         results = self.get_results('fr', self.cleaned_data.get('search'))
         data = results['object_list'][self.cleaned_data.get('position')]
         data, self.new_company = create_company('fr', data)
-

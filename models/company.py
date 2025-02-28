@@ -1,24 +1,19 @@
 from django.db import models
-from django.conf import settings
-from django.utils.module_loading import import_string
-from django.utils.html import format_html
 from django.template.defaultfilters import slugify
-from django.core.exceptions import ValidationError
 
+from company import choices as _c
+from company import managers
+from company import translates as _
+from company.apps import CompanyConfig as conf
+from mighty.fields import RichTextField
 from mighty.models.base import Base
 from mighty.models.image import Image
-from mighty.applications.address.models import Address
-from mighty.fields import RichTextField
-
-from company import translates as _, managers, get_company_model
-from company.apps import CompanyConfig as conf
-from company import choices as _c
 
 
 class Company(Base, Image):
-    rules_fields = ["settle_internal", "duration_mandate", "age_limit_pdg", "age_limit_dg", "stock_min_rule", "stock_min_status"]
-    marketplace_fields = ["capital_division", "current", "share_capital", "icb", "market", "dowjones", "nasdaq", "gaia"]
-    infos_fields = ["purpose", "instance_comex", "matrix_skills"]
+    rules_fields = ['settle_internal', 'duration_mandate', 'age_limit_pdg', 'age_limit_dg', 'stock_min_rule', 'stock_min_status']
+    marketplace_fields = ['capital_division', 'current', 'share_capital', 'icb', 'market', 'dowjones', 'nasdaq', 'gaia']
+    infos_fields = ['purpose', 'instance_comex', 'matrix_skills']
     search_fields = ['denomination']
 
     denomination = models.CharField(max_length=255)
@@ -28,7 +23,7 @@ class Company(Base, Image):
     secretary = models.CharField(_.secretary, max_length=255, blank=True, null=True)
     resume = RichTextField(blank=True, null=True)
 
-    is_type = models.CharField(max_length=15, choices=_c.ISTYPE, default="COMPANY")
+    is_type = models.CharField(max_length=15, choices=_c.ISTYPE, default='COMPANY')
 
     purpose = models.CharField(_.purpose, max_length=3, choices=_c.YESNO, blank=True, null=True)
     instance_comex = models.BooleanField(_.instance_comex, default=False)
@@ -88,14 +83,14 @@ class Company(Base, Image):
 
     def set_named_id(self, offset=0):
         if hasattr(self, 'named_id'):
-            self.named_id = conf.named_tpl % {"named": slugify(self.denomination), "id": self.siren_or_rna}
+            self.named_id = conf.named_tpl % {'named': slugify(self.denomination), 'id': self.siren_or_rna}
             if offset:
-                self.named_id += "-"+str(offset)
+                self.named_id += '-' + str(offset)
             qs = self.model.objects.filter(named_id=self.named_id)
             if self.pk:
                 qs = qs.exclude(pk=self.pk)
             if len(qs):
-                self.set_named_id(offset+1)
+                self.set_named_id(offset + 1)
 
     def pre_update(self):
         self.set_siege_fr()
@@ -120,9 +115,8 @@ class Company(Base, Image):
     @property
     def marketplace(self):
         data = {f: getattr(self, f) for f in self.marketplace_fields}
-        data.update({"floating": round(self.floating, 2) if self.floating else None})
+        data.update({'floating': round(self.floating, 2) if self.floating else None})
         return data
-
 
     @property
     def siege_or_first_fr(self):
@@ -151,7 +145,7 @@ class Company(Base, Image):
 
     @property
     def kind(self):
-        return "association" if self.is_association else "entreprise"
+        return 'association' if self.is_association else 'entreprise'
 
     def stock_kind_default(self, legalform=None):
         if legalform and str(legalform) in _c.STOCK_DEFAULT:
@@ -206,8 +200,8 @@ class Company(Base, Image):
     @property
     def siren_or_rna(self):
         if self.siege_or_first_fr:
-            return self.rna if self.rna else self.siren
-        return "n-a"
+            return self.rna or self.siren
+        return 'n-a'
 
     def set_siege_fr(self):
         try:

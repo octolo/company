@@ -1,6 +1,8 @@
+
 from django.core.management.base import BaseCommand
+
 from company.backends import search_entity
-import json
+
 # "octolo",
 # "917432254",
 # "91743225400014",
@@ -22,4 +24,4 @@ class Command(BaseCommand):
             print(result)
             print()
 
-        print(f"Found {total} result(s)")
+        print(f'Found {total} result(s)')

@@ -1,8 +1,11 @@
 from django.conf import settings
-from mighty.functions import get_form_model
+
+from company import backends_loop, fields, get_company_model
+from company import translates as _
 from company.apps import CompanyConfig as conf
 from company.forms import CompanyAddByCountry
-from company import backends_loop, get_company_model, filters, fields, translates as _
+from mighty.functions import get_form_model
+
 
 class CanContainParentObject:
     country = 'fr'
@@ -23,7 +26,7 @@ class CanContainParentObject:
     @property
     def country_form(self):
         return get_form_model(self.country_model, form_class=CompanyAddByCountry, form_fields=self.country_fields)
- 
+
     def get_country(self):
         return self.kwargs.get('country', self.country)
 
@@ -33,8 +36,8 @@ class CanContainParentObject:
     def get_parent_object(self):
         if self.parent_object:
             return self.parent_object
-        elif self.kwargs.get('uid'):
-            return self.company_model.objects.get(uid=self.kwargs.get('uid') )
+        if self.kwargs.get('uid'):
+            return self.company_model.objects.get(uid=self.kwargs.get('uid'))
         return None
 
     def get_context_data(self, **kwargs):
@@ -46,6 +49,7 @@ class CanContainParentObject:
             context.update({'parent_object': parent_object})
         return context
 
+
 class SearchByCountryBase(CanContainParentObject):
     def get_results(self, search):
         message, companies, total, pages = backends_loop(self.kwargs.get('country', 'fr'), search)
@@ -55,7 +59,7 @@ class SearchByCountryBase(CanContainParentObject):
             'message': message,
             'total': total,
             'pages': pages,
-            'error': False,#cf.message,
+            'error': False,  # cf.message,
             'results': _.results % total if int(total) > 1 else _.result % total,
             'strpages': _.pages % pages if int(pages) > 1 else _.page % pages,
             'toomuch': _.toomuch % total,

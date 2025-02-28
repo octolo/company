@@ -1,4 +1,7 @@
-from company.forms.country import CompanySearchByCountryForm, CompanyAddByCountry
+from company.forms.country import (
+    CompanyAddByCountry,
+    CompanySearchByCountryForm,
+)
 from company.forms.fr import CompanySearchFRForm
 
 __all__ = (

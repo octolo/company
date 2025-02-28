@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 
 from company import choices as _c
@@ -14,6 +13,7 @@ CHOICES_APE = sorted(list(choices_fr.APE), key=lambda x: x[1])
 CHOICES_LEGALFORM = sorted(list(choices_fr.LEGALFORM), key=lambda x: x[1])
 CHOICES_GOVERNANCE = sorted(list(choices_fr.GOVERNANCE), key=lambda x: x[1])
 CHOICES_EVALUATION = sorted(list(choices_fr.EVALUATION), key=lambda x: x[1])
+
 
 class CompanyFR(CompanyAlpha2):
     search_fields = ['denomination', 'siret', 'isin', 'ticker']
@@ -43,7 +43,7 @@ class CompanyFR(CompanyAlpha2):
 
     class Meta(CompanyAlpha2.Meta):
         abstract = True
-        ordering = ['denomination',]
+        ordering = ['denomination']
         verbose_name = _.v_companyfr
         verbose_name_plural = _.vp_companyfr
 
@@ -64,7 +64,7 @@ class CompanyFR(CompanyAlpha2):
 
     @property
     def ape_code(self):
-        return self.ape if self.ape else _.ape_null
+        return self.ape or _.ape_null
 
     @property
     def ape_label(self):
@@ -76,7 +76,7 @@ class CompanyFR(CompanyAlpha2):
 
     @property
     def legalform_code(self):
-        return self.legalform if self.legalform else _.fr_legalform_null
+        return self.legalform or _.fr_legalform_null
 
     @property
     def legalform_label(self):
@@ -84,7 +84,7 @@ class CompanyFR(CompanyAlpha2):
 
     @property
     def siren_or_rna(self):
-        return self.rna if self.rna else self.siren
+        return self.rna or self.siren
 
 
 class CompanyAddressFR(Address):
@@ -100,7 +100,10 @@ class CompanyAddressFR(Address):
     def __str__(self):
         return self.raw
 
+
 CHOICES_ANNOUNCE = sorted(list(choices_fr.ANNOUNCE), key=lambda x: x[1])
+
+
 class Balo(Base):
     companyfr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE)
     announce = models.CharField(choices=CHOICES_ANNOUNCE, max_length=3, null=True)

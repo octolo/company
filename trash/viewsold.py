@@ -1,23 +1,24 @@
-from django.shortcuts import render
-from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ValidationError
-from django.utils.decorators import method_decorator
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 
-from mighty.views import TemplateView, FormView, DetailView, AddView, ListView
-from mighty.functions import get_form_model
-from mighty.filters import FiltersManager, Foxid
-from mighty.views import CheckData
-
+from company import (
+    backends_loop,
+    create_company,
+    fields,
+    filters,
+    get_company_model,
+)
+from company import translates as _
 from company.apps import CompanyConfig as conf
-from company.models import Company
-from company.forms import CompanySearchByCountryForm, CompanyAddByCountry
-from company import backends_loop, get_company_model, translates as _, filters, fields, create_company
-import datetime
+from company.forms import CompanyAddByCountry, CompanySearchByCountryForm
+from mighty.filters import FiltersManager, Foxid
+from mighty.functions import get_form_model
+from mighty.views import CheckData, FormView, TemplateView
 
 company_model = get_company_model()
+
 
 class CanContainParentObject:
     country = 'fr'
@@ -38,8 +39,8 @@ class CanContainParentObject:
     def get_parent_object(self):
         if self.parent_object:
             return self.parent_object
-        elif self.kwargs.get('uid'):
-            return company_model.objects.get(uid=self.kwargs.get('uid') )
+        if self.kwargs.get('uid'):
+            return company_model.objects.get(uid=self.kwargs.get('uid'))
         return None
 
     def get_context_data(self, **kwargs):
@@ -51,22 +52,24 @@ class CanContainParentObject:
             context.update({'parent_object': parent_object})
         return context
 
+
 @method_decorator(login_required, name='dispatch')
 class ChoiceCountry(CanContainParentObject, TemplateView):
-    template_name = "company/country_choice.html"
+    template_name = 'company/country_choice.html'
 
     def get_countries(self):
         alpha2 = [alpha2 for alpha2, backends in settings.COMPANY_BACKENDS.items()]
         if 'mighty.applications.nationality' in settings.INSTALLED_APPS:
             from mighty.models import Nationality
             nationalities = {nat[0].lower(): {'alpha2': nat[0].lower(), 'image': nat[1]} for nat in Nationality.objects.values_list('alpha2', 'image')}
-            return [nationalities[al] if al in nationalities else {'alpha2': al.lower(), 'image': None}  for al in alpha2]
+            return [nationalities[al] if al in nationalities else {'alpha2': al.lower(), 'image': None} for al in alpha2]
         return [{'alpha2': al.lower(), 'image': None} for al in alpha2]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({'object_list': self.get_countries()})
         return context
+
 
 class SearchByCountryBase(CanContainParentObject):
     def get_results(self, search):
@@ -77,7 +80,7 @@ class SearchByCountryBase(CanContainParentObject):
             'message': message,
             'total': total,
             'pages': pages,
-            'error': False,#cf.message,
+            'error': False,  # cf.message,
             'results': _.results % total if int(total) > 1 else _.result % total,
             'strpages': _.pages % pages if int(pages) > 1 else _.page % pages,
             'toomuch': _.toomuch % total,
@@ -107,13 +110,15 @@ class SearchByCountryBase(CanContainParentObject):
             context.update(self.get_results(self.request.GET.get('search')))
         return context
 
+
 @method_decorator(login_required, name='dispatch')
 class SearchByCountry(SearchByCountryBase, FormView):
-    template_name = "company/country_search.html"
+    template_name = 'company/country_search.html'
     form_class = CompanySearchByCountryForm
     success_url = '/company/search/'
     over_no_permission = True
     over_add_to_context = {'search': _.search, 'search_placeholder': _.search_placeholder, 'since': _.since}
+
 
 @method_decorator(login_required, name='dispatch')
 class APISearchByCountry(SearchByCountryBase, TemplateView):
@@ -124,6 +129,7 @@ class APISearchByCountry(SearchByCountryBase, TemplateView):
 
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context, safe=True, **response_kwargs)
+
 
 @method_decorator(login_required, name='dispatch')
 class AddByCountry(CanContainParentObject, FormView):
@@ -136,10 +142,10 @@ class AddByCountry(CanContainParentObject, FormView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({
-            "country_model": self.get_country_model(),
-            "country_fields": self.get_country_fields(),
-            "parent_object": self.get_parent_object(),
-            "admin": self.admin,
+            'country_model': self.get_country_model(),
+            'country_fields': self.get_country_fields(),
+            'parent_object': self.get_parent_object(),
+            'admin': self.admin,
         })
         return kwargs
 
@@ -147,6 +153,7 @@ class AddByCountry(CanContainParentObject, FormView):
         form.save()
         self.success_url = form.new_company.admin_change_url if self.admin else form.new_company.detail_url
         return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class AddBySiren(APISearchByCountry):
@@ -161,6 +168,7 @@ class AddBySiren(APISearchByCountry):
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context, safe=True, **response_kwargs)
 
+
 @method_decorator(login_required, name='dispatch')
 class AddByRna(APISearchByCountry):
     def get_context_data(self, **kwargs):
@@ -174,20 +182,23 @@ class AddByRna(APISearchByCountry):
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context, safe=True, **response_kwargs)
 
+
 class CompanyCheckSiren(CheckData):
     model = company_model
     test_field = 'company_fr__siren'
-    
+
+
 class CompanyCheckRna(CheckData):
     model = company_model
     test_field = 'company_fr__rna'
 
 
 if 'rest_framework' in settings.INSTALLED_APPS:
-    from rest_framework.views import APIView
-    from rest_framework.response import Response
     from rest_framework.generics import ListAPIView, RetrieveAPIView
-    from company import serializers, filters
+    from rest_framework.response import Response
+    from rest_framework.views import APIView
+
+    from company import filters, serializers
     from mighty.filters import FiltersManager, Foxid
 
     class APICompanyList(ListAPIView):
@@ -247,4 +258,3 @@ if 'rest_framework' in settings.INSTALLED_APPS:
 
         def get(self, request, format=None):
             return Response(self.get_context_data())
-            

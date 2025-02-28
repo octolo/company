@@ -1,21 +1,20 @@
-from django.db import transaction
-from mighty.management import ModelBaseCommand
-from company import get_company_model, get_backend_data
+from company import get_backend_data, get_company_model
 from company.apps import CompanyConfig
 from company.backends.data import BackendError
-import time
+from mighty.management import ModelBaseCommand
+
 
 class Command(ModelBaseCommand):
     do_on_all = False
     backend_path = None
-    manager = "objects"
+    manager = 'objects'
     backend = None
     list_to_set = CompanyConfig.FR.list_to_set
 
     def add_arguments(self, parser):
         super().add_arguments(parser)
         parser.add_argument('--backend')
-        parser.add_argument('--all', action="store_true")
+        parser.add_argument('--all', action='store_true')
         parser.add_argument('--siret', default=None)
         parser.add_argument('--isin', default=None)
 
@@ -29,17 +28,17 @@ class Command(ModelBaseCommand):
     @property
     def model_use(self):
         if self.siret:
-            return get_company_model("CompanyFR").get(siret=self.siret)
-        return get_company_model("CompanyFR").get(isin=self.isin)
+            return get_company_model('CompanyFR').get(siret=self.siret)
+        return get_company_model('CompanyFR').get(isin=self.isin)
 
     def do(self):
         if self.backend_path:
-            self.logger.info("backend path: %s" % self.backend_path)
+            self.logger.info('backend path: %s' % self.backend_path)
             if self.in_test:
                 CompanyModel = self.model_use
                 self.current_object = CompanyModel()
                 self.current_object.company = get_company_model()()
-                self.current_object.denomination = "Test"
+                self.current_object.denomination = 'Test'
                 self.current_object.isin = self.isin
                 self.on_object(self.current_object)
             elif self.siret or self.isin:
@@ -48,9 +47,9 @@ class Command(ModelBaseCommand):
             elif self.do_on_all:
                 self.each_objects()
             else:
-                self.logger.warning("--siret, --isin or --all param needed")
+                self.logger.warning('--siret, --isin or --all param needed')
         else:
-            self.logger.warning("--backend param needed")
+            self.logger.warning('--backend param needed')
 
     def on_object(self, obj):
         try:
@@ -61,9 +60,9 @@ class Command(ModelBaseCommand):
             self.backend.save()
             for data in self.list_to_set:
                 try:
-                    self.logger.debug("%s: %s" % (data, getattr(self.backend.obj.company, data)))
+                    self.logger.debug('%s: %s' % (data, getattr(self.backend.obj.company, data)))
                 except Exception:
-                    self.logger.debug("%s: %s" % (data, getattr(self.backend.obj, data)))
-            #time.sleep(5)
+                    self.logger.debug('%s: %s' % (data, getattr(self.backend.obj, data)))
+            # time.sleep(5)
         except BackendError as e:
             self.logger.warning(str(e))

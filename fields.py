@@ -28,7 +28,7 @@ company = (
     'stock_kind',
 )
 
-form =(
+form = (
     'is_type',
     'stackholder_kind',
     'stock_kind',
@@ -58,7 +58,7 @@ rules = (
     'stock_min_status'
 )
 
-countryfr = ("siege_fr", "siege_fr_address")
+countryfr = ('siege_fr', 'siege_fr_address')
 
 if conf.named_id:
     company += ('named_id',)
@@ -113,4 +113,4 @@ fr = (
     'evaluation',
     'phone',
 )
-balo =  ('announce', 'company', 'case', 'link', 'file_link', 'date')
+balo = ('announce', 'company', 'case', 'link', 'file_link', 'date')

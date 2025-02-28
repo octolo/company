@@ -1,6 +1,5 @@
 from django.db import models
 
-from company import get_company_model
 from company import translates as _
 from company.apps import CompanyConfig as conf
 from mighty.models.base import Base

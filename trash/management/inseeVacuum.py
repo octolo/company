@@ -1,8 +1,11 @@
-from django.db import transaction
-from mighty.management import ModelBaseCommand
-from mighty.functions import get_model
-from company.backends.insee import CompanyFillerBackend
 import time
+
+from django.db import transaction
+
+from company.backends.insee import CompanyFillerBackend
+from mighty.functions import get_model
+from mighty.management import ModelBaseCommand
+
 
 class Command(ModelBaseCommand):
     number = 1000

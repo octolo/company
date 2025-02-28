@@ -1,8 +1,10 @@
-from django.db import transaction
-from mighty.management import ModelBaseCommand
-from mighty.functions import get_model
-from company.backends.insee import CompanyFillerBackend
 import time
+
+from django.db import transaction
+
+from company.backends.insee import CompanyFillerBackend
+from mighty.management import ModelBaseCommand
+
 
 class Command(ModelBaseCommand):
     number = 1000
@@ -14,7 +16,7 @@ class Command(ModelBaseCommand):
         super().add_arguments(parser)
         parser.add_argument('--number', default=self.number)
         parser.add_argument('--offset', default=self.offset)
-        parser.add_argument('--format', default="csv")
+        parser.add_argument('--format', default='csv')
         parser.add_argument('--siret', default=None)
         parser.add_argument('--siren', default=None)
 

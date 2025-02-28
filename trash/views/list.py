@@ -1,9 +1,10 @@
 from django.conf import settings
+
 if 'rest_framework' in settings.INSTALLED_APPS:
     from rest_framework.generics import ListAPIView
+
+    from company import filters, get_company_model, serializers
     from mighty.filters import FiltersManager, Foxid
-    from company import get_company_model, filters
-    from company import serializers, filters
 
     class APICompanyList(ListAPIView):
         queryset = get_company_model().objectsB.all()
@@ -24,7 +25,3 @@ if 'rest_framework' in settings.INSTALLED_APPS:
 
         def get_queryset(self, queryset=None):
             return self.foxid.filter(*self.manager.params(self.request))
-
-
-
-            

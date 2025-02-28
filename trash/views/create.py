@@ -1,11 +1,12 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 
-from mighty.views import TemplateView, FormView
 from company import create_company
-from company.views.base import SearchByCountryBase, CanContainParentObject
+from company.views.base import CanContainParentObject, SearchByCountryBase
+from mighty.views import FormView, TemplateView
+
 
 @method_decorator(login_required, name='dispatch')
 class AddByCountry(CanContainParentObject, FormView):
@@ -18,10 +19,10 @@ class AddByCountry(CanContainParentObject, FormView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({
-            "country_model": self.country_model,
-            "country_fields": self.country_fields,
-            "parent_object": self.get_parent_object(),
-            "admin": self.admin,
+            'country_model': self.country_model,
+            'country_fields': self.country_fields,
+            'parent_object': self.get_parent_object(),
+            'admin': self.admin,
         })
         return kwargs
 
@@ -29,6 +30,7 @@ class AddByCountry(CanContainParentObject, FormView):
         form.save()
         self.success_url = form.new_company.admin_change_url if self.admin else form.new_company.detail_url
         return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class AddBySiren(SearchByCountryBase, TemplateView):
@@ -42,6 +44,7 @@ class AddBySiren(SearchByCountryBase, TemplateView):
 
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context, safe=True, **response_kwargs)
+
 
 @method_decorator(login_required, name='dispatch')
 class AddByRna(SearchByCountryBase, TemplateView):
@@ -58,8 +61,8 @@ class AddByRna(SearchByCountryBase, TemplateView):
 
 
 if 'rest_framework' in settings.INSTALLED_APPS:
-    from rest_framework.views import APIView
     from rest_framework.response import Response
+    from rest_framework.views import APIView
 
     class AddBySiren(SearchByCountryBase, APIView):
         def get_context_data(self, **kwargs):
