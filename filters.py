@@ -18,11 +18,26 @@ class SearchFilter(filters.SearchFilter):
         super().__init__(id, request, *args, **kwargs)
 
     def get_field(self):
-        return {'company': self.prefix + 'search' + self.mask, 'company_fr': self.prefix + 'company_fr__search' + self.mask}
+        return {
+            'company': self.prefix + 'search' + self.mask,
+            'company_fr': self.prefix + 'company_fr__search' + self.mask,
+        }
 
     def get_Q(self):
-        company = reduce(self.operator, [Q(**{self.get_field()['company']: value}) for value in self.get_value()])
-        company_fr = reduce(self.operator, [Q(**{self.get_field()['company_fr']: value}) for value in self.get_value()])
+        company = reduce(
+            self.operator,
+            [
+                Q(**{self.get_field()['company']: value})
+                for value in self.get_value()
+            ],
+        )
+        company_fr = reduce(
+            self.operator,
+            [
+                Q(**{self.get_field()['company_fr']: value})
+                for value in self.get_value()
+            ],
+        )
         return company | company_fr
 
 
@@ -161,7 +176,9 @@ class SearchFRByLegalform(filters.ParamMultiChoicesFilter):
     def __init__(self, id='legalform', request=None, *args, **kwargs):
         super().__init__(id, request, *args, **kwargs)
         self.field = kwargs.get('field', 'company_fr__legalform')
-        self.choices = kwargs.get('choices', [l[0] for l in choices_fr.LEGALFORM])
+        self.choices = kwargs.get(
+            'choices', [l[0] for l in choices_fr.LEGALFORM]
+        )
 
 
 class SearchFRByGovernance(filters.ParamMultiChoicesFilter):
@@ -169,7 +186,9 @@ class SearchFRByGovernance(filters.ParamMultiChoicesFilter):
         super().__init__(id, request, *args, **kwargs)
         self.choices_required = False
         self.field = kwargs.get('field', 'company_fr__governance')
-        self.choices = kwargs.get('choices', [g[0] for g in choices_fr.GOVERNANCE])
+        self.choices = kwargs.get(
+            'choices', [g[0] for g in choices_fr.GOVERNANCE]
+        )
 
 
 class SearchFRByEvaluation(filters.ParamMultiChoicesFilter):
@@ -177,7 +196,9 @@ class SearchFRByEvaluation(filters.ParamMultiChoicesFilter):
         super().__init__(id, request, *args, **kwargs)
         self.choices_required = True
         self.field = kwargs.get('field', 'company_fr__evaluation')
-        self.choices = kwargs.get('choices', [e[0] for e in choices_fr.EVALUATION])
+        self.choices = kwargs.get(
+            'choices', [e[0] for e in choices_fr.EVALUATION]
+        )
 
 
 class SearchFRByIndex(filters.ParamMultiChoicesFilter):
@@ -193,7 +214,9 @@ class SearchFRBySliceEffective(filters.ParamMultiChoicesFilter):
         super().__init__(id, request, *args, **kwargs)
         self.choices_required = True
         self.field = kwargs.get('field', 'company_fr__slice_effective')
-        self.choices = kwargs.get('choices', [e[0] for e in choices_fr.SLICE_EFFECTIVE])
+        self.choices = kwargs.get(
+            'choices', [e[0] for e in choices_fr.SLICE_EFFECTIVE]
+        )
 
 
 class SearchByNews(filters.SearchFilter):
@@ -207,10 +230,8 @@ filters_list = [
     SearchByUid(),
     SinceFilter(),
     UntilFilter(),
-
     # Actualités
     SearchByNews(),
-
     # Index/ICB/Market
     SearchFRByIndex(),
     SearchByICB(),
@@ -218,26 +239,21 @@ filters_list = [
     IsDowjones(),
     IsNasdaq(),
     IsGaia(),
-
     # Flottants/Chiffre
     SearchByFloating(),
     SearchByTurnover(),
     SearchByCoderef(),
-
     # Effectif/Durée de mandat/matrice de compétences
     SearchByEffective(),
     DurationMandate(),
     HasMatrixSkills(),
-
     # Limite d'age PDG/DG
     HasAgeLimitPDG(),
     HasAgeLimitDG(),
-
     # Stock reglement/status
     HasSettleTnternal(),
     HasStockMinRule(),
     HasStockMinStatus(),
-
     # FR - API/Governance/Evaluation/ISIN/LegalForm/Siret/Effectif
     SearchFRByAPE(),
     SearchFRByGovernance(),

@@ -6,7 +6,10 @@ from company.backends.search.fr import SearchBackendFr
 
 class SearchBackend(SearchBackendFr):
     base_url = 'https://api.insee.fr/'
-    headers = {'Accept': 'application/json', 'X-INSEE-Api-Key-Integration': settings.INSEE_API_KEY}
+    headers = {
+        'Accept': 'application/json',
+        'X-INSEE-Api-Key-Integration': settings.INSEE_API_KEY,
+    }
     urls = {
         'siren': {
             'url': 'api-sirene/3.11/siret',
@@ -31,7 +34,7 @@ class SearchBackend(SearchBackendFr):
         'rna': 'uniteLegale.identifiantAssociationUniteLegale',
         'denomination': (
             'uniteLegale.denominationUniteLegale',
-            'uniteLegale.nomUniteLegale'
+            'uniteLegale.nomUniteLegale',
         ),
         'ape': 'uniteLegale.activitePrincipaleUniteLegale',
         'legalform': 'uniteLegale.categorieJuridiqueUniteLegale',
@@ -43,7 +46,7 @@ class SearchBackend(SearchBackendFr):
         'complement': 'adresseEtablissement.complementAdresseEtablissement',
         'locality': (
             'adresseEtablissement.libelleCommuneEtablissement',
-            'adresseEtablissement.libelleCommuneEtrangerEtablissement'
+            'adresseEtablissement.libelleCommuneEtrangerEtablissement',
         ),
         'postal_code': (
             'adresseEtablissement.codePostalEtablissement',
@@ -58,16 +61,22 @@ class SearchBackend(SearchBackendFr):
     }
 
     def get_value_address(self, obj):
-        nve = self.getattr_recursive(obj, 'adresseEtablissement.numeroVoieEtablissement')
-        tve = self.getattr_recursive(obj, 'adresseEtablissement.typeVoieEtablissement')
-        lve = self.getattr_recursive(obj, 'adresseEtablissement.libelleVoieEtablissement')
+        nve = self.getattr_recursive(
+            obj, 'adresseEtablissement.numeroVoieEtablissement'
+        )
+        tve = self.getattr_recursive(
+            obj, 'adresseEtablissement.typeVoieEtablissement'
+        )
+        lve = self.getattr_recursive(
+            obj, 'adresseEtablissement.libelleVoieEtablissement'
+        )
         return f'{nve} {tve} {lve}'
 
     def get_results(self, search, page=1):
         search_type = self.get_search_type(search)
         search_conf = self.urls.get(search_type)
-        query = f"?q={search_conf['query'] % search}&nombre={self.show_by_page}&debut={self.show_by_page * (page - 1)}&masquerValeursNulles=true"
-        url = f"{self.base_url}{search_conf['url']}{query}"
+        query = f'?q={search_conf["query"] % search}&nombre={self.show_by_page}&debut={self.show_by_page * (page - 1)}&masquerValeursNulles=true'
+        url = f'{self.base_url}{search_conf["url"]}{query}'
         try:
             buffer, code = self.do_request(url, 'get', headers=self.headers)
         except requests.exceptions.HTTPError as e:

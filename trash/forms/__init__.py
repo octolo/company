@@ -5,6 +5,7 @@ from company.forms.country import (
 from company.forms.fr import CompanySearchFRForm
 
 __all__ = (
-    CompanySearchByCountryForm, CompanyAddByCountry,
+    CompanySearchByCountryForm,
+    CompanyAddByCountry,
     CompanySearchFRForm,
 )

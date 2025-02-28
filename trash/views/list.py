@@ -15,7 +15,9 @@ if 'rest_framework' in settings.INSTALLED_APPS:
 
         @property
         def foxid(self):
-            return Foxid(self.queryset, self.request, f=self.manager.flts).ready()
+            return Foxid(
+                self.queryset, self.request, f=self.manager.flts
+            ).ready()
 
         @property
         def manager(self):

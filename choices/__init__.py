@@ -1,8 +1,8 @@
 from django.utils.translation import gettext_lazy as _
 
 YESNO = (
-('YES', _('yes')),
-('NO', _('no')),
+    ('YES', _('yes')),
+    ('NO', _('no')),
 )
 
 COMPANY = 'COMPANY'

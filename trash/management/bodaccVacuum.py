@@ -1,4 +1,3 @@
-
 import os
 import re
 import shutil
@@ -17,7 +16,7 @@ class Command(ModelBaseCommand):
     directory = '/tmp/bodacc/'
     urls = {
         'base': 'https://echanges.dila.gouv.fr/OPENDATA/BODACC/',
-        'history': 'https://echanges.dila.gouv.fr/OPENDATA/BODACC/FluxHistorique/'
+        'history': 'https://echanges.dila.gouv.fr/OPENDATA/BODACC/FluxHistorique/',
     }
 
     def add_arguments(self, parser):
@@ -31,7 +30,8 @@ class Command(ModelBaseCommand):
         super(ModelBaseCommand, self).handle(*args, **options)
 
     def do(self):
-        if self.history: self.get_history(self.history)
+        if self.history:
+            self.get_history(self.history)
 
     def get_files(self, directory):
         for file in os.listdir(directory):
@@ -70,8 +70,10 @@ class Command(ModelBaseCommand):
         fil = fileurl.split('/')[-1]
         filepath = self.directory + fil
         open(filepath, 'wb').write(r.content)
-        if fileurl[-3:] == 'tar': self.extract_tarfile(filepath, year)
-        elif fileurl[-3:] == 'taz':  self.extract_tazfile(fil, self.directory)
+        if fileurl[-3:] == 'tar':
+            self.extract_tarfile(filepath, year)
+        elif fileurl[-3:] == 'taz':
+            self.extract_tazfile(fil, self.directory)
         shutil.rmtree(self.directory)
 
     def get_subdir(self, subdir, year):
@@ -90,6 +92,8 @@ class Command(ModelBaseCommand):
             for history in histories:
                 if str(h) in history:
                     logger.info(f'Treat year: {h}')
-                    if 'bodacc' in history.lower(): self.get_file(self.urls['history'] + history, str(h))
-                    else: self.get_subdir(self.urls['history'] + history, str(h))
+                    if 'bodacc' in history.lower():
+                        self.get_file(self.urls['history'] + history, str(h))
+                    else:
+                        self.get_subdir(self.urls['history'] + history, str(h))
                     break

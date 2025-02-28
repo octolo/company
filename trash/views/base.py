@@ -17,7 +17,9 @@ class CanContainParentObject:
 
     @property
     def country_model(self):
-        return get_company_model(getattr(conf.Model, f'Company{self.get_country().upper()}'))
+        return get_company_model(
+            getattr(conf.Model, f'Company{self.get_country().upper()}')
+        )
 
     @property
     def country_fields(self):
@@ -25,13 +27,21 @@ class CanContainParentObject:
 
     @property
     def country_form(self):
-        return get_form_model(self.country_model, form_class=CompanyAddByCountry, form_fields=self.country_fields)
+        return get_form_model(
+            self.country_model,
+            form_class=CompanyAddByCountry,
+            form_fields=self.country_fields,
+        )
 
     def get_country(self):
         return self.kwargs.get('country', self.country)
 
     def get_country_form(self):
-        return get_form_model(self.country_model, form_class=CompanyAddByCountry, form_fields=self.country_fields)
+        return get_form_model(
+            self.country_model,
+            form_class=CompanyAddByCountry,
+            form_fields=self.country_fields,
+        )
 
     def get_parent_object(self):
         if self.parent_object:
@@ -45,14 +55,18 @@ class CanContainParentObject:
         context.update({'fake': self.company_model()})
         parent_object_uid = context.get('object_id', self.kwargs.get('uid'))
         if not context.get('parent_object') and parent_object_uid:
-            parent_object = self.company_model.objects.get(uid=parent_object_uid)
+            parent_object = self.company_model.objects.get(
+                uid=parent_object_uid
+            )
             context.update({'parent_object': parent_object})
         return context
 
 
 class SearchByCountryBase(CanContainParentObject):
     def get_results(self, search):
-        message, companies, total, pages = backends_loop(self.kwargs.get('country', 'fr'), search)
+        message, companies, total, pages = backends_loop(
+            self.kwargs.get('country', 'fr'), search
+        )
         return {
             'search': search,
             'object_list': companies,
@@ -60,7 +74,9 @@ class SearchByCountryBase(CanContainParentObject):
             'total': total,
             'pages': pages,
             'error': False,  # cf.message,
-            'results': _.results % total if int(total) > 1 else _.result % total,
+            'results': _.results % total
+            if int(total) > 1
+            else _.result % total,
             'strpages': _.pages % pages if int(pages) > 1 else _.page % pages,
             'toomuch': _.toomuch % total,
         }
@@ -77,6 +93,7 @@ class SearchByCountryBase(CanContainParentObject):
     def get_nationality(self, country):
         if 'mighty.applications.nationality' in settings.INSTALLED_APPS:
             from mighty.models import Nationality
+
             return Nationality.objects.get(alpha2__iexact=country)
         return country
 

@@ -60,9 +60,13 @@ class Command(ModelBaseCommand):
             self.backend.save()
             for data in self.list_to_set:
                 try:
-                    self.logger.debug(f'{data}: {getattr(self.backend.obj.company, data)}')
+                    self.logger.debug(
+                        f'{data}: {getattr(self.backend.obj.company, data)}'
+                    )
                 except Exception:
-                    self.logger.debug(f'{data}: {getattr(self.backend.obj, data)}')
+                    self.logger.debug(
+                        f'{data}: {getattr(self.backend.obj, data)}'
+                    )
             # time.sleep(5)
         except BackendError as e:
             self.logger.warning(str(e))

@@ -7,7 +7,8 @@ class CompanyConfig(AppConfig):
     app_label = getattr(settings, 'COMPANY_APP_LABEL', 'company')
     countries = {
         'fr': getattr(settings, 'COMPANY_APP_LABEL', 'company') + '_companyfr',
-        'news': getattr(settings, 'COMPANY_APP_LABEL', 'company') + '_companynews',
+        'news': getattr(settings, 'COMPANY_APP_LABEL', 'company')
+        + '_companynews',
     }
     sz_fields = ()
     named_id = True

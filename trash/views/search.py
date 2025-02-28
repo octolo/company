@@ -15,7 +15,11 @@ class SearchByCountry(SearchByCountryBase, FormView):
     form_class = CompanySearchByCountryForm
     success_url = '/company/search/'
     over_no_permission = True
-    over_add_to_context = {'search': _.search, 'search_placeholder': _.search_placeholder, 'since': _.since}
+    over_add_to_context = {
+        'search': _.search,
+        'search_placeholder': _.search_placeholder,
+        'since': _.since,
+    }
 
 
 @method_decorator(login_required, name='dispatch')

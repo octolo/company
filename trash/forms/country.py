@@ -12,7 +12,15 @@ class CompanyAddByCountry(forms.ModelForm):
     search = forms.CharField(required=True)
     error_messages = {'invalid_search': 'test'}
 
-    def __init__(self, country_model, country_fields, parent_object=None, admin=False, *args, **kwargs):
+    def __init__(
+        self,
+        country_model,
+        country_fields,
+        parent_object=None,
+        admin=False,
+        *args,
+        **kwargs,
+    ):
         self.country_model = country_model
         self.country_fields = country_fields
         self.parent_object = parent_object

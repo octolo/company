@@ -46,7 +46,7 @@ market = (
     'market',
     'dowjones',
     'nasdaq',
-    'gaia'
+    'gaia',
 )
 
 rules = (
@@ -55,7 +55,7 @@ rules = (
     'age_limit_pdg',
     'age_limit_dg',
     'stock_min_rule',
-    'stock_min_status'
+    'stock_min_status',
 )
 
 countryfr = ('siege_fr', 'siege_fr_address')

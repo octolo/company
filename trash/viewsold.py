@@ -31,10 +31,16 @@ class CanContainParentObject:
         return fields.country + getattr(fields, self.get_country())[0:5]
 
     def get_country_model(self):
-        return get_company_model(getattr(conf.Model, f'Company{self.get_country().upper()}'))
+        return get_company_model(
+            getattr(conf.Model, f'Company{self.get_country().upper()}')
+        )
 
     def get_country_form(self):
-        return get_form_model(self.get_country_model(), form_class=CompanyAddByCountry, form_fields=self.get_country_fields())
+        return get_form_model(
+            self.get_country_model(),
+            form_class=CompanyAddByCountry,
+            form_fields=self.get_country_fields(),
+        )
 
     def get_parent_object(self):
         if self.parent_object:
@@ -58,11 +64,22 @@ class ChoiceCountry(CanContainParentObject, TemplateView):
     template_name = 'company/country_choice.html'
 
     def get_countries(self):
-        alpha2 = [alpha2 for alpha2, backends in settings.COMPANY_BACKENDS.items()]
+        alpha2 = [
+            alpha2 for alpha2, backends in settings.COMPANY_BACKENDS.items()
+        ]
         if 'mighty.applications.nationality' in settings.INSTALLED_APPS:
             from mighty.models import Nationality
-            nationalities = {nat[0].lower(): {'alpha2': nat[0].lower(), 'image': nat[1]} for nat in Nationality.objects.values_list('alpha2', 'image')}
-            return [nationalities[al] if al in nationalities else {'alpha2': al.lower(), 'image': None} for al in alpha2]
+
+            nationalities = {
+                nat[0].lower(): {'alpha2': nat[0].lower(), 'image': nat[1]}
+                for nat in Nationality.objects.values_list('alpha2', 'image')
+            }
+            return [
+                nationalities[al]
+                if al in nationalities
+                else {'alpha2': al.lower(), 'image': None}
+                for al in alpha2
+            ]
         return [{'alpha2': al.lower(), 'image': None} for al in alpha2]
 
     def get_context_data(self, **kwargs):
@@ -73,7 +90,9 @@ class ChoiceCountry(CanContainParentObject, TemplateView):
 
 class SearchByCountryBase(CanContainParentObject):
     def get_results(self, search):
-        message, companies, total, pages = backends_loop(self.kwargs.get('country', 'fr'), search)
+        message, companies, total, pages = backends_loop(
+            self.kwargs.get('country', 'fr'), search
+        )
         return {
             'search': search,
             'object_list': companies,
@@ -81,7 +100,9 @@ class SearchByCountryBase(CanContainParentObject):
             'total': total,
             'pages': pages,
             'error': False,  # cf.message,
-            'results': _.results % total if int(total) > 1 else _.result % total,
+            'results': _.results % total
+            if int(total) > 1
+            else _.result % total,
             'strpages': _.pages % pages if int(pages) > 1 else _.page % pages,
             'toomuch': _.toomuch % total,
         }
@@ -98,6 +119,7 @@ class SearchByCountryBase(CanContainParentObject):
     def get_nationality(self, country):
         if 'mighty.applications.nationality' in settings.INSTALLED_APPS:
             from mighty.models import Nationality
+
             return Nationality.objects.get(alpha2__iexact=country)
         return country
 
@@ -116,7 +138,11 @@ class SearchByCountry(SearchByCountryBase, FormView):
     form_class = CompanySearchByCountryForm
     success_url = '/company/search/'
     over_no_permission = True
-    over_add_to_context = {'search': _.search, 'search_placeholder': _.search_placeholder, 'since': _.since}
+    over_add_to_context = {
+        'search': _.search,
+        'search_placeholder': _.search_placeholder,
+        'since': _.since,
+    }
 
 
 @method_decorator(login_required, name='dispatch')
@@ -150,7 +176,11 @@ class AddByCountry(CanContainParentObject, FormView):
 
     def form_valid(self, form):
         form.save()
-        self.success_url = form.new_company.admin_change_url if self.admin else form.new_company.detail_url
+        self.success_url = (
+            form.new_company.admin_change_url
+            if self.admin
+            else form.new_company.detail_url
+        )
         return super().form_valid(form)
 
 
@@ -209,7 +239,9 @@ if 'rest_framework' in settings.INSTALLED_APPS:
 
         @property
         def foxid(self):
-            return Foxid(self.queryset, self.request, f=self.manager.flts).ready()
+            return Foxid(
+                self.queryset, self.request, f=self.manager.flts
+            ).ready()
 
         @property
         def manager(self):
@@ -239,7 +271,9 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('siren'):
                 results = self.get_results(self.request.GET.get('siren'))
                 if len(results['object_list']) == 1:
-                    data, _company = create_company('FR', results['object_list'][0])
+                    data, _company = create_company(
+                        'FR', results['object_list'][0]
+                    )
                     return data
             return {}
 
@@ -251,7 +285,9 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('rna'):
                 results = self.get_results(self.request.GET.get('rna'))
                 if len(results['object_list']) == 1:
-                    data, _company = create_company('FR', results['object_list'][0])
+                    data, _company = create_company(
+                        'FR', results['object_list'][0]
+                    )
                     return data
             return {}
 

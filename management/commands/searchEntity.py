@@ -1,4 +1,3 @@
-
 from django.core.management.base import BaseCommand
 
 from company.backends import search_entity
@@ -13,8 +12,14 @@ class Command(BaseCommand):
     help = 'Search for companies'
 
     def add_arguments(self, parser):
-        parser.add_argument('country', type=str, help='Country code', default='fr')
-        parser.add_argument('search', type=str, help='Company/Association name or SIREN/SIRET/NRA number')
+        parser.add_argument(
+            'country', type=str, help='Country code', default='fr'
+        )
+        parser.add_argument(
+            'search',
+            type=str,
+            help='Company/Association name or SIREN/SIRET/NRA number',
+        )
 
     def handle(self, *args, **kwargs):
         total, results = search_entity(kwargs['country'], kwargs['search'])

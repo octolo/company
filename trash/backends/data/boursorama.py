@@ -155,11 +155,17 @@ class CompanyDataBackend(CompanyDataBackend):
         self.html_search = self.get_page(url_search)
         if self.html_search.url != url_search:
             redirect = re.search(r'/cours/.*/', self.html_search.url).group(0)
-            self.html_home = self.get_page(redirect.replace('/cours/', self.urls['home']))
+            self.html_home = self.get_page(
+                redirect.replace('/cours/', self.urls['home'])
+            )
             self.lxml_home = html.fromstring(self.html_home.content)
-            self.html_profil = self.get_page(redirect.replace('/cours/', self.urls['profil']))
+            self.html_profil = self.get_page(
+                redirect.replace('/cours/', self.urls['profil'])
+            )
             self.lxml_profil = html.fromstring(self.html_profil.content)
-            self.html_keysnumber = self.get_page(redirect.replace('/cours/', self.urls['keysnumber']))
+            self.html_keysnumber = self.get_page(
+                redirect.replace('/cours/', self.urls['keysnumber'])
+            )
             self.lxml_keysnumber = html.fromstring(self.html_keysnumber.content)
         else:
             self.backend_error(f"Can't init for {self.obj}")
@@ -180,13 +186,19 @@ class CompanyDataBackend(CompanyDataBackend):
         return requests.get(url)
 
     def scrap_data(self, doc, path, raw=False):
-        if raw: return doc.xpath(self.way_html[path])[0]
+        if raw:
+            return doc.xpath(self.way_html[path])[0]
         return doc.xpath(self.way_html[path])[0].text_content().strip()
 
     def get_div_float(self):
         try:
-            capital_division = self.scrap_data(self.lxml_profil, 'capital_division').replace(' ', '')
-            capital_division = re.findall(re.compile(r"JSON.parse\('(.+)'\)", re.MULTILINE), capital_division)
+            capital_division = self.scrap_data(
+                self.lxml_profil, 'capital_division'
+            ).replace(' ', '')
+            capital_division = re.findall(
+                re.compile(r"JSON.parse\('(.+)'\)", re.MULTILINE),
+                capital_division,
+            )
             capital_division = json.loads(capital_division[0])
             capital_division = capital_division['data']['amChartData']
             flottant = False
@@ -216,7 +228,8 @@ class CompanyDataBackend(CompanyDataBackend):
     def data_icb(self):
         try:
             icb = self.scrap_data(self.lxml_profil, 'icb1')
-            if not len(icb): icb = self.scrap_data(self.lxml_profil, 'icb2')
+            if not len(icb):
+                icb = self.scrap_data(self.lxml_profil, 'icb2')
             return self.choices_icb[self.icb[icb]]
         except Exception:
             self.logger.warning('Icb not found')
@@ -274,7 +287,9 @@ class CompanyDataBackend(CompanyDataBackend):
     @property
     def data_effective(self):
         try:
-            effective = self.scrap_data(self.lxml_profil, 'effective').replace(' ', '')
+            effective = self.scrap_data(self.lxml_profil, 'effective').replace(
+                ' ', ''
+            )
             effective = re.findall(r'\d+', effective)[0]
             return int(effective)
         except Exception:
@@ -284,7 +299,9 @@ class CompanyDataBackend(CompanyDataBackend):
     @property
     def data_current(self):
         try:
-            current = self.scrap_data(self.lxml_profil, 'current').replace(' ', '')
+            current = self.scrap_data(self.lxml_profil, 'current').replace(
+                ' ', ''
+            )
             return float(current)
         except Exception:
             self.logger.warning('Current not found')
@@ -293,7 +310,9 @@ class CompanyDataBackend(CompanyDataBackend):
     @property
     def data_securities(self):
         try:
-            securities = self.scrap_data(self.lxml_profil, 'securities').replace(' ', '')
+            securities = self.scrap_data(
+                self.lxml_profil, 'securities'
+            ).replace(' ', '')
             return int(securities)
         except Exception:
             self.logger.warning('Securities not found')
@@ -314,10 +333,21 @@ class CompanyDataBackend(CompanyDataBackend):
     @property
     def data_net_profit(self):
         try:
-            net_profit = self.scrap_data(self.lxml_keysnumber, 'net_profit', True)
+            net_profit = self.scrap_data(
+                self.lxml_keysnumber, 'net_profit', True
+            )
             for tr in net_profit.xpath('.//tr'):
-                if 'Résultat net (part du groupe)' in tr[0].xpath('.//div')[0].text_content():
-                    net_profit = tr[-1].xpath('.//div')[0].text_content().strip().replace(' ', '')
+                if (
+                    'Résultat net (part du groupe)'
+                    in tr[0].xpath('.//div')[0].text_content()
+                ):
+                    net_profit = (
+                        tr[-1]
+                        .xpath('.//div')[0]
+                        .text_content()
+                        .strip()
+                        .replace(' ', '')
+                    )
                     return int(net_profit)
                     break
         except Exception:
@@ -328,8 +358,17 @@ class CompanyDataBackend(CompanyDataBackend):
         try:
             turnover = self.scrap_data(self.lxml_keysnumber, 'turnover', True)
             for tr in turnover.xpath('.//tr'):
-                if "Chiffre d'affaires" in tr[0].xpath('.//div')[0].text_content():
-                    turnover = tr[-1].xpath('.//div')[0].text_content().strip().replace(' ', '')
+                if (
+                    "Chiffre d'affaires"
+                    in tr[0].xpath('.//div')[0].text_content()
+                ):
+                    turnover = (
+                        tr[-1]
+                        .xpath('.//div')[0]
+                        .text_content()
+                        .strip()
+                        .replace(' ', '')
+                    )
                     return int(turnover) * 1000
                     break
         except Exception:

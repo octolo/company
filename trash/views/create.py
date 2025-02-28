@@ -28,7 +28,11 @@ class AddByCountry(CanContainParentObject, FormView):
 
     def form_valid(self, form):
         form.save()
-        self.success_url = form.new_company.admin_change_url if self.admin else form.new_company.detail_url
+        self.success_url = (
+            form.new_company.admin_change_url
+            if self.admin
+            else form.new_company.detail_url
+        )
         return super().form_valid(form)
 
 
@@ -69,7 +73,9 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('siren'):
                 results = self.get_results(self.request.GET.get('siren'))
                 if len(results['object_list']) == 1:
-                    data, _company = create_company('FR', results['object_list'][0])
+                    data, _company = create_company(
+                        'FR', results['object_list'][0]
+                    )
                     return data
             return {}
 
@@ -81,7 +87,9 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('rna'):
                 results = self.get_results(self.request.GET.get('rna'))
                 if len(results['object_list']) == 1:
-                    data, _company = create_company('FR', results['object_list'][0])
+                    data, _company = create_company(
+                        'FR', results['object_list'][0]
+                    )
                     return data
             return {}
 

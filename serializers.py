@@ -15,7 +15,15 @@ except_mask = ('uid', 'denomination', 'capital_division', 'image_url')
 class CompanyFRSerializer(ModelSerializer):
     class Meta:
         model = fr_model
-        fields = (*fields.fr, 'siren', 'ape_label', 'legalform_label', 'siren', 'isin', 'index')
+        fields = (
+            *fields.fr,
+            'siren',
+            'ape_label',
+            'legalform_label',
+            'siren',
+            'isin',
+            'index',
+        )
 
 
 @maskedSerializer(except_mask=('uid',))
@@ -29,7 +37,15 @@ class CompanyAddressFRSerializer(ModelSerializer):
 class CompanyMinSerializer(ModelSerializer):
     class Meta:
         model = company_model
-        fields = ('uid', 'named_id', 'denomination', 'image_url', 'siren', 'isin', 'index')
+        fields = (
+            'uid',
+            'named_id',
+            'denomination',
+            'image_url',
+            'siren',
+            'isin',
+            'index',
+        )
 
 
 class CompanySerializer(ModelSerializer):
@@ -37,7 +53,11 @@ class CompanySerializer(ModelSerializer):
 
     class Meta:
         model = company_model
-        fields = fields.serializer + CompanyConfig.sz_fields + ('siren', 'isin', 'index')
+        fields = (
+            fields.serializer
+            + CompanyConfig.sz_fields
+            + ('siren', 'isin', 'index')
+        )
 
 
 @maskedSerializer(except_mask=except_mask)
@@ -47,4 +67,8 @@ class CompanyWithAddrFRSerializer(ModelSerializer):
 
     class Meta:
         model = company_model
-        fields = fields.serializer + CompanyConfig.sz_fields + ('siren', 'isin', 'index', 'companyfr_address')
+        fields = (
+            fields.serializer
+            + CompanyConfig.sz_fields
+            + ('siren', 'isin', 'index', 'companyfr_address')
+        )

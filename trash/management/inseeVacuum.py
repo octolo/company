@@ -43,8 +43,14 @@ class Command(ModelBaseCommand):
                 with transaction.atomic():
                     for obj in objs:
                         address = obj.pop('address')
-                        company, _company_created = self.model_company.objects.update_or_create(**obj, defaults={'siren': obj['siren']})
+                        company, _company_created = (
+                            self.model_company.objects.update_or_create(
+                                **obj, defaults={'siren': obj['siren']}
+                            )
+                        )
                         address['company'] = company
-                        address, _address_created = self.model_address.objects.get_or_create(**address)
+                        address, _address_created = (
+                            self.model_address.objects.get_or_create(**address)
+                        )
             else:
                 break

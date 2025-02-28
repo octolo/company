@@ -147,7 +147,9 @@ class Command(UpdateModel):
 
     def get_valorisation(self, document, obj):
         try:
-            valorisation = document.xpath('//*[@id="main-content"]/div/section[1]/header/div/div/div[3]/div[2]/div/ul/li[2]/p[2]')
+            valorisation = document.xpath(
+                '//*[@id="main-content"]/div/section[1]/header/div/div/div[3]/div[2]/div/ul/li[2]/p[2]'
+            )
             valorisation = valorisation[0].text_content().strip().split(' ')
             valorisation.pop()
             valorisation = ''.join(valorisation)
@@ -158,7 +160,9 @@ class Command(UpdateModel):
 
     def get_effective(self, document, obj):
         try:
-            effective = document.xpath('//*[@id="main-content"]/div/section/div[3]/div[1]/div/div/div[2]/div/ul/li[5]/p[2]')
+            effective = document.xpath(
+                '//*[@id="main-content"]/div/section/div[3]/div[1]/div/div/div[2]/div/ul/li[5]/p[2]'
+            )
             effective = effective[0].text_content().strip().replace(' ', '')
             effective = re.findall(r'\d+', effective)[0]
             return int(effective)
@@ -168,7 +172,9 @@ class Command(UpdateModel):
 
     def get_current(self, document, obj):
         try:
-            current = document.xpath('//*[@id="main-content"]/div/section/header/div/div/div[1]/div[1]/div/div[1]/span[1]')
+            current = document.xpath(
+                '//*[@id="main-content"]/div/section/header/div/div/div[1]/div[1]/div/div[1]/span[1]'
+            )
             current = current[0].text_content().strip().replace(' ', '')
             return float(current)
         except Exception:
@@ -177,9 +183,13 @@ class Command(UpdateModel):
 
     def get_icb(self, document, obj):
         try:
-            icb = document.xpath('//*[@id="main-content"]/div/section/header/div/div/div[2]/div[2]/div/ul/li[1]/p[2]/a')
+            icb = document.xpath(
+                '//*[@id="main-content"]/div/section/header/div/div/div[2]/div[2]/div/ul/li[1]/p[2]/a'
+            )
             if not len(icb):
-                icb = document.xpath('//*[@id="main-content"]/div/section[1]/header/div/div/div[2]/div[2]/div/ul/li[1]/p[2]/a')
+                icb = document.xpath(
+                    '//*[@id="main-content"]/div/section[1]/header/div/div/div[2]/div[2]/div/ul/li[1]/p[2]/a'
+                )
             icb = icb[0].text_content().strip()
             return self.choices_icb[self.icb[icb]]
         except Exception:
@@ -188,7 +198,9 @@ class Command(UpdateModel):
 
     def get_ticker(self, document, obj):
         try:
-            ticker = document.xpath('//*[@id="main-content"]/div/section[1]/header/div/div/div[1]/div[2]/h2')
+            ticker = document.xpath(
+                '//*[@id="main-content"]/div/section[1]/header/div/div/div[1]/div[2]/h2'
+            )
             ticker = ticker[0].text_content().strip()
             return ticker.split(' ').pop()
         except Exception:
@@ -197,10 +209,18 @@ class Command(UpdateModel):
 
     def get_capital_division(self, document, obj):
         import json
+
         try:
-            capital_division = document.xpath('//*[@id="main-content"]/div/section[1]/div[3]/div[2]/article/div[3]/div/div[2]/div[1]/div/script')
-            capital_division = capital_division[0].text_content().strip().replace(' ', '')
-            capital_division = re.findall(re.compile(r"JSON.parse\('(.+)'\)", re.MULTILINE), capital_division)
+            capital_division = document.xpath(
+                '//*[@id="main-content"]/div/section[1]/div[3]/div[2]/article/div[3]/div/div[2]/div[1]/div/script'
+            )
+            capital_division = (
+                capital_division[0].text_content().strip().replace(' ', '')
+            )
+            capital_division = re.findall(
+                re.compile(r"JSON.parse\('(.+)'\)", re.MULTILINE),
+                capital_division,
+            )
             capital_division = json.loads(capital_division[0])
             capital_division = capital_division['data']['amChartData']
             flottant = False
@@ -222,7 +242,9 @@ class Command(UpdateModel):
 
     def get_site(self, document, obj):
         try:
-            site = document.xpath('//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[3]/p[2]/a')
+            site = document.xpath(
+                '//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[3]/p[2]/a'
+            )
             return site[0].text_content().strip().replace(' ', '')
         except Exception:
             self.error.add('Site not found', obj, self.current_row)
@@ -230,7 +252,9 @@ class Command(UpdateModel):
 
     def get_market(self, document, obj):
         try:
-            market = document.xpath('//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[8]/p[2]')
+            market = document.xpath(
+                '//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[8]/p[2]'
+            )
             market = market[0].text_content().strip()
             return self.choices_market[market]
         except Exception:
@@ -239,7 +263,9 @@ class Command(UpdateModel):
 
     def get_securities(self, document, obj):
         try:
-            securities = document.xpath('//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[6]/p[2]')
+            securities = document.xpath(
+                '//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[6]/p[2]'
+            )
             securities = securities[0].text_content().strip().replace(' ', '')
             return int(securities)
         except Exception:
@@ -248,7 +274,9 @@ class Command(UpdateModel):
 
     def get_dividend(self, document, obj):
         try:
-            dividend = document.xpath('//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div/div[1]/div[12]/div[2]/div[1]/div/table/tbody')[0]
+            dividend = document.xpath(
+                '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div/div[1]/div[12]/div[2]/div[1]/div/table/tbody'
+            )[0]
             for tr in dividend.xpath('.//tr'):
                 if 'Dividende' in tr[0].text_content():
                     dividend = tr[3].text_content().strip()
@@ -261,10 +289,21 @@ class Command(UpdateModel):
 
     def get_net_profit(self, document, obj):
         try:
-            net_profit = document.xpath('//*[@id="main-content"]/div/section[1]/div[3]/div/article/div[1]/div/div[2]/div[1]/div/table/tbody')[0]
+            net_profit = document.xpath(
+                '//*[@id="main-content"]/div/section[1]/div[3]/div/article/div[1]/div/div[2]/div[1]/div/table/tbody'
+            )[0]
             for tr in net_profit.xpath('.//tr'):
-                if 'Résultat net (part du groupe)' in tr[0].xpath('.//div')[0].text_content():
-                    net_profit = tr[-1].xpath('.//div')[0].text_content().strip().replace(' ', '')
+                if (
+                    'Résultat net (part du groupe)'
+                    in tr[0].xpath('.//div')[0].text_content()
+                ):
+                    net_profit = (
+                        tr[-1]
+                        .xpath('.//div')[0]
+                        .text_content()
+                        .strip()
+                        .replace(' ', '')
+                    )
                     return int(net_profit)
                     break
         except Exception:
@@ -273,10 +312,21 @@ class Command(UpdateModel):
 
     def get_turnover(self, document, obj):
         try:
-            turnover = document.xpath('//*[@id="main-content"]/div/section[1]/div[3]/div/article/div[1]/div/div[2]/div[1]/div/table/tbody')[0]
+            turnover = document.xpath(
+                '//*[@id="main-content"]/div/section[1]/div[3]/div/article/div[1]/div/div[2]/div[1]/div/table/tbody'
+            )[0]
             for tr in turnover.xpath('.//tr'):
-                if "Chiffre d'affaires" in tr[0].xpath('.//div')[0].text_content():
-                    turnover = tr[-1].xpath('.//div')[0].text_content().strip().replace(' ', '')
+                if (
+                    "Chiffre d'affaires"
+                    in tr[0].xpath('.//div')[0].text_content()
+                ):
+                    turnover = (
+                        tr[-1]
+                        .xpath('.//div')[0]
+                        .text_content()
+                        .strip()
+                        .replace(' ', '')
+                    )
                     return int(turnover)
                     break
         except Exception:
@@ -284,28 +334,56 @@ class Command(UpdateModel):
         return obj.turnover
 
     def do_update(self, obj):
-        home = self.getWebPage(f'https://www.boursorama.com/recherche/{obj.isin}')
+        home = self.getWebPage(
+            f'https://www.boursorama.com/recherche/{obj.isin}'
+        )
         if 'location' in self.headers:
             default = self.headers['location']
-            home = self.getWebPage(default.replace('/cours/', 'https://www.boursorama.com/cours/'))
-            profil = self.getWebPage(default.replace('/cours/', 'https://www.boursorama.com/cours/societe/profil/'))
-            keysnumber = self.getWebPage(default.replace('/cours/', 'https://www.boursorama.com/cours/societe/chiffres-cles/'))
+            home = self.getWebPage(
+                default.replace('/cours/', 'https://www.boursorama.com/cours/')
+            )
+            profil = self.getWebPage(
+                default.replace(
+                    '/cours/',
+                    'https://www.boursorama.com/cours/societe/profil/',
+                )
+            )
+            keysnumber = self.getWebPage(
+                default.replace(
+                    '/cours/',
+                    'https://www.boursorama.com/cours/societe/chiffres-cles/',
+                )
+            )
             obj.site = self.get_site(profil, obj)
             obj.icb = self.get_icb(profil, obj)
             obj.ticker = self.get_ticker(profil, obj)
             obj.market = self.get_market(profil, obj)
             obj.save()
             # AG DATA
-            agdataobj = CompanyAGData.objects.filter(company=obj, assembly__date_assembly__year=2020).order_by('assembly__date_assembly').last()
+            agdataobj = (
+                CompanyAGData.objects.filter(
+                    company=obj, assembly__date_assembly__year=2020
+                )
+                .order_by('assembly__date_assembly')
+                .last()
+            )
             if not agdataobj:
                 try:
-                    assembly = Assembly.objects.filter(company=obj, date_assembly__year=2020).order_by('date_assembly').last()
+                    assembly = (
+                        Assembly.objects.filter(
+                            company=obj, date_assembly__year=2020
+                        )
+                        .order_by('date_assembly')
+                        .last()
+                    )
                 except Assembly.DoesNotExist:
                     assembly = Assembly(company=obj, date_assembly='2020-12-31')
                     assembly.save()
                 agdataobj = CompanyAGData(company=obj, assembly=assembly)
                 agdataobj.save()
-            agdataobj.capital_division, agdataobj.floating = self.get_capital_division(profil, agdataobj)
+            agdataobj.capital_division, agdataobj.floating = (
+                self.get_capital_division(profil, agdataobj)
+            )
             print(f'agdataobj.capital_division: {agdataobj.capital_division}')
             agdataobj.valorisation = self.get_valorisation(profil, agdataobj)
             print(f'agdataobj.valorisation: {agdataobj.valorisation}')

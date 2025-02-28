@@ -40,7 +40,9 @@ pages = _('for %s pages')
 
 search = _('search')
 search_placeholder = _('siren, company...')
-toomuch = _('In view of the high number of results (% s) we advise you to search by SIREN')
+toomuch = _(
+    'In view of the high number of results (% s) we advise you to search by SIREN'
+)
 countries = _('countries')
 
 v_companyfr = 'french company or association'

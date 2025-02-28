@@ -7,10 +7,14 @@ from company.views.retrieve import APICompanyDetail
 from company.views.search import APISearchByCountry, SearchByCountry
 
 __all__ = (
-    CompanyCheckSiren, CompanyCheckRna,
+    CompanyCheckSiren,
+    CompanyCheckRna,
     ChoiceCountry,
-    SearchByCountry, APISearchByCountry,
-    AddByCountry, AddBySiren, AddByRna,
+    SearchByCountry,
+    APISearchByCountry,
+    AddByCountry,
+    AddBySiren,
+    AddByRna,
     APICompanyList,
     APICompanyDetail,
     SearchFrFormDescView,

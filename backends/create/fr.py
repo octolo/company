@@ -10,8 +10,7 @@ def create(input_obj, accept_duplicate=False):
     CompanyAddress = get_company_model('CompanyAddressFR')
 
     company = CompanyModel(
-        denomination=input_obj.get('denomination'),
-        since=input_obj.get('since')
+        denomination=input_obj.get('denomination'), since=input_obj.get('since')
     )
     if input_obj.get('rna'):
         company.is_type = 'ASSOCIATION'

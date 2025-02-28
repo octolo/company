@@ -2,13 +2,17 @@ from importlib import import_module
 
 from django.conf import settings
 
-search_backends = getattr(settings, 'COMPANY_SEARCH_BACKENDS', {
-    'fr': [
-        'company.backends.search.fr.insee.SearchBackend',
-        'company.backends.search.fr.opendatasoft.SearchBackend',
-        'company.backends.search.fr.entdatagouv.SearchBackend',
-    ],
-})
+search_backends = getattr(
+    settings,
+    'COMPANY_SEARCH_BACKENDS',
+    {
+        'fr': [
+            'company.backends.search.fr.insee.SearchBackend',
+            'company.backends.search.fr.opendatasoft.SearchBackend',
+            'company.backends.search.fr.entdatagouv.SearchBackend',
+        ],
+    },
+)
 
 
 def search_entity(country, search, backends=None):
