@@ -40,14 +40,14 @@ class Command(ModelBaseCommand):
             self.extract_tazfile(file, directory)
 
     def extract_tarfile(self, fil, year):
-        logger.info('Extraction to: %s' % fil)
+        logger.info(f'Extraction to: {fil}')
         tf = tarfile.open(fil)
         tf.extractall(self.directory)
-        self.get_files('%s/' % (self.directory + year,))
+        self.get_files(f'{self.directory + year}/')
 
     def extract_tazfile(self, fil, directory):
-        logger.info('Extraction to: %s' % directory + fil)
-        os.system('tar -C %s -xf %s' % (self.directory, directory + fil))
+        logger.info(f'Extraction to: {directory}' + fil)
+        os.system(f'tar -C {self.directory} -xf {directory + fil}')
         self.read_xmlfiles()
         os.remove(directory + fil)
 
@@ -55,9 +55,9 @@ class Command(ModelBaseCommand):
         for file in os.listdir(self.directory):
             if file[-3:] == 'xml':
                 filxml = self.directory + file
-                logger.info('Read xml: %s' % filxml)
+                logger.info(f'Read xml: {filxml}')
                 tree = ET.parse(filxml)
-                root = tree.getroot()
+                tree.getroot()
                 os.remove(filxml)
 
     def get_file(self, fileurl, year):
@@ -65,7 +65,7 @@ class Command(ModelBaseCommand):
             os.mkdir(self.directory)
         if not os.path.isdir(self.directory + year):
             os.mkdir(self.directory + year)
-        logger.info('Downloading: %s' % fileurl)
+        logger.info(f'Downloading: {fileurl}')
         r = requests.get(fileurl)
         fil = fileurl.split('/')[-1]
         filepath = self.directory + fil
@@ -75,11 +75,11 @@ class Command(ModelBaseCommand):
         shutil.rmtree(self.directory)
 
     def get_subdir(self, subdir, year):
-        logger.info('Browse: %s' % subdir)
+        logger.info(f'Browse: {subdir}')
         response = requests.get(subdir).text
         histories = re.compile(r'href="(.+taz)"').findall(response)
         for history in histories:
-            logger.info('Downloading: %s' % history)
+            logger.info(f'Downloading: {history}')
             self.get_file(subdir + history, year)
 
     def get_history(self, history):
@@ -89,7 +89,7 @@ class Command(ModelBaseCommand):
         for h in range(int(history[0]), int(history[1])):
             for history in histories:
                 if str(h) in history:
-                    logger.info('Treat year: %s' % h)
+                    logger.info(f'Treat year: {h}')
                     if 'bodacc' in history.lower(): self.get_file(self.urls['history'] + history, str(h))
                     else: self.get_subdir(self.urls['history'] + history, str(h))
                     break

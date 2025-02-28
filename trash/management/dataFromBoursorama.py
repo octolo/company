@@ -120,8 +120,6 @@ class Command(UpdateModel):
         'Construction individuelle': 'Services aux consommateurs',
         'Édition': 'Services aux consommateurs',
         "Jeux de hasard et d'argent": 'Services aux consommateurs',
-        'SCPI : biens immobiliers industriels et bureautiques': 'Sociétés Financières',
-        'Fer et acier': 'Matériaux de base',
     }
     choices_icb = {
         'Matériaux de base': ICB_MATERIALBASE,
@@ -185,7 +183,7 @@ class Command(UpdateModel):
             icb = icb[0].text_content().strip()
             return self.choices_icb[self.icb[icb]]
         except Exception:
-            self.error.add('Icb not found', '%s: %s' % (obj, icb), self.current_row)
+            self.error.add('Icb not found', f'{obj}: {icb}', self.current_row)
         return obj.icb
 
     def get_ticker(self, document, obj):
@@ -225,8 +223,7 @@ class Command(UpdateModel):
     def get_site(self, document, obj):
         try:
             site = document.xpath('//*[@id="main-content"]/div/section[1]/div[3]/div[1]/div/div/div[2]/div/ul/li[3]/p[2]/a')
-            site = site[0].text_content().strip().replace(' ', '')
-            return site
+            return site[0].text_content().strip().replace(' ', '')
         except Exception:
             self.error.add('Site not found', obj, self.current_row)
         return obj.site
@@ -287,7 +284,7 @@ class Command(UpdateModel):
         return obj.turnover
 
     def do_update(self, obj):
-        home = self.getWebPage('https://www.boursorama.com/recherche/%s' % obj.isin)
+        home = self.getWebPage(f'https://www.boursorama.com/recherche/{obj.isin}')
         if 'location' in self.headers:
             default = self.headers['location']
             home = self.getWebPage(default.replace('/cours/', 'https://www.boursorama.com/cours/'))
@@ -309,19 +306,19 @@ class Command(UpdateModel):
                 agdataobj = CompanyAGData(company=obj, assembly=assembly)
                 agdataobj.save()
             agdataobj.capital_division, agdataobj.floating = self.get_capital_division(profil, agdataobj)
-            print('agdataobj.capital_division: %s' % agdataobj.capital_division)
+            print(f'agdataobj.capital_division: {agdataobj.capital_division}')
             agdataobj.valorisation = self.get_valorisation(profil, agdataobj)
-            print('agdataobj.valorisation: %s' % agdataobj.valorisation)
+            print(f'agdataobj.valorisation: {agdataobj.valorisation}')
             agdataobj.effective = self.get_effective(profil, agdataobj)
-            print('agdataobj.effective: %s' % agdataobj.effective)
+            print(f'agdataobj.effective: {agdataobj.effective}')
             agdataobj.current = self.get_current(profil, agdataobj)
-            print('agdataobj.current: %s' % agdataobj.current)
+            print(f'agdataobj.current: {agdataobj.current}')
             agdataobj.securities = self.get_securities(profil, agdataobj)
-            print('agdataobj.securities: %s' % agdataobj.securities)
+            print(f'agdataobj.securities: {agdataobj.securities}')
             agdataobj.dividend = self.get_dividend(home, agdataobj)
-            print('agdataobj.dividend: %s' % agdataobj.dividend)
+            print(f'agdataobj.dividend: {agdataobj.dividend}')
             agdataobj.net_profit = self.get_net_profit(keysnumber, agdataobj)
-            print('agdataobj.net_profit: %s' % agdataobj.net_profit)
+            print(f'agdataobj.net_profit: {agdataobj.net_profit}')
             agdataobj.turnover = self.get_turnover(keysnumber, agdataobj)
-            print('agdataobj.turnover: %s' % agdataobj.turnover)
+            print(f'agdataobj.turnover: {agdataobj.turnover}')
             agdataobj.save()

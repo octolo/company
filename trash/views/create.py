@@ -38,7 +38,7 @@ class AddBySiren(SearchByCountryBase, TemplateView):
         if self.request.GET.get('siren'):
             results = self.get_results(self.request.GET.get('siren'))
             if len(results['object_list']) == 1:
-                data, company = create_company('FR', results['object_list'][0])
+                data, _company = create_company('FR', results['object_list'][0])
                 return data
         return {}
 
@@ -52,7 +52,7 @@ class AddByRna(SearchByCountryBase, TemplateView):
         if self.request.GET.get('rna'):
             results = self.get_results(self.request.GET.get('rna'))
             if len(results['object_list']) == 1:
-                data, company = create_company('FR', results['object_list'][0])
+                data, _company = create_company('FR', results['object_list'][0])
                 return data
         return {}
 
@@ -69,7 +69,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('siren'):
                 results = self.get_results(self.request.GET.get('siren'))
                 if len(results['object_list']) == 1:
-                    data, company = create_company('FR', results['object_list'][0])
+                    data, _company = create_company('FR', results['object_list'][0])
                     return data
             return {}
 
@@ -81,7 +81,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('rna'):
                 results = self.get_results(self.request.GET.get('rna'))
                 if len(results['object_list']) == 1:
-                    data, company = create_company('FR', results['object_list'][0])
+                    data, _company = create_company('FR', results['object_list'][0])
                     return data
             return {}
 

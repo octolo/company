@@ -1,3 +1,5 @@
+import contextlib
+
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -41,7 +43,6 @@ class Company(Base, Image):
 
     is_capital_variable = models.BooleanField(_.is_capital_variable, default=False)
     capital_division = models.JSONField(blank=True, null=True)
-    current = models.FloatField(blank=True, null=True)
     share_capital = models.FloatField(_.share_capital, blank=True, null=True)
     floating = models.FloatField(blank=True, null=True)
     icb = models.CharField(_.icb, max_length=40, choices=_c.ICB, blank=True, null=True, db_index=True)
@@ -76,10 +77,8 @@ class Company(Base, Image):
         ordering = ['denomination']
 
     def set_floating(self):
-        try:
+        with contextlib.suppress(Exception):
             self.floating = float(self.capital_division['Flottant'])
-        except Exception:
-            pass
 
     def set_named_id(self, offset=0):
         if hasattr(self, 'named_id'):
@@ -204,16 +203,12 @@ class Company(Base, Image):
         return 'n-a'
 
     def set_siege_fr(self):
-        try:
+        with contextlib.suppress(Exception):
             self.siege_fr = self.company_fr.get(siege=True)
-        except Exception:
-            pass
 
     def set_siege_fr_address(self):
-        try:
+        with contextlib.suppress(Exception):
             self.siege_fr_address = self.companyfr_address.get(is_siege=True)
-        except Exception:
-            pass
 
     # ADDRESS
     @property

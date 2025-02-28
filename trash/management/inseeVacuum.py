@@ -32,7 +32,7 @@ class Command(ModelBaseCommand):
         offset = kwargs.get('offset', self.offset)
         time.sleep(1)
         backend = CompanyFillerBackend()
-        companies, total, pages = backend.get_active_companies(number, offset)
+        companies, _total, _pages = backend.get_active_companies(number, offset)
         return companies
 
     def each_objects(self):
@@ -43,8 +43,8 @@ class Command(ModelBaseCommand):
                 with transaction.atomic():
                     for obj in objs:
                         address = obj.pop('address')
-                        company, company_created = self.model_company.objects.update_or_create(**obj, defaults={'siren': obj['siren']})
+                        company, _company_created = self.model_company.objects.update_or_create(**obj, defaults={'siren': obj['siren']})
                         address['company'] = company
-                        address, address_created = self.model_address.objects.get_or_create(**address)
+                        address, _address_created = self.model_address.objects.get_or_create(**address)
             else:
                 break

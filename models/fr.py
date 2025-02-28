@@ -1,3 +1,5 @@
+import operator
+
 from django.db import models
 
 from company import choices as _c
@@ -9,10 +11,10 @@ from mighty.applications.address.models import Address
 from mighty.fields import RichTextField
 from mighty.models.base import Base
 
-CHOICES_APE = sorted(list(choices_fr.APE), key=lambda x: x[1])
-CHOICES_LEGALFORM = sorted(list(choices_fr.LEGALFORM), key=lambda x: x[1])
-CHOICES_GOVERNANCE = sorted(list(choices_fr.GOVERNANCE), key=lambda x: x[1])
-CHOICES_EVALUATION = sorted(list(choices_fr.EVALUATION), key=lambda x: x[1])
+CHOICES_APE = sorted(choices_fr.APE, key=operator.itemgetter(1))
+CHOICES_LEGALFORM = sorted(choices_fr.LEGALFORM, key=operator.itemgetter(1))
+CHOICES_GOVERNANCE = sorted(choices_fr.GOVERNANCE, key=operator.itemgetter(1))
+CHOICES_EVALUATION = sorted(choices_fr.EVALUATION, key=operator.itemgetter(1))
 
 
 class CompanyFR(CompanyAlpha2):
@@ -101,7 +103,7 @@ class CompanyAddressFR(Address):
         return self.raw
 
 
-CHOICES_ANNOUNCE = sorted(list(choices_fr.ANNOUNCE), key=lambda x: x[1])
+CHOICES_ANNOUNCE = sorted(choices_fr.ANNOUNCE, key=operator.itemgetter(1))
 
 
 class Balo(Base):

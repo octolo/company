@@ -29,24 +29,24 @@ class CompanyDataBackend(EnableLogger):
         self.obj = kwargs.get('obj')
 
     def set_one_data(self, data):
-        self.logger.info('set data: %s' % data)
-        value = getattr(self, 'data_%s' % data)
+        self.logger.info(f'set data: {data}')
+        value = getattr(self, f'data_{data}')
         old_value = (
-            getattr(self, 'get_data_%s' % data)()
-            if hasattr(self, 'get_data_%s' % data)
+            getattr(self, f'get_data_{data}')()
+            if hasattr(self, f'get_data_{data}')
             else getattr(self.obj.company, data)
         )
-        self.logger.info('value found: %s' % value)
+        self.logger.info(f'value found: {value}')
         if value and old_value != value:
             self.value_update += 1
-            self.logger.info('set value: %s' % value)
-            getattr(self, 'set_data_%s' % data)(value) if hasattr(
-                self, 'set_data_%s' % data
+            self.logger.info(f'set value: {value}')
+            getattr(self, f'set_data_{data}')(value) if hasattr(
+                self, f'set_data_{data}'
             ) else setattr(self.obj.company, data, value)
 
     def get_one_data(self, data):
-        value = getattr(self, 'data_%s' % data)
-        self.logger.info('value found: %s' % value)
+        value = getattr(self, f'data_{data}')
+        self.logger.info(f'value found: {value}')
         return value or getattr(self.obj.company, data, value)
 
     def save(self):

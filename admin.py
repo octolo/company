@@ -60,7 +60,7 @@ class CompanyAdmin(BaseAdmin):
         extra_context = extra_context or {}
         extra_context['action'] = action
         countries = import_string(f'company.backends.{action}_backends')
-        extra_context['countries'] = {key: get_country_by(key, 'alpha2') for key in countries.keys()}
+        extra_context['countries'] = {key: get_country_by(key, 'alpha2') for key in countries}
         return self.admincustom_view(request, object_id, extra_context, urlname=self.get_admin_urlname(self.country_admin_suffix), template=self.country_admin_template)
 
     search_admin_path = 'actions/search/countries/<str:country>/'
@@ -98,8 +98,8 @@ class CompanyAdmin(BaseAdmin):
             'total': total,
         })
         if request.method == 'POST' and request.POST.get('rna_or_siren') == rna_or_siren:
-            info, model = create_entity(country, results[0])
-            return redirect('admin:%s_%s_change' % (self.model._meta.app_label, self.model._meta.model_name), object_id=model.id)
+            _info, model = create_entity(country, results[0])
+            return redirect(f'admin:{self.model._meta.app_label}_{self.model._meta.model_name}_change', object_id=model.id)
         return self.admincustom_view(request, object_id, extra_context, urlname=self.get_admin_urlname(self.create_admin_suffix), template=self.create_admin_template)
 
     getorcreate_admin_path = 'actions/getorcreate/countries/<str:country>/<str:rna_or_siren>/'
@@ -108,7 +108,7 @@ class CompanyAdmin(BaseAdmin):
     def getorcreate_view(self, request, country, rna_or_siren, object_id=None, form_url=None, extra_context=None):
         try:
             entity = CompanyModel.objects.get(Q(company_fr__rna=rna_or_siren) | Q(company_fr__siren=rna_or_siren))
-            return redirect('admin:%s_%s_change' % (self.model._meta.app_label, self.model._meta.model_name), object_id=entity.id)
+            return redirect(f'admin:{self.model._meta.app_label}_{self.model._meta.model_name}_change', object_id=entity.id)
         except CompanyModel.DoesNotExist:
             suffix = self.get_admin_urlname(self.create_admin_suffix)
             return redirect(f'admin:{suffix}', country=country, rna_or_siren=rna_or_siren)
@@ -152,7 +152,7 @@ class CompanyFRAdminInline(admin.StackedInline):
 
 
 class CompanyAddressFRAdminInline(AddressAdminInline):
-    fields = address_fields + ('is_siege', 'is_active')
+    fields = (*address_fields, 'is_siege', 'is_active')
 
 
 class BaloAdmin(BaseAdmin):

@@ -37,7 +37,7 @@ class SearchBackend(SearchBackendFr):
         search_type = self.get_search_type(search)
         urls = self.urls.get(search_type) % search
         buffer, code = self.do_request(urls, 'get')
-        if str(code)[0] in ['2', '3']:
+        if str(code)[0] in {'2', '3'}:
             buffer = buffer.json()
             total = buffer.get('total_results', 0)
             results = buffer.get('results', [])

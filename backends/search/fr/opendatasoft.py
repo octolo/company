@@ -32,7 +32,7 @@ class SearchBackend(SearchBackendFr):
     }
 
     def get_value_siege(self, obj):
-        return True if obj.get('etablissementsiege', '').strip().lower() == 'oui' else False
+        return obj.get('etablissementsiege', '').strip().lower() == 'oui'
 
     def get_value_address(self, obj):
         nve = self.getattr_recursive(obj, 'numerovoieetablissement')
@@ -48,7 +48,7 @@ class SearchBackend(SearchBackendFr):
             'offset': (page - 1) * self.show_by_page,
         }
         buffer, code = self.do_request(self.base_url, 'get', params=params)
-        if str(code)[0] in ['2', '3']:
+        if str(code)[0] in {'2', '3'}:
             buffer = buffer.json()
             total = buffer.get('total_count', 0)
             results = buffer.get('results', [])

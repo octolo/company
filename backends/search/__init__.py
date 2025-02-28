@@ -48,14 +48,14 @@ class SearchBackend:
             except exceptions as e:
                 self.retries += 1
                 if self.retries >= self.max_retries:
-                    self._logger.error(
+                    self._logger.exception(
                         'Failed after %d retries (exception: %s)',
                         self.retries,
                         e,
                     )
                     if return_on_failure is not None:
                         return return_on_failure
-                    raise e
+                    raise
                 delay_with_jitter = self.calculate_delay(
                     self.base_delay, self.retries, self.max_delay
                 )
@@ -66,6 +66,7 @@ class SearchBackend:
                     e,
                 )
                 time.sleep(delay_with_jitter)
+        return None
 
     def get_search_type(self, search):
         for key, value in self.search_types.items():
@@ -131,12 +132,12 @@ class SearchBackend:
             if isinstance(field, str):
                 data[field] = self.get_value(entity, field, name=name)
             elif isinstance(field, dict):
-                key = list(field.keys())[0]
+                key = next(iter(field.keys()))
                 sub = field[key]
                 data[key] = self.get_data_json(
                     entity, data_format=sub, name=key
                 )
-            elif isinstance(field, list) or isinstance(field, tuple):
+            elif isinstance(field, list | tuple):
                 return [
                     self.get_data_json(entity, subfield, name)
                     for subfield in field

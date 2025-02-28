@@ -15,14 +15,14 @@ except_mask = ('uid', 'denomination', 'capital_division', 'image_url')
 class CompanyFRSerializer(ModelSerializer):
     class Meta:
         model = fr_model
-        fields = fields.fr + ('siren', 'ape_label', 'legalform_label', 'siren', 'isin', 'index')
+        fields = (*fields.fr, 'siren', 'ape_label', 'legalform_label', 'siren', 'isin', 'index')
 
 
 @maskedSerializer(except_mask=('uid',))
 class CompanyAddressFRSerializer(ModelSerializer):
     class Meta:
         model = addressfr_model
-        fields = address_fields + ('representation',)
+        fields = (*address_fields, 'representation')
 
 
 @maskedSerializer(except_mask=except_mask)

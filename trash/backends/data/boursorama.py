@@ -99,8 +99,6 @@ class CompanyDataBackend(CompanyDataBackend):
         'Construction individuelle': 'Services aux consommateurs',
         'Édition': 'Services aux consommateurs',
         "Jeux de hasard et d'argent": 'Services aux consommateurs',
-        'SCPI : biens immobiliers industriels et bureautiques': 'Sociétés Financières',
-        'Fer et acier': 'Matériaux de base',
     }
     urls = {
         'search': 'https://www.boursorama.com/recherche/',
@@ -150,8 +148,7 @@ class CompanyDataBackend(CompanyDataBackend):
 
     @property
     def choices_market(self):
-        choices = {m[1]: m[0] for m in self.choices.MARKET}
-        return choices
+        return {m[1]: m[0] for m in self.choices.MARKET}
 
     def prepare_boursorama_lxml(self):
         url_search = self.urls['search'] + self.obj.isin
@@ -165,7 +162,7 @@ class CompanyDataBackend(CompanyDataBackend):
             self.html_keysnumber = self.get_page(redirect.replace('/cours/', self.urls['keysnumber']))
             self.lxml_keysnumber = html.fromstring(self.html_keysnumber.content)
         else:
-            self.backend_error("Can't init for %s" % self.obj)
+            self.backend_error(f"Can't init for {self.obj}")
 
     def try_to_prepare(self):
         try:
@@ -250,7 +247,7 @@ class CompanyDataBackend(CompanyDataBackend):
     @property
     def data_capital_division(self):
         try:
-            capital_division, floatting = self.get_div_float()
+            capital_division, _floatting = self.get_div_float()
             return capital_division
         except Exception:
             self.logger.warning('CapitalDivision not found')
@@ -258,7 +255,7 @@ class CompanyDataBackend(CompanyDataBackend):
     @property
     def data_floating(self):
         try:
-            capital_division, floating = self.get_div_float()
+            _capital_division, floating = self.get_div_float()
             return floating
         except Exception:
             self.logger.warning('Floating not found')

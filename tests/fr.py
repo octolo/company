@@ -8,19 +8,19 @@ class TestSearchFrBackend(TestCase):
     def test_search_fulltext(self):
         results = search_entity('fr', 'Octolo')
         print(results)
-        self.assertTrue(results)
+        assert results
 
     def test_search_siren(self):
         results = search_entity('fr', '917432254')
         print(results)
-        self.assertTrue(results)
+        assert results
 
     def test_search_siret(self):
         results = search_entity('fr', '91743225400014')
         print(results)
-        self.assertTrue(results)
+        assert results
 
     def test_search_nra(self):
         results = search_entity('fr', 'W751042370')
         print(results)
-        self.assertTrue(results)
+        assert results

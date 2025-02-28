@@ -17,7 +17,7 @@ class CanContainParentObject:
 
     @property
     def country_model(self):
-        return get_company_model(getattr(conf.Model, 'Company%s' % self.get_country().upper()))
+        return get_company_model(getattr(conf.Model, f'Company{self.get_country().upper()}'))
 
     @property
     def country_fields(self):
@@ -77,13 +77,12 @@ class SearchByCountryBase(CanContainParentObject):
     def get_nationality(self, country):
         if 'mighty.applications.nationality' in settings.INSTALLED_APPS:
             from mighty.models import Nationality
-            nationality = Nationality.objects.get(alpha2__iexact=country)
-            return nationality
+            return Nationality.objects.get(alpha2__iexact=country)
         return country
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        country = self.get_country()
+        self.get_country()
         context.update(self.country_definition())
         if self.request.GET.get('search'):
             context.update(self.get_results(self.request.GET.get('search')))

@@ -31,7 +31,7 @@ class CanContainParentObject:
         return fields.country + getattr(fields, self.get_country())[0:5]
 
     def get_country_model(self):
-        return get_company_model(getattr(conf.Model, 'Company%s' % self.get_country().upper()))
+        return get_company_model(getattr(conf.Model, f'Company{self.get_country().upper()}'))
 
     def get_country_form(self):
         return get_form_model(self.get_country_model(), form_class=CompanyAddByCountry, form_fields=self.get_country_fields())
@@ -98,13 +98,12 @@ class SearchByCountryBase(CanContainParentObject):
     def get_nationality(self, country):
         if 'mighty.applications.nationality' in settings.INSTALLED_APPS:
             from mighty.models import Nationality
-            nationality = Nationality.objects.get(alpha2__iexact=country)
-            return nationality
+            return Nationality.objects.get(alpha2__iexact=country)
         return country
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        country = self.get_country()
+        self.get_country()
         context.update(self.country_definition())
         if self.request.GET.get('search'):
             context.update(self.get_results(self.request.GET.get('search')))
@@ -161,7 +160,7 @@ class AddBySiren(APISearchByCountry):
         if self.request.GET.get('siren'):
             results = self.get_results(self.request.GET.get('siren'))
             if len(results['object_list']) == 1:
-                data, company = create_company('FR', results['object_list'][0])
+                data, _company = create_company('FR', results['object_list'][0])
                 return data
         return {}
 
@@ -175,7 +174,7 @@ class AddByRna(APISearchByCountry):
         if self.request.GET.get('rna'):
             results = self.get_results(self.request.GET.get('rna'))
             if len(results['object_list']) == 1:
-                data, company = create_company('FR', results['object_list'][0])
+                data, _company = create_company('FR', results['object_list'][0])
                 return data
         return {}
 
@@ -240,7 +239,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('siren'):
                 results = self.get_results(self.request.GET.get('siren'))
                 if len(results['object_list']) == 1:
-                    data, company = create_company('FR', results['object_list'][0])
+                    data, _company = create_company('FR', results['object_list'][0])
                     return data
             return {}
 
@@ -252,7 +251,7 @@ if 'rest_framework' in settings.INSTALLED_APPS:
             if self.request.GET.get('rna'):
                 results = self.get_results(self.request.GET.get('rna'))
                 if len(results['object_list']) == 1:
-                    data, company = create_company('FR', results['object_list'][0])
+                    data, _company = create_company('FR', results['object_list'][0])
                     return data
             return {}
 

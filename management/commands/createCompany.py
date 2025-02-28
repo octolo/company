@@ -26,12 +26,12 @@ class Command(CSVModelCommand):
             self.stop_loop = True
 
     def create_company(self, country, info, row=None):
-        total, results = search_entity(country, info)
+        _total, results = search_entity(country, info)
         if len(results) > 0:
-            data, new_company = create_entity(country, results[0])
+            _data, new_company = create_entity(country, results[0])
             if row:
                 for k, v in row.items():
-                    if k not in ('country', 'info'):
+                    if k not in {'country', 'info'}:
                         if v and hasattr(new_company, k):
                             setattr(new_company, k, v)
                 new_company.save()

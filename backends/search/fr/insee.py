@@ -73,9 +73,9 @@ class SearchBackend(SearchBackendFr):
         except requests.exceptions.HTTPError as e:
             code = e.response.status_code
             if code != 404:
-                raise e
+                raise
 
-        if str(code)[0] in ['2', '3']:
+        if str(code)[0] in {'2', '3'}:
             buffer = buffer.json()
             total = buffer.get('header', {}).get('total')
             results = buffer.get('etablissements', [])

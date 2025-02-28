@@ -33,7 +33,7 @@ class Command(ModelBaseCommand):
 
     def do(self):
         if self.backend_path:
-            self.logger.info('backend path: %s' % self.backend_path)
+            self.logger.info(f'backend path: {self.backend_path}')
             if self.in_test:
                 CompanyModel = self.model_use
                 self.current_object = CompanyModel()
@@ -60,9 +60,9 @@ class Command(ModelBaseCommand):
             self.backend.save()
             for data in self.list_to_set:
                 try:
-                    self.logger.debug('%s: %s' % (data, getattr(self.backend.obj.company, data)))
+                    self.logger.debug(f'{data}: {getattr(self.backend.obj.company, data)}')
                 except Exception:
-                    self.logger.debug('%s: %s' % (data, getattr(self.backend.obj, data)))
+                    self.logger.debug(f'{data}: {getattr(self.backend.obj, data)}')
             # time.sleep(5)
         except BackendError as e:
             self.logger.warning(str(e))

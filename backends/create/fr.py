@@ -26,17 +26,17 @@ def create(input_obj, accept_duplicate=False):
     del input_obj['slice_str']
     del input_obj['raw_address']
     del input_obj['rna_or_siren']
-    data = {key: value for key, value in input_obj.items()}
+    data = dict(input_obj.items())
     data['company'] = company
 
     if accept_duplicate:
         companyC = CompanyCountry(**data)
         companyC.save()
     else:
-        companyC, created = CompanyCountry.objects.get_or_create(**data)
+        companyC, _created = CompanyCountry.objects.get_or_create(**data)
     if address:
         address['company'] = company
-        companyA, created = CompanyAddress.objects.get_or_create(**address)
+        _companyA, _created = CompanyAddress.objects.get_or_create(**address)
     return {
         'url': companyC.company.named_id,
         'siret': companyC.siret,
