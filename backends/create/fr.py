@@ -14,8 +14,8 @@ def create(input_obj, accept_duplicate=False, user=None):
     )
     company.user_tmp = user
 
-    if input_obj.get("rna"):
-        company.is_type = "ASSOCIATION"
+    if input_obj.get('rna'):
+        company.is_type = 'ASSOCIATION'
     company.save()
 
     address = None
