@@ -2,52 +2,66 @@ from django.db import transaction
 
 from company import get_company_model
 
+Company = get_company_model()
+CompanyFR = get_company_model('CompanyFR')
+CompanyAddrFR = get_company_model('CompanyAddressFR')
 
-@transaction.atomic
-def create(input_obj, accept_duplicate=False, user=None):
-    CompanyModel = get_company_model()
-    CompanyCountry = get_company_model('CompanyFR')
-    CompanyAddress = get_company_model('CompanyAddressFR')
 
-    company = CompanyModel(
-        denomination=input_obj.get('denomination'), since=input_obj.get('since')
-    )
-    company.user_tmp = user
+def create(input_obj, accept_duplicate=False, user=None):  # noqa: FBT002
+    """
+    Persist the company hit returned by the INSEE API and (optionally)
+    its address, then return a lightweight dict for immediate use plus
+    the newly-created Company instance.
+    """
+    with transaction.atomic():
+        company = Company(
+            denomination=input_obj.get('denomination'),
+            since=input_obj.get('since'),
+        )
+        if user is not None:
+            company.user_tmp = user
 
-    if input_obj.get('rna'):
-        company.is_type = 'ASSOCIATION'
-    company.save()
+        # An association gets a different flag
+        if input_obj.get('rna'):
+            company.is_type = 'ASSOCIATION'
 
-    address = None
-    if 'address' in input_obj:
-        address = input_obj['address']
-        del input_obj['address']
-    del input_obj['ape_str']
-    del input_obj['legalform_str']
-    del input_obj['slice_str']
-    del input_obj['raw_address']
-    del input_obj['rna_or_siren']
-    data = dict(input_obj.items())
-    data['company'] = company
+        company.save()
 
-    if accept_duplicate:
-        companyC = CompanyCountry(**data)
-        companyC.save()
-    else:
-        companyC, _created = CompanyCountry.objects.get_or_create(**data)
-    if address:
-        address['company'] = company
-        _companyA, _created = CompanyAddress.objects.get_or_create(**address)
-    return {
-        'url': companyC.company.named_id,
-        'siret': companyC.siret,
-        'denomination': companyC.siret,
-        'legalform': companyC.legalform,
-        'ape': companyC.ape,
-        'ape_noun': companyC.ape_noun,
-        'since': companyC.since,
-        'category': companyC.category,
-        'slice_effective': companyC.slice_effective,
-        'siege': companyC.siege,
-        'rna': companyC.rna,
-    }, companyC.company
+        addr_blob = input_obj.pop('address', None)
+
+        # Drop noisy helper fields coming from the search hit
+        for key in (
+            'ape_str',
+            'legalform_str',
+            'slice_str',
+            'raw_address',
+            'rna_or_siren',
+        ):
+            input_obj.pop(key, None)
+
+        company_fr_data = dict(input_obj)
+        company_fr_data['company'] = company
+
+        if accept_duplicate:
+            company_fr = CompanyFR.objects.create(**company_fr_data)
+        else:
+            company_fr, _ = CompanyFR.objects.get_or_create(**company_fr_data)
+
+        if addr_blob:
+            addr_blob['company'] = company
+            CompanyAddrFR.objects.get_or_create(**addr_blob)
+
+    payload = {
+        'url': company_fr.company.named_id,
+        'siret': company_fr.siret,
+        'denomination': company_fr.siret,
+        'legalform': company_fr.legalform,
+        'ape': company_fr.ape,
+        'ape_noun': company_fr.ape_noun,
+        'since': company_fr.since,
+        'category': company_fr.category,
+        'slice_effective': company_fr.slice_effective,
+        'siege': company_fr.siege,
+        'rna': company_fr.rna,
+    }
+    return payload, company
