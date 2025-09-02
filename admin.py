@@ -23,6 +23,7 @@ class CompanyAdmin(BaseAdmin):
                 'classes': ('wide',),
                 'fields': (
                     'denomination',
+                    'parent',
                     'image',
                     'since',
                     'site',
@@ -33,9 +34,10 @@ class CompanyAdmin(BaseAdmin):
             },
         ),
     )
-    list_display = ('denomination', 'since', 'siege_fr', 'is_type')
+    list_display = ('denomination', 'parent', 'since', 'siege_fr', 'is_type')
     search_fields = ('denomination', 'company_fr__siret')
     readonly_fields = ('siege_fr', 'siege_fr_address')
+    raw_id_fields = ('parent',)
     search_template = None
 
     def __init__(self, model, admin_site):

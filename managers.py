@@ -1,6 +1,6 @@
 from django.db import models
 
-Select_related = ('siege_fr',)
+Select_related = ('siege_fr', 'parent')
 
 
 class CompanyManager(models.Manager):

@@ -34,6 +34,13 @@ class Company(Base, Image):
     infos_fields = ['purpose', 'instance_comex', 'matrix_skills']
     search_fields = ['denomination']
 
+    parent = models.ForeignKey('self',
+        on_delete=models.SET_NULL,
+        related_name='parent_to_company',
+        blank=True,
+        null=True,
+        verbose_name=_.parent
+    )
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)
     site = models.URLField(blank=True, null=True)
@@ -189,6 +196,10 @@ class Company(Base, Image):
 
     def __str__(self):
         return self.denomination
+
+    @property
+    def parent_denomination(self):
+        return self.parent.denomination if self.parent else None
 
     @property
     def infos(self):

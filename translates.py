@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 v_company = 'company or association'
 vp_company = 'companies or associations'
 
+parent = _('parent company')
 since = _('since')
 icb = _('industry classification benchmark')
 market = _('market')
