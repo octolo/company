@@ -11,7 +11,13 @@ from mighty.fields import RichTextField
 from mighty.models.base import Base
 from mighty.models.image import Image
 
+from simple_history.models import HistoricalRecords
+from company.apps import CompanyConfig as conf
+from company.decorators import InheritModelClassList
 
+@InheritModelClassList(
+    'company.models.company.documents',
+)
 class Company(Base, Image):
     rules_fields = [
         'settle_internal',
@@ -34,129 +40,57 @@ class Company(Base, Image):
     infos_fields = ['purpose', 'instance_comex', 'matrix_skills']
     search_fields = ['denomination']
 
-    parent = models.ForeignKey('self',
-        on_delete=models.SET_NULL,
-        related_name='parent_to_company',
-        blank=True,
-        null=True,
-        verbose_name=_.parent
-    )
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='parent_to_company', blank=True, null=True, verbose_name=_.parent)
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)
     site = models.URLField(blank=True, null=True)
     effective = models.BigIntegerField(blank=True, null=True)
-    secretary = models.CharField(
-        _.secretary, max_length=255, blank=True, null=True
-    )
+    secretary = models.CharField(_.secretary, max_length=255, blank=True, null=True)
     resume = RichTextField(blank=True, null=True)
-
-    is_type = models.CharField(
-        max_length=15, choices=_c.ISTYPE, default='COMPANY'
-    )
-
-    purpose = models.CharField(
-        _.purpose, max_length=3, choices=_c.YESNO, blank=True, null=True
-    )
+    is_type = models.CharField(max_length=15, choices=_c.ISTYPE, default='COMPANY')
+    purpose = models.CharField(_.purpose, max_length=3, choices=_c.YESNO, blank=True, null=True)
     instance_comex = models.BooleanField(_.instance_comex, default=False)
     matrix_skills = models.BooleanField(_.matrix_skills, default=False)
+    document_header = models.TextField(blank=True, null=True)
+    document_footer = models.TextField(blank=True, null=True)
 
-    capital_socnomtotal = models.DecimalField(
-        _.capital_socnomtotal,
-        blank=True,
-        null=True,
-        decimal_places=2,
-        max_digits=15,
-    )
-    valorisation = models.DecimalField(
-        _.valorisation, decimal_places=2, max_digits=15, default=0.0
-    )
-    nominal = models.DecimalField(
-        _.nominal, decimal_places=3, max_digits=16, default=0.0
-    )
+    capital_socnomtotal = models.DecimalField( _.capital_socnomtotal, blank=True, null=True, decimal_places=2, max_digits=15,)
+    valorisation = models.DecimalField(_.valorisation, decimal_places=2, max_digits=15, default=0.0)
+    nominal = models.DecimalField(_.nominal, decimal_places=3, max_digits=16, default=0.0)
     turnover = models.BigIntegerField(_.turnover, blank=True, null=True)
-    net_profit = models.BigIntegerField(
-        _.net_profit, blank=True, null=True, help_text=_.net_profit_help
-    )
+    net_profit = models.BigIntegerField(_.net_profit, blank=True, null=True, help_text=_.net_profit_help)
     dividend = models.FloatField(_.total_dividend, blank=True, null=True)
     securities = models.BigIntegerField(_.securities, blank=True, null=True)
     current = models.FloatField(_.current, default=0.0)
-    total_dividend = models.IntegerField(
-        _.total_dividend, blank=True, null=True, help_text=_.total_dividend_help
-    )
+    total_dividend = models.IntegerField(_.total_dividend, blank=True, null=True, help_text=_.total_dividend_help)
 
-    is_capital_variable = models.BooleanField(
-        _.is_capital_variable, default=False
-    )
+    is_capital_variable = models.BooleanField(_.is_capital_variable, default=False)
     capital_division = models.JSONField(blank=True, null=True)
     share_capital = models.FloatField(_.share_capital, blank=True, null=True)
     floating = models.FloatField(blank=True, null=True)
-    icb = models.CharField(
-        _.icb,
-        max_length=40,
-        choices=_c.ICB,
-        blank=True,
-        null=True,
-        db_index=True,
-    )
-    market = models.CharField(
-        _.market,
-        max_length=40,
-        choices=_c.MARKET,
-        blank=True,
-        null=True,
-        db_index=True,
-    )
+    icb = models.CharField(_.icb, max_length=40, choices=_c.ICB, blank=True, null=True, db_index=True)
+    market = models.CharField(_.market, max_length=40, choices=_c.MARKET, blank=True, null=True, db_index=True)
     dowjones = models.BooleanField(default=False)
     nasdaq = models.BooleanField(default=False)
     gaia = models.BooleanField(default=False)
 
     settle_internal = models.BooleanField(_.settle_internal, default=False)
-    duration_mandate = models.PositiveSmallIntegerField(
-        _.duration_mandate, blank=True, null=True
-    )
+    duration_mandate = models.PositiveSmallIntegerField(_.duration_mandate, blank=True, null=True)
     age_limit_pdg = models.BooleanField(_.age_limit_pdg, default=False)
     age_limit_dg = models.BooleanField(_.age_limit_dg, default=False)
-    stock_min_rule = models.PositiveIntegerField(
-        _.stock_min_rule, blank=True, null=True
-    )
-    stock_min_status = models.PositiveIntegerField(
-        _.stock_min_status, blank=True, null=True
-    )
-    stackholder_kind = models.CharField(
-        max_length=20,
-        choices=_c.STACKHOLDER_KINDS,
-        default=_c.STACKHOLDER_SHAREHOLDER,
-        blank=True,
-        null=True,
-    )
-    stock_kind = models.CharField(
-        max_length=20,
-        choices=_c.STOCK_KINDS,
-        default=_c.STOCK_SHAREHOLDER,
-        blank=True,
-        null=True,
-    )
+    stock_min_rule = models.PositiveIntegerField(_.stock_min_rule, blank=True, null=True)
+    stock_min_status = models.PositiveIntegerField(_.stock_min_status, blank=True, null=True)
+    stackholder_kind = models.CharField(max_length=20, choices=_c.STACKHOLDER_KINDS, default=_c.STACKHOLDER_SHAREHOLDER, blank=True, null=True)
+    stock_kind = models.CharField(max_length=20, choices=_c.STOCK_KINDS, default=_c.STOCK_SHAREHOLDER, blank=True, null=True)
 
     # FR
-    siege_fr = models.ForeignKey(
-        conf.Model.CompanyFR,
-        on_delete=models.CASCADE,
-        related_name='siege_fr',
-        blank=True,
-        null=True,
-    )
-    siege_fr_address = models.ForeignKey(
-        conf.Model.CompanyAddressFR,
-        on_delete=models.CASCADE,
-        related_name='siege_fr_address',
-        blank=True,
-        null=True,
-    )
+    siege_fr = models.ForeignKey(conf.Model.CompanyFR, on_delete=models.CASCADE, related_name='siege_fr', blank=True, null=True)
+    siege_fr_address = models.ForeignKey(conf.Model.CompanyAddressFR, on_delete=models.CASCADE, related_name='siege_fr_address', blank=True, null=True)
 
     if conf.named_id:
-        named_id = models.CharField(
-            max_length=255, db_index=True, null=True, editable=False
-        )
+        named_id = models.CharField(max_length=255, db_index=True, null=True, editable=False)
+
+    history = HistoricalRecords(inherit=True)
 
     objects = models.Manager()
     objectsB = managers.CompanyManager()
@@ -166,6 +100,8 @@ class Company(Base, Image):
         verbose_name = _.v_company
         verbose_name_plural = _.vp_company
         ordering = ['denomination']
+        app_label = conf.app_label
+        db_table = conf.company_table
 
     def set_floating(self):
         with contextlib.suppress(Exception):
@@ -281,9 +217,6 @@ class Company(Base, Image):
         elif self.is_type == _c.COOWNER:
             self.stock_kind = _c.STOCK_SHARES
             self.stackholder_kind = _c.STACKHOLDER_OWNER
-        # elif self.is_type == _c.BIGMASTER:
-        #     self.stock_kind = STOCK_TITLE
-        #     self.stackholder_kind = _c.STACKHOLDER_ASSOCIATE
 
     # FR
     @property
@@ -321,3 +254,9 @@ class Company(Base, Image):
     def raw_address(self):
         first_address = self.companyfr_address.first()
         return first_address.raw if first_address else None
+
+for name, field in conf.fields_to_add.items():
+    Company.add_to_class(name, field)
+
+for cls in conf.company_class_herit:
+    Company = type('Company', (cls, Company), {})
