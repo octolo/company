@@ -188,6 +188,40 @@ class CompanyAdmin(BaseAdmin):
                 f'admin:{suffix}', country=country, rna_or_siren=rna_or_siren
             )
 
+    status_admin_path = 'actions/status/countries/<str:country>/'
+    status_admin_suffix = 'status'
+    status_admin_template = 'admin/company/status.html'
+    status_object_tools = {'name': 'status', 'url': 'status'}
+
+    def status_view(
+        self,
+        request,
+        country,
+        object_id=None,
+        form_url=None,
+        extra_context=None,
+    ):
+        extra_context = extra_context or {}
+        extra_context.update({
+            'country': country,
+            'status': request.GET.get('q'),
+            'results': [],
+            'total': 0,
+        })
+        extra_context['country'] = country
+        extra_context['status'] = request.GET.get('q')
+        if extra_context['status']:
+            total, results = status_list(country, extra_context['status'])
+            extra_context['results'] = results
+            extra_context['total'] = total
+        return self.admincustom_view(
+            request,
+            object_id,
+            extra_context,
+            urlname=self.get_admin_urlname(self.status_admin_suffix),
+            template=self.status_admin_template,
+        )
+
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
@@ -221,6 +255,13 @@ class CompanyAdmin(BaseAdmin):
                 self.getorcreate_admin_path,
                 self.wrap(self.getorcreate_view),
                 name=self.get_admin_urlname(self.getorcreate_admin_suffix),
+            ),
+            path(
+                self.status_admin_path,
+                self.wrap(
+                    self.status_view, object_tools=self.status_object_tools
+                ),
+                name=self.get_admin_urlname(self.status_admin_suffix),
             ),
         ]
         return my_urls + urls

@@ -5,9 +5,8 @@
 {{ block.super }}
 <style>
 #content-main > .actions {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    grid-gap: 10px;
+    display: flex;
+    gap: 5px;
 }
 
 #content-main > .actions > .action {
@@ -43,6 +42,11 @@
         <a class="action" href="{% url 'admin:'|add:opts.app_label|add:'_'|add:opts.model_name|add:'_countries' 'search' %}">
             <img src="{% static 'admin/img/search.svg' %}" alt="{% trans 'Search' %}" />&nbsp;
             <span>{% trans 'Search' %}</span>
+        </a>
+        <br/>
+        <a class="action" href="{% url 'admin:'|add:opts.app_label|add:'_'|add:opts.model_name|add:'_countries' 'status' %}">
+            <img src="{% static 'admin/img/search.svg' %}" alt="{% trans 'Search' %}" />&nbsp;
+            <span>{% trans 'Status' %}</span>
         </a>
     </div>
 </div>

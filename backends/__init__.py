@@ -25,3 +25,26 @@ def search_entity(country, search, backends=None):
         if total and len(results):
             return total, results
     return 0, []
+
+
+status_backends = getattr(
+    settings,
+    'COMPANY_STATUS_BACKENDS',
+    {
+        'fr': [
+            'company.backends.status.fr.insee.StatusBackend',
+        ],
+    },
+)
+
+
+def status_list(country, status, backends=None):
+    results = {}
+    backends = backends or status_backends
+    country_backends = backends.get(country, [])
+    for backend in country_backends:
+        module, cls = backend.rsplit('.', 1)
+        total, results = getattr(import_module(module), cls)().status(status)
+        if total and len(results):
+            return total, results
+    return 0, []
