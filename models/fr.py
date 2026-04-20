@@ -8,7 +8,6 @@ from company.apps import CompanyConfig as conf
 from company.choices import fr as choices_fr
 from company.models.alpha import CompanyAlpha2
 from mighty.applications.address.models import Address
-from mighty.fields import RichTextField
 from mighty.models.base import Base
 
 CHOICES_APE = sorted(choices_fr.APE, key=operator.itemgetter(1))
@@ -93,7 +92,6 @@ class CompanyFR(CompanyAlpha2):
         _.fr_secretary, max_length=255, blank=True, null=True
     )
     siege = models.BooleanField(default=False)
-    resume = RichTextField(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     accept_duplicate = False

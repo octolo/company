@@ -63,6 +63,7 @@ class CompanySerializer(ModelSerializer):
 @maskedSerializer(except_mask=except_mask)
 class CompanyWithAddrFRSerializer(ModelSerializer):
     siege_fr = CompanyFRSerializer(many=False)
+    siege_fr_address = CompanyAddressFRSerializer(many=False, read_only=True)
     companyfr_address = CompanyAddressFRSerializer(many=True, read_only=True)
 
     class Meta:
@@ -70,5 +71,11 @@ class CompanyWithAddrFRSerializer(ModelSerializer):
         fields = (
             fields.serializer
             + CompanyConfig.sz_fields
-            + ('siren', 'isin', 'index', 'companyfr_address')
+            + (
+                'siren',
+                'isin',
+                'index',
+                'siege_fr_address',
+                'companyfr_address',
+            )
         )

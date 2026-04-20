@@ -7,7 +7,6 @@ from company import choices as _c
 from company import managers
 from company import translates as _
 from company.apps import CompanyConfig as conf
-from mighty.fields import RichTextField
 from mighty.models.base import Base
 from mighty.models.image import Image
 
@@ -34,12 +33,13 @@ class Company(Base, Image):
     infos_fields = ['purpose', 'instance_comex', 'matrix_skills']
     search_fields = ['denomination']
 
-    parent = models.ForeignKey('self',
+    parent = models.ForeignKey(
+        'self',
         on_delete=models.SET_NULL,
         related_name='parent_to_company',
         blank=True,
         null=True,
-        verbose_name=_.parent
+        verbose_name=_.parent,
     )
     denomination = models.CharField(max_length=255)
     since = models.DateField(_.since, null=True)
@@ -48,7 +48,6 @@ class Company(Base, Image):
     secretary = models.CharField(
         _.secretary, max_length=255, blank=True, null=True
     )
-    resume = RichTextField(blank=True, null=True)
 
     is_type = models.CharField(
         max_length=15, choices=_c.ISTYPE, default='COMPANY'

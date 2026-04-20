@@ -29,7 +29,6 @@ class CompanyAdmin(BaseAdmin):
                     'site',
                     'effective',
                     'secretary',
-                    'resume',
                 ),
             },
         ),
