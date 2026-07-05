@@ -223,11 +223,16 @@ class Company(Base, Image):
 
     @property
     def siege_of_first_fr_address(self):
-        return (
-            self.siege_fr_address
-            if self.siege_fr_address_id
-            else self.companyfr_address.order_by('-is_siege').first()
-        )
+        if self.siege_fr_address_id:
+            return self.siege_fr_address
+        cache = getattr(self, '_prefetched_objects_cache', {})
+        if 'companyfr_address' in cache:
+            addresses = list(cache['companyfr_address'])
+            return next(
+                (a for a in addresses if a.is_siege),
+                addresses[0] if addresses else None,
+            )
+        return self.companyfr_address.order_by('-is_siege').first()
 
     # KIND
     @property
