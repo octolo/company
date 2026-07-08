@@ -112,5 +112,7 @@ fr = (
     'siege',
     'evaluation',
     'phone',
+    'registry_type',
+    'registry_authority',
 )
 balo = ('announce', 'company', 'case', 'link', 'file_link', 'date')

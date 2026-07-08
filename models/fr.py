@@ -92,6 +92,12 @@ class CompanyFR(CompanyAlpha2):
     secretary = models.CharField(
         _.fr_secretary, max_length=255, blank=True, null=True
     )
+    registry_type = models.CharField(
+        _.fr_registry_type, max_length=10, default='RCS'
+    )
+    registry_authority = models.CharField(
+        _.fr_registry_authority, max_length=50, default='PARIS'
+    )
     siege = models.BooleanField(default=False)
     resume = RichTextField(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
