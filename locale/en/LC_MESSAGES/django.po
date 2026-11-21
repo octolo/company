@@ -546,23 +546,23 @@ msgid "SA d'économie mixte à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:176
-msgid "Fonds à forme sociétale à conseil d'administratio"
+msgid "Fonds à forme sociétale à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:180
 msgid ""
 "SA immobilière pour le commerce et l'industrie (SICOMI) à conseil "
-"d'administratio"
+"d'administration"
 msgstr ""
 
 #: company/choices/fr.py:183
-msgid "SA immobilière d'investissement à conseil d'administratio"
+msgid "SA immobilière d'investissement à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:187
 msgid ""
 "SA d'aménagement foncier et d'équipement rural (SAFER) à conseil "
-"d'administratio"
+"d'administration"
 msgstr ""
 
 #: company/choices/fr.py:193
@@ -571,15 +571,15 @@ msgid ""
 msgstr ""
 
 #: company/choices/fr.py:198
-msgid "SA d'intérêt collectif agricole (SICA) à conseil d'administratio"
+msgid "SA d'intérêt collectif agricole (SICA) à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:200
-msgid "SA d'attribution à conseil d'administratio"
+msgid "SA d'attribution à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:201
-msgid "SA coopérative de construction à conseil d'administratio"
+msgid "SA coopérative de construction à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:202
@@ -599,7 +599,7 @@ msgid "SA coopérative de consommation à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:209
-msgid "SA coopérative de commerçants-détaillants à conseil d'administratio"
+msgid "SA coopérative de commerçants-détaillants à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:212
@@ -611,11 +611,11 @@ msgid "SA coopérative (d'intérêt) maritime à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:214
-msgid "SA coopérative de transport à conseil d'administratio"
+msgid "SA coopérative de transport à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:218
-msgid "SA coopérative ouvrière de production (SCOP) à conseil d'administratio"
+msgid "SA coopérative ouvrière de production (SCOP) à conseil d'administration"
 msgstr ""
 
 #: company/choices/fr.py:221

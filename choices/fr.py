@@ -173,18 +173,18 @@ LEGALFORM = (
     (5505, _("SA à participation ouvrière à conseil d'administration")),
     (5510, _("SA nationale à conseil d'administration")),
     (5515, _("SA d'économie mixte à conseil d'administration")),
-    (5520, _("Fonds à forme sociétale à conseil d'administratio")),
+    (5520, _("Fonds à forme sociétale à conseil d'administration")),
     (
         5522,
         _(
-            "SA immobilière pour le commerce et l'industrie (SICOMI) à conseil d'administratio"
+            "SA immobilière pour le commerce et l'industrie (SICOMI) à conseil d'administration"
         ),
     ),
-    (5525, _("SA immobilière d'investissement à conseil d'administratio")),
+    (5525, _("SA immobilière d'investissement à conseil d'administration")),
     (
         5530,
         _(
-            "SA d'aménagement foncier et d'équipement rural (SAFER) à conseil d'administratio"
+            "SA d'aménagement foncier et d'équipement rural (SAFER) à conseil d'administration"
         ),
     ),
     (
@@ -195,10 +195,10 @@ LEGALFORM = (
     ),
     (
         5532,
-        _("SA d'intérêt collectif agricole (SICA) à conseil d'administratio"),
+        _("SA d'intérêt collectif agricole (SICA) à conseil d'administration"),
     ),
-    (5542, _("SA d'attribution à conseil d'administratio")),
-    (5543, _("SA coopérative de construction à conseil d'administratio")),
+    (5542, _("SA d'attribution à conseil d'administration")),
+    (5543, _("SA coopérative de construction à conseil d'administration")),
     (5546, _("SA de HLM à conseil d'administration")),
     (5547, _("SA coopérative de production de HLM à conseil d'administration")),
     (5548, _("SA de crédit immobilier à conseil d'administration")),
@@ -206,16 +206,16 @@ LEGALFORM = (
     (
         5552,
         _(
-            "SA coopérative de commerçants-détaillants à conseil d'administratio"
+            "SA coopérative de commerçants-détaillants à conseil d'administration"
         ),
     ),
     (5553, _("SA coopérative artisanale à conseil d'administration")),
     (5554, _("SA coopérative (d'intérêt) maritime à conseil d'administration")),
-    (5555, _("SA coopérative de transport à conseil d'administratio")),
+    (5555, _("SA coopérative de transport à conseil d'administration")),
     (
         5558,
         _(
-            "SA coopérative ouvrière de production (SCOP) à conseil d'administratio"
+            "SA coopérative ouvrière de production (SCOP) à conseil d'administration"
         ),
     ),
     (5559, _("SA union de sociétés coopératives à conseil d'administration")),
