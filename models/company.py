@@ -1,4 +1,5 @@
 import contextlib
+import re
 
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -10,6 +11,14 @@ from company.apps import CompanyConfig as conf
 from mighty.fields import RichTextField
 from mighty.models.base import Base
 from mighty.models.image import Image
+
+
+def company_abbreviation(denomination: str, *, max_length: int = 32) -> str:
+    """Build an uppercase abbreviation from denomination words."""
+    cleaned = re.sub(r'[^\w\s]', '', denomination or '', flags=re.UNICODE)
+    cleaned = cleaned.replace('_', '')
+    words = [word for word in cleaned.split() if len(word) >= 2]
+    return ''.join(word[0] for word in words).upper()[:max_length]
 
 
 class Company(Base, Image):
@@ -32,16 +41,27 @@ class Company(Base, Image):
         'gaia',
     ]
     infos_fields = ['purpose', 'instance_comex', 'matrix_skills']
-    search_fields = ['denomination']
+    search_fields = ['denomination', 'abbreviation']
 
-    parent = models.ForeignKey('self',
+    parent = models.ForeignKey(
+        'self',
         on_delete=models.SET_NULL,
         related_name='parent_to_company',
         blank=True,
         null=True,
-        verbose_name=_.parent
+        verbose_name=_.parent,
     )
     denomination = models.CharField(max_length=255)
+    abbreviation = models.CharField(
+        max_length=32,
+        blank=True,
+        default='',
+        verbose_name='Abbreviation',
+        help_text=(
+            'Generated from the denomination when left empty. '
+            'You can replace it.'
+        ),
+    )
     since = models.DateField(_.since, null=True)
     site = models.URLField(blank=True, null=True)
     effective = models.BigIntegerField(blank=True, null=True)
@@ -193,6 +213,25 @@ class Company(Base, Image):
         self.set_stackholder_kind()
         self.set_stock_kind()
         self.prepare_kind()
+
+    def set_abbreviation(self):
+        abbreviation = (self.abbreviation or '').strip().upper()
+        if not abbreviation:
+            abbreviation = company_abbreviation(self.denomination)
+        self.abbreviation = abbreviation
+
+    def save(self, *args, **kwargs):
+        previous_abbreviation = self.abbreviation
+        self.set_abbreviation()
+        update_fields = kwargs.get('update_fields')
+        if (
+            update_fields is not None
+            and self.abbreviation != previous_abbreviation
+        ):
+            kwargs['update_fields'] = list(
+                dict.fromkeys([*update_fields, 'abbreviation'])
+            )
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.denomination

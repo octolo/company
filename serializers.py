@@ -41,6 +41,7 @@ class CompanyMinSerializer(ModelSerializer):
             'uid',
             'named_id',
             'denomination',
+            'abbreviation',
             'image_url',
             'siren',
             'isin',

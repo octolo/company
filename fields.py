@@ -2,6 +2,7 @@ from company.apps import CompanyConfig as conf
 
 company = (
     'denomination',
+    'abbreviation',
     'since',
     'icb',
     'market',
@@ -70,6 +71,7 @@ serializer = (
     'uid',
     'named_id',
     'denomination',
+    'abbreviation',
     'image_url',
     'capital_socnomtotal',
     'valorisation',
